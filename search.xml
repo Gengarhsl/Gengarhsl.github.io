@@ -19,4 +19,219 @@
     <url>/2022/04/29/hello-world-1/</url>
     <content><![CDATA[]]></content>
   </entry>
+  <entry>
+    <title>Linux笔记</title>
+    <url>/2022/05/06/Linux/</url>
+    <content><![CDATA[<h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><p>yum groupinstall ‘Virtualization Host’<br>安装图形化界面虚拟机管理工具<br>yum install virt-manager<br>启动虚拟化服务<br>libvirtd.service<br>Wen管理界面<br>cockpit.service</p>
+<p>Linux</p>
+<h1 id="nmtui配置网卡"><a href="#nmtui配置网卡" class="headerlink" title="nmtui配置网卡"></a>nmtui配置网卡</h1><p>/etc/sysconfig/network-scripts/ifcfg-enp1s0 网卡配置文件<br>nmcli con modify enp1s0 ipv4.method me<br>nmcli con up enp1s0启用网卡配置</p>
+<p>w查看登录信息<br>Ss -ant查看链接信息<br>Ss -at<br>Ss -atu<br>/etc/resolv.conf  dns记录文件 网卡会覆盖</p>
+<h1 id="etc-hostname修改主机名"><a href="#etc-hostname修改主机名" class="headerlink" title="/etc/hostname修改主机名"></a>/etc/hostname修改主机名</h1><p>/etc/hosts dns解析文件<br>route -n查询网关<br>主机名 计算机名<br>Fqdn  web-server.abc.com<br>Netbiosname.  Web-server<br>nmcli con show 查看<br>nmcli device status 查看网卡状态</p>
+<h1 id="安装软件包-chrony"><a href="#安装软件包-chrony" class="headerlink" title="安装软件包 chrony"></a>安装软件包 chrony</h1><p>查看时钟同步状态<br>chronyc sources -v<br>搭建内网Ntp服务器<br>/etc/chrony.conf</p>
+<p>Yum list 查询仓库里所有软件包及其状态</p>
+<p>rpm -i 安装 v查看安装信息 h显示进度<br>rpm -q查询<br>rpm -e删除<br>过滤<br>| grep 名字<br>查询某个文件属于某个rpm包<br>rpm -qa<br>Net-tools<br>Bash-c<em><br>Vim-e</em></p>
+<h1 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h1><p>\1. /boot. 1g<br>\2. Swap.  2 Ram<br>\3. /.  All</p>
+<p>修改时区<br>timedatectl. Set-timezone. Asia/Shanghai<br>           List-timezone  查询<br>Timedatectl. Set-ntp. true/false 开启互联网校准<br>Date -s. 修改时间<br>firewall-cmd. —add-service=ntp<br>firewall-cmd.  —list-all  查看防火墙规则</p>
+<h1 id="ssh配置"><a href="#ssh配置" class="headerlink" title="ssh配置"></a>ssh配置</h1><p>/etc/ssh/sshd_config<br>Port 22<br>Permitrootlogin yes 允许 root远程登录 no禁止</p>
+<p>关闭selinux安全插件<br>setenforce 0</p>
+<p>使用秘钥登陆<br>客户端生成秘钥文件  公钥加密（非对称加密）公钥，私钥</p>
+<p>客户端<br>ssh-keygen 生成公钥<br>上传公钥到目标服务器的root账号<br>ssh-copy-id 主机</p>
+<p>scp 文件 主机:位置<br>SCP -R 文件夹</p>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="搭建DHCP服务器"><a href="#搭建DHCP服务器" class="headerlink" title="搭建DHCP服务器"></a>搭建DHCP服务器</h1><p>安装dhcp软件包.dhcp-server<br>修改配置文件<br>/etc/DHCP/dhcpd.conf<br>10yy复制<br>P粘贴</p>
+<p>查看磁盘<br>fdisk -l<br>lsblk<br>分区工具<br>fdisk交互式分区<br>n p w<br>parted 可交互</p>
+<p>Parted 磁盘<br>Print打印查看<br>Mkpart<br>Name 名字<br>类型<br>起始 上一个磁盘的终止<br>终止 起始加分区大小<br>quit 退出<br>非交互式<br>parted 磁盘 mkpart 名字 起始 终止</p>
+<p>RMB<br>Parted 磁盘 mklabel msdos<br>Parted 磁盘 rm 分区 删除分区<br>Parted 磁盘 mkpart 主/扩 格式 起始 终止<br>对分区进行格式化</p>
+<p>ext4<br>Xfs<br>mkfs -t 格式 磁盘<br>mkfs.格式 磁盘<br>如果硬盘是Ada 插入U盘 设备名为 sdb<br>mount | tail -n 数字 查看文件的最后几行<br>lsblk -f 查看挂载<br>开机自动挂载<br>/etc/fstab<br>设备名建议使用UUID<br>blkid 磁盘 查看UUID<br>lsblk _f 查看UUID<br>udevadm settle 更新文件 rhel8<br>Parts -a 磁盘 更新文件. rhel7之前</p>
+<p>扩充交换分区<br>mkswap 磁盘 格式化为swap类型<br>挂载为了swap空间<br>swapon 磁盘<br>swapon -s 查看<br>swapoff 卸载挂载点</p>
+<p>dd if=/dev/zero of=/ten/swap1 bs=1M count=2048 复制磁盘块为文件<br>格式化<br>挂载</p>
+<p>Man 命令 查看命令手册 </p>
+<h1 id="搭建ftp服务器"><a href="#搭建ftp服务器" class="headerlink" title="搭建ftp服务器"></a>搭建ftp服务器</h1><p>yum install vsftpd -y<br>修改FTP配置文件<br>/etc/vsftpd/vsftpd.conf<br>anonymous_enable=yes<br>启动FTP服务 开机自启<br>systemctl enable vsftpd.service —now<br>Ftp 默认家目录 匿名访问<br>/var/ftp<br>默认命令行下是主动FTP 21 20建立传输<br>被动高端端口<br>限制FTP被动端口范围<br>Pasv_min_port=10000<br>Pasv_max_port=11000<br>Ss -ant查看 </p>
+<h1 id="LVM-逻辑卷管理"><a href="#LVM-逻辑卷管理" class="headerlink" title="LVM  逻辑卷管理"></a>LVM  逻辑卷管理</h1><p>传统的磁盘分区  分区固定后不能更改</p>
+<p>将磁盘，分区转换为PV逻辑卷<br>PVcreate 磁盘<br>Pvs. Pvdisplay 磁盘 查看信息</p>
+<p>将物理卷组合成卷组 VG<br>vgcreate 名字 磁盘<br>vgs. Vgdispaly 磁盘 查看<br>VGremove 名称 删除卷组<br>-s定义块大小</p>
+<p>Pe的尺寸可以更改</p>
+<p>创建lv 逻辑卷<br>lvcreate -n 名字 -L 大小/-l 多少个块 卷组</p>
+<p>lvextend -L +尺寸 逻辑卷 扩展逻辑卷<br>将扩展的lv与挂载点 同步尺寸<br>xfs_growfs 挂载点<br>Resize2fs 逻辑卷 ext4同步<br>Vgextend vg pv扩展卷组</p>
+<h1 id="dns服务器"><a href="#dns服务器" class="headerlink" title="dns服务器"></a>dns服务器</h1><p>bind. bind-utils<br>配置文件<br>/etc/named.conf<br>UDP53客户机找服务<br>Tcp53服务器找服务器</p>
+<p>zone “ABC.com”IN{<br>      type master;<br>      File “abc.com.zone”;</p>
+<p>};<br>/var/named/</p>
+<p>mount -o loop 文件 挂载本地文件<br>＞覆盖 ＞＞重定向<br>开机自动挂载 defaults.loop<br>给web启用 ssl 使用数字证书<br>Yum install mod_ssl</p>
+<h1 id="搭建多个web站点-虚拟主机"><a href="#搭建多个web站点-虚拟主机" class="headerlink" title="搭建多个web站点 虚拟主机"></a>搭建多个web站点 虚拟主机</h1><p>Apache 配置文件 /etc/httpd<br>conf 主配置文件 conf.d辅配置文件<br>/usr/share/doc/httpd配置文件模板<br>httpd-vhosts.conf 虚拟主机模板</p>
+<p>动态网站<br>asp asp.net php jsp Python 等开发<br>小型机 IBM Aix<br>      Sun solris Oracle 甲骨文<br>      Hp hp-unix</p>
+<p>挂接数据库 mysql mariadb<br>mariadb-server<br>如果需要，可以做安全初始化配置<br>MySQL_secure_installation<br>清除历史命令 history -c<br>unzip 文件 -d 目录</p>
+<p>Chmod o+w config/ -R<br>data/ -R<br>uc_client<br>Uc_server<br>软件包 php-mysqlnd<br>Php-xml</p>
+<p>firewall-cmd —list-all<br>firewalld.richlanguage富规则<br>firewall-cmd —add-service=服务  —permanent. 写入配置文件</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>数通笔记</title>
+    <url>/2022/05/06/%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<h1 id="华为DHCP服务器配置：display-ip-pool"><a href="#华为DHCP服务器配置：display-ip-pool" class="headerlink" title="华为DHCP服务器配置：display ip pool"></a>华为DHCP服务器配置：display ip pool</h1><p>方法一：基于接口地址池<br>　1.全局启用DHCP：dhcp  enable<br>　2.接口中选DHCP方法：int　接口号<br>　　 　　　　　　　　 dhcp 　select　 int<br>  3.定义DHCP选项（Option）：<br>   Option3：自动为接口IP，无须配置<br>   Option6：dhcp  server  dns-list  DNS服务器地址<br>  4.排除范围（可选）：dhcp  server  excl  起始地址　结束地址<br>  5.租期（可选）：dhcp  server  Lease  ? ? ?</p>
+<p>方法二：基于全局地址池<br>1.全局启用DHCP：dhcp  enable<br> 2.创建地址池：ip  pool  池名<br> 3.定义DHCP选项（Option）<br>  方法1：用Option命令：option 选项号 ip 地址<br>  方法2：手工配置<br>  Option3（Router）：gateway-list 默认网关<br>　Option6（DNS Server）：dns-list DNS服务器地址<br>4.范围：network 　网络　mask　掩码<br>5.排除范围（可选）：excl 　起始地址　结束地址<br>6.接口中选DHCP方法：int　接口号<br>　　　　　　　　　　 dhcp 　select　 global</p>
+<ol>
+<li>.租期（可选）：dhcp  server  Lease  ? ? ?</li>
+<li>dhcp server forbidden-ip 10.0.20.1 10.0.20.100 禁止将pc网关分配给用户</li>
+</ol>
+<p>DHCP Client：<br>Windows PC机：ipconfig、ipconfig /release、ipconfig /renew、ipconfig /all<br>华为Router以太网接口：ip  add  dhcp-a （dis ip int br、 dis ip rout 、 dis  dns  server）</p>
+<h1 id="端口隔离"><a href="#端口隔离" class="headerlink" title="端口隔离"></a>端口隔离</h1><p>SWA<br>sys<br>port-isolate group 1<br>int g1/0/1<br> port-isolate enable group 1<br>int g1/0/2<br> port-isolate enable group 1<br>int g1/0/3<br> port-isolate enable group 1</p>
+<p>dis port-isolate group 1</p>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="链路类型"><a href="#链路类型" class="headerlink" title="链路类型"></a>链路类型</h1><p>接口模式</p>
+<p>SW1<br>sys<br>sys SW1<br>vlan 2<br> port g1/0/1 access<br> port g1/0/2 access<br>vlan 10<br> port g1/0/3 access<br>dis vlan brief</p>
+<p>trunk 模式</p>
+<p>SW1<br>sys<br>vlan 2<br> port g1/0/2<br>vlan 10<br> port g1/0/3<br>int g1/0/1<br> port link-type trunk<br> port trunk permit vlan all<br>dis vlan brief<br>dis int g1/0/1</p>
+<h1 id="stp-pvst"><a href="#stp-pvst" class="headerlink" title="stp pvst"></a>stp pvst</h1><p>SWA<br>sys<br>vlan 11 to 12<br>vlan 21 to 22<br>vlan 31 to 32<br>int g1/0/1<br> port link-type trunk<br> port trunk permit vlan all<br>int g1/0/2<br> port link-type trunk<br> port trunk permit vlan all<br>qu<br>stp mode pvst<br>stp vlan 11 21 31 root primary<br>stp vlan 12 22 32 root secondary</p>
+<p>ip ttl-expires enable   开启设备的ICMP超时报文的发送功能<br>ip unreachables enable  开启设备的ICMP目的不可达报文的发送功能</p>
+<p>华三  宣告默认路由</p>
+<p>rip    default-route or</p>
+<p>ospf     default-route-adv</p>
+<h1 id="ACL过滤"><a href="#ACL过滤" class="headerlink" title="ACL过滤"></a>ACL过滤</h1><p>acl advanced 3000<br> rule 0 deny ip source 10.1.1.2 0 destination 10.2.2.2 0<br> rule 5 deny tcp source 10.1.1.3 0 destination 10.2.2.2 0 destination-port eq www<br> rule 10 deny tcp source 10.1.1.4 0 destination 10.2.2.2 0 destination-port eq ftp<br>int g0/0<br> packet-filter 3000 inbound</p>
+<p>dis acl 3000<br>dis cu int g0/0<br>dis packet-filter statistics int g0/0 inbound </p>
+<p>华为接口过滤</p>
+<p>acl 3050<br> rule deny ip source 10.0.50.0 0.0.0.255 destin 10.0.0.0 0.255.255.255<br>int g0/0/4<br> traffic-filter inbound acl 3050</p>
+<p>reset saved-configuration 华三清楚配置命令</p>
+<p>ctrl+B或E</p>
+<h1 id="IP-v6"><a href="#IP-v6" class="headerlink" title="IP v6"></a>IP v6</h1><p>sysn RTD<br>int g0/2<br> ipv6 add 2004::1 64<br>int g0/0<br> mac-add 0000-0c00-0111<br> ipv6 add auto</p>
+<h2 id="ripng"><a href="#ripng" class="headerlink" title="ripng"></a>ripng</h2><p>ripng 1<br>int g0/2<br> ripng 1 enable<br>int g0/0<br> ripng 1 enable</p>
+<p>dis ipv6 rout pro ripng</p>
+<h2 id="ospfv3"><a href="#ospfv3" class="headerlink" title="ospfv3"></a>ospfv3</h2><p>syst<br>ospfv3 1<br> router-id 4.4.4.4<br> import-route ripng 1 allow-direct</p>
+<p>int g0/2<br> ospfv3 1 area 0</p>
+<p>dis ipv6 routi pro ospfv3<br>dis ospfv3 peer<br>dis ospfv3 lsdb</p>
+<h2 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h2><p>int tunnel 0 mode ipv6-ipv4<br> ipv6 add 2222:: 64 eui-64<br> ospfv3 1 area 0<br> source g0/1<br> destin 10.0.23.2</p>
+<p>ip route-s 0.0.0.0 0 100.100.100.1  默认路由</p>
+<h1 id="MSTP配置"><a href="#MSTP配置" class="headerlink" title="MSTP配置"></a>MSTP配置</h1><p>首先已配置完成VLAN、Access和Trunk端口。</p>
+<p> 1.启用STP： stp  enable</p>
+<p> 2.用MSTP模式：stp  mode  mstp</p>
+<p> 3.进入MSTP配置视图：stp  region-conf</p>
+<p> 4.定义区域名称：region-name 名</p>
+<p> 5.定义修订等级：revision-level 号</p>
+<p> 6.定义VLAN关联表：instance 实例号  vlan  VLAN范围</p>
+<p> 7.激活配置：active  region-conf</p>
+<p> 8.退出MSTP配置视图：quit</p>
+<p> 9.定义主备根：stp  instance  实例号  root  p（主根）或s（备根）</p>
+<p> 10.检查：dis stp br，dis stp region-conf</p>
+<h1 id="VRRP（Virtual-Router-Redundancy-Protocol，虚拟路由冗余协议）"><a href="#VRRP（Virtual-Router-Redundancy-Protocol，虚拟路由冗余协议）" class="headerlink" title="VRRP（Virtual Router Redundancy Protocol，虚拟路由冗余协议）"></a>VRRP（Virtual Router Redundancy Protocol，虚拟路由冗余协议）</h1><p> 开放，RFC3768，用224.0.0.18，协议号=112。</p>
+<p><strong>VRRP Router**</strong>角色**（dis vrrp）</p>
+<p><strong>一.Master**</strong>：**主用</p>
+<p> 选择：1.优先级最高（可抢占）；2.IP最高（不可抢占）。</p>
+<p> 作用：1.用VMAC应答主机ARP请求；2.转发用户Data。</p>
+<p><strong>二.Backup**</strong>：**备用</p>
+<p> 监听Master定期（1秒）发送的通告，在Master_Down_Interval时间内未收到，则认为Master失效，立即成为Master，即切换。</p>
+<p><strong>启用VRRP**</strong>（接口视图）：<strong>vrrp  vrid  组号  virtual-ip  虚拟IP（</strong>VIP**）</p>
+<p> 检查：dis vrrp</p>
+<p><strong>Virtual IP Address**</strong>（VIP<strong>**）：手工配置。</strong></p>
+<p><strong>Virtual MAC**</strong>（VMAC<strong><strong>）：0000-5e00-01XX</strong></strong>（XX<strong>**：组号）</strong></p>
+<p> <strong>查看：</strong>Router用dis vrrp，dis arp；主机用arp -a</p>
+<p><strong>VRRP**</strong>状态机（**dis vrrp）</p>
+<p>1.Master：主用；2.Backup：备用；3. Initialize：接口shutdown。</p>
+<p><strong>VRRP**</strong>优先级**</p>
+<p>默认=100，可用于定制Master。</p>
+<p><strong>定制Master</strong></p>
+<p> 接口视图修改优先级：vrrp  vrid  组号 priority  优先级</p>
+<p><strong>回切</strong></p>
+<p>如果优先级高的原Master恢复，则抢占为Master，即回切。</p>
+<p><strong>VRRP**</strong>联动功能**</p>
+<p>接口跟踪（Track）功能，当上行链路（Uplink）down时，Master降低优先级（默认降低10），进行主备切换；当上行链路恢复up，原Master恢复优先级，抢占为Master，即回切。</p>
+<p><strong>VRRP**</strong>负载分担**</p>
+<p> 可用多个组，每个组可对应一个VLAN，不同组有不同的Master。</p>
+<h1 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h1><p><strong>安全区域（Zone**</strong>）：**用于区分不同的网络。默认4个Zone。（dis zone）</p>
+<p> 1.local：代表防火墙本身。</p>
+<p> 2.trust：可连接内部（Inside）网络。</p>
+<p> 3.untrust：可连接外部（Outside）网络，即Internet。</p>
+<p> 4.dmz：可连接放置允许外部访问的服务器群（Server Farm）的网络。</p>
+<p><strong>安全级别（Security Level**</strong>）：<strong>dis Zone显示为priority。表示受信任程度。可用于定义报文</strong>流动的方向。**</p>
+<p> <strong>高到低：Outbound**</strong>；低到高：Inbound<strong>**。</strong></p>
+<p><strong>华为USG**</strong>基本配置**</p>
+<p>以下为USG5500型，6000型见课件。</p>
+<p>1.添加接口到区域（Zone）：firewall  zone  Zone名</p>
+<p>​             Add  interface  接口号（dis  zone）</p>
+<p>\2. 接口IP地址。</p>
+<p>\3. DHCP服务器（接口视图）：</p>
+<p> Dhcp select interface</p>
+<p> dhcp server dns-list DNS服务器IP</p>
+<p>4.安全策略：policy  interzone  Zone名 Zone名 inbound或outbound </p>
+<p>​       policy 号（执行顺序）</p>
+<p>​       action permit（允许）</p>
+<p>5.检查：会话表：Display firewall session table</p>
+<p>​    老化时间:：display firewall session aging-time</p>
+<p> <strong>NAT No-PAT</strong></p>
+<p>以前称为NAT， 用公有IP地址池中的IP，“<strong>一对一地址转换</strong>”。<strong>不常用！</strong></p>
+<p>syst</p>
+<p>nat address-group 1 100.100.100.12 100.100.100.13</p>
+<p>nat-policy interzone trust untrust outbound </p>
+<p> policy 1</p>
+<p> action source-nat </p>
+<p> address-group 1 no-pat</p>
+<p><strong>NAPT</strong></p>
+<p>以前称为PAT，用公有IP地址池中的IP<strong>及端口号</strong>，“<strong>多对一的地址转换</strong>”，常用于企业访问Internet。</p>
+<p>sys</p>
+<p>nat address-group <strong>2</strong> 100.100.100.14 100.100.100.15（公有IP地址池）</p>
+<p>nat-policy  interzone  trust untrust  outbound </p>
+<p> policy 1</p>
+<p> action source-nat </p>
+<p> address-group <strong>2</strong></p>
+<p>dis  firew session  table</p>
+<p><strong>配置策略NAPT</strong></p>
+<p>用于控制上网的用户。</p>
+<p>nat-policy interzone trust untrust outbound</p>
+<p> policy 1</p>
+<p> policy source 192.168.0.2 0（允许上网的用户）</p>
+<p> action source-nat</p>
+<p> address-group 2</p>
+<p>dis  this</p>
+<p><strong>NAT-Server</strong></p>
+<p>用于公网用户访问DMZ的服务器。即将公网IP地址映射为服务器的私网IP地址。</p>
+<p> nat server protocol tcp global 100.100.100.172 80 inside 172.16.1.101 80（dis nat server）</p>
+<h2 id="ASPF-（Application-Specific-Packet-Filter-）"><a href="#ASPF-（Application-Specific-Packet-Filter-）" class="headerlink" title="ASPF**（Application Specific Packet Filter**）"></a><strong>ASPF**</strong>（Application Specific Packet Filter<strong>**）</strong></h2><p> 可对应用层协议进行深度检测，支持多通道协议（FTP等）、实时通讯工具（如QQ等）通过NAT设备的转发。</p>
+<p>sys<br>firew interzone untrust dmz<br> detect ftp<br>firew interzone trust untrust<br> detect qq</p>
+<p>dis firew server-map</p>
+<h1 id="GER-VPN"><a href="#GER-VPN" class="headerlink" title="GER VPN"></a>GER VPN</h1><p>sys<br>int tunnel 0 mode gre<br>ip address 10.1.2.1 24<br>source 192.13.2.2<br>destination 132.108.5.2<br>display ip int br</p>
+<h2 id="IPsec-vpn"><a href="#IPsec-vpn" class="headerlink" title="IPsec vpn"></a>IPsec vpn</h2><p>sys</p>
+<ol>
+<li>ACL<br>acl adv 3001<br>rule permit gre source 192.13.2.2 0 destination 132.108.5.2 0<br>quit </li>
+<li>IKE<br>ike keychain k1<br>pre-shared-key address 132.108.5.2 24 key si 123456<br>qu<br>ike profile p1<br>keychain k1<br>match remote identity address 132.108.5.2 24<br>qu</li>
+<li>IPsec<br>ipsec transform-set tr1<br>encapsulation-mode tunnel<br>protocol esp<br>esp encryption-algorithm aes-cbc-128<br>esp authentication-algorithm sha1<br>qu</li>
+<li>MAP<br>ipsec policy map1 20 isakmp<br>security acl 3001<br>transform-set tr1<br>local-address 192.13.2.2<br>remote-address 132.108.5.2<br>ike-profile p1<br>return<br>sys<br>interface g 0/1<br>ipsec apply policy map1<br>qu</li>
+</ol>
+<p>display ike sa<br>display ipsec sa </p>
+<h1 id="DHCP-Snooping"><a href="#DHCP-Snooping" class="headerlink" title="DHCP Snooping"></a><strong>DHCP Snooping</strong></h1><p>用DHCP Option82建立和维护真实IP、真实MAC、VLAN、接口对应的绑定表（dis dhcp snooping user-bind all）；将端口分别设为信任（可转发DHCP报文）或不信任（丢弃DHCP报文）。</p>
+<p><strong>一.**</strong>用于防止DHCP<strong>**饿死攻击</strong></p>
+<p>用绑定表对照检查DHCP报文CHADDR的字段，不一致则丢弃。</p>
+<p>二.<strong>用于防止仿冒DHCP Server**</strong>攻击**</p>
+<p>只有连接合法DHCP Server的端口设为信任。</p>
+<p>三.<strong>用于防止ARP**</strong>中间人攻击**</p>
+<p>用绑定表发现MAC欺骗，丢弃ARP报文。</p>
+<p><strong>配置DHCP Snooping</strong></p>
+<p> 1.全局启用DHCP：dhcp enable</p>
+<p> 2.全局启用DHCP Snooping：dhcp snooping enable</p>
+<p> 3.接口中启用Option82：dhcp option82 insert enable</p>
+<p> 4.接口中启用DHCP Snooping：dhcp snooping enable</p>
+<p> 以上配置后全部端口为不信任。</p>
+<p> \5. 连接合法DHCP Server的端口设为信任（接口中）：dhcp snooping trust</p>
+<p> 6.绑定表：dis dhcp snooping user-bind all</p>
+<h1 id="端口安全-Port-Security"><a href="#端口安全-Port-Security" class="headerlink" title="端口安全(Port Security)"></a><strong>端口安全(Port Security)</strong></h1><p> 捆绑合法MAC到端口，防止仿冒用户接入，可用于<strong>接入层**</strong>Switch<strong>。限制端口MAC数量，可用于</strong>汇聚层<strong>**Switch</strong>。</p>
+<p><strong>端口安全MAC**</strong>类型**</p>
+<p> <strong>1.**</strong>安全动态MAC<strong>**地址</strong></p>
+<p>启用端口安全后动态学习的MAC地址，设备重启后会丢失表项。(dis mac-add Security)</p>
+<p> <strong>2.**</strong>安全静态MAC<strong>**地址</strong></p>
+<p>手工捆绑的静态MAC地址，设备重启后不丢失表项。(dis mac-add sticky)</p>
+<p> <strong>3.</strong> <strong>Sticky MAC**</strong>地址**</p>
+<p>启用端口安全后，启用Sticky MAC功能后将动态学习的MAC地址转换为Sticky MAC地址，设备重启后不丢失表项。(dis mac-add sticky)</p>
+<p><strong>端口安全限制动作</strong></p>
+<p>超出端口安全MAC地址限制数后的动作。</p>
+<p> <strong>1.</strong> <strong>restrict</strong></p>
+<p>丢弃非法报文(源MAC不存在的报文)并告警(产生Log)，默认。</p>
+<p> <strong>2.</strong> <strong>protect</strong></p>
+<p>丢弃非法报文不告警。</p>
+<p> <strong>3.</strong> <strong>shutdown</strong></p>
+<p>接口置为error-down，并告警。必须在接口视图下用restart命令重启接口。</p>
+<p><strong>配置端口安全</strong></p>
+<p> 1.进入接口视图：interface 接口号</p>
+<p> 2.启用端口安全：port-security  enable</p>
+<p> 3.启用Sticky MAC：port-security  mac-address  sticky</p>
+<p> 4.手工捆绑静态MAC地址：port-security  mac-address sticky xxxx-xxxx-xxxx(MAC地址)  vlan  号 </p>
+<p> 5.限制端口MAC数量(默认=1)：port-security max-mac-num MAC地址上限(可用于<strong>汇聚层**</strong>Switch**)</p>
+<p> 6.端口安全保护动作(默认为restrict)： port-security  protect-action  protect 或restrict 或shutdown</p>
+<p> 7.检查：dis mac-add ， dis mac-add security， dis mac-add sticky</p>
+]]></content>
+  </entry>
 </search>

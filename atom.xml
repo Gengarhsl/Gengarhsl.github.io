@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2022-06-29T03:24:36.367Z</updated>
+  <updated>2022-06-30T03:08:05.905Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,8 +21,15 @@
     <link href="http://example.com/2022/06/29/hello/"/>
     <id>http://example.com/2022/06/29/hello/</id>
     <published>2022-06-29T03:24:36.000Z</published>
-    <updated>2022-06-29T03:24:36.367Z</updated>
+    <updated>2022-06-30T03:08:05.905Z</updated>
     
+    <content type="html"><![CDATA[<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hello world</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class</summary>
+      
     
     
     
@@ -63,19 +70,6 @@
       
     <summary type="html">&lt;h1 id=&quot;安装虚拟化组&quot;&gt;&lt;a href=&quot;#安装虚拟化组&quot; class=&quot;headerlink&quot; title=&quot;安装虚拟化组&quot;&gt;&lt;/a&gt;安装虚拟化组&lt;/h1&gt;&lt;p&gt;yum groupinstall ‘Virtualization Host’&lt;br&gt;安装图形化界面虚拟机管理</summary>
       
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>hello-world</title>
-    <link href="http://example.com/2022/04/29/hello-world-1/"/>
-    <id>http://example.com/2022/04/29/hello-world-1/</id>
-    <published>2022-04-29T08:32:48.000Z</published>
-    <updated>2022-04-29T08:32:48.938Z</updated>
-    
     
     
     

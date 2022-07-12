@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2022/04/29/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Linux笔记</title>
     <url>/2022/05/06/Linux/</url>
-    <content><![CDATA[<h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><p>yum groupinstall ‘Virtualization Host’<br>安装图形化界面虚拟机管理工具<br>yum install virt-manager<br>启动虚拟化服务<br>libvirtd.service<br>Wen管理界面<br>cockpit.service</p>
+    <content><![CDATA[<h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><h3 id="安装图形化界面虚拟机管理工具"><a href="#安装图形化界面虚拟机管理工具" class="headerlink" title="安装图形化界面虚拟机管理工具"></a>安装图形化界面虚拟机管理工具</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum groupinstall <span class="string">&#x27;Virtualization Host&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动虚拟化服务"><a href="#启动虚拟化服务" class="headerlink" title="启动虚拟化服务"></a>启动虚拟化服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install virt-manager</span><br></pre></td></tr></table></figure>
+<h3 id="Web管理界面"><a href="#Web管理界面" class="headerlink" title="Web管理界面"></a>Web管理界面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ systemctl start libvirtd.service</span><br><span class="line">$ systemclt start cockpit.service</span><br></pre></td></tr></table></figure>
 <p>Linux</p>
 <h1 id="nmtui配置网卡"><a href="#nmtui配置网卡" class="headerlink" title="nmtui配置网卡"></a>nmtui配置网卡</h1><p>/etc/sysconfig/network-scripts/ifcfg-enp1s0 网卡配置文件<br>nmcli con modify enp1s0 ipv4.method me<br>nmcli con up enp1s0启用网卡配置</p>
 <p>w查看登录信息<br>Ss -ant查看链接信息<br>Ss -at<br>Ss -atu<br>/etc/resolv.conf  dns记录文件 网卡会覆盖</p>
@@ -56,6 +44,20 @@
 <p>挂接数据库 mysql mariadb<br>mariadb-server<br>如果需要，可以做安全初始化配置<br>MySQL_secure_installation<br>清除历史命令 history -c<br>unzip 文件 -d 目录</p>
 <p>Chmod o+w config/ -R<br>data/ -R<br>uc_client<br>Uc_server<br>软件包 php-mysqlnd<br>Php-xml</p>
 <p>firewall-cmd —list-all<br>firewalld.richlanguage富规则<br>firewall-cmd —add-service=服务  —permanent. 写入配置文件</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2022/04/29/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>

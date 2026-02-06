@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1.3 软硬件环境角色    主机名    ip地址    备注master    k8s-master    192.168.163.151k8s主节点、8核CPU、4GB(CD) node    k8s-node1    192.168.163.152k8s从节点、8核CPU、4GB node    k8s-node2    192.168.163.153k8s从节点、8核CPU、4GB Gi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git-jenkins-harbor-k8s部署笔记">
+<meta property="og:url" content="http://example.com/2026/02/06/git-jenkins-harbor-k8s%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Gengar">
+<meta property="og:description" content="1.3 软硬件环境角色    主机名    ip地址    备注master    k8s-master    192.168.163.151k8s主节点、8核CPU、4GB(CD) node    k8s-node1    192.168.163.152k8s从节点、8核CPU、4GB node    k8s-node2    192.168.163.153k8s从节点、8核CPU、4GB Gi">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-06T09:51:44.810Z">
+<meta property="article:author" content="Gengar">
+<meta property="article:tag" content="python, linux, mysql, 数通">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/02/06/git-jenkins-harbor-k8s%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>git-jenkins-harbor-k8s部署笔记 | Gengar</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Gengar" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Gengar</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个兴趣使然的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/atom.xml" rel="section"><i class="sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/NightTeam/nightteam.github.io" class="github-corner" title="NightTeam GitHub" aria-label="NightTeam GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/git-jenkins-harbor-k8s%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git-jenkins-harbor-k8s部署笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-02-06 00:00:00 / 修改时间：17:51:44" itemprop="dateCreated datePublished" datetime="2026-02-06T00:00:00+08:00">2026-02-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>1.3 软硬件环境<br>角色    主机名    ip地址    备注<br>master    k8s-master    192.168.163.151<br>k8s主节点、8核CPU、4GB(CD)</p>
+<p>node    k8s-node1    192.168.163.152<br>k8s从节点、8核CPU、4GB</p>
+<p>node    k8s-node2    192.168.163.153<br>k8s从节点、8核CPU、4GB</p>
+<p>Gitlab+Jenkins+Docker    jenkins    192.168.163.155<br> 8核CPU、12GB，Gitlab最少需要4G(CI)</p>
+<p>docker镜像仓库:harbor    harbor    192.168.163.156<br>8核CPU、4GB</p>
+<p>软件    版本<br>docker    26.1.3<br>k8s    1.22.2<br>harbor    2.0.6<br>Jenkins    2.457(尽量别用latest版本安装 可能导致插件安装失败)<br>gitlab    10.7.5<br>二、环境准备<br>在所有节点操作</p>
+<p>2.1 关闭NetworkManager<br>NetworkManager会和network启动是发生冲突，导致network启动失败，不能远程访问虚拟机；</p>
+<p>systemctl stop NetworkManager                #临时关闭<br>systemctl disable NetworkManager             #永久关闭网络管理命令<br>systemctl start network.service              #开启网络服务<br>2.2 设置静态ip<br>  2.2.1查看网络配置</p>
+<p>ifconfig #查看网络配置<br>2.2.2 修改网络配置文件</p>
+<p>vi /etc/sysconfig/network-scripts/ifcfg-ens33<br>1）选择动态分配或者静态分配</p>
+<p>BOOTPROTO=static    #dhcp：自动分配ip ，static：静态ip<br>2）开启自动打开网卡</p>
+<p>ONBOOT=yes     #开启启动必须是yes</p>
+<p>TYPE=Ethernet<br>PROXY_METHOD=none<br>BROWSER_ONLY=no<br>BOOTPROTO=static    #dhcp：自动分配ip ，static：静态ip<br>DEFROUTE=yes<br>IPV4_FAILURE_FATAL=no<br>IPV6INIT=yes<br>IPV6_AUTOCONF=yes<br>IPV6_DEFROUTE=yes<br>IPV6_FAILURE_FATAL=no<br>IPV6_ADDR_GEN_MODE=stable-privacy<br>NAME=ens33<br>UUID=9c922cc8-b3ed-419a-88bd-6fd756e04880<br>DEVICE=ens33<br>ONBOOT=yes  #开启启动必须是yes<br>IPADDR=192.168.163.152 #静态ip<br>NETMASK=255.255.255.0  #<br>GATEWAY=192.168.163.2  #网关<br>DNS1=192.168.163.0   #DNS<br>DNS2=114.114.114.114<br>2.2.3重启服务</p>
+<p>systemctl restart network<br>2.2.4查看网络状态</p>
+<p>systemctl status network.service</p>
+<h3 id="2-3-修改主机名"><a href="#2-3-修改主机名" class="headerlink" title="2.3 修改主机名"></a>2.3 修改主机名</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hostnamectl set-hostname k8s-master <span class="comment">#k8s-master 为主机名称</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-所有机器关闭防火墙"><a href="#2-3-所有机器关闭防火墙" class="headerlink" title="2.3 所有机器关闭防火墙"></a>2.3 所有机器关闭防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld	<span class="comment">#关闭</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld		<span class="comment">#开机不自启</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">systemctl status firewalld		<span class="comment">#查看状态</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-4-所有机器关闭selinux"><a href="#2-4-所有机器关闭selinux" class="headerlink" title="2.4 所有机器关闭selinux"></a>2.4 所有机器关闭selinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sed -i <span class="string">&#x27;s/enforcing/disabled/&#x27;</span> /etc/selinux/config </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">setenforce 0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> systemctl status firewalld</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-所有机器关闭swap"><a href="#2-5-所有机器关闭swap" class="headerlink" title="2.5 所有机器关闭swap"></a>2.5 所有机器关闭swap</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a <span class="comment"># 临时关闭</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sed -ri <span class="string">&#x27;s/.*swap.*/#&amp;/&#x27;</span> /etc/fstab  <span class="comment">#永久关闭</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">swapon -s <span class="comment">#查看swapon分区</span></span><br></pre></td></tr></table></figure>
+<p>2.6 为所有节点安装docker<br>yum install wget.x86_64 -y<br>rm -rf /etc/yum.repos.d/*<br>wget -O /etc/yum.repos.d/centos7.repo <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/repo/Centos-7.repo">http://mirrors.aliyun.com/repo/Centos-7.repo</a><br>wget -O /etc/yum.repos.d/epel-7.repo <a target="_blank" rel="noopener" href="http://mirrors.aliyun.com/repo/epel-7.repo">http://mirrors.aliyun.com/repo/epel-7.repo</a><br>wget -O /etc/yum.repos.d/docker-ce.repo <a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo">https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</a><br>yum install docker-ce-20.10.11 -y<br>systemctl start docker<br>systemctl enable docker<br>docker version</p>
+<p>配置docker加速器</p>
+<p> mkdir -p /etc/docker<br> tee /etc/docker/daemon.json &lt;&lt;-‘EOF’<br>{<br>  “registry-mirrors”: [“<a target="_blank" rel="noopener" href="https://2tefyfv7.mirror.aliyuncs.com">https://2tefyfv7.mirror.aliyuncs.com</a>“]<br>}<br>EOF<br> systemctl daemon-reload<br> systemctl restart docker<br>三、部署k8s集群<br>3.1 添加主机名与ip的对应关系（k8s-master、k8s-node1、k8s-node2）<br>cat &gt;&gt; /etc/hosts &lt;&lt; EOF<br>192.168.163.151 k8s-master<br>192.168.163.152 k8s-node1<br>192.168.163.153 k8s-node2<br>EOF</p>
+<p>source /etc/profile</p>
+<p>3.2 将桥接的ipv4流量传递到iptables的链（k8s-master、k8s-node1、k8s-node2）<br>cat &gt;&gt; /etc/sysctl.d/k8s.conf &lt;&lt; EOF<br> net.bridge.bridge-nf-call-ip6tables = 1<br> net.bridge.bridge-nf-call-iptables = 1<br>EOF</p>
+<p>3.3 安装kubeadm、kubelet、kubectl（k8s-master、k8s-node1、k8s-node2）<br>cat &lt;<EOF > /etc/yum.repos.d/kubernetes.repo<br>[kubernetes]<br>name=Kubernetes<br>baseurl=<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/">https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64/</a><br>enabled=1<br>gpgcheck=1<br>repo_gpgcheck=1<br>gpgkey=<a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg">https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg</a> <a target="_blank" rel="noopener" href="https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg">https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg</a><br>EOF<br>yum install kubelet-1.22.2 kubeadm-1.22.2 kubectl-1.22.2 -y<br>systemctl enable kubelet &amp;&amp; systemctl start kubelet<br>kubectl version</p>
+<p>3.4 修改docker的配置（k8s-master、k8s-node1、k8s-node2）  </p>
+<h1 id="镜像加速-registry-mirrors"><a href="#镜像加速-registry-mirrors" class="headerlink" title="镜像加速 registry-mirrors"></a>镜像加速 registry-mirrors</h1><p>cat &gt; /etc/docker/daemon.json &lt;&lt;EOF<br>{<br>  “exec-opts”: [“native.cgroupdriver=systemd”],<br>  “registry-mirrors”: [“<a target="_blank" rel="noopener" href="https://2tefyfv7.mirror.aliyuncs.com">https://2tefyfv7.mirror.aliyuncs.com</a>“]<br>}<br>EOF<br>systemctl daemon-reload<br>systemctl restart docker.service<br>systemctl restart kubelet.service<br>systemctl status kubelet.service</p>
+<p>这里从节点的kubelet.service状态报code=exited, status=1/FAILURE是正常的 集群没有初始化导致的</p>
+<p>3.5 部署master节点（主节点k8s-master）<br>3.5.1 集群初始化<br>kubeadm init \<br>—apiserver-advertise-address=192.168.71.129 \<br>—image-repository registry.aliyuncs.com/google_containers \<br>—kubernetes-version v1.23.0 \<br>—control-plane-endpoint k8s-master \<br>—service-cidr=172.16.0.0/16 \<br>—pod-network-cidr=10.244.0.0/16<br>这段命令是用于将一个工作节点（worker node）加入到已存在的 Kubernetes 集群中的过程。</p>
+<p>kubeadm init 是用来初始化 Kubernetes 集群的命令。下面是一些常用的参数及其说明：</p>
+<p>—apiserver-advertise-address: 指定用于通告的 API 服务器的 IP 地址。</p>
+<p>—apiserver-bind-port: 指定 API 服务器绑定的端口。</p>
+<p>—control-plane-endpoint: 指定控制平面的端口。</p>
+<p>—image-repository: 设置 Kubernetes 镜像仓库的地址。</p>
+<p>—kubernetes-version: 设置 Kubernetes 版本。</p>
+<p>—pod-network-cidr: 设置 Pod 网络的 CIDR 范围。</p>
+<p>—service-cidr: 设置服务的 CIDR 范围。</p>
+<p>1).遇到报错： </p>
+<p>2).解决办法：关闭swap</p>
+<p> swapoff -a # 临时关闭<br> sed -ri ‘s/.<em>swap.</em>/#&amp;/‘ /etc/fstab  #永久关闭<br>1).遇到报错：</p>
+<p>Here is one example how you may list all Kubernetes containers running in docker:</p>
+<pre><code>            - &#39;docker ps -a | grep kube | grep -v pause&#39;
+            Once you have found the failing container, you can inspect its logs with:
+            - &#39;docker logs CONTAINERID&#39;
+</code></pre><p>error execution phase wait-control-plane: couldn’t initialize a Kubernetes cluster<br>To see the stack trace of this error execute with —v=5 or higher<br>2).解决办法：</p>
+<p>rm -rf /etc/containerd/config.toml<br>systemctl restart containerd<br> 如果初始化失败，可以重新初始化</p>
+<p>kubeadm reset<br>此命令将删除当前集群的状态信息，并使其回到初始状态</p>
+<p>初始化成功</p>
+<p>记下红框中内容，添加节点时需要</p>
+<p>3.5.2 按照指示执行<br>mkdir -p $HOME/.kube<br>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config<br>sudo chown $(id -u):$(id -g) $HOME/.kube/config<br>初始化时 该命令有输出</p>
+<p>3.5.3 查看kubelet.service状态<br>systemctl status kubelet.service</p>
+<p>3.5.4 查看节点状态为notready<br>kubectl get nodes</p>
+<p>3.5.5 安装网络插件<br>官方文档：<a target="_blank" rel="noopener" href="https://github.com/flannel-io/flannel">https://github.com/flannel-io/flannel</a></p>
+<h1 id="最好手动提前拉取所需镜像"><a href="#最好手动提前拉取所需镜像" class="headerlink" title="最好手动提前拉取所需镜像"></a>最好手动提前拉取所需镜像</h1><p>docker pull quay.io/coreos/flannel:v0.14.0<br>wget <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml">https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml</a><br>kubectl apply -f kube-flannel.yml<br>kubectl get pods —all-namespaces</p>
+<p>3.5.6 添加node节点<br>在k8s-node1和k8s-node1节点执行</p>
+<p>docker pull quay.io/coreos/flannel:v0.14.0<br>kubeadm join k8s-master:6443 —token yt11th.b5wzq4lkjxcsljpg \<br>    —discovery-token-ca-cert-hash sha256:f36824a14f1acb9413246e8f5f0cdf5f6060066f7e4eec6d27edd69004499f9f</p>
+<p>在主节点k8s-master查看节点状态为notready </p>
+<p> 四、部署Gitlab（192.168.163.155）<br>4.1 配置docker加速器<br> mkdir -p /etc/docker<br> tee /etc/docker/daemon.json &lt;&lt;-‘EOF’<br>{<br>  “registry-mirrors”: [“<a target="_blank" rel="noopener" href="https://2tefyfv7.mirror.aliyuncs.com">https://2tefyfv7.mirror.aliyuncs.com</a>“]<br>}<br>EOF<br> systemctl daemon-reload<br> systemctl restart docker</p>
+<p>4.2 安装并配置Gitlab<br>docker pull beginor/gitlab-ce</p>
+<p>4.2.1 创建共享卷目录<br>mkdir -p /data/gitlab/etc/ /data/gitlab/log/ /data/gitlab/data<br>chmod 777 /data/gitlab/etc/ /data/gitlab/log/ /data/gitlab/data/<br>4.2.2 创建 gitlab 容器<br>docker run -itd —name=gitlab —restart=always —privileged=true   -p 8443:443  -p 80:80 -p 222:22 -v  /data/gitlab/etc:/etc/gitlab -v  /data/gitlab/log:/var/log/gitlab -v  /data/gitlab/data:/var/opt/gitlab  beginor/gitlab-ce<br>docker ps<br> 切记:这里的端口要设置成80，要不push项目会提示没有报错，如果宿主机端口被占用，需要把这个端口腾出来</p>
+<p>4.2.3 关闭容器修改配置文件<br>docker stop gitlab<br>cat /data/gitlab/etc/gitlab.rb |grep external_url<br>sed -i “/external_url ‘GENERATED_EXTERNAL_URL’/a external_url\t’<a target="_blank" rel="noopener" href="http://192.168.163.155">http://192.168.163.155</a>‘ “  /data/gitlab/etc/gitlab.rb<br>cat /data/gitlab/etc/gitlab.rb |grep external_url<br> external_url ‘<a target="_blank" rel="noopener" href="http://192.168.163.155’">http://192.168.163.155’</a></p>
+<p> gitlab_rails[‘gitlab_ssh_host’] = ‘192.168.163.155’’</p>
+<p>cat /data/gitlab/etc/gitlab.rb |grep gitlab_ssh_host<br>sed -i “/gitlab_ssh_host/a gitlab_rails[‘gitlab_ssh_host’] = ‘192.168.163.155’ “  /data/gitlab/etc/gitlab.rb<br>cat /data/gitlab/etc/gitlab.rb |grep gitlab_ssh_host</p>
+<p>gitlab_rails[gitlab_shell_ssh_port] = 222</p>
+<p>cat /data/gitlab/etc/gitlab.rb | grep gitlab_shell_ssh<br>sed -i “/gitlab_shell_ssh_port/a gitlab_rails[‘gitlab_shell_ssh_port’] = 222” /data/gitlab/etc/gitlab.rb<br>cat /data/gitlab/etc/gitlab.rb | grep gitlab_shell_ssh<br>vim /data/gitlab/data/gitlab-rails/etc/gitlab.yml</p>
+<p>4.2.4 修改完配置文件之后。直接启动容器<br>docker start gitlab<br>docker ps<br>在宿主机所在的物理机访问，<a target="_blank" rel="noopener" href="http://192.168.163.155/">http://192.168.163.155/</a> ，会自动跳转到修改密码(root用户),如果密码设置的没有满足一定的复杂性，则会报500，需要从新设置</p>
+<p>4.2.5 新建SSH密钥<br>  1.进入gitlab容器</p>
+<p>docker exec -it gitlab /bin/sh</p>
+<p>  2.生成密钥</p>
+<p>ssh-keygen<br>一路回车就可以完成 创建SSH 密钥，可以看到 ~/.ssh目录下生成了 id_rsa 和 id_rsa.pub 两个文件</p>
+<p>3.查看密钥</p>
+<p>cat ~/.ssh/id_rsa.pub</p>
+<p>4.gitlab配置密钥</p>
+<p> 5.推出容器</p>
+<p>exit</p>
+<p>五、部署harbor（192.168.163.156）<br>5.1 安装docker-compose<br>yum install -y docker-compose<br>配置docker加速器</p>
+<p>mkdir -p /etc/docker<br>tee /etc/docker/daemon.json &lt;&lt;-‘EOF’<br>{<br>  “registry-mirrors”: [“<a target="_blank" rel="noopener" href="https://2tefyfv7.mirror.aliyuncs.com">https://2tefyfv7.mirror.aliyuncs.com</a>“]<br>}<br>EOF<br>systemctl daemon-reload<br>systemctl restart docker<br>5.2 使用安装包安装 harbor<br>harbor安装包：harbor</p>
+<p> 解压安装harbor</p>
+<p>tar -zxvf harbor-offline-installer-v2.0.6.tgz<br>docker load -i harbor/harbor.v2.0.6.tar.gz</p>
+<p>5.3 修改配置文件<br>cd harbor/<br>cp harbor.yml.tmpl harbor.yml<br>vim harbor.yml<br> harbor.yml：设置IP和用户名密码 注释写https</p>
+<p>5.4 执行./prepare &amp;&amp; ./install.sh 初始化harbor<br>./prepare<br>./install.sh</p>
+<p>[root@harbor ~]# cd harbor/<br>[root@harbor harbor]# cp harbor.yml.tmpl harbor.yml<br>[root@harbor harbor]# vim harbor.yml<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]# ./prepare<br>prepare base dir is set to /root/harbor<br>ERROR:root:Error: The protocol is https but attribute ssl_cert is not set<br>Error happened in config validation…<br>[root@harbor harbor]# ls<br>common  common.sh  harbor.v2.0.6.tar.gz  harbor.yml  harbor.yml.tmpl  input  install.sh  LICENSE  prepare<br>[root@harbor harbor]# prepare<br>bash: prepare: 未找到命令…<br>[root@harbor harbor]# ./prepare<br>prepare base dir is set to /root/harbor<br>Error happened in config validation…<br>ERROR:root:Error: The protocol is https but attribute ssl_cert is not set<br>[root@harbor harbor]# vim harbor.yml<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]# ./prepare<br>prepare base dir is set to /root/harbor<br>Error happened in config validation…<br>ERROR:root:Error: The protocol is https but attribute ssl_cert is not set<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]# vim harbor.yml<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]# clear<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]# ./prepare<br>prepare base dir is set to /root/harbor<br>WARNING:root:WARNING: HTTP protocol is insecure. Harbor will deprecate http protocol in the future. Please make sure to upgrade to https<br>Generated configuration file: /config/log/logrotate.conf<br>Generated configuration file: /config/log/rsyslog_docker.conf<br>Generated configuration file: /config/nginx/nginx.conf<br>Generated configuration file: /config/core/env<br>Generated configuration file: /config/core/app.conf<br>Generated configuration file: /config/registry/config.yml<br>Generated configuration file: /config/registryctl/env<br>Generated configuration file: /config/registryctl/config.yml<br>Generated configuration file: /config/db/env<br>Generated configuration file: /config/jobservice/env<br>Generated configuration file: /config/jobservice/config.yml<br>Generated and saved secret to file: /data/secret/keys/secretkey<br>Successfully called func: create_root_cert<br>Generated configuration file: /compose_location/docker-compose.yml<br>Clean up the input dir<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]#<br>[root@harbor harbor]# ./install.sh</p>
+<p>[Step 0]: checking if docker is installed …</p>
+<p>Note: docker version: 26.1.3</p>
+<p>[Step 1]: checking docker-compose is installed …</p>
+<p>Note: docker-compose version: 1.18.0</p>
+<p>[Step 2]: loading Harbor images …<br>Loaded image: goharbor/notary-server-photon:v2.0.6<br>Loaded image: goharbor/clair-photon:v2.0.6<br>Loaded image: goharbor/clair-adapter-photon:v2.0.6<br>Loaded image: goharbor/harbor-portal:v2.0.6<br>Loaded image: goharbor/harbor-core:v2.0.6<br>Loaded image: goharbor/harbor-db:v2.0.6<br>Loaded image: goharbor/harbor-jobservice:v2.0.6<br>Loaded image: goharbor/redis-photon:v2.0.6<br>Loaded image: goharbor/notary-signer-photon:v2.0.6<br>Loaded image: goharbor/harbor-log:v2.0.6<br>Loaded image: goharbor/harbor-registryctl:v2.0.6<br>Loaded image: goharbor/trivy-adapter-photon:v2.0.6<br>Loaded image: goharbor/chartmuseum-photon:v2.0.6<br>Loaded image: goharbor/prepare:v2.0.6<br>Loaded image: goharbor/nginx-photon:v2.0.6<br>Loaded image: goharbor/registry-photon:v2.0.6</p>
+<p>[Step 3]: preparing environment …</p>
+<p>[Step 4]: preparing harbor configs …<br>prepare base dir is set to /root/harbor<br>WARNING:root:WARNING: HTTP protocol is insecure. Harbor will deprecate http protocol in the future. Please make sure to upgrade to https<br>Clearing the configuration file: /config/log/logrotate.conf<br>Clearing the configuration file: /config/log/rsyslog_docker.conf<br>Clearing the configuration file: /config/nginx/nginx.conf<br>Clearing the configuration file: /config/core/env<br>Clearing the configuration file: /config/core/app.conf<br>Clearing the configuration file: /config/registry/passwd<br>Clearing the configuration file: /config/registry/config.yml<br>Clearing the configuration file: /config/registryctl/env<br>Clearing the configuration file: /config/registryctl/config.yml<br>Clearing the configuration file: /config/db/env<br>Clearing the configuration file: /config/jobservice/env<br>Clearing the configuration file: /config/jobservice/config.yml<br>Generated configuration file: /config/log/logrotate.conf<br>Generated configuration file: /config/log/rsyslog_docker.conf<br>Generated configuration file: /config/nginx/nginx.conf<br>Generated configuration file: /config/core/env<br>Generated configuration file: /config/core/app.conf<br>Generated configuration file: /config/registry/config.yml<br>Generated configuration file: /config/registryctl/env<br>Generated configuration file: /config/registryctl/config.yml<br>Generated configuration file: /config/db/env<br>Generated configuration file: /config/jobservice/env<br>Generated configuration file: /config/jobservice/config.yml<br>Creating harbor-log … done<br>Generated configuration file: /compose_location/docker-compose.yml<br>Clean up the input dir</p>
+<p>Creating harbor-db … done<br>Creating harbor-core … done<br>Creating network “harbor_harbor” with the default driver<br>Creating nginx … done<br>Creating harbor-portal …<br>Creating redis …<br>Creating registryctl …<br>Creating registry …<br>Creating harbor-db …<br>Creating harbor-core …<br>Creating harbor-jobservice …<br>Creating nginx …<br>✔ ——Harbor has been installed and started successfully.——<br>[root@harbor harbor]# </p>
+<p>5.5 查看相关镜像<br>docker ps</p>
+<p>5.6 访问测试<br> <a target="_blank" rel="noopener" href="http://192.168.163.156">http://192.168.163.156</a></p>
+<p>5.7 CI服务器的docker配置（jenkins:192.168.163.155）<br>这里因为我们要在192.168.163.155(CI服务器)上push镜像到192.168.163.156(私仓)，所有需要修改CI服务器上的Docker配置。</p>
+<p>cat /etc/docker/daemon.json<br>vim /etc/docker/daemon.json</p>
+<p>[root@jenkins ~]# cat /etc/docker/daemon.json<br>{<br>  “registry-mirrors”: [“<a target="_blank" rel="noopener" href="https://2tefyfv7.mirror.aliyuncs.com">https://2tefyfv7.mirror.aliyuncs.com</a>“],<br>  “insecure-registries”: [“192.168.163.156”]<br>}<br>[root@jenkins ~]#<br>加载使其生效 </p>
+<p>systemctl daemon-reload<br>systemctl restart docker<br> CI机器简单测试一下</p>
+<p>docker login 192.168.163.156<br> 测试上传镜像</p>
+<p>docker tag beginor/gitlab-ce 192.168.163.156/library/gitlab-ce #beginor/gitlab-ce为本地镜像 可以自定义<br>docker images<br>docker push 192.168.163.156/library/gitlab-ce</p>
+<p>5.8 CD服务器的docker配置（k8s-master、k8s-node1、k8s-node2）<br>cat /etc/docker/daemon.json</p>
+<p>vim /etc/docker/daemon.json<br>cat /etc/docker/daemon.json</p>
+<p>加载使其生效 </p>
+<p>systemctl daemon-reload<br>systemctl restart docker<br>CI机器简单测试一下</p>
+<p>5.9 harbor开机启动<br>  编辑/lib/systemd/system/harbor.service</p>
+<p>vim /lib/systemd/system/harbor.service<br>[Unit]<br>Description=Harbor<br>After=network.service docker.service systemd-networkd.service systemd-resolved.service<br>Requires=docker.service<br>Documentation=<a target="_blank" rel="noopener" href="http://github.com/vmware/harbor">http://github.com/vmware/harbor</a></p>
+<p>[Service]<br>Type=simple<br>Restart=on-failure<br>RestartSec=5<br>ExecStart=/usr/bin/docker-compose -f /root/harbor/docker-compose.yml up<br>ExecStop=/usr/bin/docker-compose -f /root/harbor/docker-compose.yml down</p>
+<p>[Install]<br>WantedBy=multi-user.target</p>
+<p>重载配置 </p>
+<p>chmod 755 /lib/systemd/system/harbor.service<br>systemctl restart harbor<br>systemctl status harbor<br>systemctl enable harbor</p>
+<p> 六、安装配置jenkins（jenkins:192.168.163.155）<br>6.1 镜像jenkins拉取<br>docker pull jenkins/jenkins:2.457</p>
+<p>6.2 创建共享卷，修改所属组和用户,和容器里相同<br>mkdir /jenkins<br>chown 1000:1000 /jenkins</p>
+<h1 id="这里为什么要改成-1000，是因为容器里是以-jenkins-用户的身份去读写数据，而在容器里jenkins-的-uid-是-1000"><a href="#这里为什么要改成-1000，是因为容器里是以-jenkins-用户的身份去读写数据，而在容器里jenkins-的-uid-是-1000" class="headerlink" title="这里为什么要改成 1000，是因为容器里是以 jenkins 用户的身份去读写数据，而在容器里jenkins 的 uid 是 1000"></a>这里为什么要改成 1000，是因为容器里是以 jenkins 用户的身份去读写数据，而在容器里jenkins 的 uid 是 1000</h1><p>6.3 创建 jenkins 容器<br>docker run -dit -p 8080:8080 -p 50000:50000 —name jenkins  —privileged=true —restart=always -v /jenkins:/var/jenkins_home jenkins/jenkins:2.457<br>docker ps | grep jenkins<br> 访问jenkins  <a target="_blank" rel="noopener" href="http://192.168.163.155:8080">http://192.168.163.155:8080</a></p>
+<p>关闭Jenkins容器，因为要修改配置</p>
+<p>docker stop jenkins</p>
+<p>6.4 配置jenkins环境<br>更换国内清华大学镜像,Jenkins下载插件特别慢，更换国内的清华源的镜像地址会快不少</p>
+<p>cat /jenkins/hudson.model.UpdateCenter.xml</p>
+<p>sed -i  ‘s#updates.jenkins.io/update-center.json#mirrors.tuna.tsinghua.edu.cn/jenkins/updates/update-center.json#g ‘  /jenkins/hudson.model.UpdateCenter.xml<br>cat /jenkins/hudson.model.UpdateCenter.xml  </p>
+<p> “<a target="_blank" rel="noopener" href="https://www.google.com/”">https://www.google.com/”</a> 替换为 “<a target="_blank" rel="noopener" href="https://www.baidu.com/”">https://www.baidu.com/”</a></p>
+<p>yum install -y jq<br>cat /jenkins/updates/default.json | jq ‘.connectionCheckUrl’<br>cat /jenkins/updates/default.json | jq ‘keys’</p>
+<p>替换</p>
+<p>sed -i    s#<a target="_blank" rel="noopener" href="https://www.google.com/#https://www.baidu.com/#g">https://www.google.com/#https://www.baidu.com/#g</a>  /jenkins/updates/default.json<br> 重启docker，获取登录密匙</p>
+<p>docker start jenkins<br>cat /jenkins/secrets/initialAdminPassword</p>
+<p> 需要修改jenkins绑定的docker的启动参数，ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2376 -H fd:// —containerd=/run/containerd/containerd.sock</p>
+<p>vim /lib/systemd/system/docker.service</p>
+<p>修改镜像库启动参数后需要重启docker</p>
+<p>systemctl daemon-reload<br>systemctl restart docker<br>6.5 配置Jenkins 安装插件</p>
+<p>安装和配置docker插件</p>
+<p>依此点击Manage Jenkins-&gt;Manage Plugins-&gt;AVAILABLE-&gt;Search 搜索docker、docker-build-step</p>
+<p>  需要修改harbor(192.168.163.156)的docker的启动参数，ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2376 -H fd:// —containerd=/run/containerd/containerd.sock</p>
+<p>vim /lib/systemd/system/docker.service<br> 修改镜像库启动参数后需要重启docker</p>
+<p>systemctl daemon-reload<br>systemctl restart docker</p>
+<p>  以上docker配置是为了Build / Publish Docker Image时使用，定义了用那个服务器的docker执行docker命令</p>
+<p>jenkins 安全设置</p>
+<p>后面 gitlab 要和 jenkins 进行联动，所以必须要需要对 jenkins 的安全做一些设置，依次点击 系统管理-全局安全配置-授权策略，勾选”匿名用户具有可读权限”</p>
+<p>七、Jenkins发布打包成Docker的spring boot项目到K8s集群<br>7.1 创建spring boot 项目</p>
+<p>pom.xml</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.7.RELEASE</version>
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>demo</name>
+    <description>demo</description>
+    <properties>
+        <java.version>1.8</java.version>
+        <java.version>1.8</java.version>
+        <!--换成你的harbor仓库地址-->
+        <docker.repostory>192.168.163.156</docker.repostory>
+        <!--换成你的仓库项目名称-->
+        <docker.registry.name>demo</docker.registry.name>
+        <docker.image.tag>0.0.1</docker.image.tag>
+        <docker.maven.plugin.version>1.4.10</docker.maven.plugin.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>demo</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>${docker.maven.plugin.version}</version>
+                <!--以下配置依赖docker环境 maven编译打包时会生成docker镜像 本地编译时先注释掉  上传git时在打开-->
+                <executions>
+                    <execution>
+                        <id>default</id>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>push</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <contextDirectory>${project.basedir}</contextDirectory>
+                    <useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+                    <repository>${docker.repostory}/${docker.registry.name}/${project.artifactId}</repository>
+                    <!--换成你的harbor仓库账号密码-->
+                    <username>admin</username>
+                    <password>root123456</password>
+                    <tag>${docker.image.tag}</tag>
+                    <buildArgs>
+                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                    </buildArgs>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <!-- 指定 src/main/resources下所有文件及文件夹为资源文件 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${project.build.directory}/classes</targetPath>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>
+
+<p> 创建测试接口</p>
+<p>package com.example.demo.api;</p>
+<p>import lombok.AllArgsConstructor;<br>import org.springframework.web.bind.annotation.GetMapping;<br>import org.springframework.web.bind.annotation.RequestMapping;<br>import org.springframework.web.bind.annotation.RestController;</p>
+<p>/**</p>
+<ul>
+<li>@author lgp</li>
+<li>@description: 测试PI</li>
+<li><p>@date 2023/9/6<br>*/<br> @RestController<br> @AllArgsConstructor<br> @RequestMapping(“/api”)<br> public class testApi {</p>
+<p> @GetMapping(“/test”)<br> public String test() {</p>
+<pre><code> return &quot;测试1112233552219122120911！！&quot;;
+</code></pre><p> }</p>
+</li>
+</ul>
+<p>}</p>
+<p>启动项目</p>
+<p>访问测试接口</p>
+<p>添加Dockerfile文件</p>
+<p>  该文件时docker创建容器的文件，名称不可改变</p>
+<h1 id="添加依赖环境，前提是将Java8的Docker镜像从官方镜像仓库pull下来，然后上传到自己的Harbor私有仓库中"><a href="#添加依赖环境，前提是将Java8的Docker镜像从官方镜像仓库pull下来，然后上传到自己的Harbor私有仓库中" class="headerlink" title="添加依赖环境，前提是将Java8的Docker镜像从官方镜像仓库pull下来，然后上传到自己的Harbor私有仓库中"></a>添加依赖环境，前提是将Java8的Docker镜像从官方镜像仓库pull下来，然后上传到自己的Harbor私有仓库中</h1><p>FROM 192.168.163.156/library/java:8</p>
+<h1 id="指定镜像制作作者，可自己随意设置"><a href="#指定镜像制作作者，可自己随意设置" class="headerlink" title="指定镜像制作作者，可自己随意设置"></a>指定镜像制作作者，可自己随意设置</h1><p>MAINTAINER admin</p>
+<h1 id="运行目录"><a href="#运行目录" class="headerlink" title="运行目录"></a>运行目录</h1><p>VOLUME /tmp</p>
+<h1 id="将本地的文件拷贝到容器，一般在项目的target目录下，要根据项目自己修改"><a href="#将本地的文件拷贝到容器，一般在项目的target目录下，要根据项目自己修改" class="headerlink" title="将本地的文件拷贝到容器，一般在项目的target目录下，要根据项目自己修改"></a>将本地的文件拷贝到容器，一般在项目的target目录下，要根据项目自己修改</h1><p>ADD target/*jar app.jar</p>
+<h1 id="启动容器后自动执行的命令"><a href="#启动容器后自动执行的命令" class="headerlink" title="启动容器后自动执行的命令"></a>启动容器后自动执行的命令</h1><p>ENTRYPOINT [ “java”, “-Djava.security.egd=file:/dev/./urandom”, “-jar”, “/app.jar” ]<br>添加demo.yaml文件</p>
+<p>该文件是k8s创建pod的配置文件</p>
+<p>apiVersion: apps/v1<br>kind: Deployment<br>metadata:<br>  name: demo<br>  labels:<br>    app: demo<br>spec:<br>  replicas: 1<br>  selector:<br>    matchLabels:<br>      app: demo<br>  template:<br>    metadata:<br>      labels:<br>        app: demo<br>    spec:<br>      imagePullSecrets:                 #使用imagePullSecrets参数指定镜像拉取秘钥</p>
+<pre><code>    - name: harbor-registry        #使用我们的secret，即harbor-registry
+  containers:
+  - name: demo
+    image: 192.168.163.156/demo/demo:0.0.1
+    ports:
+    - containerPort: 8080   #修改成你项目的端口
+    imagePullPolicy: Always #镜像拉取策略：每次都拉去最新的镜像
+</code></pre><hr>
+<p>apiVersion: v1<br>kind: Service<br>metadata:<br>  name: demo<br>  labels:<br>    app: demo<br>spec:<br>  ports:</p>
+<pre><code>- name: http
+  port: 8080            #修改成你项目的端口
+  nodePort: 30001      ##容器暴露的访问端口，要确定无冲突，否则需修改
+</code></pre><p>  type: NodePort<br>  selector:<br>    app: demo</p>
+<p>项目上传到gitlab </p>
+<p>7.2 拉取java8镜像<br> 在jenkins服务器(192.168.163.155)上拉取java8镜像，然后推送至harbor仓库，一会打包构建docker镜像的时候会用到。</p>
+<p>docker pull java:8<br>docker tag java:8 192.168.163.156/library/java:8<br>docker login 192.168.163.156<br>docker push 192.168.163.156/library/java:8</p>
+<p>7.3 配置 jenkins容器到其他服务的ssh免密登录<br>jenkins执行构建命令时，需要ssh访问jenkins容器所在服务器（192.168.163.155）和k8s主节点服务器（192.168.163.151），所以需要配置ssh免密登录</p>
+<p>在jenkins容器所在服务器（192.168.163.155）上进入jenkins容器</p>
+<p>docker exec -it jenkins bash</p>
+<p>生产密钥</p>
+<p>ssh-keygen -t rsa<br>将公钥复制到jenkins容器所在服务器（192.168.163.155）</p>
+<p>ssh-copy-id root@192.168.163.155</p>
+<p> 将公钥复制到k8s主节点服务器（192.168.163.151)</p>
+<p>7.4 k8s 创建私有镜像仓库Secret（k8s主节点服务器192.168.163.151）<br>k8s需要从harbor私有进行仓库拉取镜像时，需要创建Secret，配置harbor私有镜像仓库地址、账号密码</p>
+<h1 id="docker-registry是关键字-harbor-registry是自定义的名称与demo-yaml中的imagePullSecrets-name值一致"><a href="#docker-registry是关键字-harbor-registry是自定义的名称与demo-yaml中的imagePullSecrets-name值一致" class="headerlink" title="docker-registry是关键字 harbor-registry是自定义的名称与demo.yaml中的imagePullSecrets.name值一致"></a>docker-registry是关键字 harbor-registry是自定义的名称与demo.yaml中的imagePullSecrets.name值一致</h1><p>kubectl -n default create secret docker-registry harbor-registry —docker-email=baidu.com@example —docker-username=root —docker-password=root123456 —docker-server=192.168.163.156    </p>
+<p>kubectl get secret harbor-registry #查看secret</p>
+<p>7.5 安装jdk和maven(jenkins:192.168.163.155)<br> 安装mvn</p>
+<p>cd /usr/local/<br>wget <a target="_blank" rel="noopener" href="https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz">https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz</a><br>tar -zxvf apache-maven-3.6.3-bin.tar.gz<br>安装jdk</p>
+<p>yum install -y java-1.8.0-openjdk-devel<br>配置环境变量</p>
+<p>vim /etc/profile</p>
+<p>MAVEN_HOME=/usr/local/apache-maven-3.6.3<br>JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.412.b08-1.el7_9.x86_64  ##这里的路径注意使用你安装的jdk的版本号<br>CLASS_PATH=.:$JAVA_HOME/lib<br>PATH=$MAVEN_HOME/bin:$JAVA_HOME/bin:$PATH<br> 刷新环境变量</p>
+<p>source /etc/profile<br>检查是否安装成功</p>
+<p>mvn -v<br>java -version</p>
+<p>7.6 使用jenkins构建发布项目</p>
+<h1 id="使用jenkins宿主机的maven打包-jenkins-workspace是jenkins-拉取git项目的目录-创建jenkins容器时已经做好了映射"><a href="#使用jenkins宿主机的maven打包-jenkins-workspace是jenkins-拉取git项目的目录-创建jenkins容器时已经做好了映射" class="headerlink" title="使用jenkins宿主机的maven打包 /jenkins/workspace是jenkins 拉取git项目的目录 创建jenkins容器时已经做好了映射"></a>使用jenkins宿主机的maven打包 /jenkins/workspace是jenkins 拉取git项目的目录 创建jenkins容器时已经做好了映射</h1><p>ssh -tt root@192.168.163.155 ‘docker rmi 192.168.163.156/demo/demo:0.0.1<br>    /usr/local/apache-maven-3.6.3/bin/mvn -f /jenkins/workspace/demo/pom.xml clean install -Dmaven.test.skip=true’<br>ssh -tt root@192.168.163.155 ‘docker login 192.168.163.156<br>    docker push  192.168.163.156/demo/demo:0.0.1’<br>scp /var/jenkins_home/workspace/demo/demo.yaml root@192.168.163.151:/<br>ssh -tt root@192.168.163.151 ‘/usr/bin/kubectl delete -f /demo.yaml’ #第一次执行时 由于没有该pod 会报错 所以第一次先注释掉<br>ssh -tt root@192.168.163.151 ‘/usr/bin/kubectl apply -f /demo.yaml’</p>
+<p>镜像仓库</p>
+<p>查看k8s pod</p>
+<p>kubectl get pod —all-namespaces</p>
+<p>访问应用：192.168.163.151:30001/api/test</p>
+<p>方式二 构建 （比较麻烦 依赖于 6.5中的安装和配置docker插件）</p>
+<p>  分为三步：</p>
+<pre><code>  1.执行 shell maven编译生成jar包
+
+
+
+    2.Build / Publish Docker Image 生成镜像并上传至镜像仓库
+</code></pre><p>   3.执行 shell 远程k8s更新pod</p>
+<p>以上项目部署CI/CD 还需要手动在jenkins中构建项目，下面整合Jenkins和gitlab，使用gitlab的webhook功能，实现代码提交到gitlab后 自动构建部署项目</p>
+<p>1、master节点<br>1.1、在master节点执行下面reset命令：<br>kubeadm reset</p>
+<p>//过程会询问是否重置，输入y然后回车</p>
+<p>1.2、手动清除配置信息，这一步很关键：<br>cd ~ 进入根目录</p>
+<p>ll -a 查看是否存在.kube文件<br>rm -rf /root/.kube</p>
+<p>systemctl restart docker ## 重启docker<br>systemctl restart kubelet ## 重启kubelet</p>
+<p>rm -rf /etc/cni/net.d<br>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre><p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43025151/article/details/135536233">https://blog.csdn.net/weixin_43025151/article/details/135536233</a></p>
+<h3 id="2、work节点"><a href="#2、work节点" class="headerlink" title="2、work节点"></a>2、work节点</h3><h4 id="2-1、重置工作节点"><a href="#2-1、重置工作节点" class="headerlink" title="2.1、重置工作节点"></a>2.1、重置工作节点</h4><p><code>kubeadm reset</code><br>//过程会询问是否重置，输入y然后回车</p>
+<h4 id="2-2、手动删除目录"><a href="#2-2、手动删除目录" class="headerlink" title="2.2、手动删除目录"></a>2.2、手动删除目录</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /root/.kube</span><br><span class="line">rm -rf /etc/cni/net.d</span><br><span class="line">rm -rf /etc/kubernetes/*</span><br></pre></td></tr></table></figure>
+<h3 id="kubectl命令报错-“The-connection-to-the-server-localhost-8080-was-refused-did-you-specify-the-right-host-or-port-”"><a href="#kubectl命令报错-“The-connection-to-the-server-localhost-8080-was-refused-did-you-specify-the-right-host-or-port-”" class="headerlink" title="kubectl命令报错 “The connection to the server localhost:8080 was refused - did you specify the right host or port?”"></a>kubectl命令报错 “The connection to the server localhost:8080 was refused - did you specify the right host or port?”</h3><p>解决方法：<br>1.将主节点（master）中的“/etc/<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=kubernetes&amp;spm=1001.2101.3001.7020">kubernetes</a>/admin.conf”文件拷贝到从节点相同目录下<br>2.配置环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;export KUBECONFIG=/etc/kubernetes/admin.conf&quot;</span> &gt;&gt; ~/.bash_profile</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<p>3.立即生效</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>常用命令</p>
+<p>查看pod</p>
+<p>kubectl get pods -A   /  kubectl get pods -All-namespaces #查看所有命令空间pod</p>
+<p>kubectl get nodes #查看所有节点信息</p>
+<p>kubectl logs  <yourpodname> -n <yournamespace>  #查看pod日志</p>
+<p>kubectl logs <pod-name> -c <container-name> #查看pod中指定容器</p>
+<p>kubectl logs <pod-name> —tail=20  #查看最后20行<br>kubectl logs <pod-name> —since=1h #查看最近一小时内的日志</p>
+<p>kubectl describe pod <pod_name>  #描述pod</p>
+<p>kubectl describe node <node_name>  #描述node</p>
+<p>kubectl describe service <service_name> #描述service</p>
+<p>kubectl cluster-info #查看集群信息</p>
+<p>kubectl get <resource_type> #获取资源清单（pods、services、deployment)</p>
+<p>kubectl create -f <filename> #创建资源</p>
+<p>kubectl apply -f <filename> #更新资源</p>
+<p>kubectl delete <resource_type> <resource_name> #删除资源</p>
+<p>kubectl exec -it <pod_name> <em>— /bin/bash</em> #进入pod交互式终端</p>
+<p>kubectl scale —replicas=<num> deployment/<deployment_name>  #<strong>扩展/缩放 Deployment</strong></p>
+<p><strong>查看 ConfigMap 和 Secret：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Copy Codekubectl get configmaps</span><br><span class="line">kubectl get secrets</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>查看和修改节点标签：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Copy Codekubectl get nodes --show-labels</span><br><span class="line">kubectl label node &lt;node_name&gt; &lt;label_key&gt;=&lt;label_value&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>查看 API 资源：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Copy Codekubectl api-resources</span><br></pre></td></tr></table></figure>
+<p><strong>查看 API 版本：</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Copy Codekubectl api-versions</span><br></pre></td></tr></table></figure>
+<p>yaml解释</p>
+<p>apiVersion: v1 # 资源版本<br>kind: Service # 资源类型<br>metadata: # 元数据<br>  name: gateway # 资源名称<br>  namespace: peric718 # 命名空间<br>spec: # 详细配置<br>  ports: # 端口配置</p>
+<ul>
+<li>port: 10000 # 内部访问端口<br>name: gateway # 端口名称<br>nodePort: 30001 # 对外暴露端口<br>selector: # 选择器，用于指定当前资源作用于哪些pod<br>app: gateway<br>type: NodePort # 类型为NodePort</li>
+</ul>
+<hr>
+<p>apiVersion: apps/v1<br>kind: Deployment<br>metadata:<br>  name: gateway<br>  namespace: peric718<br>spec:<br>  replicas: 1<br>  selector:<br>    matchLabels:<br>      app: gateway<br>  template: # pod副本创建模板。属性和Pod的属性一样<br>    metadata:<br>      labels: # 给要创建的pod打标签<br>        app: gateway<br>    spec:<br>      containers: # 使用的容器信息</p>
+<pre><code>  - name: gateway
+    image: 192.168.1.180:5000/aengus/gateway:v1.6
+    # 拉取镜像策略：本地镜像不存在，从仓库取。有Always：中从仓库取。Never：总从本地取。
+    imagePullPolicy: IfNotPresent 
+    ports:
+    - protocol: TCP
+      containerPort: 10000 # 镜像映射出的端口
+      env: # 镜像环境变量设置
+      - name: NACOS_URL # nacos注册网址
+        value: 192.168.1.181:8848
+      - name: NACOS_DISCOVERY_NAMESPACE # nacos服务注册命名空间的环境变量
+        value: 2a20a28f-6345-4ec7-ac28-ae525796736a
+      - name: NACOS_CONFIG_NAMESPACE # nacos服务配置命名空间的环境变量
+        value: 2a20a28f-6345-4ec7-ac28-ae525796736a
+      - name: NACOS_DISCOVERRY_IP
+        valueFrom:
+          fieldRef:
+             fieldPath: status.podIP
+</code></pre>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Gengar
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2026/02/06/git-jenkins-harbor-k8s%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/" title="git-jenkins-harbor-k8s部署笔记">http://example.com/2026/02/06/git-jenkins-harbor-k8s部署笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/02/06/springcloud%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%BAhttps%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/" rel="prev" title="springcloud项目部署为https">
+      <i class="fa fa-chevron-left"></i> springcloud项目部署为https
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" rel="next" title="docker命令笔记">
+      docker命令笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="nav-number">1.</span> <span class="nav-text">2.3 修改主机名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%89%80%E6%9C%89%E6%9C%BA%E5%99%A8%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">2.</span> <span class="nav-text">2.3 所有机器关闭防火墙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%89%80%E6%9C%89%E6%9C%BA%E5%99%A8%E5%85%B3%E9%97%ADselinux"><span class="nav-number">3.</span> <span class="nav-text">2.4 所有机器关闭selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E6%89%80%E6%9C%89%E6%9C%BA%E5%99%A8%E5%85%B3%E9%97%ADswap"><span class="nav-number">4.</span> <span class="nav-text">2.5 所有机器关闭swap</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F-registry-mirrors"><span class="nav-number"></span> <span class="nav-text">镜像加速 registry-mirrors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%A5%BD%E6%89%8B%E5%8A%A8%E6%8F%90%E5%89%8D%E6%8B%89%E5%8F%96%E6%89%80%E9%9C%80%E9%95%9C%E5%83%8F"><span class="nav-number"></span> <span class="nav-text">最好手动提前拉取所需镜像</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%99%E9%87%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%94%B9%E6%88%90-1000%EF%BC%8C%E6%98%AF%E5%9B%A0%E4%B8%BA%E5%AE%B9%E5%99%A8%E9%87%8C%E6%98%AF%E4%BB%A5-jenkins-%E7%94%A8%E6%88%B7%E7%9A%84%E8%BA%AB%E4%BB%BD%E5%8E%BB%E8%AF%BB%E5%86%99%E6%95%B0%E6%8D%AE%EF%BC%8C%E8%80%8C%E5%9C%A8%E5%AE%B9%E5%99%A8%E9%87%8Cjenkins-%E7%9A%84-uid-%E6%98%AF-1000"><span class="nav-number"></span> <span class="nav-text">这里为什么要改成 1000，是因为容器里是以 jenkins 用户的身份去读写数据，而在容器里jenkins 的 uid 是 1000</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%E7%8E%AF%E5%A2%83%EF%BC%8C%E5%89%8D%E6%8F%90%E6%98%AF%E5%B0%86Java8%E7%9A%84Docker%E9%95%9C%E5%83%8F%E4%BB%8E%E5%AE%98%E6%96%B9%E9%95%9C%E5%83%8F%E4%BB%93%E5%BA%93pull%E4%B8%8B%E6%9D%A5%EF%BC%8C%E7%84%B6%E5%90%8E%E4%B8%8A%E4%BC%A0%E5%88%B0%E8%87%AA%E5%B7%B1%E7%9A%84Harbor%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E4%B8%AD"><span class="nav-number"></span> <span class="nav-text">添加依赖环境，前提是将Java8的Docker镜像从官方镜像仓库pull下来，然后上传到自己的Harbor私有仓库中</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C%E4%BD%9C%E8%80%85%EF%BC%8C%E5%8F%AF%E8%87%AA%E5%B7%B1%E9%9A%8F%E6%84%8F%E8%AE%BE%E7%BD%AE"><span class="nav-number"></span> <span class="nav-text">指定镜像制作作者，可自己随意设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E7%9B%AE%E5%BD%95"><span class="nav-number"></span> <span class="nav-text">运行目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%86%E6%9C%AC%E5%9C%B0%E7%9A%84%E6%96%87%E4%BB%B6%E6%8B%B7%E8%B4%9D%E5%88%B0%E5%AE%B9%E5%99%A8%EF%BC%8C%E4%B8%80%E8%88%AC%E5%9C%A8%E9%A1%B9%E7%9B%AE%E7%9A%84target%E7%9B%AE%E5%BD%95%E4%B8%8B%EF%BC%8C%E8%A6%81%E6%A0%B9%E6%8D%AE%E9%A1%B9%E7%9B%AE%E8%87%AA%E5%B7%B1%E4%BF%AE%E6%94%B9"><span class="nav-number"></span> <span class="nav-text">将本地的文件拷贝到容器，一般在项目的target目录下，要根据项目自己修改</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8%E5%90%8E%E8%87%AA%E5%8A%A8%E6%89%A7%E8%A1%8C%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number"></span> <span class="nav-text">启动容器后自动执行的命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#docker-registry%E6%98%AF%E5%85%B3%E9%94%AE%E5%AD%97-harbor-registry%E6%98%AF%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E5%90%8D%E7%A7%B0%E4%B8%8Edemo-yaml%E4%B8%AD%E7%9A%84imagePullSecrets-name%E5%80%BC%E4%B8%80%E8%87%B4"><span class="nav-number"></span> <span class="nav-text">docker-registry是关键字 harbor-registry是自定义的名称与demo.yaml中的imagePullSecrets.name值一致</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8jenkins%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%9A%84maven%E6%89%93%E5%8C%85-jenkins-workspace%E6%98%AFjenkins-%E6%8B%89%E5%8F%96git%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%9B%AE%E5%BD%95-%E5%88%9B%E5%BB%BAjenkins%E5%AE%B9%E5%99%A8%E6%97%B6%E5%B7%B2%E7%BB%8F%E5%81%9A%E5%A5%BD%E4%BA%86%E6%98%A0%E5%B0%84"><span class="nav-number"></span> <span class="nav-text">使用jenkins宿主机的maven打包 &#x2F;jenkins&#x2F;workspace是jenkins 拉取git项目的目录 创建jenkins容器时已经做好了映射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81work%E8%8A%82%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">2、work节点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1%E3%80%81%E9%87%8D%E7%BD%AE%E5%B7%A5%E4%BD%9C%E8%8A%82%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">2.1、重置工作节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2%E3%80%81%E6%89%8B%E5%8A%A8%E5%88%A0%E9%99%A4%E7%9B%AE%E5%BD%95"><span class="nav-number">1.2.</span> <span class="nav-text">2.2、手动删除目录</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kubectl%E5%91%BD%E4%BB%A4%E6%8A%A5%E9%94%99-%E2%80%9CThe-connection-to-the-server-localhost-8080-was-refused-did-you-specify-the-right-host-or-port-%E2%80%9D"><span class="nav-number">2.</span> <span class="nav-text">kubectl命令报错 “The connection to the server localhost:8080 was refused - did you specify the right host or port?”</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gengar"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">Gengar</p>
+  <div class="site-description" itemprop="description">分享学习内容</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/NightTeam" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;NightTeam" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:contact@nightteam.cn" title="E-Mail → mailto:contact@nightteam.cn" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gengar</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '0db41092506d1fe13c1c',
+      clientSecret: 'e0375c33e4d7dd7caf55d3a663f088e9f07ec8f1',
+      repo        : 'nightteam.github.io',
+      owner       : 'NightTeam',
+      admin       : ['germey'],
+      id          : 'd322fe1483e340baacb9e93bf052a442',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

@@ -1,8 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>/2026/02/06/1%E3%80%81%E5%B9%B6%E8%A1%8C%E5%92%8C%E5%B9%B6%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<p>1、并行和并发的区别</p>
+<p>并行强调多个任务同时处理</p>
+<p>并发强调的是系统具有处理多个任务的能力，这些任务可以同时执行也可以交替执行</p>
+<p>2、为什么要使用线程池</p>
+<ol>
+<li>降低资源消耗：线程的创建和销毁会带来额外的开销，使用线程池可以重复利用已经创建的线程，避免频繁地创建和销毁线程，从而降低了系统的资源消耗。</li>
+<li>提高响应速度：线程池中的线程在执行完一个任务后，可以立即接受下一个任务，这样可以减少任务等待的时间，提高系统的响应速度。</li>
+<li>控制并发数量：线程池可以限制同时执行的线程数量，防止系统因为过多的线程导致资源耗尽或性能下降，从而更好地控制并发度。</li>
+<li>统一管理：线程池可以统一管理线程的生命周期、状态和执行，提供了更加方便的管理和监控机制。</li>
+<li>提供更好的可伸缩性：线程池可以根据实际情况动态调整线程数量，适应系统负载的变化，从而提供了更好的可伸缩性。</li>
+</ol>
+<p>3、springboot有哪几种日志</p>
+<p>logback默认日志框架 </p>
+<p>log4j2</p>
+<p><strong>java.util.logging</strong></p>
+<p><strong>Slf4j</strong></p>
+<p>在 Logback 中，有几个核心的标签用于配置日志输出的格式、级别、目的地等，下面是一些常用的 Logback 标签以及它们的功能和作用：</p>
+<ol>
+<li><strong><configuration></strong>：<ul>
+<li><code>&lt;configuration&gt;</code> 标签用于配置 Logback 的整体配置信息，包括根日志级别、Appender 等。</li>
+<li>可以在该标签内部定义多个子标签来配置具体的日志输出规则。</li>
+</ul>
+</li>
+<li><strong><appender></strong>：<ul>
+<li><code>&lt;appender&gt;</code> 标签用于配置日志的输出目的地，比如控制台、文件等。</li>
+<li>可以配置不同类型的 Appender，如 ConsoleAppender、FileAppender 等。</li>
+</ul>
+</li>
+<li><strong><logger></strong>：<ul>
+<li><code>&lt;logger&gt;</code> 标签用于配置具体的 Logger 对象，可以设置 Logger 的名称、级别、Appender 等。</li>
+<li>可以为不同的包或类设置不同的日志级别和目的地。</li>
+</ul>
+</li>
+<li><strong><root></strong>：<ul>
+<li><code>&lt;root&gt;</code> 标签表示根 Logger，用于配置应用程序的根日志级别和根 Appender。</li>
+<li>所有未匹配到具体 Logger 的日志消息都会经过根 Logger 处理。</li>
+</ul>
+</li>
+<li><strong><encoder></strong>：<ul>
+<li><code>&lt;encoder&gt;</code> 标签用于配置日志的输出格式，可以自定义日志消息的展示方式。</li>
+<li>可以设置日期格式、线程名、日志级别、Logger 名称、消息内容等。</li>
+</ul>
+</li>
+<li><strong><pattern></strong>：<ul>
+<li><code>&lt;pattern&gt;</code> 标签用于定义日志输出的格式模式，常常与 <code>&lt;encoder&gt;</code> 配合使用。</li>
+<li>可以通过占位符来指定输出的内容，如 <code>%d</code> 表示日期、<code>%level</code> 表示日志级别等。</li>
+</ul>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>docker version        # 显示docker的版本信息<br>docker info              # 显示docker的系统信息，包括镜像和容器的数量<br>docker 命令 —help         # 帮助命令<br>docker images    #查看镜像<br>docker search    #搜索镜像<br>docker pull    #下载镜像<br>docker pull  mysql:5.7    #指定版本下载<br>docker rmi     #删除镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id                    # 删除指定的镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id 镜像id 镜像id    # 删除多个镜像（空格分隔）<br>[root@JWei_0124 //]# docker rmi -f $(docker images -aq)    # 删除全部的镜像<br>docker run [可选参数] image</p>
+<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><p>—name=”name”        容器名字：用来区分容器<br>-d                    后台方式运行：相当于nohup<br>-it                    使用交互式运行：进入容器查看内容<br>-p                    指定容器的端口（四种方式）小写字母p<br>    -p ip:主机端口：容器端口<br>    -p 主机端口：容器端口<br>    -p 容器端口<br>    容器端口<br>-P                     随机指定端口（大写字母P）</p>
+<p>docker ps         #列出当前正在运行的容器</p>
+<h1 id="命令参数可选项"><a href="#命令参数可选项" class="headerlink" title="命令参数可选项"></a>命令参数可选项</h1><p>-a        # 列出当前正在运行的容器+历史运行过的容器<br>-n=?    # 显示最近创建的容器（可以指定显示几条，比如-n=1）<br>-q        # 只显示容器的编号</p>
+<p>docker run -it centos /bin/bash #交互式进入<br>docker rm 容器ID    #删除容器（不能删除正在运行的容器）<br>docker rm -f     #强制删除<br>docker ps -a -q|xargs docker rm     #删除所有容器<br>docker start 容器id        # 启动容器<br>docker restart 容器id    # 重启容器<br>docker stop 容器id        # 停止当前正在运行的容器<br>docker kill 容器id        # 强制停止当前容器</p>
+<p>docker logs -tf —tail 容器id</p>
+<p>-tf                        # 显示日志<br>—tail number    # 要显示的日志条数</p>
+<p>查看容器中进程的信息<br>docker top id<br>查看镜像的元数据<br>docker inspect id<br>进入当前正在运行的容器<br>docker exec -it 容器id /bin/bash</p>
+<p>从容器内拷贝文件到主机<br>docker cp 容器id:容器内路径 目的主机的路径</p>
+<h1 id="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"><a href="#如何确定是具名挂载，还是匿名挂载，还是指定路径挂载" class="headerlink" title="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"></a>如何确定是具名挂载，还是匿名挂载，还是指定路径挂载</h1><p>-v 容器内的路径                # 匿名挂载<br>-v 卷名:容器内的路径        # 具名挂载<br>-v /宿主机路径:容器内路径    # 指定路径挂载</p>
+<h1 id="提交容器成为一个新的副本"><a href="#提交容器成为一个新的副本" class="headerlink" title="提交容器成为一个新的副本"></a>提交容器成为一个新的副本</h1><p>docker commit</p>
+<h1 id="命令和git原理类似"><a href="#命令和git原理类似" class="headerlink" title="命令和git原理类似"></a>命令和git原理类似</h1><p>docker commit -m=”提交的描述信息” -a=”作者” 容器id 目标镜像名:[TAG]</p>
+<h1 id="我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"><a href="#我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。" class="headerlink" title="我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"></a>我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。</h1><p>docker run -d -P —name tomcat01 tomcat<br>docker run -d -P —name tomcato1 —het bridge tomcat</p>
+<h1 id="docker0特点：默认，域名不能访问，—1ink可以打通连接！"><a href="#docker0特点：默认，域名不能访问，—1ink可以打通连接！" class="headerlink" title="docker0特点：默认，域名不能访问，—1ink可以打通连接！"></a>docker0特点：默认，域名不能访问，—1ink可以打通连接！</h1><h1 id="我们可以自定义一个网络！"><a href="#我们可以自定义一个网络！" class="headerlink" title="我们可以自定义一个网络！"></a>我们可以自定义一个网络！</h1><p>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network create —driver bridge —subnet 192.168.0.0/16 —gateway 192.168.0.1 mynet<br>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network ls<br>NETWORK ID     NAME      DRIVER    SCOPE<br>7254ffccbdf5   bridge    bridge    local<br>45610891738f   host      host      local<br>266acd66473c   mynet     bridge    local<br>7795cbc2686c   none      null      local</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Linux笔记</title>
-    <url>/2022/05/06/Linux/</url>
+    <url>/2023/07/25/Linux/</url>
     <content><![CDATA[<h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><h3 id="安装图形化界面虚拟机管理工具"><a href="#安装图形化界面虚拟机管理工具" class="headerlink" title="安装图形化界面虚拟机管理工具"></a>安装图形化界面虚拟机管理工具</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum groupinstall <span class="string">&#x27;Virtualization Host&#x27;</span></span><br></pre></td></tr></table></figure>
 <h3 id="启动虚拟化服务"><a href="#启动虚拟化服务" class="headerlink" title="启动虚拟化服务"></a>启动虚拟化服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install virt-manager</span><br></pre></td></tr></table></figure>
 <h3 id="Web管理界面"><a href="#Web管理界面" class="headerlink" title="Web管理界面"></a>Web管理界面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ systemctl start libvirtd.service</span><br><span class="line">$ systemclt start cockpit.service</span><br></pre></td></tr></table></figure>
@@ -43,8 +116,266 @@
 ]]></content>
   </entry>
   <entry>
+    <title></title>
+    <url>/2026/02/06/docker%E5%AE%89%E8%A3%85Oracle11g/</url>
+    <content><![CDATA[<p>docker安装Oracle11g</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 从Docker hub下载，网络不好时，一般比较慢</span><br><span class="line">2docker pull lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br><span class="line">3# 可以选择从阿里云下载</span><br><span class="line">4docker pull registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br><span class="line">5# 从阿里云下载后可以tag成如下形式</span><br><span class="line">6docker tag registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure>
+<p>镜像大概2.75G左右，解压后大约7G左右，所以请保留充足的空间。执行过程如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 1[root@docker36 ~]# docker search 11.2.0.3</span><br><span class="line"> 2NAME                                 DESCRIPTION                               STARS               OFFICIAL            AUTOMATED</span><br><span class="line"> 3lhrbest/oracle_11g_ee_lhr_11.2.0.3   Oracle 11g 企业版， 11.2.0.3 ，QQ:646634621…   1                                       </span><br><span class="line"> 4[root@docker36 ~]#</span><br><span class="line"> 5[root@docker36 ~]# docker pull registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br><span class="line"> 61.0: Pulling from lhrbest/oracle_11g_ee_lhr_11.2.0.3</span><br><span class="line"> 75dd797628260: Pull complete </span><br><span class="line"> 872716ec4f779: Pull complete </span><br><span class="line"> 9Digest: sha256:95b663e35ab7a21581d6a0c2d15b18a98c1ac484cd2621778f744ef0e6d61394</span><br><span class="line">10Status: Downloaded newer image for registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br><span class="line">11registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br><span class="line">12[root@docker36 ~]# docker tag registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br><span class="line">13[root@docker36 ~]# docker images | grep 11g</span><br><span class="line">14lhrbest/oracle_11g_ee_lhr_11.2.0.3                                     1.0                 ac837aaa3923        2 hours ago         7.07GB</span><br><span class="line">15registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3   1.0                 ac837aaa3923        2 hours ago         7.07GB</span><br></pre></td></tr></table></figure>
+<h1 id="二、创建容器并启动数据库"><a href="#二、创建容器并启动数据库" class="headerlink" title="二、创建容器并启动数据库"></a>二、创建容器并启动数据库</h1><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 1# 创建容器</span><br><span class="line"> 2docker run -itd --name lhrora11203 -h lhrora11203 --privileged=true -p 1521:1521 -p 222:22  -p 1158:1158 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 init</span><br><span class="line"> 3</span><br><span class="line"> 4# 进入容器</span><br><span class="line"> 5docker exec -it lhrora11203 bash</span><br><span class="line"> 6</span><br><span class="line"> 7# 启动数据库和监听</span><br><span class="line"> 8su - oracle</span><br><span class="line"> 9lsnrctl start</span><br><span class="line">10sqlplus / as sysdba</span><br><span class="line">11startup</span><br></pre></td></tr></table></figure>
+<p>执行过程：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"> 1[root@docker36 ~]# docker run -itd --name lhrora11203 -h lhrora11203 --privileged=true -p 1521:1521 -p 222:22 -p 1158:1158  lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 init</span><br><span class="line"> 29700334260ec78f9152fc961fba75e5db0b0909afa250e33fc8215e04b5a00fa</span><br><span class="line"> 3[root@docker36 ~]# docker exec -it lhrora11203 bash</span><br><span class="line"> 4[root@localhost /]# su - oracle</span><br><span class="line"> 5[oracle@lhrora11203 ~]$ lsnrctl start</span><br><span class="line"> 6</span><br><span class="line"> 7LSNRCTL for Linux: Version 11.2.0.3.0 - Production on 10-JUL-2020 08:51:13</span><br><span class="line"> 8</span><br><span class="line"> 9Copyright (c) 1991, 2011, Oracle.  All rights reserved.</span><br><span class="line">10</span><br><span class="line">11Starting /u01/app/oracle/product/11.2.0.3/dbhome_1/bin/tnslsnr: please wait...</span><br><span class="line">12</span><br><span class="line">13TNSLSNR for Linux: Version 11.2.0.3.0 - Production</span><br><span class="line">14System parameter file is /u01/app/oracle/product/11.2.0.3/dbhome_1/network/admin/listener.ora</span><br><span class="line">15Log messages written to /u01/app/oracle/diag/tnslsnr/lhrora11203/listener/alert/log.xml</span><br><span class="line">16Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))</span><br><span class="line">17Listening on: (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=lhrora11203)(PORT=1521)))</span><br><span class="line">18</span><br><span class="line">19Connecting to (DESCRIPTION=(ADDRESS=(PROTOCOL=IPC)(KEY=EXTPROC1521)))</span><br><span class="line">20STATUS of the LISTENER</span><br><span class="line">21------------------------</span><br><span class="line">22Alias                     LISTENER</span><br><span class="line">23Version                   TNSLSNR for Linux: Version 11.2.0.3.0 - Production</span><br><span class="line">24Start Date                10-JUL-2020 08:51:13</span><br><span class="line">25Uptime                    0 days 0 hr. 0 min. 0 sec</span><br><span class="line">26Trace Level               off</span><br><span class="line">27Security                  ON: Local OS Authentication</span><br><span class="line">28SNMP                      OFF</span><br><span class="line">29Listener Parameter File   /u01/app/oracle/product/11.2.0.3/dbhome_1/network/admin/listener.ora</span><br><span class="line">30Listener Log File         /u01/app/oracle/diag/tnslsnr/lhrora11203/listener/alert/log.xml</span><br><span class="line">31Listening Endpoints Summary...</span><br><span class="line">32  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(KEY=EXTPROC1521)))</span><br><span class="line">33  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=lhrora11203)(PORT=1521)))</span><br><span class="line">34The listener supports no services</span><br><span class="line">35The command completed successfully</span><br><span class="line">36[oracle@lhrora11203 ~]$ sas</span><br><span class="line">37</span><br><span class="line">38SQL*Plus: Release 11.2.0.3.0 Production on Fri Jul 10 08:51:19 2020</span><br><span class="line">39</span><br><span class="line">40Copyright (c) 1982, 2011, Oracle.  All rights reserved.</span><br><span class="line">41</span><br><span class="line">42Connected to an idle instance.</span><br><span class="line">43</span><br><span class="line">44SYS@LHR11G&gt; startup </span><br><span class="line">45ORACLE instance started.</span><br><span class="line">46</span><br><span class="line">47Total System Global Area  325685248 bytes</span><br><span class="line">48Fixed Size                  2228064 bytes</span><br><span class="line">49Variable Size             121634976 bytes</span><br><span class="line">50Database Buffers          197132288 bytes</span><br><span class="line">51Redo Buffers                4689920 bytes</span><br><span class="line">52Database mounted.</span><br><span class="line">53Database opened.</span><br><span class="line">54SYS@LHR11G&gt; </span><br></pre></td></tr></table></figure>
+<h1 id="三、尽情使用吧"><a href="#三、尽情使用吧" class="headerlink" title="三、尽情使用吧"></a>三、尽情使用吧</h1><h2 id="3-1-数据库使用"><a href="#3-1-数据库使用" class="headerlink" title="3.1 数据库使用"></a>3.1 数据库使用</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1[oracle@lhrora11203 ~]$ lsnrctl status</span><br><span class="line">2</span><br></pre></td></tr></table></figure>
+<p>原文档连接：<a href="https://mp.weixin.qq.com/s?__biz=MzIzOTA2NjEzNQ==&amp;mid=2454779389&amp;idx=1&amp;sn=9b42eb5193587aa87bf5ec9140879acb&amp;chksm=fe8b9885c9fc1193745e931813e2f310ed369d1f9d560a3f1ae36c867d72666b9513f64226c9&amp;scene=21#wechat_redirect">【DB宝11】在Docker中只需2步即可拥有Oracle 11g企业版环境（11.2.0.3）</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2026/02/06/docker%E5%AE%89%E8%A3%85es/</url>
+    <content><![CDATA[<h2 id="一、基于Docker安装Elasticsearch"><a href="#一、基于Docker安装Elasticsearch" class="headerlink" title="一、基于Docker安装Elasticsearch"></a>一、基于Docker安装Elasticsearch</h2><h3 id="1、创建网络"><a href="#1、创建网络" class="headerlink" title="1、创建网络"></a>1、创建网络</h3><p>​        因为需要部署kibana容器，因此需要让es和kibana容器互联。</p>
+<p>指令：<br>docker network create es-net</p>
+<h3 id="2、拉取镜像"><a href="#2、拉取镜像" class="headerlink" title="2、拉取镜像"></a>2、拉取镜像</h3><p>​        以安装Elasticsearch 8.6.0 版本为例<br>指令：</p>
+<p>docker pull elasticsearch:8.6.0</p>
+<h3 id="3、-创建挂载点目录"><a href="#3、-创建挂载点目录" class="headerlink" title="3、 创建挂载点目录"></a>3、 创建挂载点目录</h3><p>指令：</p>
+<p>mkdir -p /usr/local/es/data /usr/local/es/config /usr/local/es/plugins</p>
+<p>指令：</p>
+<p>chmod 777  /usr/local/es/data<br>chmod 777  /usr/local/es/config<br>chmod 777  /usr/local/es/plugins</p>
+<h3 id="4、-部署单点es，创建es容器"><a href="#4、-部署单点es，创建es容器" class="headerlink" title="4、 部署单点es，创建es容器"></a>4、 部署单点es，创建es容器</h3><p>注：可以先创建一个临时容器</p>
+<p>docker run -d —name es -p 9200:9200 -p 9300:9300 elasticsearch:8.6.0</p>
+<p>再将es的配置目录copy到宿主机</p>
+<p>// 数据目录</p>
+<p>docker cp es:/usr/share/elasticsearch/plugins /usr/local/es/plugins </p>
+<p>// 配置目录</p>
+<p>docker cp es:/usr/share/elasticsearch/config /usr/local/es/data </p>
+<p>指令： </p>
+<p>docker run -d \<br>—restart=always \<br>—name es \<br>—network es-net \<br>-p 9200:9200 \<br>-p 9300:9300 \<br>—privileged \<br>-v /usr/local/es/data:/usr/share/elasticsearch/data \<br>-v /usr/local/es/plugins:/usr/share/elasticsearch/plugins \<br>-e “discovery.type=single-node” \<br>-e “ES_JAVA_OPTS=-Xms512m -Xmx512m” \<br>elasticsearch:8.6.0</p>
+<p>注：如果上述目录创建单节点失败</p>
+<p>需要编辑配置文件elasticsearch.yml</p>
+<p>加入</p>
+<p>// 配置单节点模式</p>
+<p>discovery.type: single-node</p>
+<p>注释 # cluster.initial_master_nodes: [“78bb2959fe68”]</p>
+<p>完整示例：</p>
+<h1 id="配置单节点模式"><a href="#配置单节点模式" class="headerlink" title="配置单节点模式"></a>配置单节点模式</h1><p>discovery.type: single-node</p>
+<p>// # Enable security features</p>
+<p>xpack.security.enabled: false</p>
+<p>xpack.security.enrollment.enabled: true</p>
+<p>// # Enable encryption for HTTP API client connections, such as Kibana, Logstash, an</p>
+<p>d Agents<br>xpack.security.http.ssl:<br>  enabled: true<br>  keystore.path: certs/http.p12</p>
+<p>// # Enable encryption and mutual authentication between cluster nodes</p>
+<p>xpack.security.transport.ssl:<br>  enabled: true<br>  verification_mode: certificate<br>  keystore.path: certs/transport.p12<br>  truststore.path: certs/transport.p12</p>
+<p>// # Create a new cluster with the current node only</p>
+<p>// # Additional nodes can still join the cluster later</p>
+<h1 id="cluster-initial-master-nodes-“78bb2959fe68”"><a href="#cluster-initial-master-nodes-“78bb2959fe68”" class="headerlink" title="cluster.initial_master_nodes: [“78bb2959fe68”]"></a>cluster.initial_master_nodes: [“78bb2959fe68”]</h1><h1 id="———————————-END-SECURITY-AUTO-CONFIGURATION-————————————"><a href="#———————————-END-SECURITY-AUTO-CONFIGURATION-————————————" class="headerlink" title="———————————- END SECURITY AUTO CONFIGURATION ————————————-"></a>———————————- END SECURITY AUTO CONFIGURATION ————————————-</h1><h3 id="5、编写elasticsearch-yml"><a href="#5、编写elasticsearch-yml" class="headerlink" title="5、编写elasticsearch.yml"></a>5、编写elasticsearch.yml</h3><p>​        先进入es容器</p>
+<p>指令：</p>
+<p>docker exec -it es /bin/bash</p>
+<p>指令：</p>
+<p>cd config</p>
+<p>指令：</p>
+<p>echo ‘xpack.security.enabled: false’ &gt;&gt; elasticsearch.yml</p>
+<h3 id="6、-重启es容器"><a href="#6、-重启es容器" class="headerlink" title="6、 重启es容器"></a>6、 重启es容器</h3><p>指令；</p>
+<p>docker restart es</p>
+<h3 id="7、-测试Elasticsearch是否安装成功"><a href="#7、-测试Elasticsearch是否安装成功" class="headerlink" title="7、 测试Elasticsearch是否安装成功"></a>7、 测试Elasticsearch是否安装成功</h3><p>访问虚拟机地址+端口号，前面配置Elasticsearch 的端口号为：9200</p>
+<p>例如：</p>
+<p><a href="http://192.168.27.129:9200">http://192.168.27.129:9200</a></p>
+<h2 id="二、基于Docker安装Kibana"><a href="#二、基于Docker安装Kibana" class="headerlink" title="二、基于Docker安装Kibana"></a>二、基于Docker安装Kibana</h2><p>3.1 拉取镜像<br>        以安装kibana 8.6.0 版本为例</p>
+<p>指令：</p>
+<p>docker pull kibana:8.6.0<br>实例：</p>
+<p>[root@bogon howlong]# docker pull kibana:8.6.0<br>8.6.0: Pulling from library/kibana<br>846c0b181fff: Already exists<br>d9d4723b53e8: Pull complete<br>3ce175049527: Pull complete<br>c5a9d626f54a: Pull complete<br>ce0bd3b890fe: Pull complete<br>4f4fb700ef54: Pull complete<br>1cb2fe49dd32: Pull complete<br>7cbec743e1ac: Pull complete<br>de07a2df0c3f: Pull complete<br>f138fef302e6: Pull complete<br>c6afac2b2f31: Pull complete<br>53c0672d0212: Pull complete<br>7522efaa8c9c: Pull complete<br>5e8db7e50c16: Pull complete<br>Digest: sha256:71d8a59d32b181c3b3c04a4fecf2197f00eb381659510d04261c2cd5d43a0225<br>Status: Downloaded newer image for kibana:8.6.0<br>docker.io/library/kibana:8.6.0<br>[root@bogon howlong]#<br>3.2 创建挂载点目录<br>指令：</p>
+<p>mkdir -p /usr/local/kibana/config /usr/local/kibana/data<br>代码：</p>
+<p>[root@bogon howlong]# mkdir -p /usr/local/kibana/config /usr/local/kibana/data<br>[root@bogon howlong]#<br>指令：</p>
+<p>chmod 777 /usr/local/kibana/data<br>chmod 777 /usr/local/kibana/config<br>3.3 部署kibana，创建kibana容器<br>指令：</p>
+<p>docker run -d \<br>—restart=always \<br>—name kibana \<br>—network es-net \<br>-p 5601:5601 \<br>-e ELASTICSEARCH_HOSTS=<a href="http://es:9200">http://es:9200</a> \<br>kibana:8.6.0<br>实例：</p>
+<p>[root@bogon howlong]# docker run -d \<br>—restart=always \<br>—name kibana \<br>—network es-net \<br>-p 5601:5601 \<br>-e ELASTICSEARCH_HOSTS=<a href="http://es:9200">http://es:9200</a> \<br>kibana:8.6.0<br>cfcc8b35079d9e74be20f89ab0c96d2a9af8e0679b055e0684865d3d042f7307<br>[root@bogon howlong]#<br>3.4 测试Kibana是否安装成功<br>访问虚拟机地址+端口号，前面配置Kibana 的端口号为：5601</p>
+<p>例如：</p>
+<p><a href="http://192.168.27.129:5601">http://192.168.27.129:5601</a></p>
+<ol>
+<li>基于Docker安装IK分词器<br>4.1 进入Elasticsearch容器<br>指令：</li>
+</ol>
+<p>docker exec -it es /bin/bash<br>实例：</p>
+<p>[root@bogon howlong]# docker exec -it es /bin/bash<br>elasticsearch@6b64658d77d5:~$ </p>
+<h2 id="三、安装IK分词器"><a href="#三、安装IK分词器" class="headerlink" title="三、安装IK分词器"></a>三、安装IK分词器</h2><h3 id="1、-在线安装"><a href="#1、-在线安装" class="headerlink" title="1、    在线安装"></a>1、    在线安装</h3><p>​    注意：安装IK分词器的版本，必须和Elasticsearch的版本一致，</p>
+<pre><code>    上文安装的是Elasticsearch 8.6.0的，所以接下来安装的IK分词器版本是8.6.0
+</code></pre><p>指令：</p>
+<p>./bin/elasticsearch-plugin install <a href="https://get.infini.cloud/elasticsearch/analysis-ik/8.6.0">https://get.infini.cloud/elasticsearch/analysis-ik/8.6.0</a></p>
+<p>报错参考：</p>
+<p>安装报错，发现原因为权限问题，exec进入后为1000用户，工作目录下除了bin其他都是root权限，</p>
+<p>重新运行一个新的es对比看下效果，结果发现当没有挂载文件时其余文件都是以elasticsearch:root为权限的，已挂载的是根据宿主机的权限一致，问题很明显了，</p>
+<p>容器内部不支持sudo命令 su - root也不知道root密码的情况下，宿主机新建useradd elasticsearch，对应挂载目录文件用户授权在安装正常运行，chown -R elasticsearch:root {plugins/data/logs/config}<br>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre><p>原文链接：<a href="https://blog.csdn.net/weixin_43757402/article/details/133634862">https://blog.csdn.net/weixin_43757402/article/details/133634862</a></p>
+<h3 id="2、离线安装"><a href="#2、离线安装" class="headerlink" title="2、离线安装"></a>2、离线安装</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://get.infini.cloud/elasticsearch</span><br></pre></td></tr></table></figure>
+<p>下载需要的软件包</p>
+<p>解压到</p>
+<p>/usr/local/es/plugins 下，重启容器</p>
+<p>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre><p>原文链接：<a href="https://blog.csdn.net/Acloasia/article/details/130683934">https://blog.csdn.net/Acloasia/article/details/130683934</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2026/02/06/docker%E5%AE%89%E8%A3%85seata/</url>
+    <content><![CDATA[<p>一、环境<br>docker23.0.3<br>nacos2.2.1</p>
+<p>二、拉取seata镜像<br>1、查看seata有哪些镜像<br>使用如下命令查看seata有哪些镜像：</p>
+<p>docker search seata<br>1</p>
+<p>可以看到有很多seata镜像，一般选择stars最高的那个，就是seataio/seata-server。</p>
+<p>2、查看原来有没有seata镜像<br>使用如下命令查看本地镜像：</p>
+<p>docker images<br>1</p>
+<p>可以看到我这里是有一份seata镜像的，使用如下命令删除：</p>
+<p>docker rmi -f “IMAGE ID”<br>1<br>这是我的</p>
+<p>docker rmi -f 67a654ca2e05<br>1</p>
+<p>3、拉取最新版本<br>拉取最新版本的镜像直接使用如下命令：</p>
+<p>docker pull seataio/seata-server<br>1</p>
+<p>拉取的过程需要点时间，耐心等待即可。</p>
+<p>结束后可以看看拉取的结果，命令如下：</p>
+<p>docker images<br>1</p>
+<p>4、拉取指定版本<br>假如我想要拉取 1.6.1 版本的seata，可以使用如下命令：</p>
+<p>docker pull seataio/seata-server:1.6.1<br>1</p>
+<p>同样，查看一下拉取成功没有：</p>
+<p>docker images<br>1</p>
+<p>拉取成功，后面就用 1.6.1 版本的镜像。</p>
+<p>三、配置seata<br>1、创建seata相关的数据库<br>数据库脚本地址：</p>
+<p><a href="https://github.com/apache/incubator-seata/tree/master/script/server/db">https://github.com/apache/incubator-seata/tree/master/script/server/db</a></p>
+<p>用的是哪个数据库就选择哪个数据库的脚本，我这里用的mysql的。</p>
+<p>创建一个数据库，执行脚本即可，我的数据库名为 cj-seata 。</p>
+<p>2、创建seata配置文件目录<br>我目录为 /www/wwwroot/changjing/docker/seata ，命令如下：</p>
+<p>mkdir -p /www/wwwroot/changjing/docker/seata<br>1</p>
+<p>3、启动seata容器<br>这里只是简单启动，为了获得seata容器最初的配置文件，后面经过修改后从宿主机挂载到容器，命令如下：</p>
+<p>docker run -d —name seata -p 7091:7091 seataio/seata-server:1.6.1<br>1</p>
+<p>4、复制seata容器下的配置文件到宿主机<br>复制配置文件的命令如下：</p>
+<p>docker cp seata:/seata-server/resources /www/wwwroot/changjing/docker/seata<br>1</p>
+<p>到宿主机的配置文件目录看一下</p>
+<p>可以看到配置文件已经拿下来了，主要修改的就是这个配置文件。</p>
+<p>为了防止操作失误，可以先备份一份，命令如下：</p>
+<p>cp application.yml application_bk.yml<br>1</p>
+<p>5、配置yml文件<br>修改的是application.yml文件，修改内容如下：</p>
+<p>这是完整的配置：</p>
+<h1 id="Copyright-1999-2019-Seata-io-Group"><a href="#Copyright-1999-2019-Seata-io-Group" class="headerlink" title="Copyright 1999-2019 Seata.io Group."></a>Copyright 1999-2019 Seata.io Group.</h1><p>#</p>
+<h1 id="Licensed-under-the-Apache-License-Version-2-0-the-“License”"><a href="#Licensed-under-the-Apache-License-Version-2-0-the-“License”" class="headerlink" title="Licensed under the Apache License, Version 2.0 (the “License”);"></a>Licensed under the Apache License, Version 2.0 (the “License”);</h1><h1 id="you-may-not-use-this-file-except-in-compliance-with-the-License"><a href="#you-may-not-use-this-file-except-in-compliance-with-the-License" class="headerlink" title="you may not use this file except in compliance with the License."></a>you may not use this file except in compliance with the License.</h1><h1 id="You-may-obtain-a-copy-of-the-License-at"><a href="#You-may-obtain-a-copy-of-the-License-at" class="headerlink" title="You may obtain a copy of the License at"></a>You may obtain a copy of the License at</h1><p>#</p>
+<h1 id="http-www-apache-org-licenses-LICENSE-2-0"><a href="#http-www-apache-org-licenses-LICENSE-2-0" class="headerlink" title="http://www.apache.org/licenses/LICENSE-2.0"></a><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></h1><p>#</p>
+<h1 id="Unless-required-by-applicable-law-or-agreed-to-in-writing-software"><a href="#Unless-required-by-applicable-law-or-agreed-to-in-writing-software" class="headerlink" title="Unless required by applicable law or agreed to in writing, software"></a>Unless required by applicable law or agreed to in writing, software</h1><h1 id="distributed-under-the-License-is-distributed-on-an-“AS-IS”-BASIS"><a href="#distributed-under-the-License-is-distributed-on-an-“AS-IS”-BASIS" class="headerlink" title="distributed under the License is distributed on an “AS IS” BASIS,"></a>distributed under the License is distributed on an “AS IS” BASIS,</h1><h1 id="WITHOUT-WARRANTIES-OR-CONDITIONS-OF-ANY-KIND-either-express-or-implied"><a href="#WITHOUT-WARRANTIES-OR-CONDITIONS-OF-ANY-KIND-either-express-or-implied" class="headerlink" title="WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied."></a>WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</h1><h1 id="See-the-License-for-the-specific-language-governing-permissions-and"><a href="#See-the-License-for-the-specific-language-governing-permissions-and" class="headerlink" title="See the License for the specific language governing permissions and"></a>See the License for the specific language governing permissions and</h1><h1 id="limitations-under-the-License"><a href="#limitations-under-the-License" class="headerlink" title="limitations under the License."></a>limitations under the License.</h1><p>server:<br>  port: 7091</p>
+<p>spring:<br>  application:<br>    name: seata-server</p>
+<p>logging:<br>  config: classpath:logback-spring.xml<br>  file:<br>    path: ${user.home}/logs/seata<br>  extend:<br>    logstash-appender:<br>      destination: 127.0.0.1:4560<br>    kafka-appender:<br>      bootstrap-servers: 127.0.0.1:9092<br>      topic: logback_to_logstash</p>
+<p>console:<br>  user:<br>    username: seata<br>    password: seata</p>
+<p>seata:<br>  config:</p>
+<pre><code># support: nacos, consul, apollo, zk, etcd3
+type: nacos
+nacos:
+  server-addr: 127.0.0.1:8848   # nacos的访问地址，因为是在docker中，ip地址改为宿主机地址
+  namespace:
+  group: SEATA_GROUP  # nacos的分组
+  username: nacos     # nacos的用户名
+  password: nacos     # nacos的密码
+  context-path:
+  ##if use MSE Nacos with auth, mutex with username/password attribute
+  #access-key:
+  #secret-key:
+  data-id: seata.properties  # nacos中的配置文件名称
+</code></pre><p>  registry:</p>
+<pre><code># support: nacos, eureka, redis, zk, consul, etcd3, sofa
+type: nacos
+nacos:
+  application: seata-server       # seata启动后在nacos的服务名
+  server-addr: 127.0.0.1:8848  # nacos的访问地址，因为是在docker中，ip地址改为宿主机地址
+  group: SEATA_GROUP   # nacos的分组
+  namespace:
+  cluster: default     # 这个歌参数在每个微服务seata时会用到
+  username: nacos      # nacos的用户名
+  password: nacos      # nacos的密码
+  context-path:
+  ##if use MSE Nacos with auth, mutex with username/password attribute
+  #access-key:
+  #secret-key:
+</code></pre><p>  store:    </p>
+<pre><code># support: file 、 db 、 redis
+mode: db
+db:
+  datasource: druid
+  db-type: mysql
+  driver-class-name: com.mysql.jdbc.Driver
+  url: jdbc:mysql://127.0.0.1:3306/cj-seata?characterEncoding=utf8&amp;connectTimeout=10000&amp;socketTimeout=30000&amp;autoReconnect=true&amp;useUnicode=true&amp;useSSL=false
+  user: root
+  password: 123456
+  min-conn: 10
+  max-conn: 100
+  global-table: global_table
+  branch-table: branch_table
+  lock-table: lock_table
+  distributed-lock-table: distributed_lock
+  query-limit: 1000
+  max-wait: 5000
+</code></pre><h1 id="server"><a href="#server" class="headerlink" title="server:"></a>server:</h1><h1 id="service-port-8091-If-not-configured-the-default-is-‘-server-port-1000’"><a href="#service-port-8091-If-not-configured-the-default-is-‘-server-port-1000’" class="headerlink" title="service-port: 8091 #If not configured, the default is ‘${server.port} + 1000’"></a>service-port: 8091 #If not configured, the default is ‘${server.port} + 1000’</h1><p>  security:<br>    secretKey: SeataSecretKey0c382ef121d778043159209298fd40bf3850a017<br>    tokenValidityInMilliseconds: 1800000<br>    ignore:<br>      urls: /,/<strong>/*.css,/</strong>/<em>.js,/**/</em>.html,/<strong>/*.map,/</strong>/<em>.svg,/**/</em>.png,/<strong>/*.ico,/console-fe/public/</strong>,/api/v1/auth/login</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20<br>21<br>22<br>23<br>24<br>25<br>26<br>27<br>28<br>29<br>30<br>31<br>32<br>33<br>34<br>35<br>36<br>37<br>38<br>39<br>40<br>41<br>42<br>43<br>44<br>45<br>46<br>47<br>48<br>49<br>50<br>51<br>52<br>53<br>54<br>55<br>56<br>57<br>58<br>59<br>60<br>61<br>62<br>63<br>64<br>65<br>66<br>67<br>68<br>69<br>70<br>71<br>72<br>73<br>74<br>75<br>76<br>77<br>78<br>79<br>80<br>81<br>82<br>83<br>84<br>85<br>86<br>87<br>88<br>89<br>90<br>91<br>92<br>93<br>6、在nacos中增加seata配置</p>
+<p>完整内容如下：</p>
+<p>service.vgroupMapping.ruoyi-system-group=default   # 这个在微服务版的若依中使用seata的服务中会用到<br>store.mode=db<br>store.db.datasource=druid<br>store.db.dbType=mysql<br>store.db.driverClassName=com.mysql.cj.jdbc.Driver<br>store.db.url=jdbc:mysql://127.0.0.1:3306/cj-seata?useUnicode=true<br>store.db.user=root<br>store.db.password=123456<br>store.db.minConn=5<br>store.db.maxConn=30<br>store.db.globalTable=global_table<br>store.db.branchTable=branch_table<br>store.db.queryLimit=100<br>store.db.lockTable=lock_table<br>store.db.maxWait=5000<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>7、重启seata<br>前面为了拿到配置文件，简单启动了一下seata容器，需要把前面那个停止并删除。</p>
+<p>停止seata命令如下：</p>
+<p>docker stop “容器ID或者容器名称”<br>1<br>这是我的：</p>
+<p>docker stop seata<br>1</p>
+<p>删除命令如下：</p>
+<p>docker rm -f “容器ID或者容器名称”<br>1<br>这是我的：</p>
+<p>docker rm -f seata<br>1</p>
+<p>启动命令如下：</p>
+<p>docker run -d —name seata \<br>-p 8091:8091 \<br>-p 7091:7091 \<br>-e SEATA_IP=127.0.0.1 \<br>-v /www/wwwroot/changjing/docker/seata/resources:/seata-server/resources \<br>seataio/seata-server:1.6.1<br>1<br>2<br>3<br>4<br>5<br>6<br>解释：</p>
+<p>docker run -d —name seata \                                                       -d 表示运行在后台，—name 指定名称为seata<br>-p 8091:8091 \                                                                     这是后面需要注册到nacos的seata服务端口号<br>-p 7091:7091 \                                                                     这是seata的客户端端口号<br>-e SEATA_IP=127.0.0.1 \                                                            这是seata注册到nacos中的 IP ，可以解决Java程序连不上seata客户端的问题，默认为运行docker容器的内网地址<br>-v /www/wwwroot/changjing/docker/seata/resources:/seata-server/resources \         seata 配置文件目录，“:”前为服务器目录，“:”后为seata容器中的目录<br>seataio/seata-server:1.6.1                                                         指定 docker seata 版本，这里是1.6.1版本<br>1<br>2<br>3<br>4<br>5<br>6</p>
+<p>然后就可以在项目中使用seata了。<br>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre><p>原文链接：<a href="https://blog.csdn.net/studio_1/article/details/135650319">https://blog.csdn.net/studio_1/article/details/135650319</a></p>
+<p>一、Seata是什么？<br>Seata 是一款开源的分布式事务解决方案，致力于提供高性能和简单易用的分布式事务服务。Seata 将为用户提供了 AT、TCC、SAGA 和 XA 事务模式，为用户打造一站式的分布式解决方案。</p>
+<p>1.相关事务概念<br>全局事务：全局事务指的是一次性操作多个资源管理器完成的事务，由一组分支事务（本地事务）组成。</p>
+<p>分支事务（本地事务）：本地事务由本地资源管理器（通常指数据库管理系统 DBMS，例如 MySQL、Oracle 等）管理，严格地支持 ACID 特性，高效可靠。本地事务不具备分布式事务的处理能力，隔离的最小单位受限于资源管理器，即本地事务只能对自己数据库的操作进行控制，对于其他数据库的操作则无能为力。</p>
+<p>工作流程</p>
+<p>Seata 对分布式事务的协调和控制，主要是通过 XID 和 3 个核心组件实现的。</p>
+<p>XID</p>
+<p>XID 是全局事务的唯一标识，它可以在服务的调用链路中传递，绑定到服务的事务上下文中。（很重要，用于判断是否是一个事务）<br>核心组件</p>
+<p>Seata的核心组件可分为Seata服务端和Seata客户端两类<br>Seata 定义了 3 个核心组件：</p>
+<p>TC（Transaction Coordinator）：事务协调器，直接调度事务参与者RM。负责将RM的反馈结果响应给TM，并听从TM的最终决议，将具体决议（提交或回滚）发送给RM执行。相当于中间人，主要负责维护全局事务和分支事务的状态。</p>
+<p>TM（Transaction Manager）：事务管理器，它是事务的发起者（具体的微服务）。根据RM第一阶段的执行结果，进行决议。并将决议反馈给TC。相当于发号施令的</p>
+<p>RM（Resource Manager）：资源管理器，其实就是事务的参与者。获取TC的执行命令具去执行分支事务的第一阶段以及第二阶段，并将执行结果反馈给TC，相当于具体做事的</p>
+<p>以上三个组件相互协作，TC 以 Seata 服务器（Server）形式独立部署，TM 和 RM 则是以 Seata Client 的形式集成在微服务中运行。</p>
+<p>Seata 的整体工作流程如下：</p>
+<p>TM 向 TC 申请开启一个全局事务，全局事务创建成功后，TC 会针对这个全局事务生成一个全局唯一的 XID（此时，由TM发起的全局事务已经开启）<br>XID 通过服务的调用链传递到其他服务<br>RM 向 TC 注册一个分支事务，并将其纳入 XID 对应全局事务的管辖（事务参与者执行本地事务，此时分支事务已经执行完成，并反馈给TC执行结果。可以理解为AT模式下的第一个阶段）<br>TM 根据 TC 收集的各个分支事务的执行结果，向 TC 发起全局事务提交或回滚决议（事务协调者根据事务管理者的决议，发送提交或回滚的调度命令，可以理解为AT模式下的第二阶段）<br>TC 调度 XID 下管辖的所有分支事务完成提交或回滚操作<br>二、seata安装和部署<br>0.前提环境<br>注：本文使用Mysql为例</p>
+<p>需要使用Nacos 教程：<a href="https://gaohuanjie.blog.csdn.net/article/details/135294828">https://gaohuanjie.blog.csdn.net/article/details/135294828</a></p>
+<p>需要git Bash窗口<br>官方下载地址： <a href="https://www.git-scm.com/download/">https://www.git-scm.com/download/</a></p>
+<p>git bash下载安装就行，如果不会提供一个教程 <a href="https://blog.csdn.net/qq_33204709/article/details/133963278">https://blog.csdn.net/qq_33204709/article/details/133963278</a></p>
+<p>1.下载seata<br>官网下载地址：<a href="https://seata.io/zh-cn/blog/download.html">https://seata.io/zh-cn/blog/download.html</a></p>
+<p>下载完成后，将文件解压到任意地方 （不要忘记解压的地方）</p>
+<p>接下来的大部分操作都在下图的根目录展开</p>
+<p>2.创建seata数据库<br>新建数据库seata，然后在解压的seata文件找到script-&gt;server-&gt;db-&gt;mysql.sql，执行这个sql脚本。</p>
+<p>3.修改config.txt文件<br>config.txt文件在seata/script/config-center目录下，需要修改的地方如下：</p>
+<p>4.seata服务注册到Nacos<br>1）创建命名空间<br>首先在nacos控制台添加新的命名空间</p>
+<p>新建命名空间</p>
+<p>空间ID可以不填，但是自动生成之后需要记住，接下来配置需要很重要</p>
+<p>命名空间和描述可以任意但是最好写seata见名知意</p>
+<p>1）将config.txt信息注册到Nacos<br>进入seata目录，找到nacos-config.sh,路径为：script-&gt;config-center-&gt;nacos-&gt;nacos-config.sh</p>
+<p>进入git bash窗口，执行以下命令：</p>
+<p>sh nacos-config.sh -h nacos服务地址 -p 8848 -g SEATA_GROUP -t 刚刚注册时候的命名空间id -u nacos -w nacos</p>
+<p>案例<br>sh nacos-config.sh -h 127.0.0.1 -p 8848 -g SEATA_GROUP -t cc7b3c50-d6e9-4b86-934a-1cd7e5a6a0e2 -u nacos -w nacos<br>1<br>2<br>3<br>4<br>参数详解:</p>
+<p>-h nacos服务IP<br>-p nacos服务端口<br>-u nacos登录名<br>-w nacos登录密码<br>-g nacos 配置的分组名称，默认设置SEATA_GROUP 修改了后续的文件的group设置也要改<br>-t 上一步配置的命名空间ID<br>注意：-u 和 -w 后面是Nacos的登录账户和密码，最好不要修改，除非你能记住，修改后下面配置文件的nacos账号密码就要修改为对应的</p>
+<p>执行完上述命令之后 配置数应该为103，可能不一样和（图为107是因为后续需要根据你的微服务数量添加对应的配置，后续说明）</p>
+<p>5.修改seata配置文件<br>进入seata/conf目录下，有两个配置文件，把application.yml 随意修改一个名字，然后把 application.example.yml修改成application.yml 作为主要配置文件。</p>
+<p>修改application.yml文件，这里使用的nacos作为注册中心，所以需要修改的地方有：</p>
+<p>第一步将原来application.yml 文件中的console和security拷贝走，复制到主要配置文件（最初的application.example.yml）文件中</p>
+<p>console放在这个位置</p>
+<p>security放在最下面，注意缩进格式</p>
+<p>然后开始修改主要配置文件（最初的application.example.yml）中的设置</p>
+<p>首先修改seata</p>
+<p>修改seata下的registry</p>
+<p>修改seata下的store</p>
+<p>至此文件就修改完成了</p>
+<p>6.启动服务<br>找到seata-server.bat，点击启动，路径为：seata-&gt;bin-&gt;seata-server.bat，成功后可以在nacos控制台服务列表中看到多了一个服务。</p>
+<p>如果闪退了说明有错误，需要在该目录下打开cmd控制台输入seata-server.bat 启动，错误是什么<br>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre><p>原文链接：<a href="https://blog.csdn.net/qq_42767920/article/details/135743126">https://blog.csdn.net/qq_42767920/article/details/135743126</a></p>
+<h1 id="三、注意事项"><a href="#三、注意事项" class="headerlink" title="三、注意事项"></a>三、注意事项</h1><h2 id="1、seata不支持相互调用嵌套调用"><a href="#1、seata不支持相互调用嵌套调用" class="headerlink" title="1、seata不支持相互调用嵌套调用"></a>1、seata不支持相互调用嵌套调用</h2><h2 id="2、全局异常处理时，不能被非运行时异常捕获"><a href="#2、全局异常处理时，不能被非运行时异常捕获" class="headerlink" title="2、全局异常处理时，不能被非运行时异常捕获"></a>2、全局异常处理时，不能被非运行时异常捕获</h2><h2 id="3、异常被吞导致失效"><a href="#3、异常被吞导致失效" class="headerlink" title="3、异常被吞导致失效"></a>3、异常被吞导致失效</h2><h2 id="4、入口方法使用-GlobalTransactional-其他使用-Transactional"><a href="#4、入口方法使用-GlobalTransactional-其他使用-Transactional" class="headerlink" title="4、入口方法使用@GlobalTransactional 其他使用@Transactional"></a>4、入口方法使用@GlobalTransactional 其他使用@Transactional</h2><h2 id="5、feign调用需要校验返回值code"><a href="#5、feign调用需要校验返回值code" class="headerlink" title="5、feign调用需要校验返回值code"></a>5、feign调用需要校验返回值code</h2><h2 id="6、不支持复杂sql"><a href="#6、不支持复杂sql" class="headerlink" title="6、不支持复杂sql"></a>6、不支持复杂sql</h2><h2 id="7、每个业务库需要创建undo-log表"><a href="#7、每个业务库需要创建undo-log表" class="headerlink" title="7、每个业务库需要创建undo_log表"></a>7、每个业务库需要创建undo_log表</h2><p>Oracle数据库</p>
+<p>— 1. 创建表（你已有，这里稍作格式调整）<br>CREATE TABLE undo_log (<br>    id NUMBER(19) NOT NULL,<br>    branch_id NUMBER(19) NOT NULL,<br>    xid VARCHAR2(100) NOT NULL,<br>    context VARCHAR2(128) NOT NULL,<br>    rollback_info BLOB NOT NULL,<br>    log_status NUMBER(10) NOT NULL,<br>    log_created DATE NOT NULL,<br>    log_modified DATE NOT NULL,<br>    ext VARCHAR2(100),<br>    CONSTRAINT pk_undo_log PRIMARY KEY (id)<br>);</p>
+<p>— 2. 创建序列<br>CREATE SEQUENCE undo_log_seq<br>START WITH 1<br>INCREMENT BY 1<br>NOCACHE<br>NOCYCLE;</p>
+<p>— 3. 创建触发器，用于自动填充 id<br>CREATE OR REPLACE TRIGGER undo_log_trigger<br>BEFORE INSERT ON undo_log<br>FOR EACH ROW<br>BEGIN<br>  IF :NEW.id IS NULL THEN<br>    SELECT undo_log_seq.NEXTVAL INTO :NEW.id FROM dual;<br>  END IF;<br>END;<br>/</p>
+<h2 id="8、不支持mybatisplus的批量插入和批量更新方法"><a href="#8、不支持mybatisplus的批量插入和批量更新方法" class="headerlink" title="8、不支持mybatisplus的批量插入和批量更新方法"></a>8、不支持mybatisplus的批量插入和批量更新方法</h2><h2 id="9、seata版本使用1-5-2，低版本会导致系列化错误"><a href="#9、seata版本使用1-5-2，低版本会导致系列化错误" class="headerlink" title="9、seata版本使用1.5.2，低版本会导致系列化错误"></a>9、seata版本使用1.5.2，低版本会导致系列化错误</h2><h2 id="10、driud连接池版本建议换高版本，否则不兼容，会导致连接断开-推荐版本1-2-20"><a href="#10、driud连接池版本建议换高版本，否则不兼容，会导致连接断开-推荐版本1-2-20" class="headerlink" title="10、driud连接池版本建议换高版本，否则不兼容，会导致连接断开  推荐版本1.2.20"></a>10、driud连接池版本建议换高版本，否则不兼容，会导致连接断开  推荐版本1.2.20</h2><h2 id="11、Oracle低版本数据库，连接驱动要用高版本，否则会出现报错-推荐版本19-3-0-0"><a href="#11、Oracle低版本数据库，连接驱动要用高版本，否则会出现报错-推荐版本19-3-0-0" class="headerlink" title="11、Oracle低版本数据库，连接驱动要用高版本，否则会出现报错 推荐版本19.3.0.0"></a>11、Oracle低版本数据库，连接驱动要用高版本，否则会出现报错 推荐版本19.3.0.0</h2>]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
-    <url>/2022/04/29/hello-world/</url>
+    <url>/2023/07/25/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
@@ -62,8 +393,244 @@
     <content><![CDATA[<h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hello world</span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
+    <title></title>
+    <url>/2026/02/06/mqtt/</url>
+    <content><![CDATA[<p>Docker 部署 MQTT服务器(EMQX)</p>
+<p>m0_46601820</p>
+<p>于 2023-12-14 09:10:40 发布</p>
+<p>阅读量1.4k<br> 收藏 12</p>
+<p>点赞数 10<br>文章标签： docker 服务器 容器<br>版权<br>1.拉取镜像</p>
+<h1 id="拉取最新版本"><a href="#拉取最新版本" class="headerlink" title="拉取最新版本"></a>拉取最新版本</h1><p>docker pull emqx/emqx:latest</p>
+<h1 id="也可以拉取指定版本"><a href="#也可以拉取指定版本" class="headerlink" title="也可以拉取指定版本"></a>也可以拉取指定版本</h1><p>docker pull emqx/emqx:v4.0.0<br>2.创建临时容器</p>
+<p>docker run -d —name emqx -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 emqx/emqx:latest<br>端口：</p>
+<p>1883：MQTT协议端口<br>8083：WebSocket协议端口<br>8084：HTTP协议端口<br>8883：MQTT over SSL协议端口<br>18083：EMQX Dashboard Web管理界面端口<br> 3.创建文件挂载目录</p>
+<p>mkdir -p /app/emqx/etc /app/emqx/lib /app/emqx/data /app/emqx/log<br>4.从容器内复制配置文件到挂载目录下</p>
+<p>docker cp emqx:/opt/emqx/etc /app/emqx/etc<br> 5.强制删除docker 容器</p>
+<p>docker rm -f emqx<br>6.运行并挂载文件代码</p>
+<p>docker run -d \<br>—restart=always \<br>—name emqx \<br>-p 1883:1883 \<br>-p 8883:8883 \<br>-p 8083:8083 \<br>-p 8084:8084 \<br>-p 8081:8081 \<br>-p 18083:18083 \<br>-v /app/emqx/etc:/opt/emqx/etc \<br>emqx/emqx:latest<br>7.登录EMQX 内置的管理控制台 </p>
+<p><a href="http://localhost:18083/">http://localhost:18083/</a></p>
+<p>默认用户 admin，默认密码 public</p>
+<p>8.设置客户端认证</p>
+<p>在 EMQX Dashboard 页面，点击左侧导航栏的访问控制 -&gt; 认证，在随即打开的认证页面，单击创建，依次选择认证方式为 Password-Based，数据源为 Built-in Database，进入配置参数</p>
+<p>Docker | EMQX 文档</p>
+<p>使用Emqx5 | FastBee文档<br>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre><p>原文链接：<a href="https://blog.csdn.net/m0_46601820/article/details/134969551">https://blog.csdn.net/m0_46601820/article/details/134969551</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2026/02/06/springcloud%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%BAhttps%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
+    <content><![CDATA[<h1 id="springcloud项目部署为https"><a href="#springcloud项目部署为https" class="headerlink" title="springcloud项目部署为https"></a>springcloud项目部署为https</h1><h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h3 id="1、安装jdk、openssl-并配置环境变量"><a href="#1、安装jdk、openssl-并配置环境变量" class="headerlink" title="1、安装jdk、openssl 并配置环境变量"></a>1、安装jdk、openssl 并配置环境变量</h3><h2 id="二、生成证书"><a href="#二、生成证书" class="headerlink" title="二、生成证书"></a>二、生成证书</h2><h3 id="1、注意事项"><a href="#1、注意事项" class="headerlink" title="1、注意事项"></a>1、注意事项</h3><p>1.1、 本次部署文档  采用  自签根证书、根证书签发服务证书、配置信任库的模式</p>
+<p>1.2、下述证书名 密码 域名 IP地址均可替</p>
+<p>1.3、网关使用gateway时，若gateway配置https，下游服务为http，使用lb:服务名形式设置uri 可能会导致 调用下游服务时请求会沿用https，请求失败。可用uri：主机名：端口的形式配置</p>
+<p>1.4、除网关外的所有下游服务需要保持协议一致，若跨协议，feign调用会失败</p>
+<p>1.5、证书文件类型可采用PKCS12等，JKS类型springboot可能会读取失败(仅限于本次测试结果)</p>
+<h3 id="2、证书生成"><a href="#2、证书生成" class="headerlink" title="2、证书生成"></a>2、证书生成</h3><p>2.1.1、 生成根证书</p>
+<p>keytool -genkeypair -alias rootca -keyalg RSA -keysize 2048 -validity 3650 -keystore rootca.jks<br>-dname “CN=Root CA, OU=OrgUnit, O=Org, L=City, ST=State, C=Country” -ext bc:c</p>
+<p>参数说明：</p>
+<p>alias: 证书别名</p>
+<p>keystore: 证书文件名</p>
+<p>dname: 描述信息</p>
+<p>storepass：证书密钥</p>
+<p>2.1.2 、导出根 CA 证书（如果还没有）<br>如果你已经有 rootca.cer，可以跳过这一步。否则，使用以下命令导出根 CA 证书：<br>keytool -exportcert -alias rootca -file rootca.crt -keystore rootca.jks -storepass 123456 -rfc</p>
+<p>2.1.3、 提取根 CA 的私钥<br>由于 keytool 不直接支持从 JKS 提取私钥，我们可以先将 JKS 转换为 PKCS#12 格式，然后再使用 OpenSSL 提取私钥。<br>2.1.4、 将 JKS 转换为 PKCS#12 格式<br>keytool -importkeystore -srckeystore rootca.jks -destkeystore rootca.p12 -srcstoretype JKS -deststoretype PKCS12 -srcstorepass 123456 -deststorepass 123456 -alias rootca</p>
+<p>2.1.5、 使用 OpenSSL 提取私钥<br>openssl pkcs12 -in rootca.p12 -nocerts -out rootca.key -nodes -passin pass:123456</p>
+<p>2.2、生成服务证书</p>
+<p>2.2.1、创建网关服务的密钥库并生成密钥对<br>使用 keytool 创建网关服务的密钥库并生成密钥对：<br>keytool -genkeypair -alias dist -keyalg RSA -keysize 2048 -keystore dist.jks -storepass 123456 -keypass 123456 -dname “CN=gateway.example.com, OU=OrgUnit, O=Organization, L=City, ST=State, C=CN”</p>
+<p>2.2.2、从密钥库中导出证书签名请求 (CSR)<br>从网关密钥库中导出 CSR：<br>keytool -certreq -alias dist -file dist.csr -keystore dist.jks -storepass 123456</p>
+<p>2.2.3、创建 OpenSSL 配置文件<br>创建一个名为 openssl.cnf 的配置文件，用于指定证书的详细信息和扩展字段：</p>
+<h1 id="openssl-cnf"><a href="#openssl-cnf" class="headerlink" title="openssl.cnf"></a>openssl.cnf</h1><p>[ req ]<br>default_bits       = 2048<br>distinguished_name = req_distinguished_name<br>req_extensions     = req_ext<br>prompt             = no</p>
+<p>[ req_distinguished_name ]<br>C  = CN<br>ST = State<br>L  = City<br>O  = Organization<br>OU = OrgUnit<br>CN = gateway.example.com</p>
+<p>[ req_ext ]<br>subjectAltName = @alt_names</p>
+<p>[ alt_names ]<br>IP.1 = 192.168.3.166<br>DNS.1 = gateway.example.com</p>
+<p>2.2.4、 使用 OpenSSL 签发证书<br>使用 OpenSSL 签发证书并将 SAN 扩展添加到证书中：<br>openssl x509 -req -in dist.csr -CA rootca.crt -CAkey rootca.key -CAcreateserial -out dist.crt -days 365 -extfile openssl.cnf -extensions req_ext</p>
+<p>2.2.5、导入根 CA 证书到网关密钥库<br>将根 CA 证书导入到网关密钥库中：<br>keytool -importcert -alias rootca -file rootca.crt -keystore dist.jks -storepass 123456 -noprompt</p>
+<p>2.2.6、导入网关的签发证书到网关密钥库<br>将网关的签发证书导入到网关密钥库中：<br>keytool -importcert -alias dist -file dist.crt -keystore dist.jks -storepass 123456</p>
+<p>2.2.7、将 JKS 转换为 PKCS#12 格式（可选）<br>keytool -importkeystore -srckeystore dist.jks -destkeystore dist.p12 -srcstoretype JKS -deststoretype PKCS12 -srcstorepass 123456 -deststorepass 123456  -alias dist</p>
+<p>2.3、配置信任库</p>
+<p>2.3.1、创建信任库</p>
+<p>keytool -storetype JKS -keystore truststore.jks -storepass 123456 -deststoretype PKCS12</p>
+<p>2.3.2  导入根 CA 证书到 truststore.p12<br>keytool -importcert -v -alias dist -file dist.cer -keystore truststore.p12 -storetype PKCS12 -storepass 123456 -noprompt</p>
+<p>根证书 以及每个服务的证书都需要导入到信任库</p>
+<h2 id="三、配置服务"><a href="#三、配置服务" class="headerlink" title="三、配置服务"></a>三、配置服务</h2><h2 id="1、springcloud-项目配置"><a href="#1、springcloud-项目配置" class="headerlink" title="1、springcloud 项目配置"></a>1、springcloud 项目配置</h2><p>1.1、将项目证书和信任库放到指定位置，（一般是项目resources下)</p>
+<p>配置文件示例：</p>
+<p>server:</p>
+<p>  port: 10084</p>
+<p>  servlet:</p>
+<p>​    context-path:</p>
+<p>  ssl:</p>
+<p>​    enabled: false</p>
+<p>​    key-store: classpath:bizz.p12  # 新服务的 keystore 文件路径</p>
+<p>​    #key-store: file:/bizz.p12   # 绝对路径写法</p>
+<p>​    key-store-password: 123456         # keystore 密码</p>
+<p>​    key-alias: bizz   # 服务证书别名</p>
+<p>​    key-store-type: PKCS12                # 证书文件类型</p>
+<p>​    trust-store: classpath:truststore.p12  # 共享的信任库文件路径</p>
+<p>​    trust-store-password: 123456        # 信任库密码</p>
+<p>​    trust-store-type: PKCS12</p>
+<h2 id="2、前端配置-项目中采用ngxin部署"><a href="#2、前端配置-项目中采用ngxin部署" class="headerlink" title="2、前端配置(项目中采用ngxin部署)"></a>2、前端配置(项目中采用ngxin部署)</h2><p>2.1、证书生成</p>
+<p>按照上述方法生成前端证书，详见第二点</p>
+<p>2.2、配置示例</p>
+<h1 id="监听-HTTP-请求并重定向到-HTTPS"><a href="#监听-HTTP-请求并重定向到-HTTPS" class="headerlink" title="监听 HTTP 请求并重定向到 HTTPS"></a>监听 HTTP 请求并重定向到 HTTPS</h1><p>server {<br>    listen 80;<br>    server_name 192.168.3.166;  # 替换为 IP 地址</p>
+<pre><code># 将 HTTP 请求重定向到 HTTPS
+return 301 https://$host:5173$request_uri;
+</code></pre><p>}</p>
+<h1 id="监听-HTTPS-请求"><a href="#监听-HTTPS-请求" class="headerlink" title="监听 HTTPS 请求"></a>监听 HTTPS 请求</h1><p>server {<br>    listen 5173 ssl;<br>    server_name 192.168.3.166;  # 替换为 IP 地址</p>
+<pre><code>ssl_certificate E:/nginx-1.18.0/conf/ssl/dist.crt;
+ssl_certificate_key E:/nginx-1.18.0/conf/ssl/dist.key;
+
+
+ssl_protocols TLSv1.2 TLSv1.3;
+ssl_prefer_server_ciphers on;
+ssl_ciphers HIGH:!aNULL:!MD5;
+
+# 静态文件服务配置
+location / &#123;
+    root E:/kunteng/qianduan/OA/dist;  # 确保路径正确
+    index index.html;
+&#125;
+
+# 反向代理到你的 Spring Cloud Gateway
+location /api/ &#123;
+    proxy_pass https://192.168.3.166:38760;  # 替换为实际的网关地址和端口
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+&#125;
+</code></pre><p>}</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/</url>
+    <content><![CDATA[<p>docker run —privileged=true \<br>—log-driver json-file \<br>—log-opt max-size=100m \<br>—log-opt max-file=2 \<br>—name kafka -p 9092:9092 \<br>-e KAFKA_BROKER_ID=0 \<br>-e KAFKA_ZOOKEEPER_CONNECT=192.168.71.134:2181/kafka \<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.71.134:9092 \<br>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \<br>-e ALLOW_PLAINTEXT_LISTENER=yes \<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G’ \<br>-v /home/kafka/:/opt/kafka/ \<br>-v /etc/localtime:/etc/localtime \<br>-d wurstmeister/kafka:2.12-2.3.1<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>命令    注释<br>–privileged=true    表示容器内的root拥有真正的root权限<br>–log-driver json-file    表示使用 JSON 文件作为日志驱动<br>–log-opt max-size=100m    表示设置日志的最大大小为100MB<br>–log-opt max-file=2    表示设置日志文件的最大数量<br>–name    表示容器命名<br>-p    表示端口映射<br>-e KAFKA_BROKER_ID=0    表示这个ID是集群的标识，不能重复<br>-e KAFKA_ZOOKEEPER_CONNECT=IP:2181/kafka    表示zookeeper的连接地址<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://IP:9092    表示kafka发布到zookeeper供客户端使用的服务地址<br>-e ALLOW_PLAINTEXT_LISTENER=yes    表示允许使用PLAINTEXT侦听器<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G    表示行内存参数<br>-v /home/kafka/data:/wurstmeister/kafka/data    表示挂载配置数据目录<br>-v /home/kafka/config:/wurstmeister/kafka/config    表示配置文件目录<br>-v /etc/localtime:/etc/localtime    表示将本地时间映射到容器中<br>-d    表示后台运行</p>
+<p>./kafka-topics.sh —create —topic test-kafka —bootstrap-server localhost:9092<br>kafka-topics.sh —describe —topic test-kafka —bootstrap-server localhost:9092</p>
+<p>3.拉取Cannal镜像</p>
+<h2 id="拉取版本为v1-1-5的canal"><a href="#拉取版本为v1-1-5的canal" class="headerlink" title="拉取版本为v1.1.5的canal"></a>拉取版本为v1.1.5的canal</h2><p>docker pull canal/canal-server:v1.1.5<br>1<br>2<br>4.运行Canal<br>4.1、启动命令<br>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>启动命令说明：</p>
+<p>4.2、命令解读<br>① -p ：指定端口<br>② -e ：指定配置文件的配置信息。此处主要有两个配置文件在起作用，分别是 canal.properties 和 instance.properties 这两个配置文件，前缀是 canal. 的修改就是 canal.properties 这个配置文件的，前缀是 canal.instance 修改的就是 instance.properties 这个配置文件的<br>③ canal.destinations：指定了实例的名称，决定了instance实例的配置文件存放目录<br>④ canal.instance.master.address ：指定了mysql的地址，正常需要ip，此处由于会将mysql和canal放在一个网络中，所以可以直接使用mysql替代<br>⑤ canal.instance.filter.regex：此处指定只过滤test这个数据库的binlog数据<br>⑥ network mysql-test：指定网络是步骤1创建的网络<br>⑦ restart=always ：将canal设置为docker启动时自启，可要可不要<br>⑧ -d ：指定步骤2拉取的镜像名称以及版本</p>
+<p>4.3、查看容器状态</p>
+<h1 id="查看启动日志"><a href="#查看启动日志" class="headerlink" title="查看启动日志"></a>查看启动日志</h1><p>docker logs canal</p>
+<h1 id="查看目前运行容器"><a href="#查看目前运行容器" class="headerlink" title="查看目前运行容器"></a>查看目前运行容器</h1><p>docker ps</p>
+<h1 id="启动失败时查看容器状态"><a href="#启动失败时查看容器状态" class="headerlink" title="启动失败时查看容器状态"></a>启动失败时查看容器状态</h1><p>docker ps -a<br>1<br>2<br>3<br>4<br>5<br>6<br>4.4、相关配置调整（可做可不做）<br>①将canal配置文件进行拷贝</p>
+<h1 id="canal-properties-amp-instance-properties"><a href="#canal-properties-amp-instance-properties" class="headerlink" title="canal.properties &amp; instance.properties"></a>canal.properties &amp; instance.properties</h1><h1 id="注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面"><a href="#注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面" class="headerlink" title="注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面"></a>注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</h1><p>docker cp canal:/home/admin/canal-server/conf/canal.properties /mydata/canal/conf<br>docker cp canal:/home/admin/canal-server/conf/test/instance.properties /mydata/canal/conf</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>②根据个人需要修改配置之后，将原有的canal容器停止并删除，然后重新启动的时候使用-v进行文件绑定，进行文件绑定时务必确保文件是存在的。</p>
+<h1 id="停止并删除容器"><a href="#停止并删除容器" class="headerlink" title="停止并删除容器"></a>停止并删除容器</h1><p>docker stop canal<br>docker rm canal</p>
+<h1 id="重新运行并指定"><a href="#重新运行并指定" class="headerlink" title="重新运行并指定"></a>重新运行并指定</h1><p>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>-v /mydata/canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties \<br>-v /mydata/canal/conf/instance.properties:/home/admin/canal-server/conf/test/instance.properties \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>docker run -p 11111:11111 —name canal \<br>-v /mydata/canal/conf:/home/admin/canal-server/conf \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>找到canal.deployer-1.1.4/conf目录下的canal.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># tcp, kafka, RocketMQ 这里选择kafka模式</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">kafka</span></span><br><span class="line"><span class="comment"># 解析器的线程数，打开此配置，不打开则会出现阻塞或者不进行解析的情况</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelThreadSize</span> = <span class="string">16</span></span><br><span class="line"><span class="comment"># 配置MQ的服务地址，这里配置的是kafka对应的地址和端口</span></span><br><span class="line"><span class="attr">canal.mq.servers</span> = <span class="string">127.0.0.1:9092</span></span><br><span class="line"><span class="comment"># 配置instance，在conf目录下要有example同名的目录，可以配置多个</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string">example</span></span><br></pre></td></tr></table></figure>
+<p>然后配置instance，找到/conf/example/instance.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment">## mysql serverId , v1.0.26+ will autoGen(自动生成，不需配置)</span></span><br><span class="line"><span class="comment"># canal.instance.mysql.slaveId=0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># position info</span></span><br><span class="line"><span class="attr">canal.instance.master.address</span>=<span class="string">127.0.0.1:3306</span></span><br><span class="line"><span class="comment"># 在Mysql执行 SHOW MASTER STATUS;查看当前数据库的binlog</span></span><br><span class="line"><span class="attr">canal.instance.master.journal.name</span>=<span class="string">mysql-bin.000006</span></span><br><span class="line"><span class="attr">canal.instance.master.position</span>=<span class="string">4596</span></span><br><span class="line"><span class="comment"># 账号密码</span></span><br><span class="line"><span class="attr">canal.instance.dbUsername</span>=<span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.dbPassword</span>=<span class="string">Canal@****</span></span><br><span class="line"><span class="attr">canal.instance.connectionCharset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="comment">#MQ队列名称</span></span><br><span class="line"><span class="attr">canal.mq.topic</span>=<span class="string">canaltopic</span></span><br><span class="line"><span class="comment">#单队列模式的分区下标</span></span><br><span class="line"><span class="attr">canal.mq.partition</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 使用命令登录：mysql -u root -p</span></span><br><span class="line"><span class="comment">-- 创建用户 用户名：canal 密码：Canal@123456</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授权 *.*表示所有库</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>下一步在MySQL配置文件my.cnf设置如下信息：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># 打开binlog</span></span><br><span class="line"><span class="string">log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"># 选择ROW(行)模式</span></span><br><span class="line"><span class="string">binlog-format=ROW</span></span><br><span class="line"><span class="comment"># 配置MySQL replaction需要定义，不要和canal的slaveId重复</span></span><br><span class="line"><span class="string">server_id=1</span></span><br></pre></td></tr></table></figure>
+<p>改了配置文件之后，重启MySQL，使用命令查看是否打开binlog模式：</p>
+<p>show variables like ‘log_bin’;</p>
+<p>查看binlog日志文件列表：</p>
+<p>show binary logs;</p>
+<p>查看当前正在写入的binlog文件：</p>
+<p>show master status;</p>
+<p>MySQL服务器这边就搞定了，很简单。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</url>
+    <content><![CDATA[<h1 id="搭建maven私服"><a href="#搭建maven私服" class="headerlink" title="搭建maven私服"></a>搭建maven私服</h1><h2 id="一、docker版本"><a href="#一、docker版本" class="headerlink" title="一、docker版本"></a>一、docker版本</h2><p>docker pull sonatype/nexus3</p>
+<p>mkdir -p /home/nexus/data<br>chmod 777 -R /home/nexus/data</p>
+<p>docker run -d —name nexus3 -p 8081:8081 —restart always -v /home/nexus/data:/nexus-data sonatype/nexus3</p>
+<p>docker logs -f nexus3</p>
+<p>访问地址：http:ip:8081</p>
+<p>默认密码存放位置：</p>
+<p>cat /home/nexus/data/admin.password</p>
+<p>1、默认仓库说明：</p>
+<p>maven-central：maven中央库，默认从<a href="https://repo1.maven.org/maven2/拉取jar">https://repo1.maven.org/maven2/拉取jar</a><br>maven-releases：私库发行版jar，初次安装请将Deployment policy设置为Allow redeploy<br>maven-snapshots：私库快照（调试版本）jar<br>maven-public：仓库分组，把上面三个仓库组合在一起对外提供服务，在本地maven基础配置settings.xml或项目pom.xml中使用</p>
+<p>2、nexus仓库类型说明</p>
+<p>hosted：本地仓库，通常我们会部署自己的构件到这一类型的仓库。比如公司的第二方库。<br>proxy：代理仓库，它们被用来代理远程的公共仓库，如maven中央仓库。<br>group：仓库组，用来合并多个hosted/proxy仓库，当你的项目希望在多个repository使用资源时就不需要多次引用了，只需要引用一个group即可。</p>
+<p>3、创建Blob stores</p>
+<p>在创建repository之前，还需要先指定文件存储目录，便于统一管理。就需要创建Blob Stores，不创建则使用的是default</p>
+<p>4、</p>
+<p>jboss的maven中央仓库地址：<a href="http://repository.jboss.com/maven2/">http://repository.jboss.com/maven2/</a><br>阿里云的maven中央仓库地址：<a href="http://maven.aliyun.com/nexus/content/groups/public/">http://maven.aliyun.com/nexus/content/groups/public/</a><br>apache的maven中央仓库地址：<a href="http://repo.maven.apache.org/maven2/">http://repo.maven.apache.org/maven2/</a></p>
+<p>Hosted有三种方式：Releases、Snapshot、Mixed</p>
+<p>Releases: 一般是已经发布的Jar包<br>Snapshot: 未发布的版本<br>Mixed：混合的</p>
+<p>Allow redeploy：允许同一个版本号下重复提交代码, nexus以时间区分<br>Disable redeploy：不允许同一个版本号下重复提交代码<br>Read-Only：不允许提交任何版本<br>原生的maven-releases库是Disable redeploy设置， maven-snapshots是Allow redeploy。</p>
+<p>5、settings.xml 配置</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+
+    <localRepository>D:\123</localRepository>
+
+    <pluginGroups>
+    </pluginGroups>
+
+
+    <proxies>
+    </proxies>
+
+    <servers>
+
+        <server>
+            <id>maven-public</id>
+            <username>admin</username>
+            <password>123456</password>
+        </server>
+
+    </servers>
+
+
+    <mirrors>
+
+        <mirror>
+            <id>maven-public</id>
+            <mirrorOf>*</mirrorOf>
+            <name>maven-public</name>
+            <url>http://192.168.3.108:8081/repository/maven-public/</url>
+        </mirror>
+
+    </mirrors>
+
+    <profiles>
+
+        <!-- 配置私服 -->
+
+        <profile>
+            <id>maven-public</id>
+            <repositories>
+                <repository>
+                    <id>maven-public</id>
+                    <name>Repository for nexus</name>
+                    <url>http://192.168.3.108:8081/repository/maven-public/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+
+    </profiles>
+
+    <!-- 配置私服 -->
+
+    <activeProfiles>
+        <activeProfile>maven-public</activeProfile>
+    </activeProfiles>
+</settings>
+
+
+
+<h2 id="二、windows版"><a href="#二、windows版" class="headerlink" title="二、windows版"></a>二、windows版</h2><p>1、下载地址</p>
+<p><a href="https://help.sonatype.com/en/download.html">Download</a></p>
+<p>2、运行</p>
+<p>D:\App\nexus-3.55.0-01-win64\nexus-3.55.0-01\bin&gt;nexus.exe /run</p>
+<p>用户名：admin（默认）</p>
+<p>密码：第一次启动时生成，(在/sonatype-work/nexus3/admin.password 文件中) </p>
+]]></content>
+  </entry>
+  <entry>
     <title>数通笔记</title>
-    <url>/2022/05/06/%E7%AC%94%E8%AE%B0/</url>
+    <url>/2023/07/25/%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<h1 id="华为DHCP服务器配置：display-ip-pool"><a href="#华为DHCP服务器配置：display-ip-pool" class="headerlink" title="华为DHCP服务器配置：display ip pool"></a>华为DHCP服务器配置：display ip pool</h1><p>方法一：基于接口地址池<br>　1.全局启用DHCP：dhcp  enable<br>　2.接口中选DHCP方法：int　接口号<br>　　 　　　　　　　　 dhcp 　select　 int<br>  3.定义DHCP选项（Option）：<br>   Option3：自动为接口IP，无须配置<br>   Option6：dhcp  server  dns-list  DNS服务器地址<br>  4.排除范围（可选）：dhcp  server  excl  起始地址　结束地址<br>  5.租期（可选）：dhcp  server  Lease  ? ? ?</p>
 <p>方法二：基于全局地址池<br>1.全局启用DHCP：dhcp  enable<br> 2.创建地址池：ip  pool  池名<br> 3.定义DHCP选项（Option）<br>  方法1：用Option命令：option 选项号 ip 地址<br>  方法2：手工配置<br>  Option3（Router）：gateway-list 默认网关<br>　Option6（DNS Server）：dns-list DNS服务器地址<br>4.范围：network 　网络　mask　掩码<br>5.排除范围（可选）：excl 　起始地址　结束地址<br>6.接口中选DHCP方法：int　接口号<br>　　　　　　　　　　 dhcp 　select　 global</p>
 <ol>
@@ -230,6 +797,36 @@
 <p> 5.限制端口MAC数量(默认=1)：port-security max-mac-num MAC地址上限(可用于<strong>汇聚层**</strong>Switch**)</p>
 <p> 6.端口安全保护动作(默认为restrict)： port-security  protect-action  protect 或restrict 或shutdown</p>
 <p> 7.检查：dis mac-add ， dis mac-add security， dis mac-add sticky</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2026/02/06/%E8%AE%A1%E7%AE%97sph00025147%20+%205000/</url>
+    <content><![CDATA[<h2 id="计算sph00025147-5000"><a href="#计算sph00025147-5000" class="headerlink" title="计算sph00025147 + 5000"></a>计算sph00025147 + 5000</h2><p>SELECT CONCAT(‘SPH000’, CAST(CAST(SUBSTRING(name, 7) AS SIGNED) + 5000 AS CHAR(10)))<br>FROM test_user<br>WHERE id = 5;</p>
+<h2 id="查询并删除重复数据"><a href="#查询并删除重复数据" class="headerlink" title="查询并删除重复数据"></a>查询并删除重复数据</h2><p>SELECT name, age, COUNT(<em>) AS count<br>FROM test_user<br>GROUP BY name, age<br>HAVING COUNT(</em>) &gt; 1;<br>WITH CTE AS (<br>    SELECT id,ROW_NUMBER() OVER (PARTITION BY name, age ORDER BY id) AS rn<br>    FROM test_user<br>)<br>SELECT * FROM CTE;<br>DELETE FROM test_user<br>WHERE id in (SELECT id FROM CTE WHERE rn &gt; 1);</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h2 id="一、-前置条件"><a href="#一、-前置条件" class="headerlink" title="一、 前置条件"></a>一、 前置条件</h2><p>1、需要安装openssl</p>
+<h2 id="二、转换证书格式"><a href="#二、转换证书格式" class="headerlink" title="二、转换证书格式"></a>二、转换证书格式</h2><p>1、转换为PKCS12(推荐)</p>
+<p>openssl pkcs12 -export -in <em>.scaxkc.com_bundle.crt -inkey </em>.scaxkc.com_RSA.key -out scaxkc-gateway.p12 -name scaxkc-gateway</p>
+<p>执行上述命令后会提示输入密码、和确认密码</p>
+<p>参数说明：</p>
+<p>_.scaxkc.com_bundle.crt：证书文件</p>
+<p>_.scaxkc.com_RSA.key：私钥文件</p>
+<p>-name:指定证书别名（可自行定义，但尽量不重复）</p>
+<p>2、springboot配置</p>
+<p>1、将证书放置resources目录下</p>
+<p>2、配置在服务配置文件ssl块下</p>
+<p>示例：</p>
+<p>ssl:</p>
+<p>​    enable: true</p>
+<p>​    key-store: classpath:scaxkc-gateway.p12 # 新服务的 keystore 文件路径</p>
+<p>​    key-store-password: Kunteng@123         # keystore 密码</p>
+<p>​    key-alias: scaxkc-gateway</p>
+<p>​    key-store-type: PKCS12 </p>
 ]]></content>
   </entry>
 </search>

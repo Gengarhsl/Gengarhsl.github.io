@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="docker run —privileged&#x3D;true \—log-driver json-file \—log-opt max-size&#x3D;100m \—log-opt max-file&#x3D;2 \—name kafka -p 9092:9092 \-e KAFKA_BROKER_ID&#x3D;0 \-e KAFKA_ZOOKEEPER_CONNECT&#x3D;192.168.71.134:2181&#x2F;kafka \-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gengar">
+<meta property="og:url" content="http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/index.html">
+<meta property="og:site_name" content="Gengar">
+<meta property="og:description" content="docker run —privileged&#x3D;true \—log-driver json-file \—log-opt max-size&#x3D;100m \—log-opt max-file&#x3D;2 \—name kafka -p 9092:9092 \-e KAFKA_BROKER_ID&#x3D;0 \-e KAFKA_ZOOKEEPER_CONNECT&#x3D;192.168.71.134:2181&#x2F;kafka \-">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-02-06T07:48:46.612Z">
+<meta property="article:modified_time" content="2024-08-21T09:19:13.920Z">
+<meta property="article:author" content="Gengar">
+<meta property="article:tag" content="python, linux, mysql, 数通">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | Gengar</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Gengar" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Gengar</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个兴趣使然的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/atom.xml" rel="section"><i class="sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/NightTeam/nightteam.github.io" class="github-corner" title="NightTeam GitHub" aria-label="NightTeam GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-02-06 15:48:46" itemprop="dateCreated datePublished" datetime="2026-02-06T15:48:46+08:00">2026-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-08-21 17:19:13" itemprop="dateModified" datetime="2024-08-21T17:19:13+08:00">2024-08-21</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>docker run —privileged=true \<br>—log-driver json-file \<br>—log-opt max-size=100m \<br>—log-opt max-file=2 \<br>—name kafka -p 9092:9092 \<br>-e KAFKA_BROKER_ID=0 \<br>-e KAFKA_ZOOKEEPER_CONNECT=192.168.71.134:2181/kafka \<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.71.134:9092 \<br>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \<br>-e ALLOW_PLAINTEXT_LISTENER=yes \<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G’ \<br>-v /home/kafka/:/opt/kafka/ \<br>-v /etc/localtime:/etc/localtime \<br>-d wurstmeister/kafka:2.12-2.3.1<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>命令    注释<br>–privileged=true    表示容器内的root拥有真正的root权限<br>–log-driver json-file    表示使用 JSON 文件作为日志驱动<br>–log-opt max-size=100m    表示设置日志的最大大小为100MB<br>–log-opt max-file=2    表示设置日志文件的最大数量<br>–name    表示容器命名<br>-p    表示端口映射<br>-e KAFKA_BROKER_ID=0    表示这个ID是集群的标识，不能重复<br>-e KAFKA_ZOOKEEPER_CONNECT=IP:2181/kafka    表示zookeeper的连接地址<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://IP:9092    表示kafka发布到zookeeper供客户端使用的服务地址<br>-e ALLOW_PLAINTEXT_LISTENER=yes    表示允许使用PLAINTEXT侦听器<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G    表示行内存参数<br>-v /home/kafka/data:/wurstmeister/kafka/data    表示挂载配置数据目录<br>-v /home/kafka/config:/wurstmeister/kafka/config    表示配置文件目录<br>-v /etc/localtime:/etc/localtime    表示将本地时间映射到容器中<br>-d    表示后台运行</p>
+<p>./kafka-topics.sh —create —topic test-kafka —bootstrap-server localhost:9092<br>kafka-topics.sh —describe —topic test-kafka —bootstrap-server localhost:9092</p>
+<p>3.拉取Cannal镜像</p>
+<h2 id="拉取版本为v1-1-5的canal"><a href="#拉取版本为v1-1-5的canal" class="headerlink" title="拉取版本为v1.1.5的canal"></a>拉取版本为v1.1.5的canal</h2><p>docker pull canal/canal-server:v1.1.5<br>1<br>2<br>4.运行Canal<br>4.1、启动命令<br>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>启动命令说明：</p>
+<p>4.2、命令解读<br>① -p ：指定端口<br>② -e ：指定配置文件的配置信息。此处主要有两个配置文件在起作用，分别是 canal.properties 和 instance.properties 这两个配置文件，前缀是 canal. 的修改就是 canal.properties 这个配置文件的，前缀是 canal.instance 修改的就是 instance.properties 这个配置文件的<br>③ canal.destinations：指定了实例的名称，决定了instance实例的配置文件存放目录<br>④ canal.instance.master.address ：指定了mysql的地址，正常需要ip，此处由于会将mysql和canal放在一个网络中，所以可以直接使用mysql替代<br>⑤ canal.instance.filter.regex：此处指定只过滤test这个数据库的binlog数据<br>⑥ network mysql-test：指定网络是步骤1创建的网络<br>⑦ restart=always ：将canal设置为docker启动时自启，可要可不要<br>⑧ -d ：指定步骤2拉取的镜像名称以及版本</p>
+<p>4.3、查看容器状态</p>
+<h1 id="查看启动日志"><a href="#查看启动日志" class="headerlink" title="查看启动日志"></a>查看启动日志</h1><p>docker logs canal</p>
+<h1 id="查看目前运行容器"><a href="#查看目前运行容器" class="headerlink" title="查看目前运行容器"></a>查看目前运行容器</h1><p>docker ps</p>
+<h1 id="启动失败时查看容器状态"><a href="#启动失败时查看容器状态" class="headerlink" title="启动失败时查看容器状态"></a>启动失败时查看容器状态</h1><p>docker ps -a<br>1<br>2<br>3<br>4<br>5<br>6<br>4.4、相关配置调整（可做可不做）<br>①将canal配置文件进行拷贝</p>
+<h1 id="canal-properties-amp-instance-properties"><a href="#canal-properties-amp-instance-properties" class="headerlink" title="canal.properties &amp; instance.properties"></a>canal.properties &amp; instance.properties</h1><h1 id="注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面"><a href="#注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面" class="headerlink" title="注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面"></a>注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</h1><p>docker cp canal:/home/admin/canal-server/conf/canal.properties /mydata/canal/conf<br>docker cp canal:/home/admin/canal-server/conf/test/instance.properties /mydata/canal/conf</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>②根据个人需要修改配置之后，将原有的canal容器停止并删除，然后重新启动的时候使用-v进行文件绑定，进行文件绑定时务必确保文件是存在的。</p>
+<h1 id="停止并删除容器"><a href="#停止并删除容器" class="headerlink" title="停止并删除容器"></a>停止并删除容器</h1><p>docker stop canal<br>docker rm canal</p>
+<h1 id="重新运行并指定"><a href="#重新运行并指定" class="headerlink" title="重新运行并指定"></a>重新运行并指定</h1><p>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>-v /mydata/canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties \<br>-v /mydata/canal/conf/instance.properties:/home/admin/canal-server/conf/test/instance.properties \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>docker run -p 11111:11111 —name canal \<br>-v /mydata/canal/conf:/home/admin/canal-server/conf \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>找到canal.deployer-1.1.4/conf目录下的canal.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tcp, kafka, RocketMQ 这里选择kafka模式</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">kafka</span></span><br><span class="line"><span class="comment"># 解析器的线程数，打开此配置，不打开则会出现阻塞或者不进行解析的情况</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelThreadSize</span> = <span class="string">16</span></span><br><span class="line"><span class="comment"># 配置MQ的服务地址，这里配置的是kafka对应的地址和端口</span></span><br><span class="line"><span class="attr">canal.mq.servers</span> = <span class="string">127.0.0.1:9092</span></span><br><span class="line"><span class="comment"># 配置instance，在conf目录下要有example同名的目录，可以配置多个</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string">example</span></span><br></pre></td></tr></table></figure>
+<p>然后配置instance，找到/conf/example/instance.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## mysql serverId , v1.0.26+ will autoGen(自动生成，不需配置)</span></span><br><span class="line"><span class="comment"># canal.instance.mysql.slaveId=0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># position info</span></span><br><span class="line"><span class="attr">canal.instance.master.address</span>=<span class="string">127.0.0.1:3306</span></span><br><span class="line"><span class="comment"># 在Mysql执行 SHOW MASTER STATUS;查看当前数据库的binlog</span></span><br><span class="line"><span class="attr">canal.instance.master.journal.name</span>=<span class="string">mysql-bin.000006</span></span><br><span class="line"><span class="attr">canal.instance.master.position</span>=<span class="string">4596</span></span><br><span class="line"><span class="comment"># 账号密码</span></span><br><span class="line"><span class="attr">canal.instance.dbUsername</span>=<span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.dbPassword</span>=<span class="string">Canal@****</span></span><br><span class="line"><span class="attr">canal.instance.connectionCharset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="comment">#MQ队列名称</span></span><br><span class="line"><span class="attr">canal.mq.topic</span>=<span class="string">canaltopic</span></span><br><span class="line"><span class="comment">#单队列模式的分区下标</span></span><br><span class="line"><span class="attr">canal.mq.partition</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 使用命令登录：mysql -u root -p</span></span><br><span class="line"><span class="comment">-- 创建用户 用户名：canal 密码：Canal@123456</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授权 *.*表示所有库</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>下一步在MySQL配置文件my.cnf设置如下信息：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># 打开binlog</span></span><br><span class="line"><span class="string">log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"># 选择ROW(行)模式</span></span><br><span class="line"><span class="string">binlog-format=ROW</span></span><br><span class="line"><span class="comment"># 配置MySQL replaction需要定义，不要和canal的slaveId重复</span></span><br><span class="line"><span class="string">server_id=1</span></span><br></pre></td></tr></table></figure>
+<p>改了配置文件之后，重启MySQL，使用命令查看是否打开binlog模式：</p>
+<p>show variables like ‘log_bin’;</p>
+<p>查看binlog日志文件列表：</p>
+<p>show binary logs;</p>
+<p>查看当前正在写入的binlog文件：</p>
+<p>show master status;</p>
+<p>MySQL服务器这边就搞定了，很简单。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Gengar
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/" title="">http://example.com/2026/02/06/拉取版本为v1.1.5的canal/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2026/02/06/%E8%AE%A1%E7%AE%97sph00025147%20+%205000/" rel="prev" title="">
+      <i class="fa fa-chevron-left"></i> 
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1-1-5%E7%9A%84canal"><span class="nav-number">1.</span> <span class="nav-text">拉取版本为v1.1.5的canal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%90%AF%E5%8A%A8%E6%97%A5%E5%BF%97"><span class="nav-number"></span> <span class="nav-text">查看启动日志</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%89%8D%E8%BF%90%E8%A1%8C%E5%AE%B9%E5%99%A8"><span class="nav-number"></span> <span class="nav-text">查看目前运行容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%A4%B1%E8%B4%A5%E6%97%B6%E6%9F%A5%E7%9C%8B%E5%AE%B9%E5%99%A8%E7%8A%B6%E6%80%81"><span class="nav-number"></span> <span class="nav-text">启动失败时查看容器状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#canal-properties-amp-instance-properties"><span class="nav-number"></span> <span class="nav-text">canal.properties &amp; instance.properties</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%8Cinstance-properties%E6%96%87%E4%BB%B6%E6%98%AF%E5%9C%A8canal-destinations%E8%BF%99%E4%B8%AA%E9%85%8D%E7%BD%AE%E6%8C%87%E5%AE%9A%E7%9A%84%E7%9B%AE%E5%BD%95%E4%BD%9C%E4%B8%BA%E5%89%8D%E7%BC%80%E4%B8%8B%E9%9D%A2"><span class="nav-number"></span> <span class="nav-text">注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%81%9C%E6%AD%A2%E5%B9%B6%E5%88%A0%E9%99%A4%E5%AE%B9%E5%99%A8"><span class="nav-number"></span> <span class="nav-text">停止并删除容器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E8%BF%90%E8%A1%8C%E5%B9%B6%E6%8C%87%E5%AE%9A"><span class="nav-number"></span> <span class="nav-text">重新运行并指定</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gengar"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">Gengar</p>
+  <div class="site-description" itemprop="description">分享学习内容</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/NightTeam" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;NightTeam" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:contact@nightteam.cn" title="E-Mail → mailto:contact@nightteam.cn" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gengar</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '0db41092506d1fe13c1c',
+      clientSecret: 'e0375c33e4d7dd7caf55d3a663f088e9f07ec8f1',
+      repo        : 'nightteam.github.io',
+      owner       : 'NightTeam',
+      admin       : ['germey'],
+      id          : 'bc4d63e1c1dded7e32358bdd97b24b66',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+    </div>
+</body>
+</html>

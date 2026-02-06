@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"gitalk","storage":true,"nav":null,"activeClass":"gitalk"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="分享学习内容">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gengar">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="Gengar">
+<meta property="og:description" content="分享学习内容">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="Gengar">
+<meta property="article:tag" content="python, linux, mysql, 数通">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/page/2/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Gengar</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Gengar" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Gengar</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">一个兴趣使然的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/atom.xml" rel="section"><i class="sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/NightTeam/nightteam.github.io" class="github-corner" title="NightTeam GitHub" aria-label="NightTeam GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/1%E3%80%81%E5%B9%B6%E8%A1%8C%E5%92%8C%E5%B9%B6%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/02/06/1%E3%80%81%E5%B9%B6%E8%A1%8C%E5%92%8C%E5%B9%B6%E5%8F%91%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2026-02-06 15:48:46" itemprop="dateCreated datePublished" datetime="2026-02-06T15:48:46+08:00">2026-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-03-29 17:29:51" itemprop="dateModified" datetime="2024-03-29T17:29:51+08:00">2024-03-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1、并行和并发的区别</p>
+<p>并行强调多个任务同时处理</p>
+<p>并发强调的是系统具有处理多个任务的能力，这些任务可以同时执行也可以交替执行</p>
+<p>2、为什么要使用线程池</p>
+<ol>
+<li>降低资源消耗：线程的创建和销毁会带来额外的开销，使用线程池可以重复利用已经创建的线程，避免频繁地创建和销毁线程，从而降低了系统的资源消耗。</li>
+<li>提高响应速度：线程池中的线程在执行完一个任务后，可以立即接受下一个任务，这样可以减少任务等待的时间，提高系统的响应速度。</li>
+<li>控制并发数量：线程池可以限制同时执行的线程数量，防止系统因为过多的线程导致资源耗尽或性能下降，从而更好地控制并发度。</li>
+<li>统一管理：线程池可以统一管理线程的生命周期、状态和执行，提供了更加方便的管理和监控机制。</li>
+<li>提供更好的可伸缩性：线程池可以根据实际情况动态调整线程数量，适应系统负载的变化，从而提供了更好的可伸缩性。</li>
+</ol>
+<p>3、springboot有哪几种日志</p>
+<p>logback默认日志框架 </p>
+<p>log4j2</p>
+<p><strong>java.util.logging</strong></p>
+<p><strong>Slf4j</strong></p>
+<p>在 Logback 中，有几个核心的标签用于配置日志输出的格式、级别、目的地等，下面是一些常用的 Logback 标签以及它们的功能和作用：</p>
+<ol>
+<li><strong><configuration></strong>：<ul>
+<li><code>&lt;configuration&gt;</code> 标签用于配置 Logback 的整体配置信息，包括根日志级别、Appender 等。</li>
+<li>可以在该标签内部定义多个子标签来配置具体的日志输出规则。</li>
+</ul>
+</li>
+<li><strong><appender></strong>：<ul>
+<li><code>&lt;appender&gt;</code> 标签用于配置日志的输出目的地，比如控制台、文件等。</li>
+<li>可以配置不同类型的 Appender，如 ConsoleAppender、FileAppender 等。</li>
+</ul>
+</li>
+<li><strong><logger></strong>：<ul>
+<li><code>&lt;logger&gt;</code> 标签用于配置具体的 Logger 对象，可以设置 Logger 的名称、级别、Appender 等。</li>
+<li>可以为不同的包或类设置不同的日志级别和目的地。</li>
+</ul>
+</li>
+<li><strong><root></strong>：<ul>
+<li><code>&lt;root&gt;</code> 标签表示根 Logger，用于配置应用程序的根日志级别和根 Appender。</li>
+<li>所有未匹配到具体 Logger 的日志消息都会经过根 Logger 处理。</li>
+</ul>
+</li>
+<li><strong><encoder></strong>：<ul>
+<li><code>&lt;encoder&gt;</code> 标签用于配置日志的输出格式，可以自定义日志消息的展示方式。</li>
+<li>可以设置日期格式、线程名、日志级别、Logger 名称、消息内容等。</li>
+</ul>
+</li>
+<li><strong><pattern></strong>：<ul>
+<li><code>&lt;pattern&gt;</code> 标签用于定义日志输出的格式模式，常常与 <code>&lt;encoder&gt;</code> 配合使用。</li>
+<li>可以通过占位符来指定输出的内容，如 <code>%d</code> 表示日期、<code>%level</code> 表示日志级别等。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/25/%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/25/%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">数通笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-25 22:55:28" itemprop="dateCreated datePublished" datetime="2023-07-25T22:55:28+08:00">2023-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-06 22:33:29" itemprop="dateModified" datetime="2022-05-06T22:33:29+08:00">2022-05-06</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="华为DHCP服务器配置：display-ip-pool"><a href="#华为DHCP服务器配置：display-ip-pool" class="headerlink" title="华为DHCP服务器配置：display ip pool"></a>华为DHCP服务器配置：display ip pool</h1><p>方法一：基于接口地址池<br>　1.全局启用DHCP：dhcp  enable<br>　2.接口中选DHCP方法：int　接口号<br>　　 　　　　　　　　 dhcp 　select　 int<br>  3.定义DHCP选项（Option）：<br>   Option3：自动为接口IP，无须配置<br>   Option6：dhcp  server  dns-list  DNS服务器地址<br>  4.排除范围（可选）：dhcp  server  excl  起始地址　结束地址<br>  5.租期（可选）：dhcp  server  Lease  ? ? ?</p>
+<p>方法二：基于全局地址池<br>1.全局启用DHCP：dhcp  enable<br> 2.创建地址池：ip  pool  池名<br> 3.定义DHCP选项（Option）<br>  方法1：用Option命令：option 选项号 ip 地址<br>  方法2：手工配置<br>  Option3（Router）：gateway-list 默认网关<br>　Option6（DNS Server）：dns-list DNS服务器地址<br>4.范围：network 　网络　mask　掩码<br>5.排除范围（可选）：excl 　起始地址　结束地址<br>6.接口中选DHCP方法：int　接口号<br>　　　　　　　　　　 dhcp 　select　 global</p>
+<ol>
+<li>.租期（可选）：dhcp  server  Lease  ? ? ?</li>
+<li>dhcp server forbidden-ip 10.0.20.1 10.0.20.100 禁止将pc网关分配给用户</li>
+</ol>
+<p>DHCP Client：<br>Windows PC机：ipconfig、ipconfig /release、ipconfig /renew、ipconfig /all<br>华为Router以太网接口：ip  add  dhcp-a （dis ip int br、 dis ip rout 、 dis  dns  server）</p>
+<h1 id="端口隔离"><a href="#端口隔离" class="headerlink" title="端口隔离"></a>端口隔离</h1><p>SWA<br>sys<br>port-isolate group 1<br>int g1/0/1<br> port-isolate enable group 1<br>int g1/0/2<br> port-isolate enable group 1<br>int g1/0/3<br> port-isolate enable group 1</p>
+<p>dis port-isolate group 1</p>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="链路类型"><a href="#链路类型" class="headerlink" title="链路类型"></a>链路类型</h1><p>接口模式</p>
+<p>SW1<br>sys<br>sys SW1<br>vlan 2<br> port g1/0/1 access<br> port g1/0/2 access<br>vlan 10<br> port g1/0/3 access<br>dis vlan brief</p>
+<p>trunk 模式</p>
+<p>SW1<br>sys<br>vlan 2<br> port g1/0/2<br>vlan 10<br> port g1/0/3<br>int g1/0/1<br> port link-type trunk<br> port trunk permit vlan all<br>dis vlan brief<br>dis int g1/0/1</p>
+<h1 id="stp-pvst"><a href="#stp-pvst" class="headerlink" title="stp pvst"></a>stp pvst</h1><p>SWA<br>sys<br>vlan 11 to 12<br>vlan 21 to 22<br>vlan 31 to 32<br>int g1/0/1<br> port link-type trunk<br> port trunk permit vlan all<br>int g1/0/2<br> port link-type trunk<br> port trunk permit vlan all<br>qu<br>stp mode pvst<br>stp vlan 11 21 31 root primary<br>stp vlan 12 22 32 root secondary</p>
+<p>ip ttl-expires enable   开启设备的ICMP超时报文的发送功能<br>ip unreachables enable  开启设备的ICMP目的不可达报文的发送功能</p>
+<p>华三  宣告默认路由</p>
+<p>rip    default-route or</p>
+<p>ospf     default-route-adv</p>
+<h1 id="ACL过滤"><a href="#ACL过滤" class="headerlink" title="ACL过滤"></a>ACL过滤</h1><p>acl advanced 3000<br> rule 0 deny ip source 10.1.1.2 0 destination 10.2.2.2 0<br> rule 5 deny tcp source 10.1.1.3 0 destination 10.2.2.2 0 destination-port eq www<br> rule 10 deny tcp source 10.1.1.4 0 destination 10.2.2.2 0 destination-port eq ftp<br>int g0/0<br> packet-filter 3000 inbound</p>
+<p>dis acl 3000<br>dis cu int g0/0<br>dis packet-filter statistics int g0/0 inbound </p>
+<p>华为接口过滤</p>
+<p>acl 3050<br> rule deny ip source 10.0.50.0 0.0.0.255 destin 10.0.0.0 0.255.255.255<br>int g0/0/4<br> traffic-filter inbound acl 3050</p>
+<p>reset saved-configuration 华三清楚配置命令</p>
+<p>ctrl+B或E</p>
+<h1 id="IP-v6"><a href="#IP-v6" class="headerlink" title="IP v6"></a>IP v6</h1><p>sysn RTD<br>int g0/2<br> ipv6 add 2004::1 64<br>int g0/0<br> mac-add 0000-0c00-0111<br> ipv6 add auto</p>
+<h2 id="ripng"><a href="#ripng" class="headerlink" title="ripng"></a>ripng</h2><p>ripng 1<br>int g0/2<br> ripng 1 enable<br>int g0/0<br> ripng 1 enable</p>
+<p>dis ipv6 rout pro ripng</p>
+<h2 id="ospfv3"><a href="#ospfv3" class="headerlink" title="ospfv3"></a>ospfv3</h2><p>syst<br>ospfv3 1<br> router-id 4.4.4.4<br> import-route ripng 1 allow-direct</p>
+<p>int g0/2<br> ospfv3 1 area 0</p>
+<p>dis ipv6 routi pro ospfv3<br>dis ospfv3 peer<br>dis ospfv3 lsdb</p>
+<h2 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h2><p>int tunnel 0 mode ipv6-ipv4<br> ipv6 add 2222:: 64 eui-64<br> ospfv3 1 area 0<br> source g0/1<br> destin 10.0.23.2</p>
+<p>ip route-s 0.0.0.0 0 100.100.100.1  默认路由</p>
+<h1 id="MSTP配置"><a href="#MSTP配置" class="headerlink" title="MSTP配置"></a>MSTP配置</h1><p>首先已配置完成VLAN、Access和Trunk端口。</p>
+<p> 1.启用STP： stp  enable</p>
+<p> 2.用MSTP模式：stp  mode  mstp</p>
+<p> 3.进入MSTP配置视图：stp  region-conf</p>
+<p> 4.定义区域名称：region-name 名</p>
+<p> 5.定义修订等级：revision-level 号</p>
+<p> 6.定义VLAN关联表：instance 实例号  vlan  VLAN范围</p>
+<p> 7.激活配置：active  region-conf</p>
+<p> 8.退出MSTP配置视图：quit</p>
+<p> 9.定义主备根：stp  instance  实例号  root  p（主根）或s（备根）</p>
+<p> 10.检查：dis stp br，dis stp region-conf</p>
+<h1 id="VRRP（Virtual-Router-Redundancy-Protocol，虚拟路由冗余协议）"><a href="#VRRP（Virtual-Router-Redundancy-Protocol，虚拟路由冗余协议）" class="headerlink" title="VRRP（Virtual Router Redundancy Protocol，虚拟路由冗余协议）"></a>VRRP（Virtual Router Redundancy Protocol，虚拟路由冗余协议）</h1><p> 开放，RFC3768，用224.0.0.18，协议号=112。</p>
+<p><strong>VRRP Router**</strong>角色**（dis vrrp）</p>
+<p><strong>一.Master**</strong>：**主用</p>
+<p> 选择：1.优先级最高（可抢占）；2.IP最高（不可抢占）。</p>
+<p> 作用：1.用VMAC应答主机ARP请求；2.转发用户Data。</p>
+<p><strong>二.Backup**</strong>：**备用</p>
+<p> 监听Master定期（1秒）发送的通告，在Master_Down_Interval时间内未收到，则认为Master失效，立即成为Master，即切换。</p>
+<p><strong>启用VRRP**</strong>（接口视图）：<strong>vrrp  vrid  组号  virtual-ip  虚拟IP（</strong>VIP**）</p>
+<p> 检查：dis vrrp</p>
+<p><strong>Virtual IP Address**</strong>（VIP<strong>**）：手工配置。</strong></p>
+<p><strong>Virtual MAC**</strong>（VMAC<strong><strong>）：0000-5e00-01XX</strong></strong>（XX<strong>**：组号）</strong></p>
+<p> <strong>查看：</strong>Router用dis vrrp，dis arp；主机用arp -a</p>
+<p><strong>VRRP**</strong>状态机（**dis vrrp）</p>
+<p>1.Master：主用；2.Backup：备用；3. Initialize：接口shutdown。</p>
+<p><strong>VRRP**</strong>优先级**</p>
+<p>默认=100，可用于定制Master。</p>
+<p><strong>定制Master</strong></p>
+<p> 接口视图修改优先级：vrrp  vrid  组号 priority  优先级</p>
+<p><strong>回切</strong></p>
+<p>如果优先级高的原Master恢复，则抢占为Master，即回切。</p>
+<p><strong>VRRP**</strong>联动功能**</p>
+<p>接口跟踪（Track）功能，当上行链路（Uplink）down时，Master降低优先级（默认降低10），进行主备切换；当上行链路恢复up，原Master恢复优先级，抢占为Master，即回切。</p>
+<p><strong>VRRP**</strong>负载分担**</p>
+<p> 可用多个组，每个组可对应一个VLAN，不同组有不同的Master。</p>
+<h1 id="防火墙配置"><a href="#防火墙配置" class="headerlink" title="防火墙配置"></a>防火墙配置</h1><p><strong>安全区域（Zone**</strong>）：**用于区分不同的网络。默认4个Zone。（dis zone）</p>
+<p> 1.local：代表防火墙本身。</p>
+<p> 2.trust：可连接内部（Inside）网络。</p>
+<p> 3.untrust：可连接外部（Outside）网络，即Internet。</p>
+<p> 4.dmz：可连接放置允许外部访问的服务器群（Server Farm）的网络。</p>
+<p><strong>安全级别（Security Level**</strong>）：<strong>dis Zone显示为priority。表示受信任程度。可用于定义报文</strong>流动的方向。**</p>
+<p> <strong>高到低：Outbound**</strong>；低到高：Inbound<strong>**。</strong></p>
+<p><strong>华为USG**</strong>基本配置**</p>
+<p>以下为USG5500型，6000型见课件。</p>
+<p>1.添加接口到区域（Zone）：firewall  zone  Zone名</p>
+<p>​             Add  interface  接口号（dis  zone）</p>
+<p>\2. 接口IP地址。</p>
+<p>\3. DHCP服务器（接口视图）：</p>
+<p> Dhcp select interface</p>
+<p> dhcp server dns-list DNS服务器IP</p>
+<p>4.安全策略：policy  interzone  Zone名 Zone名 inbound或outbound </p>
+<p>​       policy 号（执行顺序）</p>
+<p>​       action permit（允许）</p>
+<p>5.检查：会话表：Display firewall session table</p>
+<p>​    老化时间:：display firewall session aging-time</p>
+<p> <strong>NAT No-PAT</strong></p>
+<p>以前称为NAT， 用公有IP地址池中的IP，“<strong>一对一地址转换</strong>”。<strong>不常用！</strong></p>
+<p>syst</p>
+<p>nat address-group 1 100.100.100.12 100.100.100.13</p>
+<p>nat-policy interzone trust untrust outbound </p>
+<p> policy 1</p>
+<p> action source-nat </p>
+<p> address-group 1 no-pat</p>
+<p><strong>NAPT</strong></p>
+<p>以前称为PAT，用公有IP地址池中的IP<strong>及端口号</strong>，“<strong>多对一的地址转换</strong>”，常用于企业访问Internet。</p>
+<p>sys</p>
+<p>nat address-group <strong>2</strong> 100.100.100.14 100.100.100.15（公有IP地址池）</p>
+<p>nat-policy  interzone  trust untrust  outbound </p>
+<p> policy 1</p>
+<p> action source-nat </p>
+<p> address-group <strong>2</strong></p>
+<p>dis  firew session  table</p>
+<p><strong>配置策略NAPT</strong></p>
+<p>用于控制上网的用户。</p>
+<p>nat-policy interzone trust untrust outbound</p>
+<p> policy 1</p>
+<p> policy source 192.168.0.2 0（允许上网的用户）</p>
+<p> action source-nat</p>
+<p> address-group 2</p>
+<p>dis  this</p>
+<p><strong>NAT-Server</strong></p>
+<p>用于公网用户访问DMZ的服务器。即将公网IP地址映射为服务器的私网IP地址。</p>
+<p> nat server protocol tcp global 100.100.100.172 80 inside 172.16.1.101 80（dis nat server）</p>
+<h2 id="ASPF-（Application-Specific-Packet-Filter-）"><a href="#ASPF-（Application-Specific-Packet-Filter-）" class="headerlink" title="ASPF**（Application Specific Packet Filter**）"></a><strong>ASPF**</strong>（Application Specific Packet Filter<strong>**）</strong></h2><p> 可对应用层协议进行深度检测，支持多通道协议（FTP等）、实时通讯工具（如QQ等）通过NAT设备的转发。</p>
+<p>sys<br>firew interzone untrust dmz<br> detect ftp<br>firew interzone trust untrust<br> detect qq</p>
+<p>dis firew server-map</p>
+<h1 id="GER-VPN"><a href="#GER-VPN" class="headerlink" title="GER VPN"></a>GER VPN</h1><p>sys<br>int tunnel 0 mode gre<br>ip address 10.1.2.1 24<br>source 192.13.2.2<br>destination 132.108.5.2<br>display ip int br</p>
+<h2 id="IPsec-vpn"><a href="#IPsec-vpn" class="headerlink" title="IPsec vpn"></a>IPsec vpn</h2><p>sys</p>
+<ol>
+<li>ACL<br>acl adv 3001<br>rule permit gre source 192.13.2.2 0 destination 132.108.5.2 0<br>quit </li>
+<li>IKE<br>ike keychain k1<br>pre-shared-key address 132.108.5.2 24 key si 123456<br>qu<br>ike profile p1<br>keychain k1<br>match remote identity address 132.108.5.2 24<br>qu</li>
+<li>IPsec<br>ipsec transform-set tr1<br>encapsulation-mode tunnel<br>protocol esp<br>esp encryption-algorithm aes-cbc-128<br>esp authentication-algorithm sha1<br>qu</li>
+<li>MAP<br>ipsec policy map1 20 isakmp<br>security acl 3001<br>transform-set tr1<br>local-address 192.13.2.2<br>remote-address 132.108.5.2<br>ike-profile p1<br>return<br>sys<br>interface g 0/1<br>ipsec apply policy map1<br>qu</li>
+</ol>
+<p>display ike sa<br>display ipsec sa </p>
+<h1 id="DHCP-Snooping"><a href="#DHCP-Snooping" class="headerlink" title="DHCP Snooping"></a><strong>DHCP Snooping</strong></h1><p>用DHCP Option82建立和维护真实IP、真实MAC、VLAN、接口对应的绑定表（dis dhcp snooping user-bind all）；将端口分别设为信任（可转发DHCP报文）或不信任（丢弃DHCP报文）。</p>
+<p><strong>一.**</strong>用于防止DHCP<strong>**饿死攻击</strong></p>
+<p>用绑定表对照检查DHCP报文CHADDR的字段，不一致则丢弃。</p>
+<p>二.<strong>用于防止仿冒DHCP Server**</strong>攻击**</p>
+<p>只有连接合法DHCP Server的端口设为信任。</p>
+<p>三.<strong>用于防止ARP**</strong>中间人攻击**</p>
+<p>用绑定表发现MAC欺骗，丢弃ARP报文。</p>
+<p><strong>配置DHCP Snooping</strong></p>
+<p> 1.全局启用DHCP：dhcp enable</p>
+<p> 2.全局启用DHCP Snooping：dhcp snooping enable</p>
+<p> 3.接口中启用Option82：dhcp option82 insert enable</p>
+<p> 4.接口中启用DHCP Snooping：dhcp snooping enable</p>
+<p> 以上配置后全部端口为不信任。</p>
+<p> \5. 连接合法DHCP Server的端口设为信任（接口中）：dhcp snooping trust</p>
+<p> 6.绑定表：dis dhcp snooping user-bind all</p>
+<h1 id="端口安全-Port-Security"><a href="#端口安全-Port-Security" class="headerlink" title="端口安全(Port Security)"></a><strong>端口安全(Port Security)</strong></h1><p> 捆绑合法MAC到端口，防止仿冒用户接入，可用于<strong>接入层**</strong>Switch<strong>。限制端口MAC数量，可用于</strong>汇聚层<strong>**Switch</strong>。</p>
+<p><strong>端口安全MAC**</strong>类型**</p>
+<p> <strong>1.**</strong>安全动态MAC<strong>**地址</strong></p>
+<p>启用端口安全后动态学习的MAC地址，设备重启后会丢失表项。(dis mac-add Security)</p>
+<p> <strong>2.**</strong>安全静态MAC<strong>**地址</strong></p>
+<p>手工捆绑的静态MAC地址，设备重启后不丢失表项。(dis mac-add sticky)</p>
+<p> <strong>3.</strong> <strong>Sticky MAC**</strong>地址**</p>
+<p>启用端口安全后，启用Sticky MAC功能后将动态学习的MAC地址转换为Sticky MAC地址，设备重启后不丢失表项。(dis mac-add sticky)</p>
+<p><strong>端口安全限制动作</strong></p>
+<p>超出端口安全MAC地址限制数后的动作。</p>
+<p> <strong>1.</strong> <strong>restrict</strong></p>
+<p>丢弃非法报文(源MAC不存在的报文)并告警(产生Log)，默认。</p>
+<p> <strong>2.</strong> <strong>protect</strong></p>
+<p>丢弃非法报文不告警。</p>
+<p> <strong>3.</strong> <strong>shutdown</strong></p>
+<p>接口置为error-down，并告警。必须在接口视图下用restart命令重启接口。</p>
+<p><strong>配置端口安全</strong></p>
+<p> 1.进入接口视图：interface 接口号</p>
+<p> 2.启用端口安全：port-security  enable</p>
+<p> 3.启用Sticky MAC：port-security  mac-address  sticky</p>
+<p> 4.手工捆绑静态MAC地址：port-security  mac-address sticky xxxx-xxxx-xxxx(MAC地址)  vlan  号 </p>
+<p> 5.限制端口MAC数量(默认=1)：port-security max-mac-num MAC地址上限(可用于<strong>汇聚层**</strong>Switch**)</p>
+<p> 6.端口安全保护动作(默认为restrict)： port-security  protect-action  protect 或restrict 或shutdown</p>
+<p> 7.检查：dis mac-add ， dis mac-add security， dis mac-add sticky</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/25/Linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/25/Linux/" class="post-title-link" itemprop="url">Linux笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-25 22:55:28" itemprop="dateCreated datePublished" datetime="2023-07-25T22:55:28+08:00">2023-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-12 17:31:25" itemprop="dateModified" datetime="2022-07-12T17:31:25+08:00">2022-07-12</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><h3 id="安装图形化界面虚拟机管理工具"><a href="#安装图形化界面虚拟机管理工具" class="headerlink" title="安装图形化界面虚拟机管理工具"></a>安装图形化界面虚拟机管理工具</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum groupinstall <span class="string">&#x27;Virtualization Host&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动虚拟化服务"><a href="#启动虚拟化服务" class="headerlink" title="启动虚拟化服务"></a>启动虚拟化服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum install virt-manager</span><br></pre></td></tr></table></figure>
+<h3 id="Web管理界面"><a href="#Web管理界面" class="headerlink" title="Web管理界面"></a>Web管理界面</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ systemctl start libvirtd.service</span><br><span class="line">$ systemclt start cockpit.service</span><br></pre></td></tr></table></figure>
+<h1 id="配置网卡"><a href="#配置网卡" class="headerlink" title="配置网卡"></a>配置网卡</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nmtui 图形化工具</span><br><span class="line">$ /etc/sysconfig/network-scripts/ifcfg-enp1s0 网卡配置文件</span><br><span class="line">$ nmcli con modify enp1s0 ipv4.method me</span><br><span class="line">$ nmcli con up enp1s0启用网卡配置</span><br></pre></td></tr></table></figure>
+<p>w查看登录信息<br>Ss -ant查看链接信息<br>Ss -at<br>Ss -atu<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/resolv.conf  dns记录文件 网卡会覆盖</span><br><span class="line">$ /etc/hostname修改主机名</span><br><span class="line">$ /etc/hosts dns解析文件</span><br></pre></td></tr></table></figure><br>route -n查询网关<br>主机名 计算机名<br>Fqdn  web-server.abc.com<br>Netbiosname.  Web-server<br>nmcli con show 查看<br>nmcli device status 查看网卡状态</p>
+<h1 id="安装软件包-chrony"><a href="#安装软件包-chrony" class="headerlink" title="安装软件包 chrony"></a>安装软件包 chrony</h1><h3 id="查看时钟同步状态"><a href="#查看时钟同步状态" class="headerlink" title="查看时钟同步状态"></a>查看时钟同步状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ chronyc sources -v</span><br></pre></td></tr></table></figure>
+<h3 id="搭建内网Ntp服务器"><a href="#搭建内网Ntp服务器" class="headerlink" title="搭建内网Ntp服务器"></a>搭建内网Ntp服务器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim /etc/chrony.conf 修改配置文件</span><br><span class="line">$ firewall-cmd. --add-service=ntp 防火墙放行ntp服务</span><br></pre></td></tr></table></figure>
+<p>修改时区<br>timedatectl. Set-timezone. Asia/Shanghai<br>           List-timezone  查询<br>Timedatectl. Set-ntp. true/false 开启互联网校准<br>Date -s. 修改时间</p>
+<p>Yum list 查询仓库里所有软件包及其状态</p>
+<p>rpm -i 安装 v查看安装信息 h显示进度<br>rpm -q查询<br>rpm -e删除<br>过滤<br>| grep 名字<br>查询某个文件属于某个rpm包<br>rpm -qa<br>Net-tools<br>Bash-c<em><br>Vim-e</em></p>
+<h1 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h1><p>\1. /boot. 1g<br>\2. Swap.  2 Ram<br>\3. /.  All</p>
+<h1 id="ssh配置"><a href="#ssh配置" class="headerlink" title="ssh配置"></a>ssh配置</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/ssh/sshd_config</span><br><span class="line">$ Port 22</span><br><span class="line">$ Permitrootlogin <span class="built_in">yes</span> 允许 root远程登录 no禁止</span><br></pre></td></tr></table></figure>
+<h3 id="关闭selinux安全插件"><a href="#关闭selinux安全插件" class="headerlink" title="关闭selinux安全插件"></a>关闭selinux安全插件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+<h3 id="使用秘钥登陆"><a href="#使用秘钥登陆" class="headerlink" title="使用秘钥登陆"></a>使用秘钥登陆</h3><p>客户端生成秘钥文件  公钥加密（非对称加密）公钥，私钥</p>
+<p>客户端<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen 生成公钥</span><br><span class="line">上传公钥到目标服务器的root账号</span><br><span class="line">$ ssh-copy-id 主机</span><br></pre></td></tr></table></figure></p>
+<p>scp 文件 主机:位置<br>SCP -R 文件夹</p>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="搭建DHCP服务器"><a href="#搭建DHCP服务器" class="headerlink" title="搭建DHCP服务器"></a>搭建DHCP服务器</h1><h3 id="安装dhcp软件包"><a href="#安装dhcp软件包" class="headerlink" title="安装dhcp软件包"></a>安装dhcp软件包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install dhcp-server</span><br><span class="line">修改配置文件 </span><br><span class="line">$ vim /etc/DHCP/dhcpd.conf</span><br></pre></td></tr></table></figure>
+<p>10yy复制<br>P粘贴</p>
+<p>查看磁盘<br>fdisk -l<br>lsblk<br>分区工具<br>fdisk交互式分区<br>n p w<br>parted 可交互</p>
+<p>Parted 磁盘<br>Print打印查看<br>Mkpart<br>Name 名字<br>类型<br>起始 上一个磁盘的终止<br>终止 起始加分区大小<br>quit 退出<br>非交互式<br>parted 磁盘 mkpart 名字 起始 终止</p>
+<p>RMB<br>Parted 磁盘 mklabel msdos<br>Parted 磁盘 rm 分区 删除分区<br>Parted 磁盘 mkpart 主/扩 格式 起始 终止<br>对分区进行格式化</p>
+<p>ext4<br>Xfs<br>mkfs -t 格式 磁盘<br>mkfs.格式 磁盘<br>如果硬盘是Ada 插入U盘 设备名为 sdb<br>mount | tail -n 数字 查看文件的最后几行<br>lsblk -f 查看挂载<br>开机自动挂载<br>/etc/fstab<br>设备名建议使用UUID<br>blkid 磁盘 查看UUID<br>lsblk _f 查看UUID<br>udevadm settle 更新文件 rhel8<br>Parts -a 磁盘 更新文件. rhel7之前</p>
+<p>扩充交换分区<br>mkswap 磁盘 格式化为swap类型<br>挂载为了swap空间<br>swapon 磁盘<br>swapon -s 查看<br>swapoff 卸载挂载点</p>
+<p>dd if=/dev/zero of=/ten/swap1 bs=1M count=2048 复制磁盘块为文件<br>格式化<br>挂载</p>
+<p>Man 命令 查看命令手册 </p>
+<h1 id="搭建ftp服务器"><a href="#搭建ftp服务器" class="headerlink" title="搭建ftp服务器"></a>搭建ftp服务器</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ yum install vsftpd -y</span><br><span class="line"> 修改FTP配置文件</span><br><span class="line">$ /etc/vsftpd/vsftpd.conf</span><br><span class="line"><span class="variable">$anonymous_enable</span>=<span class="built_in">yes</span></span><br><span class="line"> 启动FTP服务 开机自启</span><br><span class="line"><span class="variable">$systemctl</span> <span class="built_in">enable</span> vsftpd.service --now</span><br><span class="line"> Ftp 默认家目录 匿名访问</span><br><span class="line">$ /var/ftp</span><br><span class="line">默认命令行下是主动FTP 21 20建立传输</span><br><span class="line">被动高端端口</span><br><span class="line">限制FTP被动端口范围</span><br><span class="line">Pasv_min_port=10000</span><br><span class="line">Pasv_max_port=11000</span><br><span class="line">Ss -ant查看 </span><br></pre></td></tr></table></figure>
+<h1 id="LVM-逻辑卷管理"><a href="#LVM-逻辑卷管理" class="headerlink" title="LVM  逻辑卷管理"></a>LVM  逻辑卷管理</h1><p>传统的磁盘分区  分区固定后不能更改</p>
+<h3 id="将磁盘，分区转换为PV逻辑卷"><a href="#将磁盘，分区转换为PV逻辑卷" class="headerlink" title="将磁盘，分区转换为PV逻辑卷"></a>将磁盘，分区转换为PV逻辑卷</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ PVcreate 磁盘</span><br><span class="line">$ Pvs. Pvdisplay 磁盘 查看信息</span><br></pre></td></tr></table></figure>
+<h3 id="将物理卷组合成卷组-VG"><a href="#将物理卷组合成卷组-VG" class="headerlink" title="将物理卷组合成卷组 VG"></a>将物理卷组合成卷组 VG</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ vgcreate 名字 磁盘</span><br><span class="line">$ vgs. Vgdispaly 磁盘 查看</span><br><span class="line">$ VGremove 名称 删除卷组</span><br><span class="line">$ -s定义块大小</span><br><span class="line"></span><br><span class="line">Pe的尺寸可以更改</span><br></pre></td></tr></table></figure>
+<h3 id="创建lv-逻辑卷"><a href="#创建lv-逻辑卷" class="headerlink" title="创建lv 逻辑卷"></a>创建lv 逻辑卷</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ lvcreate -n 名字 -L 大小/-l 多少个块 卷组</span><br><span class="line">$ lvextend -L +尺寸 逻辑卷 扩展逻辑卷</span><br><span class="line">将扩展的lv与挂载点 同步尺寸</span><br><span class="line">xfs_growfs 挂载点</span><br><span class="line">Resize2fs 逻辑卷 ext4同步</span><br><span class="line">Vgextend vg pv扩展卷组</span><br></pre></td></tr></table></figure>
+<h1 id="dns服务器"><a href="#dns服务器" class="headerlink" title="dns服务器"></a>dns服务器</h1><h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ yum install <span class="built_in">bind</span>. bind-utils </span><br><span class="line">$ /etc/named.conf</span><br><span class="line">UDP53客户机找服务</span><br><span class="line">Tcp53服务器找服务器</span><br><span class="line"></span><br><span class="line">添加区域</span><br><span class="line">zone “ABC.com”IN&#123;</span><br><span class="line">      <span class="built_in">type</span> master;</span><br><span class="line">      File <span class="string">&quot;abc.com.zone&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$ /var/named/</span><br></pre></td></tr></table></figure>
+<p>mount -o loop 文件 挂载本地文件<br>＞覆盖 ＞＞重定向<br>开机自动挂载 defaults.loop<br>给web启用 ssl 使用数字证书<br>Yum install mod_ssl</p>
+<h1 id="搭建多个web站点-虚拟主机"><a href="#搭建多个web站点-虚拟主机" class="headerlink" title="搭建多个web站点 虚拟主机"></a>搭建多个web站点 虚拟主机</h1><p>Apache 配置文件 /etc/httpd<br>conf 主配置文件 conf.d辅配置文件<br>/usr/share/doc/httpd配置文件模板<br>httpd-vhosts.conf 虚拟主机模板</p>
+<p>动态网站<br>asp asp.net php jsp Python 等开发<br>小型机 IBM Aix<br>      Sun solris Oracle 甲骨文<br>      Hp hp-unix</p>
+<p>挂接数据库 mysql mariadb<br>mariadb-server<br>如果需要，可以做安全初始化配置<br>MySQL_secure_installation<br>清除历史命令 history -c<br>unzip 文件 -d 目录</p>
+<p>Chmod o+w config/ -R<br>data/ -R<br>uc_client<br>Uc_server<br>软件包 php-mysqlnd<br>Php-xml</p>
+<p>firewall-cmd.  —list-all  查看防火墙规则<br>firewall-cmd —list-all<br>firewalld.richlanguage富规则<br>firewall-cmd —add-service=服务  —permanent. 写入配置文件</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/07/25/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/07/25/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-07-25 22:55:28" itemprop="dateCreated datePublished" datetime="2023-07-25T22:55:28+08:00">2023-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-29 03:22:35" itemprop="dateModified" datetime="2022-04-29T03:22:35+08:00">2022-04-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/29/hello/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/06/29/hello/" class="post-title-link" itemprop="url">hello</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-29 11:24:36" itemprop="dateCreated datePublished" datetime="2022-06-29T11:24:36+08:00">2022-06-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-30 11:08:05" itemprop="dateModified" datetime="2022-06-30T11:08:05+08:00">2022-06-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hello world</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Gengar"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">Gengar</p>
+  <div class="site-description" itemprop="description">分享学习内容</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/NightTeam" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;NightTeam" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:contact@nightteam.cn" title="E-Mail → mailto:contact@nightteam.cn" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2026</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Gengar</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/medium-zoom@1/dist/medium-zoom.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+  
+  <script src="//cdn.jsdelivr.net/npm/quicklink@1/dist/quicklink.umd.js"></script>
+  <script>
+      window.addEventListener('load', () => {
+      quicklink({
+        timeout : 3000,
+        priority: true,
+        ignores : [uri => uri.includes('#'),uri => uri === 'http://example.com/page/2/',]
+      });
+      });
+  </script>
+
+
+    </div>
+</body>
+</html>

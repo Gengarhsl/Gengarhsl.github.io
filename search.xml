@@ -55,25 +55,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title></title>
-    <url>/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>docker version        # 显示docker的版本信息<br>docker info              # 显示docker的系统信息，包括镜像和容器的数量<br>docker 命令 —help         # 帮助命令<br>docker images    #查看镜像<br>docker search    #搜索镜像<br>docker pull    #下载镜像<br>docker pull  mysql:5.7    #指定版本下载<br>docker rmi     #删除镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id                    # 删除指定的镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id 镜像id 镜像id    # 删除多个镜像（空格分隔）<br>[root@JWei_0124 //]# docker rmi -f $(docker images -aq)    # 删除全部的镜像<br>docker run [可选参数] image</p>
-<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><p>—name=”name”        容器名字：用来区分容器<br>-d                    后台方式运行：相当于nohup<br>-it                    使用交互式运行：进入容器查看内容<br>-p                    指定容器的端口（四种方式）小写字母p<br>    -p ip:主机端口：容器端口<br>    -p 主机端口：容器端口<br>    -p 容器端口<br>    容器端口<br>-P                     随机指定端口（大写字母P）</p>
-<p>docker ps         #列出当前正在运行的容器</p>
-<h1 id="命令参数可选项"><a href="#命令参数可选项" class="headerlink" title="命令参数可选项"></a>命令参数可选项</h1><p>-a        # 列出当前正在运行的容器+历史运行过的容器<br>-n=?    # 显示最近创建的容器（可以指定显示几条，比如-n=1）<br>-q        # 只显示容器的编号</p>
-<p>docker run -it centos /bin/bash #交互式进入<br>docker rm 容器ID    #删除容器（不能删除正在运行的容器）<br>docker rm -f     #强制删除<br>docker ps -a -q|xargs docker rm     #删除所有容器<br>docker start 容器id        # 启动容器<br>docker restart 容器id    # 重启容器<br>docker stop 容器id        # 停止当前正在运行的容器<br>docker kill 容器id        # 强制停止当前容器</p>
-<p>docker logs -tf —tail 容器id</p>
-<p>-tf                        # 显示日志<br>—tail number    # 要显示的日志条数</p>
-<p>查看容器中进程的信息<br>docker top id<br>查看镜像的元数据<br>docker inspect id<br>进入当前正在运行的容器<br>docker exec -it 容器id /bin/bash</p>
-<p>从容器内拷贝文件到主机<br>docker cp 容器id:容器内路径 目的主机的路径</p>
-<h1 id="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"><a href="#如何确定是具名挂载，还是匿名挂载，还是指定路径挂载" class="headerlink" title="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"></a>如何确定是具名挂载，还是匿名挂载，还是指定路径挂载</h1><p>-v 容器内的路径                # 匿名挂载<br>-v 卷名:容器内的路径        # 具名挂载<br>-v /宿主机路径:容器内路径    # 指定路径挂载</p>
-<h1 id="提交容器成为一个新的副本"><a href="#提交容器成为一个新的副本" class="headerlink" title="提交容器成为一个新的副本"></a>提交容器成为一个新的副本</h1><p>docker commit</p>
-<h1 id="命令和git原理类似"><a href="#命令和git原理类似" class="headerlink" title="命令和git原理类似"></a>命令和git原理类似</h1><p>docker commit -m=”提交的描述信息” -a=”作者” 容器id 目标镜像名:[TAG]</p>
-<h1 id="我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"><a href="#我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。" class="headerlink" title="我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"></a>我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。</h1><p>docker run -d -P —name tomcat01 tomcat<br>docker run -d -P —name tomcato1 —het bridge tomcat</p>
-<h1 id="docker0特点：默认，域名不能访问，—1ink可以打通连接！"><a href="#docker0特点：默认，域名不能访问，—1ink可以打通连接！" class="headerlink" title="docker0特点：默认，域名不能访问，—1ink可以打通连接！"></a>docker0特点：默认，域名不能访问，—1ink可以打通连接！</h1><h1 id="我们可以自定义一个网络！"><a href="#我们可以自定义一个网络！" class="headerlink" title="我们可以自定义一个网络！"></a>我们可以自定义一个网络！</h1><p>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network create —driver bridge —subnet 192.168.0.0/16 —gateway 192.168.0.1 mynet<br>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network ls<br>NETWORK ID     NAME      DRIVER    SCOPE<br>7254ffccbdf5   bridge    bridge    local<br>45610891738f   host      host      local<br>266acd66473c   mynet     bridge    local<br>7795cbc2686c   none      null      local</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Linux笔记</title>
     <url>/2023/07/25/Linux/</url>
     <content><![CDATA[<h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><h3 id="安装图形化界面虚拟机管理工具"><a href="#安装图形化界面虚拟机管理工具" class="headerlink" title="安装图形化界面虚拟机管理工具"></a>安装图形化界面虚拟机管理工具</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum groupinstall <span class="string">&#x27;Virtualization Host&#x27;</span></span><br></pre></td></tr></table></figure>
@@ -117,6 +98,25 @@
   </entry>
   <entry>
     <title></title>
+    <url>/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>docker version        # 显示docker的版本信息<br>docker info              # 显示docker的系统信息，包括镜像和容器的数量<br>docker 命令 —help         # 帮助命令<br>docker images    #查看镜像<br>docker search    #搜索镜像<br>docker pull    #下载镜像<br>docker pull  mysql:5.7    #指定版本下载<br>docker rmi     #删除镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id                    # 删除指定的镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id 镜像id 镜像id    # 删除多个镜像（空格分隔）<br>[root@JWei_0124 //]# docker rmi -f $(docker images -aq)    # 删除全部的镜像<br>docker run [可选参数] image</p>
+<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><p>—name=”name”        容器名字：用来区分容器<br>-d                    后台方式运行：相当于nohup<br>-it                    使用交互式运行：进入容器查看内容<br>-p                    指定容器的端口（四种方式）小写字母p<br>    -p ip:主机端口：容器端口<br>    -p 主机端口：容器端口<br>    -p 容器端口<br>    容器端口<br>-P                     随机指定端口（大写字母P）</p>
+<p>docker ps         #列出当前正在运行的容器</p>
+<h1 id="命令参数可选项"><a href="#命令参数可选项" class="headerlink" title="命令参数可选项"></a>命令参数可选项</h1><p>-a        # 列出当前正在运行的容器+历史运行过的容器<br>-n=?    # 显示最近创建的容器（可以指定显示几条，比如-n=1）<br>-q        # 只显示容器的编号</p>
+<p>docker run -it centos /bin/bash #交互式进入<br>docker rm 容器ID    #删除容器（不能删除正在运行的容器）<br>docker rm -f     #强制删除<br>docker ps -a -q|xargs docker rm     #删除所有容器<br>docker start 容器id        # 启动容器<br>docker restart 容器id    # 重启容器<br>docker stop 容器id        # 停止当前正在运行的容器<br>docker kill 容器id        # 强制停止当前容器</p>
+<p>docker logs -tf —tail 容器id</p>
+<p>-tf                        # 显示日志<br>—tail number    # 要显示的日志条数</p>
+<p>查看容器中进程的信息<br>docker top id<br>查看镜像的元数据<br>docker inspect id<br>进入当前正在运行的容器<br>docker exec -it 容器id /bin/bash</p>
+<p>从容器内拷贝文件到主机<br>docker cp 容器id:容器内路径 目的主机的路径</p>
+<h1 id="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"><a href="#如何确定是具名挂载，还是匿名挂载，还是指定路径挂载" class="headerlink" title="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"></a>如何确定是具名挂载，还是匿名挂载，还是指定路径挂载</h1><p>-v 容器内的路径                # 匿名挂载<br>-v 卷名:容器内的路径        # 具名挂载<br>-v /宿主机路径:容器内路径    # 指定路径挂载</p>
+<h1 id="提交容器成为一个新的副本"><a href="#提交容器成为一个新的副本" class="headerlink" title="提交容器成为一个新的副本"></a>提交容器成为一个新的副本</h1><p>docker commit</p>
+<h1 id="命令和git原理类似"><a href="#命令和git原理类似" class="headerlink" title="命令和git原理类似"></a>命令和git原理类似</h1><p>docker commit -m=”提交的描述信息” -a=”作者” 容器id 目标镜像名:[TAG]</p>
+<h1 id="我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"><a href="#我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。" class="headerlink" title="我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"></a>我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。</h1><p>docker run -d -P —name tomcat01 tomcat<br>docker run -d -P —name tomcato1 —het bridge tomcat</p>
+<h1 id="docker0特点：默认，域名不能访问，—1ink可以打通连接！"><a href="#docker0特点：默认，域名不能访问，—1ink可以打通连接！" class="headerlink" title="docker0特点：默认，域名不能访问，—1ink可以打通连接！"></a>docker0特点：默认，域名不能访问，—1ink可以打通连接！</h1><h1 id="我们可以自定义一个网络！"><a href="#我们可以自定义一个网络！" class="headerlink" title="我们可以自定义一个网络！"></a>我们可以自定义一个网络！</h1><p>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network create —driver bridge —subnet 192.168.0.0/16 —gateway 192.168.0.1 mynet<br>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network ls<br>NETWORK ID     NAME      DRIVER    SCOPE<br>7254ffccbdf5   bridge    bridge    local<br>45610891738f   host      host      local<br>266acd66473c   mynet     bridge    local<br>7795cbc2686c   none      null      local</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>docker安装Oracle11g</title>
     <url>/2026/02/06/docker%E5%AE%89%E8%A3%85Oracle11g/</url>
     <content><![CDATA[<p>docker安装Oracle11g</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 从Docker hub下载，网络不好时，一般比较慢</span><br><span class="line">2docker pull lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br><span class="line">3# 可以选择从阿里云下载</span><br><span class="line">4docker pull registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br><span class="line">5# 从阿里云下载后可以tag成如下形式</span><br><span class="line">6docker tag registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure>
@@ -132,7 +132,10 @@
   <entry>
     <title></title>
     <url>/2026/02/06/docker%E5%AE%89%E8%A3%85es/</url>
-    <content><![CDATA[<h2 id="一、基于Docker安装Elasticsearch"><a href="#一、基于Docker安装Elasticsearch" class="headerlink" title="一、基于Docker安装Elasticsearch"></a>一、基于Docker安装Elasticsearch</h2><h3 id="1、创建网络"><a href="#1、创建网络" class="headerlink" title="1、创建网络"></a>1、创建网络</h3><p>​        因为需要部署kibana容器，因此需要让es和kibana容器互联。</p>
+    <content><![CDATA[<hr>
+<p>title: 基于Docker安装Elasticsearch</p>
+<h2 id="date-2026-02-06"><a href="#date-2026-02-06" class="headerlink" title="date: 2026-02-06"></a>date: 2026-02-06</h2><hr>
+<h2 id="一、基于Docker安装Elasticsearch"><a href="#一、基于Docker安装Elasticsearch" class="headerlink" title="一、基于Docker安装Elasticsearch"></a>一、基于Docker安装Elasticsearch</h2><h3 id="1、创建网络"><a href="#1、创建网络" class="headerlink" title="1、创建网络"></a>1、创建网络</h3><p>​        因为需要部署kibana容器，因此需要让es和kibana容器互联。</p>
 <p>指令：<br>docker network create es-net</p>
 <h3 id="2、拉取镜像"><a href="#2、拉取镜像" class="headerlink" title="2、拉取镜像"></a>2、拉取镜像</h3><p>​        以安装Elasticsearch 8.6.0 版本为例<br>指令：</p>
 <p>docker pull elasticsearch:8.6.0</p>

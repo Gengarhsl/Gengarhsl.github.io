@@ -381,85 +381,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/mqtt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/3.jpg">
-      <meta itemprop="name" content="Gengar">
-      <meta itemprop="description" content="分享学习内容">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gengar">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/02/06/mqtt/" class="post-title-link" itemprop="url">docker部署mqtt</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-02-06 00:00:00 / 修改时间：17:54:21" itemprop="dateCreated datePublished" datetime="2026-02-06T00:00:00+08:00">2026-02-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Docker 部署 MQTT服务器(EMQX)</p>
-<p>m0_46601820</p>
-<p>于 2023-12-14 09:10:40 发布</p>
-<p>阅读量1.4k<br> 收藏 12</p>
-<p>点赞数 10<br>文章标签： docker 服务器 容器<br>版权<br>1.拉取镜像</p>
-<h1 id="拉取最新版本"><a href="#拉取最新版本" class="headerlink" title="拉取最新版本"></a>拉取最新版本</h1><p>docker pull emqx/emqx:latest</p>
-<h1 id="也可以拉取指定版本"><a href="#也可以拉取指定版本" class="headerlink" title="也可以拉取指定版本"></a>也可以拉取指定版本</h1><p>docker pull emqx/emqx:v4.0.0<br>2.创建临时容器</p>
-<p>docker run -d —name emqx -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 emqx/emqx:latest<br>端口：</p>
-<p>1883：MQTT协议端口<br>8083：WebSocket协议端口<br>8084：HTTP协议端口<br>8883：MQTT over SSL协议端口<br>18083：EMQX Dashboard Web管理界面端口<br> 3.创建文件挂载目录</p>
-<p>mkdir -p /app/emqx/etc /app/emqx/lib /app/emqx/data /app/emqx/log<br>4.从容器内复制配置文件到挂载目录下</p>
-<p>docker cp emqx:/opt/emqx/etc /app/emqx/etc<br> 5.强制删除docker 容器</p>
-<p>docker rm -f emqx<br>6.运行并挂载文件代码</p>
-<p>docker run -d \<br>—restart=always \<br>—name emqx \<br>-p 1883:1883 \<br>-p 8883:8883 \<br>-p 8083:8083 \<br>-p 8084:8084 \<br>-p 8081:8081 \<br>-p 18083:18083 \<br>-v /app/emqx/etc:/opt/emqx/etc \<br>emqx/emqx:latest<br>7.登录EMQX 内置的管理控制台 </p>
-<p><a target="_blank" rel="noopener" href="http://localhost:18083/">http://localhost:18083/</a></p>
-<p>默认用户 admin，默认密码 public</p>
-<p>8.设置客户端认证</p>
-<p>在 EMQX Dashboard 页面，点击左侧导航栏的访问控制 -&gt; 认证，在随即打开的认证页面，单击创建，依次选择认证方式为 Password-Based，数据源为 Built-in Database，进入配置参数</p>
-<p>Docker | EMQX 文档</p>
-<p>使用Emqx5 | FastBee文档<br>————————————————</p>
-<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
-</code></pre><p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46601820/article/details/134969551">https://blog.csdn.net/m0_46601820/article/details/134969551</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -963,6 +884,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/mqtt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/02/06/mqtt/" class="post-title-link" itemprop="url">docker部署mqtt</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-02-06 00:00:00 / 修改时间：17:54:21" itemprop="dateCreated datePublished" datetime="2026-02-06T00:00:00+08:00">2026-02-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Docker 部署 MQTT服务器(EMQX)</p>
+<p>m0_46601820</p>
+<p>于 2023-12-14 09:10:40 发布</p>
+<p>阅读量1.4k<br> 收藏 12</p>
+<p>点赞数 10<br>文章标签： docker 服务器 容器<br>版权<br>1.拉取镜像</p>
+<h1 id="拉取最新版本"><a href="#拉取最新版本" class="headerlink" title="拉取最新版本"></a>拉取最新版本</h1><p>docker pull emqx/emqx:latest</p>
+<h1 id="也可以拉取指定版本"><a href="#也可以拉取指定版本" class="headerlink" title="也可以拉取指定版本"></a>也可以拉取指定版本</h1><p>docker pull emqx/emqx:v4.0.0<br>2.创建临时容器</p>
+<p>docker run -d —name emqx -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 emqx/emqx:latest<br>端口：</p>
+<p>1883：MQTT协议端口<br>8083：WebSocket协议端口<br>8084：HTTP协议端口<br>8883：MQTT over SSL协议端口<br>18083：EMQX Dashboard Web管理界面端口<br> 3.创建文件挂载目录</p>
+<p>mkdir -p /app/emqx/etc /app/emqx/lib /app/emqx/data /app/emqx/log<br>4.从容器内复制配置文件到挂载目录下</p>
+<p>docker cp emqx:/opt/emqx/etc /app/emqx/etc<br> 5.强制删除docker 容器</p>
+<p>docker rm -f emqx<br>6.运行并挂载文件代码</p>
+<p>docker run -d \<br>—restart=always \<br>—name emqx \<br>-p 1883:1883 \<br>-p 8883:8883 \<br>-p 8083:8083 \<br>-p 8084:8084 \<br>-p 8081:8081 \<br>-p 18083:18083 \<br>-v /app/emqx/etc:/opt/emqx/etc \<br>emqx/emqx:latest<br>7.登录EMQX 内置的管理控制台 </p>
+<p><a target="_blank" rel="noopener" href="http://localhost:18083/">http://localhost:18083/</a></p>
+<p>默认用户 admin，默认密码 public</p>
+<p>8.设置客户端认证</p>
+<p>在 EMQX Dashboard 页面，点击左侧导航栏的访问控制 -&gt; 认证，在随即打开的认证页面，单击创建，依次选择认证方式为 Password-Based，数据源为 Built-in Database，进入配置参数</p>
+<p>Docker | EMQX 文档</p>
+<p>使用Emqx5 | FastBee文档<br>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre><p>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_46601820/article/details/134969551">https://blog.csdn.net/m0_46601820/article/details/134969551</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/springcloud%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%BAhttps%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1448,6 +1448,92 @@ location /api/ &#123;
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/" class="post-title-link" itemprop="url">canal手册</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-02-06 00:00:00 / 修改时间：17:56:34" itemprop="dateCreated datePublished" datetime="2026-02-06T00:00:00+08:00">2026-02-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>docker run —privileged=true \<br>—log-driver json-file \<br>—log-opt max-size=100m \<br>—log-opt max-file=2 \<br>—name kafka -p 9092:9092 \<br>-e KAFKA_BROKER_ID=0 \<br>-e KAFKA_ZOOKEEPER_CONNECT=192.168.71.134:2181/kafka \<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.71.134:9092 \<br>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \<br>-e ALLOW_PLAINTEXT_LISTENER=yes \<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G’ \<br>-v /home/kafka/:/opt/kafka/ \<br>-v /etc/localtime:/etc/localtime \<br>-d wurstmeister/kafka:2.12-2.3.1<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>命令    注释<br>–privileged=true    表示容器内的root拥有真正的root权限<br>–log-driver json-file    表示使用 JSON 文件作为日志驱动<br>–log-opt max-size=100m    表示设置日志的最大大小为100MB<br>–log-opt max-file=2    表示设置日志文件的最大数量<br>–name    表示容器命名<br>-p    表示端口映射<br>-e KAFKA_BROKER_ID=0    表示这个ID是集群的标识，不能重复<br>-e KAFKA_ZOOKEEPER_CONNECT=IP:2181/kafka    表示zookeeper的连接地址<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://IP:9092    表示kafka发布到zookeeper供客户端使用的服务地址<br>-e ALLOW_PLAINTEXT_LISTENER=yes    表示允许使用PLAINTEXT侦听器<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G    表示行内存参数<br>-v /home/kafka/data:/wurstmeister/kafka/data    表示挂载配置数据目录<br>-v /home/kafka/config:/wurstmeister/kafka/config    表示配置文件目录<br>-v /etc/localtime:/etc/localtime    表示将本地时间映射到容器中<br>-d    表示后台运行</p>
+<p>./kafka-topics.sh —create —topic test-kafka —bootstrap-server localhost:9092<br>kafka-topics.sh —describe —topic test-kafka —bootstrap-server localhost:9092</p>
+<p>3.拉取Cannal镜像</p>
+<h2 id="拉取版本为v1-1-5的canal"><a href="#拉取版本为v1-1-5的canal" class="headerlink" title="拉取版本为v1.1.5的canal"></a>拉取版本为v1.1.5的canal</h2><p>docker pull canal/canal-server:v1.1.5<br>1<br>2<br>4.运行Canal<br>4.1、启动命令<br>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>启动命令说明：</p>
+<p>4.2、命令解读<br>① -p ：指定端口<br>② -e ：指定配置文件的配置信息。此处主要有两个配置文件在起作用，分别是 canal.properties 和 instance.properties 这两个配置文件，前缀是 canal. 的修改就是 canal.properties 这个配置文件的，前缀是 canal.instance 修改的就是 instance.properties 这个配置文件的<br>③ canal.destinations：指定了实例的名称，决定了instance实例的配置文件存放目录<br>④ canal.instance.master.address ：指定了mysql的地址，正常需要ip，此处由于会将mysql和canal放在一个网络中，所以可以直接使用mysql替代<br>⑤ canal.instance.filter.regex：此处指定只过滤test这个数据库的binlog数据<br>⑥ network mysql-test：指定网络是步骤1创建的网络<br>⑦ restart=always ：将canal设置为docker启动时自启，可要可不要<br>⑧ -d ：指定步骤2拉取的镜像名称以及版本</p>
+<p>4.3、查看容器状态</p>
+<h1 id="查看启动日志"><a href="#查看启动日志" class="headerlink" title="查看启动日志"></a>查看启动日志</h1><p>docker logs canal</p>
+<h1 id="查看目前运行容器"><a href="#查看目前运行容器" class="headerlink" title="查看目前运行容器"></a>查看目前运行容器</h1><p>docker ps</p>
+<h1 id="启动失败时查看容器状态"><a href="#启动失败时查看容器状态" class="headerlink" title="启动失败时查看容器状态"></a>启动失败时查看容器状态</h1><p>docker ps -a<br>1<br>2<br>3<br>4<br>5<br>6<br>4.4、相关配置调整（可做可不做）<br>①将canal配置文件进行拷贝</p>
+<h1 id="canal-properties-amp-instance-properties"><a href="#canal-properties-amp-instance-properties" class="headerlink" title="canal.properties &amp; instance.properties"></a>canal.properties &amp; instance.properties</h1><h1 id="注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面"><a href="#注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面" class="headerlink" title="注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面"></a>注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</h1><p>docker cp canal:/home/admin/canal-server/conf/canal.properties /mydata/canal/conf<br>docker cp canal:/home/admin/canal-server/conf/test/instance.properties /mydata/canal/conf</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>②根据个人需要修改配置之后，将原有的canal容器停止并删除，然后重新启动的时候使用-v进行文件绑定，进行文件绑定时务必确保文件是存在的。</p>
+<h1 id="停止并删除容器"><a href="#停止并删除容器" class="headerlink" title="停止并删除容器"></a>停止并删除容器</h1><p>docker stop canal<br>docker rm canal</p>
+<h1 id="重新运行并指定"><a href="#重新运行并指定" class="headerlink" title="重新运行并指定"></a>重新运行并指定</h1><p>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>-v /mydata/canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties \<br>-v /mydata/canal/conf/instance.properties:/home/admin/canal-server/conf/test/instance.properties \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>docker run -p 11111:11111 —name canal \<br>-v /mydata/canal/conf:/home/admin/canal-server/conf \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>找到canal.deployer-1.1.4/conf目录下的canal.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tcp, kafka, RocketMQ 这里选择kafka模式</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">kafka</span></span><br><span class="line"><span class="comment"># 解析器的线程数，打开此配置，不打开则会出现阻塞或者不进行解析的情况</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelThreadSize</span> = <span class="string">16</span></span><br><span class="line"><span class="comment"># 配置MQ的服务地址，这里配置的是kafka对应的地址和端口</span></span><br><span class="line"><span class="attr">canal.mq.servers</span> = <span class="string">127.0.0.1:9092</span></span><br><span class="line"><span class="comment"># 配置instance，在conf目录下要有example同名的目录，可以配置多个</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string">example</span></span><br></pre></td></tr></table></figure>
+<p>然后配置instance，找到/conf/example/instance.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## mysql serverId , v1.0.26+ will autoGen(自动生成，不需配置)</span></span><br><span class="line"><span class="comment"># canal.instance.mysql.slaveId=0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># position info</span></span><br><span class="line"><span class="attr">canal.instance.master.address</span>=<span class="string">127.0.0.1:3306</span></span><br><span class="line"><span class="comment"># 在Mysql执行 SHOW MASTER STATUS;查看当前数据库的binlog</span></span><br><span class="line"><span class="attr">canal.instance.master.journal.name</span>=<span class="string">mysql-bin.000006</span></span><br><span class="line"><span class="attr">canal.instance.master.position</span>=<span class="string">4596</span></span><br><span class="line"><span class="comment"># 账号密码</span></span><br><span class="line"><span class="attr">canal.instance.dbUsername</span>=<span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.dbPassword</span>=<span class="string">Canal@****</span></span><br><span class="line"><span class="attr">canal.instance.connectionCharset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="comment">#MQ队列名称</span></span><br><span class="line"><span class="attr">canal.mq.topic</span>=<span class="string">canaltopic</span></span><br><span class="line"><span class="comment">#单队列模式的分区下标</span></span><br><span class="line"><span class="attr">canal.mq.partition</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 使用命令登录：mysql -u root -p</span></span><br><span class="line"><span class="comment">-- 创建用户 用户名：canal 密码：Canal@123456</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授权 *.*表示所有库</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>下一步在MySQL配置文件my.cnf设置如下信息：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># 打开binlog</span></span><br><span class="line"><span class="string">log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"># 选择ROW(行)模式</span></span><br><span class="line"><span class="string">binlog-format=ROW</span></span><br><span class="line"><span class="comment"># 配置MySQL replaction需要定义，不要和canal的slaveId重复</span></span><br><span class="line"><span class="string">server_id=1</span></span><br></pre></td></tr></table></figure>
+<p>改了配置文件之后，重启MySQL，使用命令查看是否打开binlog模式：</p>
+<p>show variables like ‘log_bin’;</p>
+<p>查看binlog日志文件列表：</p>
+<p>show binary logs;</p>
+<p>查看当前正在写入的binlog文件：</p>
+<p>show master status;</p>
+<p>MySQL服务器这边就搞定了，很简单。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1575,92 +1661,6 @@ location /api/ &#123;
 <p>D:\App\nexus-3.55.0-01-win64\nexus-3.55.0-01\bin&gt;nexus.exe /run</p>
 <p>用户名：admin（默认）</p>
 <p>密码：第一次启动时生成，(在/sonatype-work/nexus3/admin.password 文件中) </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/3.jpg">
-      <meta itemprop="name" content="Gengar">
-      <meta itemprop="description" content="分享学习内容">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Gengar">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/" class="post-title-link" itemprop="url">canal手册</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2026-02-06 00:00:00 / 修改时间：17:56:34" itemprop="dateCreated datePublished" datetime="2026-02-06T00:00:00+08:00">2026-02-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>docker run —privileged=true \<br>—log-driver json-file \<br>—log-opt max-size=100m \<br>—log-opt max-file=2 \<br>—name kafka -p 9092:9092 \<br>-e KAFKA_BROKER_ID=0 \<br>-e KAFKA_ZOOKEEPER_CONNECT=192.168.71.134:2181/kafka \<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.71.134:9092 \<br>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \<br>-e ALLOW_PLAINTEXT_LISTENER=yes \<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G’ \<br>-v /home/kafka/:/opt/kafka/ \<br>-v /etc/localtime:/etc/localtime \<br>-d wurstmeister/kafka:2.12-2.3.1<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>命令    注释<br>–privileged=true    表示容器内的root拥有真正的root权限<br>–log-driver json-file    表示使用 JSON 文件作为日志驱动<br>–log-opt max-size=100m    表示设置日志的最大大小为100MB<br>–log-opt max-file=2    表示设置日志文件的最大数量<br>–name    表示容器命名<br>-p    表示端口映射<br>-e KAFKA_BROKER_ID=0    表示这个ID是集群的标识，不能重复<br>-e KAFKA_ZOOKEEPER_CONNECT=IP:2181/kafka    表示zookeeper的连接地址<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://IP:9092    表示kafka发布到zookeeper供客户端使用的服务地址<br>-e ALLOW_PLAINTEXT_LISTENER=yes    表示允许使用PLAINTEXT侦听器<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G    表示行内存参数<br>-v /home/kafka/data:/wurstmeister/kafka/data    表示挂载配置数据目录<br>-v /home/kafka/config:/wurstmeister/kafka/config    表示配置文件目录<br>-v /etc/localtime:/etc/localtime    表示将本地时间映射到容器中<br>-d    表示后台运行</p>
-<p>./kafka-topics.sh —create —topic test-kafka —bootstrap-server localhost:9092<br>kafka-topics.sh —describe —topic test-kafka —bootstrap-server localhost:9092</p>
-<p>3.拉取Cannal镜像</p>
-<h2 id="拉取版本为v1-1-5的canal"><a href="#拉取版本为v1-1-5的canal" class="headerlink" title="拉取版本为v1.1.5的canal"></a>拉取版本为v1.1.5的canal</h2><p>docker pull canal/canal-server:v1.1.5<br>1<br>2<br>4.运行Canal<br>4.1、启动命令<br>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>启动命令说明：</p>
-<p>4.2、命令解读<br>① -p ：指定端口<br>② -e ：指定配置文件的配置信息。此处主要有两个配置文件在起作用，分别是 canal.properties 和 instance.properties 这两个配置文件，前缀是 canal. 的修改就是 canal.properties 这个配置文件的，前缀是 canal.instance 修改的就是 instance.properties 这个配置文件的<br>③ canal.destinations：指定了实例的名称，决定了instance实例的配置文件存放目录<br>④ canal.instance.master.address ：指定了mysql的地址，正常需要ip，此处由于会将mysql和canal放在一个网络中，所以可以直接使用mysql替代<br>⑤ canal.instance.filter.regex：此处指定只过滤test这个数据库的binlog数据<br>⑥ network mysql-test：指定网络是步骤1创建的网络<br>⑦ restart=always ：将canal设置为docker启动时自启，可要可不要<br>⑧ -d ：指定步骤2拉取的镜像名称以及版本</p>
-<p>4.3、查看容器状态</p>
-<h1 id="查看启动日志"><a href="#查看启动日志" class="headerlink" title="查看启动日志"></a>查看启动日志</h1><p>docker logs canal</p>
-<h1 id="查看目前运行容器"><a href="#查看目前运行容器" class="headerlink" title="查看目前运行容器"></a>查看目前运行容器</h1><p>docker ps</p>
-<h1 id="启动失败时查看容器状态"><a href="#启动失败时查看容器状态" class="headerlink" title="启动失败时查看容器状态"></a>启动失败时查看容器状态</h1><p>docker ps -a<br>1<br>2<br>3<br>4<br>5<br>6<br>4.4、相关配置调整（可做可不做）<br>①将canal配置文件进行拷贝</p>
-<h1 id="canal-properties-amp-instance-properties"><a href="#canal-properties-amp-instance-properties" class="headerlink" title="canal.properties &amp; instance.properties"></a>canal.properties &amp; instance.properties</h1><h1 id="注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面"><a href="#注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面" class="headerlink" title="注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面"></a>注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</h1><p>docker cp canal:/home/admin/canal-server/conf/canal.properties /mydata/canal/conf<br>docker cp canal:/home/admin/canal-server/conf/test/instance.properties /mydata/canal/conf</p>
-<p>1<br>2<br>3<br>4<br>5<br>6<br>②根据个人需要修改配置之后，将原有的canal容器停止并删除，然后重新启动的时候使用-v进行文件绑定，进行文件绑定时务必确保文件是存在的。</p>
-<h1 id="停止并删除容器"><a href="#停止并删除容器" class="headerlink" title="停止并删除容器"></a>停止并删除容器</h1><p>docker stop canal<br>docker rm canal</p>
-<h1 id="重新运行并指定"><a href="#重新运行并指定" class="headerlink" title="重新运行并指定"></a>重新运行并指定</h1><p>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>-v /mydata/canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties \<br>-v /mydata/canal/conf/instance.properties:/home/admin/canal-server/conf/test/instance.properties \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
-<p>docker run -p 11111:11111 —name canal \<br>-v /mydata/canal/conf:/home/admin/canal-server/conf \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
-<p>找到canal.deployer-1.1.4/conf目录下的canal.properties配置文件：</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tcp, kafka, RocketMQ 这里选择kafka模式</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">kafka</span></span><br><span class="line"><span class="comment"># 解析器的线程数，打开此配置，不打开则会出现阻塞或者不进行解析的情况</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelThreadSize</span> = <span class="string">16</span></span><br><span class="line"><span class="comment"># 配置MQ的服务地址，这里配置的是kafka对应的地址和端口</span></span><br><span class="line"><span class="attr">canal.mq.servers</span> = <span class="string">127.0.0.1:9092</span></span><br><span class="line"><span class="comment"># 配置instance，在conf目录下要有example同名的目录，可以配置多个</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string">example</span></span><br></pre></td></tr></table></figure>
-<p>然后配置instance，找到/conf/example/instance.properties配置文件：</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## mysql serverId , v1.0.26+ will autoGen(自动生成，不需配置)</span></span><br><span class="line"><span class="comment"># canal.instance.mysql.slaveId=0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># position info</span></span><br><span class="line"><span class="attr">canal.instance.master.address</span>=<span class="string">127.0.0.1:3306</span></span><br><span class="line"><span class="comment"># 在Mysql执行 SHOW MASTER STATUS;查看当前数据库的binlog</span></span><br><span class="line"><span class="attr">canal.instance.master.journal.name</span>=<span class="string">mysql-bin.000006</span></span><br><span class="line"><span class="attr">canal.instance.master.position</span>=<span class="string">4596</span></span><br><span class="line"><span class="comment"># 账号密码</span></span><br><span class="line"><span class="attr">canal.instance.dbUsername</span>=<span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.dbPassword</span>=<span class="string">Canal@****</span></span><br><span class="line"><span class="attr">canal.instance.connectionCharset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="comment">#MQ队列名称</span></span><br><span class="line"><span class="attr">canal.mq.topic</span>=<span class="string">canaltopic</span></span><br><span class="line"><span class="comment">#单队列模式的分区下标</span></span><br><span class="line"><span class="attr">canal.mq.partition</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 使用命令登录：mysql -u root -p</span></span><br><span class="line"><span class="comment">-- 创建用户 用户名：canal 密码：Canal@123456</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授权 *.*表示所有库</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>下一步在MySQL配置文件my.cnf设置如下信息：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># 打开binlog</span></span><br><span class="line"><span class="string">log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"># 选择ROW(行)模式</span></span><br><span class="line"><span class="string">binlog-format=ROW</span></span><br><span class="line"><span class="comment"># 配置MySQL replaction需要定义，不要和canal的slaveId重复</span></span><br><span class="line"><span class="string">server_id=1</span></span><br></pre></td></tr></table></figure>
-<p>改了配置文件之后，重启MySQL，使用命令查看是否打开binlog模式：</p>
-<p>show variables like ‘log_bin’;</p>
-<p>查看binlog日志文件列表：</p>
-<p>show binary logs;</p>
-<p>查看当前正在写入的binlog文件：</p>
-<p>show master status;</p>
-<p>MySQL服务器这边就搞定了，很简单。</p>
 
       
     </div>

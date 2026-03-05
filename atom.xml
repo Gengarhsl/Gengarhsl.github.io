@@ -49,30 +49,6 @@
   </entry>
   
   <entry>
-    <title>docker部署mqtt</title>
-    <link href="http://example.com/2026/02/06/mqtt/"/>
-    <id>http://example.com/2026/02/06/mqtt/</id>
-    <published>2026-02-05T16:00:00.000Z</published>
-    <updated>2026-02-06T09:54:21.220Z</updated>
-    
-    <content type="html"><![CDATA[<p>Docker 部署 MQTT服务器(EMQX)</p><p>m0_46601820</p><p>于 2023-12-14 09:10:40 发布</p><p>阅读量1.4k<br> 收藏 12</p><p>点赞数 10<br>文章标签： docker 服务器 容器<br>版权<br>1.拉取镜像</p><h1 id="拉取最新版本"><a href="#拉取最新版本" class="headerlink" title="拉取最新版本"></a>拉取最新版本</h1><p>docker pull emqx/emqx:latest</p><h1 id="也可以拉取指定版本"><a href="#也可以拉取指定版本" class="headerlink" title="也可以拉取指定版本"></a>也可以拉取指定版本</h1><p>docker pull emqx/emqx:v4.0.0<br>2.创建临时容器</p><p>docker run -d —name emqx -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 emqx/emqx:latest<br>端口：</p><p>1883：MQTT协议端口<br>8083：WebSocket协议端口<br>8084：HTTP协议端口<br>8883：MQTT over SSL协议端口<br>18083：EMQX Dashboard Web管理界面端口<br> 3.创建文件挂载目录</p><p>mkdir -p /app/emqx/etc /app/emqx/lib /app/emqx/data /app/emqx/log<br>4.从容器内复制配置文件到挂载目录下</p><p>docker cp emqx:/opt/emqx/etc /app/emqx/etc<br> 5.强制删除docker 容器</p><p>docker rm -f emqx<br>6.运行并挂载文件代码</p><p>docker run -d \<br>—restart=always \<br>—name emqx \<br>-p 1883:1883 \<br>-p 8883:8883 \<br>-p 8083:8083 \<br>-p 8084:8084 \<br>-p 8081:8081 \<br>-p 18083:18083 \<br>-v /app/emqx/etc:/opt/emqx/etc \<br>emqx/emqx:latest<br>7.登录EMQX 内置的管理控制台 </p><p><a href="http://localhost:18083/">http://localhost:18083/</a></p><p>默认用户 admin，默认密码 public</p><p>8.设置客户端认证</p><p>在 EMQX Dashboard 页面，点击左侧导航栏的访问控制 -&gt; 认证，在随即打开的认证页面，单击创建，依次选择认证方式为 Password-Based，数据源为 Built-in Database，进入配置参数</p><p>Docker | EMQX 文档</p><p>使用Emqx5 | FastBee文档<br>————————————————</p><pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。</code></pre><p>原文链接：<a href="https://blog.csdn.net/m0_46601820/article/details/134969551">https://blog.csdn.net/m0_46601820/article/details/134969551</a></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;Docker 部署 MQTT服务器(EMQX)&lt;/p&gt;
-&lt;p&gt;m0_46601820&lt;/p&gt;
-&lt;p&gt;于 2023-12-14 09:10:40 发布&lt;/p&gt;
-&lt;p&gt;阅读量1.4k&lt;br&gt; 收藏 12&lt;/p&gt;
-&lt;p&gt;点赞数 10&lt;br&gt;文章标签： docker 服务器 容器&lt;</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>docker命令笔记</title>
     <link href="http://example.com/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"/>
     <id>http://example.com/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</id>
@@ -106,6 +82,30 @@
       
     <summary type="html">&lt;p&gt;1.3 软硬件环境&lt;br&gt;角色    主机名    ip地址    备注&lt;br&gt;master    k8s-master    192.168.163.151&lt;br&gt;k8s主节点、8核CPU、4GB(CD)&lt;/p&gt;
 &lt;p&gt;node    k8s-node1    192.1</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>docker部署mqtt</title>
+    <link href="http://example.com/2026/02/06/mqtt/"/>
+    <id>http://example.com/2026/02/06/mqtt/</id>
+    <published>2026-02-05T16:00:00.000Z</published>
+    <updated>2026-02-06T09:54:21.220Z</updated>
+    
+    <content type="html"><![CDATA[<p>Docker 部署 MQTT服务器(EMQX)</p><p>m0_46601820</p><p>于 2023-12-14 09:10:40 发布</p><p>阅读量1.4k<br> 收藏 12</p><p>点赞数 10<br>文章标签： docker 服务器 容器<br>版权<br>1.拉取镜像</p><h1 id="拉取最新版本"><a href="#拉取最新版本" class="headerlink" title="拉取最新版本"></a>拉取最新版本</h1><p>docker pull emqx/emqx:latest</p><h1 id="也可以拉取指定版本"><a href="#也可以拉取指定版本" class="headerlink" title="也可以拉取指定版本"></a>也可以拉取指定版本</h1><p>docker pull emqx/emqx:v4.0.0<br>2.创建临时容器</p><p>docker run -d —name emqx -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 emqx/emqx:latest<br>端口：</p><p>1883：MQTT协议端口<br>8083：WebSocket协议端口<br>8084：HTTP协议端口<br>8883：MQTT over SSL协议端口<br>18083：EMQX Dashboard Web管理界面端口<br> 3.创建文件挂载目录</p><p>mkdir -p /app/emqx/etc /app/emqx/lib /app/emqx/data /app/emqx/log<br>4.从容器内复制配置文件到挂载目录下</p><p>docker cp emqx:/opt/emqx/etc /app/emqx/etc<br> 5.强制删除docker 容器</p><p>docker rm -f emqx<br>6.运行并挂载文件代码</p><p>docker run -d \<br>—restart=always \<br>—name emqx \<br>-p 1883:1883 \<br>-p 8883:8883 \<br>-p 8083:8083 \<br>-p 8084:8084 \<br>-p 8081:8081 \<br>-p 18083:18083 \<br>-v /app/emqx/etc:/opt/emqx/etc \<br>emqx/emqx:latest<br>7.登录EMQX 内置的管理控制台 </p><p><a href="http://localhost:18083/">http://localhost:18083/</a></p><p>默认用户 admin，默认密码 public</p><p>8.设置客户端认证</p><p>在 EMQX Dashboard 页面，点击左侧导航栏的访问控制 -&gt; 认证，在随即打开的认证页面，单击创建，依次选择认证方式为 Password-Based，数据源为 Built-in Database，进入配置参数</p><p>Docker | EMQX 文档</p><p>使用Emqx5 | FastBee文档<br>————————————————</p><pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。</code></pre><p>原文链接：<a href="https://blog.csdn.net/m0_46601820/article/details/134969551">https://blog.csdn.net/m0_46601820/article/details/134969551</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;Docker 部署 MQTT服务器(EMQX)&lt;/p&gt;
+&lt;p&gt;m0_46601820&lt;/p&gt;
+&lt;p&gt;于 2023-12-14 09:10:40 发布&lt;/p&gt;
+&lt;p&gt;阅读量1.4k&lt;br&gt; 收藏 12&lt;/p&gt;
+&lt;p&gt;点赞数 10&lt;br&gt;文章标签： docker 服务器 容器&lt;</summary>
       
     
     
@@ -194,26 +194,6 @@
   </entry>
   
   <entry>
-    <title>搭建maven私服手册</title>
-    <link href="http://example.com/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/"/>
-    <id>http://example.com/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</id>
-    <published>2026-02-05T16:00:00.000Z</published>
-    <updated>2026-02-06T09:56:00.183Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="搭建maven私服"><a href="#搭建maven私服" class="headerlink" title="搭建maven私服"></a>搭建maven私服</h1><h2 id="一、docker版本"><a href="#一、docker版本" class="headerlink" title="一、docker版本"></a>一、docker版本</h2><p>docker pull sonatype/nexus3</p><p>mkdir -p /home/nexus/data<br>chmod 777 -R /home/nexus/data</p><p>docker run -d —name nexus3 -p 8081:8081 —restart always -v /home/nexus/data:/nexus-data sonatype/nexus3</p><p>docker logs -f nexus3</p><p>访问地址：http:ip:8081</p><p>默认密码存放位置：</p><p>cat /home/nexus/data/admin.password</p><p>1、默认仓库说明：</p><p>maven-central：maven中央库，默认从<a href="https://repo1.maven.org/maven2/拉取jar">https://repo1.maven.org/maven2/拉取jar</a><br>maven-releases：私库发行版jar，初次安装请将Deployment policy设置为Allow redeploy<br>maven-snapshots：私库快照（调试版本）jar<br>maven-public：仓库分组，把上面三个仓库组合在一起对外提供服务，在本地maven基础配置settings.xml或项目pom.xml中使用</p><p>2、nexus仓库类型说明</p><p>hosted：本地仓库，通常我们会部署自己的构件到这一类型的仓库。比如公司的第二方库。<br>proxy：代理仓库，它们被用来代理远程的公共仓库，如maven中央仓库。<br>group：仓库组，用来合并多个hosted/proxy仓库，当你的项目希望在多个repository使用资源时就不需要多次引用了，只需要引用一个group即可。</p><p>3、创建Blob stores</p><p>在创建repository之前，还需要先指定文件存储目录，便于统一管理。就需要创建Blob Stores，不创建则使用的是default</p><p>4、</p><p>jboss的maven中央仓库地址：<a href="http://repository.jboss.com/maven2/">http://repository.jboss.com/maven2/</a><br>阿里云的maven中央仓库地址：<a href="http://maven.aliyun.com/nexus/content/groups/public/">http://maven.aliyun.com/nexus/content/groups/public/</a><br>apache的maven中央仓库地址：<a href="http://repo.maven.apache.org/maven2/">http://repo.maven.apache.org/maven2/</a></p><p>Hosted有三种方式：Releases、Snapshot、Mixed</p><p>Releases: 一般是已经发布的Jar包<br>Snapshot: 未发布的版本<br>Mixed：混合的</p><p>Allow redeploy：允许同一个版本号下重复提交代码, nexus以时间区分<br>Disable redeploy：不允许同一个版本号下重复提交代码<br>Read-Only：不允许提交任何版本<br>原生的maven-releases库是Disable redeploy设置， maven-snapshots是Allow redeploy。</p><p>5、settings.xml 配置</p><p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p><settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">    <localRepository>D:\123</localRepository>    <pluginGroups>    </pluginGroups>    <proxies>    </proxies>    <servers>        <server>            <id>maven-public</id>            <username>admin</username>            <password>123456</password>        </server>    </servers>    <mirrors>        <mirror>            <id>maven-public</id>            <mirrorOf>*</mirrorOf>            <name>maven-public</name>            <url>http://192.168.3.108:8081/repository/maven-public/</url>        </mirror>    </mirrors>    <profiles>        <!-- 配置私服 -->        <profile>            <id>maven-public</id>            <repositories>                <repository>                    <id>maven-public</id>                    <name>Repository for nexus</name>                    <url>http://192.168.3.108:8081/repository/maven-public/</url>                </repository>            </repositories>        </profile>    </profiles>    <!-- 配置私服 -->    <activeProfiles>        <activeProfile>maven-public</activeProfile>    </activeProfiles></settings><h2 id="二、windows版"><a href="#二、windows版" class="headerlink" title="二、windows版"></a>二、windows版</h2><p>1、下载地址</p><p><a href="https://help.sonatype.com/en/download.html">Download</a></p><p>2、运行</p><p>D:\App\nexus-3.55.0-01-win64\nexus-3.55.0-01\bin&gt;nexus.exe /run</p><p>用户名：admin（默认）</p><p>密码：第一次启动时生成，(在/sonatype-work/nexus3/admin.password 文件中) </p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;搭建maven私服&quot;&gt;&lt;a href=&quot;#搭建maven私服&quot; class=&quot;headerlink&quot; title=&quot;搭建maven私服&quot;&gt;&lt;/a&gt;搭建maven私服&lt;/h1&gt;&lt;h2 id=&quot;一、docker版本&quot;&gt;&lt;a href=&quot;#一、docker版本&quot; cla</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>canal手册</title>
     <link href="http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/"/>
     <id>http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/</id>
@@ -226,6 +206,26 @@
       
       
     <summary type="html">&lt;p&gt;docker run —privileged=true \&lt;br&gt;—log-driver json-file \&lt;br&gt;—log-opt max-size=100m \&lt;br&gt;—log-opt max-file=2 \&lt;br&gt;—name kafka -p 9092:9092</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>搭建maven私服手册</title>
+    <link href="http://example.com/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/"/>
+    <id>http://example.com/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</id>
+    <published>2026-02-05T16:00:00.000Z</published>
+    <updated>2026-02-06T09:56:00.183Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="搭建maven私服"><a href="#搭建maven私服" class="headerlink" title="搭建maven私服"></a>搭建maven私服</h1><h2 id="一、docker版本"><a href="#一、docker版本" class="headerlink" title="一、docker版本"></a>一、docker版本</h2><p>docker pull sonatype/nexus3</p><p>mkdir -p /home/nexus/data<br>chmod 777 -R /home/nexus/data</p><p>docker run -d —name nexus3 -p 8081:8081 —restart always -v /home/nexus/data:/nexus-data sonatype/nexus3</p><p>docker logs -f nexus3</p><p>访问地址：http:ip:8081</p><p>默认密码存放位置：</p><p>cat /home/nexus/data/admin.password</p><p>1、默认仓库说明：</p><p>maven-central：maven中央库，默认从<a href="https://repo1.maven.org/maven2/拉取jar">https://repo1.maven.org/maven2/拉取jar</a><br>maven-releases：私库发行版jar，初次安装请将Deployment policy设置为Allow redeploy<br>maven-snapshots：私库快照（调试版本）jar<br>maven-public：仓库分组，把上面三个仓库组合在一起对外提供服务，在本地maven基础配置settings.xml或项目pom.xml中使用</p><p>2、nexus仓库类型说明</p><p>hosted：本地仓库，通常我们会部署自己的构件到这一类型的仓库。比如公司的第二方库。<br>proxy：代理仓库，它们被用来代理远程的公共仓库，如maven中央仓库。<br>group：仓库组，用来合并多个hosted/proxy仓库，当你的项目希望在多个repository使用资源时就不需要多次引用了，只需要引用一个group即可。</p><p>3、创建Blob stores</p><p>在创建repository之前，还需要先指定文件存储目录，便于统一管理。就需要创建Blob Stores，不创建则使用的是default</p><p>4、</p><p>jboss的maven中央仓库地址：<a href="http://repository.jboss.com/maven2/">http://repository.jboss.com/maven2/</a><br>阿里云的maven中央仓库地址：<a href="http://maven.aliyun.com/nexus/content/groups/public/">http://maven.aliyun.com/nexus/content/groups/public/</a><br>apache的maven中央仓库地址：<a href="http://repo.maven.apache.org/maven2/">http://repo.maven.apache.org/maven2/</a></p><p>Hosted有三种方式：Releases、Snapshot、Mixed</p><p>Releases: 一般是已经发布的Jar包<br>Snapshot: 未发布的版本<br>Mixed：混合的</p><p>Allow redeploy：允许同一个版本号下重复提交代码, nexus以时间区分<br>Disable redeploy：不允许同一个版本号下重复提交代码<br>Read-Only：不允许提交任何版本<br>原生的maven-releases库是Disable redeploy设置， maven-snapshots是Allow redeploy。</p><p>5、settings.xml 配置</p><p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p><settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">    <localRepository>D:\123</localRepository>    <pluginGroups>    </pluginGroups>    <proxies>    </proxies>    <servers>        <server>            <id>maven-public</id>            <username>admin</username>            <password>123456</password>        </server>    </servers>    <mirrors>        <mirror>            <id>maven-public</id>            <mirrorOf>*</mirrorOf>            <name>maven-public</name>            <url>http://192.168.3.108:8081/repository/maven-public/</url>        </mirror>    </mirrors>    <profiles>        <!-- 配置私服 -->        <profile>            <id>maven-public</id>            <repositories>                <repository>                    <id>maven-public</id>                    <name>Repository for nexus</name>                    <url>http://192.168.3.108:8081/repository/maven-public/</url>                </repository>            </repositories>        </profile>    </profiles>    <!-- 配置私服 -->    <activeProfiles>        <activeProfile>maven-public</activeProfile>    </activeProfiles></settings><h2 id="二、windows版"><a href="#二、windows版" class="headerlink" title="二、windows版"></a>二、windows版</h2><p>1、下载地址</p><p><a href="https://help.sonatype.com/en/download.html">Download</a></p><p>2、运行</p><p>D:\App\nexus-3.55.0-01-win64\nexus-3.55.0-01\bin&gt;nexus.exe /run</p><p>用户名：admin（默认）</p><p>密码：第一次启动时生成，(在/sonatype-work/nexus3/admin.password 文件中) </p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;搭建maven私服&quot;&gt;&lt;a href=&quot;#搭建maven私服&quot; class=&quot;headerlink&quot; title=&quot;搭建maven私服&quot;&gt;&lt;/a&gt;搭建maven私服&lt;/h1&gt;&lt;h2 id=&quot;一、docker版本&quot;&gt;&lt;a href=&quot;#一、docker版本&quot; cla</summary>
       
     
     

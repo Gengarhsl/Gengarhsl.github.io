@@ -202,6 +202,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="Gengar">
+      <meta itemprop="description" content="分享学习内容">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Gengar">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/" class="post-title-link" itemprop="url">证书更换手册</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2026-02-06 00:00:00 / 修改时间：17:56:56" itemprop="dateCreated datePublished" datetime="2026-02-06T00:00:00+08:00">2026-02-06</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="一、-前置条件"><a href="#一、-前置条件" class="headerlink" title="一、 前置条件"></a>一、 前置条件</h2><p>1、需要安装openssl</p>
+<h2 id="二、转换证书格式"><a href="#二、转换证书格式" class="headerlink" title="二、转换证书格式"></a>二、转换证书格式</h2><p>1、转换为PKCS12(推荐)</p>
+<p>openssl pkcs12 -export -in <em>.scaxkc.com_bundle.crt -inkey </em>.scaxkc.com_RSA.key -out scaxkc-gateway.p12 -name scaxkc-gateway</p>
+<p>执行上述命令后会提示输入密码、和确认密码</p>
+<p>参数说明：</p>
+<p>_.scaxkc.com_bundle.crt：证书文件</p>
+<p>_.scaxkc.com_RSA.key：私钥文件</p>
+<p>-name:指定证书别名（可自行定义，但尽量不重复）</p>
+<p>2、springboot配置</p>
+<p>1、将证书放置resources目录下</p>
+<p>2、配置在服务配置文件ssl块下</p>
+<p>示例：</p>
+<p>ssl:</p>
+<p>​    enable: true</p>
+<p>​    key-store: classpath:scaxkc-gateway.p12 # 新服务的 keystore 文件路径</p>
+<p>​    key-store-password: Kunteng@123         # keystore 密码</p>
+<p>​    key-alias: scaxkc-gateway</p>
+<p>​    key-store-type: PKCS12 </p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_Oracle11g_%E5%AE%9E%E6%88%98%E9%83%A8%E7%BD%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -885,20 +961,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

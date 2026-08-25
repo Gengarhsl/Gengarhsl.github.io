@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Linux笔记</title>
+    <url>/2023/07/25/Linux/</url>
+    <content><![CDATA[<h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><h3 id="安装图形化界面虚拟机管理工具"><a href="#安装图形化界面虚拟机管理工具" class="headerlink" title="安装图形化界面虚拟机管理工具"></a>安装图形化界面虚拟机管理工具</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum groupinstall <span class="string">&#x27;Virtualization Host&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动虚拟化服务"><a href="#启动虚拟化服务" class="headerlink" title="启动虚拟化服务"></a>启动虚拟化服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install virt-manager</span><br></pre></td></tr></table></figure>
+<h3 id="Web管理界面"><a href="#Web管理界面" class="headerlink" title="Web管理界面"></a>Web管理界面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ systemctl start libvirtd.service</span><br><span class="line">$ systemclt start cockpit.service</span><br></pre></td></tr></table></figure>
+<h1 id="配置网卡"><a href="#配置网卡" class="headerlink" title="配置网卡"></a>配置网卡</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nmtui 图形化工具</span><br><span class="line">$ /etc/sysconfig/network-scripts/ifcfg-enp1s0 网卡配置文件</span><br><span class="line">$ nmcli con modify enp1s0 ipv4.method me</span><br><span class="line">$ nmcli con up enp1s0启用网卡配置</span><br></pre></td></tr></table></figure>
+<p>w查看登录信息<br>Ss -ant查看链接信息<br>Ss -at<br>Ss -atu<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/resolv.conf  dns记录文件 网卡会覆盖</span><br><span class="line">$ /etc/hostname修改主机名</span><br><span class="line">$ /etc/hosts dns解析文件</span><br></pre></td></tr></table></figure><br>route -n查询网关<br>主机名 计算机名<br>Fqdn  web-server.abc.com<br>Netbiosname.  Web-server<br>nmcli con show 查看<br>nmcli device status 查看网卡状态</p>
+<h1 id="安装软件包-chrony"><a href="#安装软件包-chrony" class="headerlink" title="安装软件包 chrony"></a>安装软件包 chrony</h1><h3 id="查看时钟同步状态"><a href="#查看时钟同步状态" class="headerlink" title="查看时钟同步状态"></a>查看时钟同步状态</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ chronyc sources -v</span><br></pre></td></tr></table></figure>
+<h3 id="搭建内网Ntp服务器"><a href="#搭建内网Ntp服务器" class="headerlink" title="搭建内网Ntp服务器"></a>搭建内网Ntp服务器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/chrony.conf 修改配置文件</span><br><span class="line">$ firewall-cmd. --add-service=ntp 防火墙放行ntp服务</span><br></pre></td></tr></table></figure>
+<p>修改时区<br>timedatectl. Set-timezone. Asia/Shanghai<br>           List-timezone  查询<br>Timedatectl. Set-ntp. true/false 开启互联网校准<br>Date -s. 修改时间</p>
+<p>Yum list 查询仓库里所有软件包及其状态</p>
+<p>rpm -i 安装 v查看安装信息 h显示进度<br>rpm -q查询<br>rpm -e删除<br>过滤<br>| grep 名字<br>查询某个文件属于某个rpm包<br>rpm -qa<br>Net-tools<br>Bash-c<em><br>Vim-e</em></p>
+<h1 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h1><p>\1. /boot. 1g<br>\2. Swap.  2 Ram<br>\3. /.  All</p>
+<h1 id="ssh配置"><a href="#ssh配置" class="headerlink" title="ssh配置"></a>ssh配置</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/ssh/sshd_config</span><br><span class="line">$ Port 22</span><br><span class="line">$ Permitrootlogin <span class="built_in">yes</span> 允许 root远程登录 no禁止</span><br></pre></td></tr></table></figure>
+<h3 id="关闭selinux安全插件"><a href="#关闭selinux安全插件" class="headerlink" title="关闭selinux安全插件"></a>关闭selinux安全插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+<h3 id="使用秘钥登陆"><a href="#使用秘钥登陆" class="headerlink" title="使用秘钥登陆"></a>使用秘钥登陆</h3><p>客户端生成秘钥文件  公钥加密（非对称加密）公钥，私钥</p>
+<p>客户端<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen 生成公钥</span><br><span class="line">上传公钥到目标服务器的root账号</span><br><span class="line">$ ssh-copy-id 主机</span><br></pre></td></tr></table></figure></p>
+<p>scp 文件 主机:位置<br>SCP -R 文件夹</p>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="搭建DHCP服务器"><a href="#搭建DHCP服务器" class="headerlink" title="搭建DHCP服务器"></a>搭建DHCP服务器</h1><h3 id="安装dhcp软件包"><a href="#安装dhcp软件包" class="headerlink" title="安装dhcp软件包"></a>安装dhcp软件包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install dhcp-server</span><br><span class="line">修改配置文件 </span><br><span class="line">$ vim /etc/DHCP/dhcpd.conf</span><br></pre></td></tr></table></figure>
+<p>10yy复制<br>P粘贴</p>
+<p>查看磁盘<br>fdisk -l<br>lsblk<br>分区工具<br>fdisk交互式分区<br>n p w<br>parted 可交互</p>
+<p>Parted 磁盘<br>Print打印查看<br>Mkpart<br>Name 名字<br>类型<br>起始 上一个磁盘的终止<br>终止 起始加分区大小<br>quit 退出<br>非交互式<br>parted 磁盘 mkpart 名字 起始 终止</p>
+<p>RMB<br>Parted 磁盘 mklabel msdos<br>Parted 磁盘 rm 分区 删除分区<br>Parted 磁盘 mkpart 主/扩 格式 起始 终止<br>对分区进行格式化</p>
+<p>ext4<br>Xfs<br>mkfs -t 格式 磁盘<br>mkfs.格式 磁盘<br>如果硬盘是Ada 插入U盘 设备名为 sdb<br>mount | tail -n 数字 查看文件的最后几行<br>lsblk -f 查看挂载<br>开机自动挂载<br>/etc/fstab<br>设备名建议使用UUID<br>blkid 磁盘 查看UUID<br>lsblk _f 查看UUID<br>udevadm settle 更新文件 rhel8<br>Parts -a 磁盘 更新文件. rhel7之前</p>
+<p>扩充交换分区<br>mkswap 磁盘 格式化为swap类型<br>挂载为了swap空间<br>swapon 磁盘<br>swapon -s 查看<br>swapoff 卸载挂载点</p>
+<p>dd if=/dev/zero of=/ten/swap1 bs=1M count=2048 复制磁盘块为文件<br>格式化<br>挂载</p>
+<p>Man 命令 查看命令手册 </p>
+<h1 id="搭建ftp服务器"><a href="#搭建ftp服务器" class="headerlink" title="搭建ftp服务器"></a>搭建ftp服务器</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install vsftpd -y</span><br><span class="line"> 修改FTP配置文件</span><br><span class="line">$ /etc/vsftpd/vsftpd.conf</span><br><span class="line"><span class="variable">$anonymous_enable</span>=<span class="built_in">yes</span></span><br><span class="line"> 启动FTP服务 开机自启</span><br><span class="line"><span class="variable">$systemctl</span> <span class="built_in">enable</span> vsftpd.service --now</span><br><span class="line"> Ftp 默认家目录 匿名访问</span><br><span class="line">$ /var/ftp</span><br><span class="line">默认命令行下是主动FTP 21 20建立传输</span><br><span class="line">被动高端端口</span><br><span class="line">限制FTP被动端口范围</span><br><span class="line">Pasv_min_port=10000</span><br><span class="line">Pasv_max_port=11000</span><br><span class="line">Ss -ant查看 </span><br></pre></td></tr></table></figure>
+<h1 id="LVM-逻辑卷管理"><a href="#LVM-逻辑卷管理" class="headerlink" title="LVM  逻辑卷管理"></a>LVM  逻辑卷管理</h1><p>传统的磁盘分区  分区固定后不能更改</p>
+<h3 id="将磁盘，分区转换为PV逻辑卷"><a href="#将磁盘，分区转换为PV逻辑卷" class="headerlink" title="将磁盘，分区转换为PV逻辑卷"></a>将磁盘，分区转换为PV逻辑卷</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ PVcreate 磁盘</span><br><span class="line">$ Pvs. Pvdisplay 磁盘 查看信息</span><br></pre></td></tr></table></figure>
+<h3 id="将物理卷组合成卷组-VG"><a href="#将物理卷组合成卷组-VG" class="headerlink" title="将物理卷组合成卷组 VG"></a>将物理卷组合成卷组 VG</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vgcreate 名字 磁盘</span><br><span class="line">$ vgs. Vgdispaly 磁盘 查看</span><br><span class="line">$ VGremove 名称 删除卷组</span><br><span class="line">$ -s定义块大小</span><br><span class="line"></span><br><span class="line">Pe的尺寸可以更改</span><br></pre></td></tr></table></figure>
+<h3 id="创建lv-逻辑卷"><a href="#创建lv-逻辑卷" class="headerlink" title="创建lv 逻辑卷"></a>创建lv 逻辑卷</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ lvcreate -n 名字 -L 大小/-l 多少个块 卷组</span><br><span class="line">$ lvextend -L +尺寸 逻辑卷 扩展逻辑卷</span><br><span class="line">将扩展的lv与挂载点 同步尺寸</span><br><span class="line">xfs_growfs 挂载点</span><br><span class="line">Resize2fs 逻辑卷 ext4同步</span><br><span class="line">Vgextend vg pv扩展卷组</span><br></pre></td></tr></table></figure>
+<h1 id="dns服务器"><a href="#dns服务器" class="headerlink" title="dns服务器"></a>dns服务器</h1><h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install <span class="built_in">bind</span>. bind-utils </span><br><span class="line">$ /etc/named.conf</span><br><span class="line">UDP53客户机找服务</span><br><span class="line">Tcp53服务器找服务器</span><br><span class="line"></span><br><span class="line">添加区域</span><br><span class="line">zone “ABC.com”IN&#123;</span><br><span class="line">      <span class="built_in">type</span> master;</span><br><span class="line">      File <span class="string">&quot;abc.com.zone&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$ /var/named/</span><br></pre></td></tr></table></figure>
+<p>mount -o loop 文件 挂载本地文件<br>＞覆盖 ＞＞重定向<br>开机自动挂载 defaults.loop<br>给web启用 ssl 使用数字证书<br>Yum install mod_ssl</p>
+<h1 id="搭建多个web站点-虚拟主机"><a href="#搭建多个web站点-虚拟主机" class="headerlink" title="搭建多个web站点 虚拟主机"></a>搭建多个web站点 虚拟主机</h1><p>Apache 配置文件 /etc/httpd<br>conf 主配置文件 conf.d辅配置文件<br>/usr/share/doc/httpd配置文件模板<br>httpd-vhosts.conf 虚拟主机模板</p>
+<p>动态网站<br>asp asp.net php jsp Python 等开发<br>小型机 IBM Aix<br>      Sun solris Oracle 甲骨文<br>      Hp hp-unix</p>
+<p>挂接数据库 mysql mariadb<br>mariadb-server<br>如果需要，可以做安全初始化配置<br>MySQL_secure_installation<br>清除历史命令 history -c<br>unzip 文件 -d 目录</p>
+<p>Chmod o+w config/ -R<br>data/ -R<br>uc_client<br>Uc_server<br>软件包 php-mysqlnd<br>Php-xml</p>
+<p>firewall-cmd.  —list-all  查看防火墙规则<br>firewall-cmd —list-all<br>firewalld.richlanguage富规则<br>firewall-cmd —add-service=服务  —permanent. 写入配置文件</p>
+]]></content>
+  </entry>
+  <entry>
     <title>Docker企业级部署Seata分布式事务（Nacos + MySQL + Oracle支持）</title>
     <url>/2026/02/06/Docker%E4%BC%81%E4%B8%9A%E7%BA%A7%E9%83%A8%E7%BD%B2Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%88Nacos-+-MySQL-+-Oracle%E6%94%AF%E6%8C%81%EF%BC%89/</url>
     <content><![CDATA[<h1 id="一、Seata简介"><a href="#一、Seata简介" class="headerlink" title="一、Seata简介"></a>一、Seata简介</h1><p>Seata 是一款开源的分布式事务解决方案，支持：</p>
@@ -125,280 +167,6 @@
         <tag>分布式事务</tag>
         <tag>微服务中间件</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Linux笔记</title>
-    <url>/2023/07/25/Linux/</url>
-    <content><![CDATA[<h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><h3 id="安装图形化界面虚拟机管理工具"><a href="#安装图形化界面虚拟机管理工具" class="headerlink" title="安装图形化界面虚拟机管理工具"></a>安装图形化界面虚拟机管理工具</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum groupinstall <span class="string">&#x27;Virtualization Host&#x27;</span></span><br></pre></td></tr></table></figure>
-<h3 id="启动虚拟化服务"><a href="#启动虚拟化服务" class="headerlink" title="启动虚拟化服务"></a>启动虚拟化服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install virt-manager</span><br></pre></td></tr></table></figure>
-<h3 id="Web管理界面"><a href="#Web管理界面" class="headerlink" title="Web管理界面"></a>Web管理界面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ systemctl start libvirtd.service</span><br><span class="line">$ systemclt start cockpit.service</span><br></pre></td></tr></table></figure>
-<h1 id="配置网卡"><a href="#配置网卡" class="headerlink" title="配置网卡"></a>配置网卡</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nmtui 图形化工具</span><br><span class="line">$ /etc/sysconfig/network-scripts/ifcfg-enp1s0 网卡配置文件</span><br><span class="line">$ nmcli con modify enp1s0 ipv4.method me</span><br><span class="line">$ nmcli con up enp1s0启用网卡配置</span><br></pre></td></tr></table></figure>
-<p>w查看登录信息<br>Ss -ant查看链接信息<br>Ss -at<br>Ss -atu<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/resolv.conf  dns记录文件 网卡会覆盖</span><br><span class="line">$ /etc/hostname修改主机名</span><br><span class="line">$ /etc/hosts dns解析文件</span><br></pre></td></tr></table></figure><br>route -n查询网关<br>主机名 计算机名<br>Fqdn  web-server.abc.com<br>Netbiosname.  Web-server<br>nmcli con show 查看<br>nmcli device status 查看网卡状态</p>
-<h1 id="安装软件包-chrony"><a href="#安装软件包-chrony" class="headerlink" title="安装软件包 chrony"></a>安装软件包 chrony</h1><h3 id="查看时钟同步状态"><a href="#查看时钟同步状态" class="headerlink" title="查看时钟同步状态"></a>查看时钟同步状态</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ chronyc sources -v</span><br></pre></td></tr></table></figure>
-<h3 id="搭建内网Ntp服务器"><a href="#搭建内网Ntp服务器" class="headerlink" title="搭建内网Ntp服务器"></a>搭建内网Ntp服务器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/chrony.conf 修改配置文件</span><br><span class="line">$ firewall-cmd. --add-service=ntp 防火墙放行ntp服务</span><br></pre></td></tr></table></figure>
-<p>修改时区<br>timedatectl. Set-timezone. Asia/Shanghai<br>           List-timezone  查询<br>Timedatectl. Set-ntp. true/false 开启互联网校准<br>Date -s. 修改时间</p>
-<p>Yum list 查询仓库里所有软件包及其状态</p>
-<p>rpm -i 安装 v查看安装信息 h显示进度<br>rpm -q查询<br>rpm -e删除<br>过滤<br>| grep 名字<br>查询某个文件属于某个rpm包<br>rpm -qa<br>Net-tools<br>Bash-c<em><br>Vim-e</em></p>
-<h1 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h1><p>\1. /boot. 1g<br>\2. Swap.  2 Ram<br>\3. /.  All</p>
-<h1 id="ssh配置"><a href="#ssh配置" class="headerlink" title="ssh配置"></a>ssh配置</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/ssh/sshd_config</span><br><span class="line">$ Port 22</span><br><span class="line">$ Permitrootlogin <span class="built_in">yes</span> 允许 root远程登录 no禁止</span><br></pre></td></tr></table></figure>
-<h3 id="关闭selinux安全插件"><a href="#关闭selinux安全插件" class="headerlink" title="关闭selinux安全插件"></a>关闭selinux安全插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
-<h3 id="使用秘钥登陆"><a href="#使用秘钥登陆" class="headerlink" title="使用秘钥登陆"></a>使用秘钥登陆</h3><p>客户端生成秘钥文件  公钥加密（非对称加密）公钥，私钥</p>
-<p>客户端<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen 生成公钥</span><br><span class="line">上传公钥到目标服务器的root账号</span><br><span class="line">$ ssh-copy-id 主机</span><br></pre></td></tr></table></figure></p>
-<p>scp 文件 主机:位置<br>SCP -R 文件夹</p>
-<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="搭建DHCP服务器"><a href="#搭建DHCP服务器" class="headerlink" title="搭建DHCP服务器"></a>搭建DHCP服务器</h1><h3 id="安装dhcp软件包"><a href="#安装dhcp软件包" class="headerlink" title="安装dhcp软件包"></a>安装dhcp软件包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install dhcp-server</span><br><span class="line">修改配置文件 </span><br><span class="line">$ vim /etc/DHCP/dhcpd.conf</span><br></pre></td></tr></table></figure>
-<p>10yy复制<br>P粘贴</p>
-<p>查看磁盘<br>fdisk -l<br>lsblk<br>分区工具<br>fdisk交互式分区<br>n p w<br>parted 可交互</p>
-<p>Parted 磁盘<br>Print打印查看<br>Mkpart<br>Name 名字<br>类型<br>起始 上一个磁盘的终止<br>终止 起始加分区大小<br>quit 退出<br>非交互式<br>parted 磁盘 mkpart 名字 起始 终止</p>
-<p>RMB<br>Parted 磁盘 mklabel msdos<br>Parted 磁盘 rm 分区 删除分区<br>Parted 磁盘 mkpart 主/扩 格式 起始 终止<br>对分区进行格式化</p>
-<p>ext4<br>Xfs<br>mkfs -t 格式 磁盘<br>mkfs.格式 磁盘<br>如果硬盘是Ada 插入U盘 设备名为 sdb<br>mount | tail -n 数字 查看文件的最后几行<br>lsblk -f 查看挂载<br>开机自动挂载<br>/etc/fstab<br>设备名建议使用UUID<br>blkid 磁盘 查看UUID<br>lsblk _f 查看UUID<br>udevadm settle 更新文件 rhel8<br>Parts -a 磁盘 更新文件. rhel7之前</p>
-<p>扩充交换分区<br>mkswap 磁盘 格式化为swap类型<br>挂载为了swap空间<br>swapon 磁盘<br>swapon -s 查看<br>swapoff 卸载挂载点</p>
-<p>dd if=/dev/zero of=/ten/swap1 bs=1M count=2048 复制磁盘块为文件<br>格式化<br>挂载</p>
-<p>Man 命令 查看命令手册 </p>
-<h1 id="搭建ftp服务器"><a href="#搭建ftp服务器" class="headerlink" title="搭建ftp服务器"></a>搭建ftp服务器</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install vsftpd -y</span><br><span class="line"> 修改FTP配置文件</span><br><span class="line">$ /etc/vsftpd/vsftpd.conf</span><br><span class="line"><span class="variable">$anonymous_enable</span>=<span class="built_in">yes</span></span><br><span class="line"> 启动FTP服务 开机自启</span><br><span class="line"><span class="variable">$systemctl</span> <span class="built_in">enable</span> vsftpd.service --now</span><br><span class="line"> Ftp 默认家目录 匿名访问</span><br><span class="line">$ /var/ftp</span><br><span class="line">默认命令行下是主动FTP 21 20建立传输</span><br><span class="line">被动高端端口</span><br><span class="line">限制FTP被动端口范围</span><br><span class="line">Pasv_min_port=10000</span><br><span class="line">Pasv_max_port=11000</span><br><span class="line">Ss -ant查看 </span><br></pre></td></tr></table></figure>
-<h1 id="LVM-逻辑卷管理"><a href="#LVM-逻辑卷管理" class="headerlink" title="LVM  逻辑卷管理"></a>LVM  逻辑卷管理</h1><p>传统的磁盘分区  分区固定后不能更改</p>
-<h3 id="将磁盘，分区转换为PV逻辑卷"><a href="#将磁盘，分区转换为PV逻辑卷" class="headerlink" title="将磁盘，分区转换为PV逻辑卷"></a>将磁盘，分区转换为PV逻辑卷</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ PVcreate 磁盘</span><br><span class="line">$ Pvs. Pvdisplay 磁盘 查看信息</span><br></pre></td></tr></table></figure>
-<h3 id="将物理卷组合成卷组-VG"><a href="#将物理卷组合成卷组-VG" class="headerlink" title="将物理卷组合成卷组 VG"></a>将物理卷组合成卷组 VG</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vgcreate 名字 磁盘</span><br><span class="line">$ vgs. Vgdispaly 磁盘 查看</span><br><span class="line">$ VGremove 名称 删除卷组</span><br><span class="line">$ -s定义块大小</span><br><span class="line"></span><br><span class="line">Pe的尺寸可以更改</span><br></pre></td></tr></table></figure>
-<h3 id="创建lv-逻辑卷"><a href="#创建lv-逻辑卷" class="headerlink" title="创建lv 逻辑卷"></a>创建lv 逻辑卷</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ lvcreate -n 名字 -L 大小/-l 多少个块 卷组</span><br><span class="line">$ lvextend -L +尺寸 逻辑卷 扩展逻辑卷</span><br><span class="line">将扩展的lv与挂载点 同步尺寸</span><br><span class="line">xfs_growfs 挂载点</span><br><span class="line">Resize2fs 逻辑卷 ext4同步</span><br><span class="line">Vgextend vg pv扩展卷组</span><br></pre></td></tr></table></figure>
-<h1 id="dns服务器"><a href="#dns服务器" class="headerlink" title="dns服务器"></a>dns服务器</h1><h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install <span class="built_in">bind</span>. bind-utils </span><br><span class="line">$ /etc/named.conf</span><br><span class="line">UDP53客户机找服务</span><br><span class="line">Tcp53服务器找服务器</span><br><span class="line"></span><br><span class="line">添加区域</span><br><span class="line">zone “ABC.com”IN&#123;</span><br><span class="line">      <span class="built_in">type</span> master;</span><br><span class="line">      File <span class="string">&quot;abc.com.zone&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$ /var/named/</span><br></pre></td></tr></table></figure>
-<p>mount -o loop 文件 挂载本地文件<br>＞覆盖 ＞＞重定向<br>开机自动挂载 defaults.loop<br>给web启用 ssl 使用数字证书<br>Yum install mod_ssl</p>
-<h1 id="搭建多个web站点-虚拟主机"><a href="#搭建多个web站点-虚拟主机" class="headerlink" title="搭建多个web站点 虚拟主机"></a>搭建多个web站点 虚拟主机</h1><p>Apache 配置文件 /etc/httpd<br>conf 主配置文件 conf.d辅配置文件<br>/usr/share/doc/httpd配置文件模板<br>httpd-vhosts.conf 虚拟主机模板</p>
-<p>动态网站<br>asp asp.net php jsp Python 等开发<br>小型机 IBM Aix<br>      Sun solris Oracle 甲骨文<br>      Hp hp-unix</p>
-<p>挂接数据库 mysql mariadb<br>mariadb-server<br>如果需要，可以做安全初始化配置<br>MySQL_secure_installation<br>清除历史命令 history -c<br>unzip 文件 -d 目录</p>
-<p>Chmod o+w config/ -R<br>data/ -R<br>uc_client<br>Uc_server<br>软件包 php-mysqlnd<br>Php-xml</p>
-<p>firewall-cmd.  —list-all  查看防火墙规则<br>firewall-cmd —list-all<br>firewalld.richlanguage富规则<br>firewall-cmd —add-service=服务  —permanent. 写入配置文件</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>docker命令笔记</title>
-    <url>/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>docker version        # 显示docker的版本信息<br>docker info              # 显示docker的系统信息，包括镜像和容器的数量<br>docker 命令 —help         # 帮助命令<br>docker images    #查看镜像<br>docker search    #搜索镜像<br>docker pull    #下载镜像<br>docker pull  mysql:5.7    #指定版本下载<br>docker rmi     #删除镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id                    # 删除指定的镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id 镜像id 镜像id    # 删除多个镜像（空格分隔）<br>[root@JWei_0124 //]# docker rmi -f $(docker images -aq)    # 删除全部的镜像<br>docker run [可选参数] image</p>
-<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><p>—name=”name”        容器名字：用来区分容器<br>-d                    后台方式运行：相当于nohup<br>-it                    使用交互式运行：进入容器查看内容<br>-p                    指定容器的端口（四种方式）小写字母p<br>    -p ip:主机端口：容器端口<br>    -p 主机端口：容器端口<br>    -p 容器端口<br>    容器端口<br>-P                     随机指定端口（大写字母P）</p>
-<p>docker ps         #列出当前正在运行的容器</p>
-<h1 id="命令参数可选项"><a href="#命令参数可选项" class="headerlink" title="命令参数可选项"></a>命令参数可选项</h1><p>-a        # 列出当前正在运行的容器+历史运行过的容器<br>-n=?    # 显示最近创建的容器（可以指定显示几条，比如-n=1）<br>-q        # 只显示容器的编号</p>
-<p>docker run -it centos /bin/bash #交互式进入<br>docker rm 容器ID    #删除容器（不能删除正在运行的容器）<br>docker rm -f     #强制删除<br>docker ps -a -q|xargs docker rm     #删除所有容器<br>docker start 容器id        # 启动容器<br>docker restart 容器id    # 重启容器<br>docker stop 容器id        # 停止当前正在运行的容器<br>docker kill 容器id        # 强制停止当前容器</p>
-<p>docker logs -tf —tail 容器id</p>
-<p>-tf                        # 显示日志<br>—tail number    # 要显示的日志条数</p>
-<p>查看容器中进程的信息<br>docker top id<br>查看镜像的元数据<br>docker inspect id<br>进入当前正在运行的容器<br>docker exec -it 容器id /bin/bash</p>
-<p>从容器内拷贝文件到主机<br>docker cp 容器id:容器内路径 目的主机的路径</p>
-<h1 id="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"><a href="#如何确定是具名挂载，还是匿名挂载，还是指定路径挂载" class="headerlink" title="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"></a>如何确定是具名挂载，还是匿名挂载，还是指定路径挂载</h1><p>-v 容器内的路径                # 匿名挂载<br>-v 卷名:容器内的路径        # 具名挂载<br>-v /宿主机路径:容器内路径    # 指定路径挂载</p>
-<h1 id="提交容器成为一个新的副本"><a href="#提交容器成为一个新的副本" class="headerlink" title="提交容器成为一个新的副本"></a>提交容器成为一个新的副本</h1><p>docker commit</p>
-<h1 id="命令和git原理类似"><a href="#命令和git原理类似" class="headerlink" title="命令和git原理类似"></a>命令和git原理类似</h1><p>docker commit -m=”提交的描述信息” -a=”作者” 容器id 目标镜像名:[TAG]</p>
-<h1 id="我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"><a href="#我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。" class="headerlink" title="我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"></a>我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。</h1><p>docker run -d -P —name tomcat01 tomcat<br>docker run -d -P —name tomcato1 —het bridge tomcat</p>
-<h1 id="docker0特点：默认，域名不能访问，—1ink可以打通连接！"><a href="#docker0特点：默认，域名不能访问，—1ink可以打通连接！" class="headerlink" title="docker0特点：默认，域名不能访问，—1ink可以打通连接！"></a>docker0特点：默认，域名不能访问，—1ink可以打通连接！</h1><h1 id="我们可以自定义一个网络！"><a href="#我们可以自定义一个网络！" class="headerlink" title="我们可以自定义一个网络！"></a>我们可以自定义一个网络！</h1><p>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network create —driver bridge —subnet 192.168.0.0/16 —gateway 192.168.0.1 mynet<br>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network ls<br>NETWORK ID     NAME      DRIVER    SCOPE<br>7254ffccbdf5   bridge    bridge    local<br>45610891738f   host      host      local<br>266acd66473c   mynet     bridge    local<br>7795cbc2686c   none      null      local</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>linux重置密码手册</title>
-    <url>/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Linux 忘记 Root 密码解决方案与安全防护指南（运维手册版）</span><br><span class="line"></span><br><span class="line">本文系统整理 **Linux 忘记 root 密码的解决方案**、**GRUB 启动原理**、**不同发行版重置方式**以及**生产环境安全防护措施**。  </span><br><span class="line">适用于 Linux 运维工程师、开发人员和系统管理员。</span><br><span class="line"></span><br><span class="line">适用系统包括：</span><br><span class="line"></span><br><span class="line">- **:contentReference[oaicite:0]&#123;index=0&#125;**</span><br><span class="line">- **:contentReference[oaicite:1]&#123;index=1&#125;**</span><br><span class="line">- **:contentReference[oaicite:2]&#123;index=2&#125;**</span><br><span class="line">- **:contentReference[oaicite:3]&#123;index=3&#125;**</span><br><span class="line">- **:contentReference[oaicite:4]&#123;index=4&#125;**</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># 一、Linux 启动流程简述</span><br><span class="line"></span><br><span class="line">理解 Linux 启动流程有助于理解为什么可以通过 GRUB 重置 root 密码。</span><br><span class="line"></span><br><span class="line">Linux 启动过程大致如下：</span><br></pre></td></tr></table></figure>
-<p>BIOS / UEFI<br> ↓<br> BootLoader（GRUB）<br> ↓<br> Linux Kernel<br> ↓<br> init / systemd<br> ↓<br> 用户空间</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">关键点：</span><br></pre></td></tr></table></figure>
-<p>GRUB 可以修改 Linux 内核启动参数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">如果我们修改启动参数，就可以：</span><br><span class="line"></span><br><span class="line">- 进入单用户模式</span><br><span class="line">- 进入 emergency shell</span><br><span class="line">- 修改系统文件</span><br><span class="line">- 重置 root 密码</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># 二、通过 GRUB 重置 root 密码（推荐方法）</span><br><span class="line"></span><br><span class="line">适用于：</span><br><span class="line"></span><br><span class="line">- CentOS 7+</span><br><span class="line">- Rocky Linux</span><br><span class="line">- AlmaLinux</span><br><span class="line"></span><br><span class="line">## 1 重启服务器</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="2-进入-GRUB-菜单"><a href="#2-进入-GRUB-菜单" class="headerlink" title="2 进入 GRUB 菜单"></a>2 进入 GRUB 菜单</h2><p>系统启动时按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ESC</span><br><span class="line">或</span><br><span class="line">Shift</span><br></pre></td></tr></table></figure>
-<p>进入 GRUB 界面。</p>
-<hr>
-<h2 id="3-编辑启动项"><a href="#3-编辑启动项" class="headerlink" title="3 编辑启动项"></a>3 编辑启动项</h2><p>选中当前系统启动项，按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
-<p>进入编辑模式。</p>
-<p>找到这一行：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/... ro</span><br></pre></td></tr></table></figure>
-<p>将：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ro</span><br></pre></td></tr></table></figure>
-<p>改为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rw init=/sysroot/bin/sh</span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/centos-root rw init=/sysroot/bin/sh</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="4-启动系统"><a href="#4-启动系统" class="headerlink" title="4 启动系统"></a>4 启动系统</h2><p>按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
-<p>进入紧急 shell。</p>
-<hr>
-<h2 id="5-切换到系统环境"><a href="#5-切换到系统环境" class="headerlink" title="5 切换到系统环境"></a>5 切换到系统环境</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chroot /sysroot</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="6-修改-root-密码"><a href="#6-修改-root-密码" class="headerlink" title="6 修改 root 密码"></a>6 修改 root 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-<p>输入新密码即可。</p>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Changing password for user root.</span><br><span class="line">New password:</span><br><span class="line">Retype new password:</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="7-修复-SELinux-标签（重要）"><a href="#7-修复-SELinux-标签（重要）" class="headerlink" title="7 修复 SELinux 标签（重要）"></a>7 修复 SELinux 标签（重要）</h2><p>如果系统开启了 SELinux，需要执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch /.autorelabel</span><br></pre></td></tr></table></figure>
-<p>否则系统可能无法正常登录。</p>
-<hr>
-<h2 id="8-重启系统"><a href="#8-重启系统" class="headerlink" title="8 重启系统"></a>8 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">exit</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<p>系统启动后即可使用新密码登录。</p>
-<hr>
-<h1 id="三、使用-rd-break-重置密码（CentOS-官方方式）"><a href="#三、使用-rd-break-重置密码（CentOS-官方方式）" class="headerlink" title="三、使用 rd.break 重置密码（CentOS 官方方式）"></a>三、使用 rd.break 重置密码（CentOS 官方方式）</h1><p>该方法是 **Red Hat 推荐的方式。</p>
-<h2 id="1-进入-GRUB-编辑界面"><a href="#1-进入-GRUB-编辑界面" class="headerlink" title="1 进入 GRUB 编辑界面"></a>1 进入 GRUB 编辑界面</h2><p>按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
-<p>找到：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16</span><br></pre></td></tr></table></figure>
-<p>在行尾添加：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rd.break</span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/centos-root ro rd.break</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="2-启动系统"><a href="#2-启动系统" class="headerlink" title="2 启动系统"></a>2 启动系统</h2><p>按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
-<p>进入 emergency mode。</p>
-<hr>
-<h2 id="3-重新挂载系统分区"><a href="#3-重新挂载系统分区" class="headerlink" title="3 重新挂载系统分区"></a>3 重新挂载系统分区</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount -o remount,rw /sysroot</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="4-切换到系统环境"><a href="#4-切换到系统环境" class="headerlink" title="4 切换到系统环境"></a>4 切换到系统环境</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chroot /sysroot</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="5-修改-root-密码"><a href="#5-修改-root-密码" class="headerlink" title="5 修改 root 密码"></a>5 修改 root 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="6-SELinux-修复"><a href="#6-SELinux-修复" class="headerlink" title="6 SELinux 修复"></a>6 SELinux 修复</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch /.autorelabel</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="7-重启系统"><a href="#7-重启系统" class="headerlink" title="7 重启系统"></a>7 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">exit</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="四、Ubuntu-Debian-重置-root-密码"><a href="#四、Ubuntu-Debian-重置-root-密码" class="headerlink" title="四、Ubuntu / Debian 重置 root 密码"></a>四、Ubuntu / Debian 重置 root 密码</h1><p>适用于：</p>
-<ul>
-<li><strong>Ubuntu</strong></li>
-<li><strong>Debian</strong></li>
-</ul>
-<h2 id="1-进入-GRUB"><a href="#1-进入-GRUB" class="headerlink" title="1 进入 GRUB"></a>1 进入 GRUB</h2><p>开机按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ESC</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="2-编辑启动项"><a href="#2-编辑启动项" class="headerlink" title="2 编辑启动项"></a>2 编辑启动项</h2><p>找到：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux /boot/vmlinuz</span><br></pre></td></tr></table></figure>
-<p>在行尾添加：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">init=/bin/bash</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="3-启动系统"><a href="#3-启动系统" class="headerlink" title="3 启动系统"></a>3 启动系统</h2><p>按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
-<p>进入 root shell。</p>
-<hr>
-<h2 id="4-挂载为读写"><a href="#4-挂载为读写" class="headerlink" title="4 挂载为读写"></a>4 挂载为读写</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount -o remount,rw /</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="5-修改密码"><a href="#5-修改密码" class="headerlink" title="5 修改密码"></a>5 修改密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="6-重启系统"><a href="#6-重启系统" class="headerlink" title="6 重启系统"></a>6 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exec /sbin/init</span><br></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">reboot -f</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="五、为什么可以重置-root-密码？"><a href="#五、为什么可以重置-root-密码？" class="headerlink" title="五、为什么可以重置 root 密码？"></a>五、为什么可以重置 root 密码？</h1><p>核心原因：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GRUB 可以修改 Linux 启动参数</span><br></pre></td></tr></table></figure>
-<p>只要满足以下条件：</p>
-<ul>
-<li>能访问服务器控制台</li>
-<li>能修改 GRUB 启动项</li>
-<li>没有设置 GRUB 密码</li>
-</ul>
-<p>就可以重置 root 密码。</p>
-<hr>
-<h1 id="六、生产环境安全防护"><a href="#六、生产环境安全防护" class="headerlink" title="六、生产环境安全防护"></a>六、生产环境安全防护</h1><p>为了防止非法修改 root 密码，需要采取安全措施。</p>
-<hr>
-<h2 id="1-设置-GRUB-密码"><a href="#1-设置-GRUB-密码" class="headerlink" title="1 设置 GRUB 密码"></a>1 设置 GRUB 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grub2-setpassword</span><br></pre></td></tr></table></figure>
-<p>这样进入 GRUB 编辑界面需要密码。</p>
-<hr>
-<h2 id="2-禁止外部设备启动"><a href="#2-禁止外部设备启动" class="headerlink" title="2 禁止外部设备启动"></a>2 禁止外部设备启动</h2><p>在 BIOS 中：</p>
-<ul>
-<li>禁止 U 盘启动</li>
-<li>禁止光驱启动</li>
-</ul>
-<hr>
-<h2 id="3-设置-BIOS-密码"><a href="#3-设置-BIOS-密码" class="headerlink" title="3 设置 BIOS 密码"></a>3 设置 BIOS 密码</h2><p>防止攻击者修改启动顺序。</p>
-<hr>
-<h2 id="4-使用磁盘加密"><a href="#4-使用磁盘加密" class="headerlink" title="4 使用磁盘加密"></a>4 使用磁盘加密</h2><p>Linux 推荐使用：</p>
-<p><strong>LUKS</strong></p>
-<p>磁盘加密后：</p>
-<ul>
-<li>没有密码无法挂载磁盘</li>
-<li>无法修改系统文件</li>
-<li>无法重置 root 密码</li>
-</ul>
-<hr>
-<h2 id="5-机房物理安全"><a href="#5-机房物理安全" class="headerlink" title="5 机房物理安全"></a>5 机房物理安全</h2><p>服务器安全原则：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">物理安全 &gt; 系统安全</span><br></pre></td></tr></table></figure>
-<p>如果攻击者拥有：</p>
-<ul>
-<li>服务器物理访问权限</li>
-<li>控制台权限</li>
-</ul>
-<p>任何系统都可能被破解。</p>
-<hr>
-<h1 id="七、云服务器为什么不能这样操作"><a href="#七、云服务器为什么不能这样操作" class="headerlink" title="七、云服务器为什么不能这样操作"></a>七、云服务器为什么不能这样操作</h1><p>在云环境中，例如：</p>
-<ul>
-<li><strong>Amazon Web Services</strong></li>
-<li><strong>Alibaba Cloud</strong></li>
-<li><strong>Tencent Cloud</strong></li>
-</ul>
-<p>用户通常无法：</p>
-<ul>
-<li>修改 GRUB</li>
-<li>控制启动过程</li>
-<li>直接访问磁盘</li>
-</ul>
-<p>因此只能通过云平台提供的 <strong>重置密码功能</strong>。</p>
-<hr>
-<h1 id="八、运维最佳实践"><a href="#八、运维最佳实践" class="headerlink" title="八、运维最佳实践"></a>八、运维最佳实践</h1><p>建议：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 定期备份服务器</span><br><span class="line">2 禁止 root 远程登录</span><br><span class="line">3 使用 SSH Key 登录</span><br><span class="line">4 开启日志审计</span><br><span class="line">5 设置 GRUB 密码</span><br><span class="line">6 保护服务器物理安全</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="九、总结"><a href="#九、总结" class="headerlink" title="九、总结"></a>九、总结</h1><p>Linux 忘记 root 密码时，可以通过 <strong>GRUB 修改启动参数</strong>进入系统重置密码。</p>
-<p>常见方法：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>推荐程度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GRUB init=/bin/sh</td>
-<td>常用</td>
-</tr>
-<tr>
-<td>rd.break</td>
-<td>官方推荐</td>
-</tr>
-<tr>
-<td>单用户模式</td>
-<td>较旧</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>但前提是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">必须拥有服务器控制权限</span><br></pre></td></tr></table></figure>
-<p>生产环境必须做好：</p>
-<ul>
-<li>GRUB 安全</li>
-<li>BIOS 安全</li>
-<li>磁盘加密</li>
-<li>物理安全</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>docker部署mqtt</title>
-    <url>/2026/02/06/mqtt/</url>
-    <content><![CDATA[<p>Docker 部署 MQTT服务器(EMQX)</p>
-<p>m0_46601820</p>
-<p>于 2023-12-14 09:10:40 发布</p>
-<p>阅读量1.4k<br> 收藏 12</p>
-<p>点赞数 10<br>文章标签： docker 服务器 容器<br>版权<br>1.拉取镜像</p>
-<h1 id="拉取最新版本"><a href="#拉取最新版本" class="headerlink" title="拉取最新版本"></a>拉取最新版本</h1><p>docker pull emqx/emqx:latest</p>
-<h1 id="也可以拉取指定版本"><a href="#也可以拉取指定版本" class="headerlink" title="也可以拉取指定版本"></a>也可以拉取指定版本</h1><p>docker pull emqx/emqx:v4.0.0<br>2.创建临时容器</p>
-<p>docker run -d —name emqx -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 emqx/emqx:latest<br>端口：</p>
-<p>1883：MQTT协议端口<br>8083：WebSocket协议端口<br>8084：HTTP协议端口<br>8883：MQTT over SSL协议端口<br>18083：EMQX Dashboard Web管理界面端口<br> 3.创建文件挂载目录</p>
-<p>mkdir -p /app/emqx/etc /app/emqx/lib /app/emqx/data /app/emqx/log<br>4.从容器内复制配置文件到挂载目录下</p>
-<p>docker cp emqx:/opt/emqx/etc /app/emqx/etc<br> 5.强制删除docker 容器</p>
-<p>docker rm -f emqx<br>6.运行并挂载文件代码</p>
-<p>docker run -d \<br>—restart=always \<br>—name emqx \<br>-p 1883:1883 \<br>-p 8883:8883 \<br>-p 8083:8083 \<br>-p 8084:8084 \<br>-p 8081:8081 \<br>-p 18083:18083 \<br>-v /app/emqx/etc:/opt/emqx/etc \<br>emqx/emqx:latest<br>7.登录EMQX 内置的管理控制台 </p>
-<p><a href="http://localhost:18083/">http://localhost:18083/</a></p>
-<p>默认用户 admin，默认密码 public</p>
-<p>8.设置客户端认证</p>
-<p>在 EMQX Dashboard 页面，点击左侧导航栏的访问控制 -&gt; 认证，在随即打开的认证页面，单击创建，依次选择认证方式为 Password-Based，数据源为 Built-in Database，进入配置参数</p>
-<p>Docker | EMQX 文档</p>
-<p>使用Emqx5 | FastBee文档<br>————————————————</p>
-<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
-</code></pre><p>原文链接：<a href="https://blog.csdn.net/m0_46601820/article/details/134969551">https://blog.csdn.net/m0_46601820/article/details/134969551</a></p>
-]]></content>
   </entry>
   <entry>
     <title>git-jenkins-harbor-k8s部署笔记</title>
@@ -779,6 +547,219 @@
 </code></pre>]]></content>
   </entry>
   <entry>
+    <title>linux重置密码手册</title>
+    <url>/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Linux 忘记 Root 密码解决方案与安全防护指南（运维手册版）</span><br><span class="line"></span><br><span class="line">本文系统整理 **Linux 忘记 root 密码的解决方案**、**GRUB 启动原理**、**不同发行版重置方式**以及**生产环境安全防护措施**。  </span><br><span class="line">适用于 Linux 运维工程师、开发人员和系统管理员。</span><br><span class="line"></span><br><span class="line">适用系统包括：</span><br><span class="line"></span><br><span class="line">- **:contentReference[oaicite:0]&#123;index=0&#125;**</span><br><span class="line">- **:contentReference[oaicite:1]&#123;index=1&#125;**</span><br><span class="line">- **:contentReference[oaicite:2]&#123;index=2&#125;**</span><br><span class="line">- **:contentReference[oaicite:3]&#123;index=3&#125;**</span><br><span class="line">- **:contentReference[oaicite:4]&#123;index=4&#125;**</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># 一、Linux 启动流程简述</span><br><span class="line"></span><br><span class="line">理解 Linux 启动流程有助于理解为什么可以通过 GRUB 重置 root 密码。</span><br><span class="line"></span><br><span class="line">Linux 启动过程大致如下：</span><br></pre></td></tr></table></figure>
+<p>BIOS / UEFI<br> ↓<br> BootLoader（GRUB）<br> ↓<br> Linux Kernel<br> ↓<br> init / systemd<br> ↓<br> 用户空间</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">关键点：</span><br></pre></td></tr></table></figure>
+<p>GRUB 可以修改 Linux 内核启动参数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">如果我们修改启动参数，就可以：</span><br><span class="line"></span><br><span class="line">- 进入单用户模式</span><br><span class="line">- 进入 emergency shell</span><br><span class="line">- 修改系统文件</span><br><span class="line">- 重置 root 密码</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># 二、通过 GRUB 重置 root 密码（推荐方法）</span><br><span class="line"></span><br><span class="line">适用于：</span><br><span class="line"></span><br><span class="line">- CentOS 7+</span><br><span class="line">- Rocky Linux</span><br><span class="line">- AlmaLinux</span><br><span class="line"></span><br><span class="line">## 1 重启服务器</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-进入-GRUB-菜单"><a href="#2-进入-GRUB-菜单" class="headerlink" title="2 进入 GRUB 菜单"></a>2 进入 GRUB 菜单</h2><p>系统启动时按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ESC</span><br><span class="line">或</span><br><span class="line">Shift</span><br></pre></td></tr></table></figure>
+<p>进入 GRUB 界面。</p>
+<hr>
+<h2 id="3-编辑启动项"><a href="#3-编辑启动项" class="headerlink" title="3 编辑启动项"></a>3 编辑启动项</h2><p>选中当前系统启动项，按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
+<p>进入编辑模式。</p>
+<p>找到这一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/... ro</span><br></pre></td></tr></table></figure>
+<p>将：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ro</span><br></pre></td></tr></table></figure>
+<p>改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rw init=/sysroot/bin/sh</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/centos-root rw init=/sysroot/bin/sh</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-启动系统"><a href="#4-启动系统" class="headerlink" title="4 启动系统"></a>4 启动系统</h2><p>按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
+<p>进入紧急 shell。</p>
+<hr>
+<h2 id="5-切换到系统环境"><a href="#5-切换到系统环境" class="headerlink" title="5 切换到系统环境"></a>5 切换到系统环境</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chroot /sysroot</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6-修改-root-密码"><a href="#6-修改-root-密码" class="headerlink" title="6 修改 root 密码"></a>6 修改 root 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<p>输入新密码即可。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Changing password for user root.</span><br><span class="line">New password:</span><br><span class="line">Retype new password:</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="7-修复-SELinux-标签（重要）"><a href="#7-修复-SELinux-标签（重要）" class="headerlink" title="7 修复 SELinux 标签（重要）"></a>7 修复 SELinux 标签（重要）</h2><p>如果系统开启了 SELinux，需要执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch /.autorelabel</span><br></pre></td></tr></table></figure>
+<p>否则系统可能无法正常登录。</p>
+<hr>
+<h2 id="8-重启系统"><a href="#8-重启系统" class="headerlink" title="8 重启系统"></a>8 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">exit</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<p>系统启动后即可使用新密码登录。</p>
+<hr>
+<h1 id="三、使用-rd-break-重置密码（CentOS-官方方式）"><a href="#三、使用-rd-break-重置密码（CentOS-官方方式）" class="headerlink" title="三、使用 rd.break 重置密码（CentOS 官方方式）"></a>三、使用 rd.break 重置密码（CentOS 官方方式）</h1><p>该方法是 **Red Hat 推荐的方式。</p>
+<h2 id="1-进入-GRUB-编辑界面"><a href="#1-进入-GRUB-编辑界面" class="headerlink" title="1 进入 GRUB 编辑界面"></a>1 进入 GRUB 编辑界面</h2><p>按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
+<p>找到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16</span><br></pre></td></tr></table></figure>
+<p>在行尾添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rd.break</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/centos-root ro rd.break</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-启动系统"><a href="#2-启动系统" class="headerlink" title="2 启动系统"></a>2 启动系统</h2><p>按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
+<p>进入 emergency mode。</p>
+<hr>
+<h2 id="3-重新挂载系统分区"><a href="#3-重新挂载系统分区" class="headerlink" title="3 重新挂载系统分区"></a>3 重新挂载系统分区</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount -o remount,rw /sysroot</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-切换到系统环境"><a href="#4-切换到系统环境" class="headerlink" title="4 切换到系统环境"></a>4 切换到系统环境</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chroot /sysroot</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="5-修改-root-密码"><a href="#5-修改-root-密码" class="headerlink" title="5 修改 root 密码"></a>5 修改 root 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6-SELinux-修复"><a href="#6-SELinux-修复" class="headerlink" title="6 SELinux 修复"></a>6 SELinux 修复</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch /.autorelabel</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="7-重启系统"><a href="#7-重启系统" class="headerlink" title="7 重启系统"></a>7 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">exit</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="四、Ubuntu-Debian-重置-root-密码"><a href="#四、Ubuntu-Debian-重置-root-密码" class="headerlink" title="四、Ubuntu / Debian 重置 root 密码"></a>四、Ubuntu / Debian 重置 root 密码</h1><p>适用于：</p>
+<ul>
+<li><strong>Ubuntu</strong></li>
+<li><strong>Debian</strong></li>
+</ul>
+<h2 id="1-进入-GRUB"><a href="#1-进入-GRUB" class="headerlink" title="1 进入 GRUB"></a>1 进入 GRUB</h2><p>开机按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ESC</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-编辑启动项"><a href="#2-编辑启动项" class="headerlink" title="2 编辑启动项"></a>2 编辑启动项</h2><p>找到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux /boot/vmlinuz</span><br></pre></td></tr></table></figure>
+<p>在行尾添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">init=/bin/bash</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="3-启动系统"><a href="#3-启动系统" class="headerlink" title="3 启动系统"></a>3 启动系统</h2><p>按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
+<p>进入 root shell。</p>
+<hr>
+<h2 id="4-挂载为读写"><a href="#4-挂载为读写" class="headerlink" title="4 挂载为读写"></a>4 挂载为读写</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount -o remount,rw /</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="5-修改密码"><a href="#5-修改密码" class="headerlink" title="5 修改密码"></a>5 修改密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6-重启系统"><a href="#6-重启系统" class="headerlink" title="6 重启系统"></a>6 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exec /sbin/init</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">reboot -f</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="五、为什么可以重置-root-密码？"><a href="#五、为什么可以重置-root-密码？" class="headerlink" title="五、为什么可以重置 root 密码？"></a>五、为什么可以重置 root 密码？</h1><p>核心原因：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GRUB 可以修改 Linux 启动参数</span><br></pre></td></tr></table></figure>
+<p>只要满足以下条件：</p>
+<ul>
+<li>能访问服务器控制台</li>
+<li>能修改 GRUB 启动项</li>
+<li>没有设置 GRUB 密码</li>
+</ul>
+<p>就可以重置 root 密码。</p>
+<hr>
+<h1 id="六、生产环境安全防护"><a href="#六、生产环境安全防护" class="headerlink" title="六、生产环境安全防护"></a>六、生产环境安全防护</h1><p>为了防止非法修改 root 密码，需要采取安全措施。</p>
+<hr>
+<h2 id="1-设置-GRUB-密码"><a href="#1-设置-GRUB-密码" class="headerlink" title="1 设置 GRUB 密码"></a>1 设置 GRUB 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grub2-setpassword</span><br></pre></td></tr></table></figure>
+<p>这样进入 GRUB 编辑界面需要密码。</p>
+<hr>
+<h2 id="2-禁止外部设备启动"><a href="#2-禁止外部设备启动" class="headerlink" title="2 禁止外部设备启动"></a>2 禁止外部设备启动</h2><p>在 BIOS 中：</p>
+<ul>
+<li>禁止 U 盘启动</li>
+<li>禁止光驱启动</li>
+</ul>
+<hr>
+<h2 id="3-设置-BIOS-密码"><a href="#3-设置-BIOS-密码" class="headerlink" title="3 设置 BIOS 密码"></a>3 设置 BIOS 密码</h2><p>防止攻击者修改启动顺序。</p>
+<hr>
+<h2 id="4-使用磁盘加密"><a href="#4-使用磁盘加密" class="headerlink" title="4 使用磁盘加密"></a>4 使用磁盘加密</h2><p>Linux 推荐使用：</p>
+<p><strong>LUKS</strong></p>
+<p>磁盘加密后：</p>
+<ul>
+<li>没有密码无法挂载磁盘</li>
+<li>无法修改系统文件</li>
+<li>无法重置 root 密码</li>
+</ul>
+<hr>
+<h2 id="5-机房物理安全"><a href="#5-机房物理安全" class="headerlink" title="5 机房物理安全"></a>5 机房物理安全</h2><p>服务器安全原则：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">物理安全 &gt; 系统安全</span><br></pre></td></tr></table></figure>
+<p>如果攻击者拥有：</p>
+<ul>
+<li>服务器物理访问权限</li>
+<li>控制台权限</li>
+</ul>
+<p>任何系统都可能被破解。</p>
+<hr>
+<h1 id="七、云服务器为什么不能这样操作"><a href="#七、云服务器为什么不能这样操作" class="headerlink" title="七、云服务器为什么不能这样操作"></a>七、云服务器为什么不能这样操作</h1><p>在云环境中，例如：</p>
+<ul>
+<li><strong>Amazon Web Services</strong></li>
+<li><strong>Alibaba Cloud</strong></li>
+<li><strong>Tencent Cloud</strong></li>
+</ul>
+<p>用户通常无法：</p>
+<ul>
+<li>修改 GRUB</li>
+<li>控制启动过程</li>
+<li>直接访问磁盘</li>
+</ul>
+<p>因此只能通过云平台提供的 <strong>重置密码功能</strong>。</p>
+<hr>
+<h1 id="八、运维最佳实践"><a href="#八、运维最佳实践" class="headerlink" title="八、运维最佳实践"></a>八、运维最佳实践</h1><p>建议：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 定期备份服务器</span><br><span class="line">2 禁止 root 远程登录</span><br><span class="line">3 使用 SSH Key 登录</span><br><span class="line">4 开启日志审计</span><br><span class="line">5 设置 GRUB 密码</span><br><span class="line">6 保护服务器物理安全</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="九、总结"><a href="#九、总结" class="headerlink" title="九、总结"></a>九、总结</h1><p>Linux 忘记 root 密码时，可以通过 <strong>GRUB 修改启动参数</strong>进入系统重置密码。</p>
+<p>常见方法：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>推荐程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GRUB init=/bin/sh</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>rd.break</td>
+<td>官方推荐</td>
+</tr>
+<tr>
+<td>单用户模式</td>
+<td>较旧</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>但前提是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">必须拥有服务器控制权限</span><br></pre></td></tr></table></figure>
+<p>生产环境必须做好：</p>
+<ul>
+<li>GRUB 安全</li>
+<li>BIOS 安全</li>
+<li>磁盘加密</li>
+<li>物理安全</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>docker部署mqtt</title>
+    <url>/2026/02/06/mqtt/</url>
+    <content><![CDATA[<p>Docker 部署 MQTT服务器(EMQX)</p>
+<p>m0_46601820</p>
+<p>于 2023-12-14 09:10:40 发布</p>
+<p>阅读量1.4k<br> 收藏 12</p>
+<p>点赞数 10<br>文章标签： docker 服务器 容器<br>版权<br>1.拉取镜像</p>
+<h1 id="拉取最新版本"><a href="#拉取最新版本" class="headerlink" title="拉取最新版本"></a>拉取最新版本</h1><p>docker pull emqx/emqx:latest</p>
+<h1 id="也可以拉取指定版本"><a href="#也可以拉取指定版本" class="headerlink" title="也可以拉取指定版本"></a>也可以拉取指定版本</h1><p>docker pull emqx/emqx:v4.0.0<br>2.创建临时容器</p>
+<p>docker run -d —name emqx -p 1883:1883 -p 8083:8083 -p 8084:8084 -p 8883:8883 -p 18083:18083 emqx/emqx:latest<br>端口：</p>
+<p>1883：MQTT协议端口<br>8083：WebSocket协议端口<br>8084：HTTP协议端口<br>8883：MQTT over SSL协议端口<br>18083：EMQX Dashboard Web管理界面端口<br> 3.创建文件挂载目录</p>
+<p>mkdir -p /app/emqx/etc /app/emqx/lib /app/emqx/data /app/emqx/log<br>4.从容器内复制配置文件到挂载目录下</p>
+<p>docker cp emqx:/opt/emqx/etc /app/emqx/etc<br> 5.强制删除docker 容器</p>
+<p>docker rm -f emqx<br>6.运行并挂载文件代码</p>
+<p>docker run -d \<br>—restart=always \<br>—name emqx \<br>-p 1883:1883 \<br>-p 8883:8883 \<br>-p 8083:8083 \<br>-p 8084:8084 \<br>-p 8081:8081 \<br>-p 18083:18083 \<br>-v /app/emqx/etc:/opt/emqx/etc \<br>emqx/emqx:latest<br>7.登录EMQX 内置的管理控制台 </p>
+<p><a href="http://localhost:18083/">http://localhost:18083/</a></p>
+<p>默认用户 admin，默认密码 public</p>
+<p>8.设置客户端认证</p>
+<p>在 EMQX Dashboard 页面，点击左侧导航栏的访问控制 -&gt; 认证，在随即打开的认证页面，单击创建，依次选择认证方式为 Password-Based，数据源为 Built-in Database，进入配置参数</p>
+<p>Docker | EMQX 文档</p>
+<p>使用Emqx5 | FastBee文档<br>————————————————</p>
+<pre><code>                        版权声明：本文为博主原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接和本声明。
+</code></pre><p>原文链接：<a href="https://blog.csdn.net/m0_46601820/article/details/134969551">https://blog.csdn.net/m0_46601820/article/details/134969551</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>springcloud项目部署为https</title>
     <url>/2026/02/06/springcloud%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%BAhttps%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</url>
     <content><![CDATA[<h1 id="springcloud项目部署为https"><a href="#springcloud项目部署为https" class="headerlink" title="springcloud项目部署为https"></a>springcloud项目部署为https</h1><h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a>一、环境准备</h2><h3 id="1、安装jdk、openssl-并配置环境变量"><a href="#1、安装jdk、openssl-并配置环境变量" class="headerlink" title="1、安装jdk、openssl 并配置环境变量"></a>1、安装jdk、openssl 并配置环境变量</h3><h2 id="二、生成证书"><a href="#二、生成证书" class="headerlink" title="二、生成证书"></a>二、生成证书</h2><h3 id="1、注意事项"><a href="#1、注意事项" class="headerlink" title="1、注意事项"></a>1、注意事项</h3><p>1.1、 本次部署文档  采用  自签根证书、根证书签发服务证书、配置信任库的模式</p>
@@ -846,20 +827,550 @@ ssl_prefer_server_ciphers on;
 ssl_ciphers HIGH:!aNULL:!MD5;
 
 # 静态文件服务配置
-location / &#123;
+location / {
     root E:/kunteng/qianduan/OA/dist;  # 确保路径正确
     index index.html;
-&#125;
+}
 
 # 反向代理到你的 Spring Cloud Gateway
-location /api/ &#123;
+location /api/ {
     proxy_pass https://192.168.3.166:38760;  # 替换为实际的网关地址和端口
     proxy_set_header Host $host;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Proto $scheme;
-&#125;
+}
 </code></pre><p>}</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>Spring Boot 整合 Activiti 实战：支持前端在线绘制流程图，并通过 JSON 自动部署流程</title>
+    <url>/2026/03/12/springboot-activiti-hexo/</url>
+    <content><![CDATA[<h1 id="Spring-Boot-整合-Activiti-实战：支持前端在线绘制流程图，并通过-JSON-自动部署流程"><a href="#Spring-Boot-整合-Activiti-实战：支持前端在线绘制流程图，并通过-JSON-自动部署流程" class="headerlink" title="Spring Boot 整合 Activiti 实战：支持前端在线绘制流程图，并通过 JSON 自动部署流程"></a>Spring Boot 整合 Activiti 实战：支持前端在线绘制流程图，并通过 JSON 自动部署流程</h1><blockquote>
+<p>适用场景：OA、请假、报销、合同审批、采购审批、工单流转、售后工单、业务编排。</p>
+<p>文章目标：从 0 到 1 搭建一个 <strong>Spring Boot + Activiti + MySQL + bpmn-js</strong> 的工作流系统，做到：</p>
+<ol>
+<li>后端完成 Activiti 基础集成。</li>
+<li>支持流程定义、流程部署、启动流程、待办任务、审批、驳回、历史查询。</li>
+<li>前端可直接在线绘制 BPMN 流程图。</li>
+<li>前端通过 <strong>JSON 请求体</strong> 提交流程图数据，后端自动部署流程。</li>
+<li>在 <strong>不强绑定某个前端框架</strong> 的前提下，给出 Vue/React 都好接入的方案。</li>
+</ol>
+</blockquote>
+<hr>
+<h2 id="1-为什么选择-Activiti"><a href="#1-为什么选择-Activiti" class="headerlink" title="1. 为什么选择 Activiti"></a>1. 为什么选择 Activiti</h2><p>Activiti 是一个轻量级、Java 生态友好的 BPMN 2.0 工作流引擎，适合在 Spring Boot 项目中快速落地审批流、任务流和业务流程自动化。它的核心能力包括：</p>
+<ul>
+<li><strong>流程定义与部署</strong>：将 BPMN 2.0 流程定义部署到引擎。</li>
+<li><strong>流程实例管理</strong>：启动、挂起、激活、终止流程实例。</li>
+<li><strong>任务管理</strong>：查询待办、签收、完成、委派、转办。</li>
+<li><strong>历史数据追踪</strong>：查询流程执行历史、任务历史、变量历史。</li>
+<li><strong>流程变量</strong>：支持业务参数在整个流程中的流转。</li>
+<li><strong>网关与条件流转</strong>：支持排他网关、并行网关、包含网关等。</li>
+<li><strong>监听器与扩展点</strong>：可以在节点进入、离开、任务创建、任务完成时扩展业务逻辑。</li>
+</ul>
+<p>如果你的场景本质上是“<strong>一组步骤按照规则流转，并且每个节点需要人或系统来处理</strong>”，那 Activiti 就很适合。</p>
+<hr>
+<h2 id="2-先说结论：前端画图-JSON-自动部署，推荐怎么做"><a href="#2-先说结论：前端画图-JSON-自动部署，推荐怎么做" class="headerlink" title="2. 先说结论：前端画图 + JSON 自动部署，推荐怎么做"></a>2. 先说结论：前端画图 + JSON 自动部署，推荐怎么做</h2><p>很多人第一次做“在线流程设计器”时，会纠结“前端到底传 XML 还是传 JSON”。这里直接给结论：</p>
+<h3 id="推荐方案：JSON-外壳-BPMN-XML-内容"><a href="#推荐方案：JSON-外壳-BPMN-XML-内容" class="headerlink" title="推荐方案：JSON 外壳 + BPMN XML 内容"></a>推荐方案：JSON 外壳 + BPMN XML 内容</h3><p>前端用 <code>bpmn-js</code> 在线绘制流程图。绘制完成后导出 BPMN XML，然后将 XML 放进一个 JSON 请求体中提交给后端，例如：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;processKey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;leaveApproval&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;processName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;请假审批流程&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;category&quot;</span><span class="punctuation">:</span> <span class="string">&quot;oa&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tenantId&quot;</span><span class="punctuation">:</span> <span class="string">&quot;default&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;bpmnXml&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;...&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这样做的优点：</p>
+<ol>
+<li><strong>前端仍然是传 JSON</strong>，满足接口规范。</li>
+<li><code>bpmn-js</code> 原生最擅长导出的是 BPMN XML，直接部署最稳。</li>
+<li>后端无需做复杂的“自定义节点 JSON -&gt; BPMN XML”转换。</li>
+<li>与 Activiti 的部署接口天然匹配，维护成本最低。</li>
+</ol>
+<h3 id="也支持纯业务-JSON-建模"><a href="#也支持纯业务-JSON-建模" class="headerlink" title="也支持纯业务 JSON 建模"></a>也支持纯业务 JSON 建模</h3><p>如果你的前端不是标准 BPMN 设计器，而是你自己封装的一套“节点、连线、审批人、条件表达式”的 JSON 结构，也可以在后端把该 JSON 转成 <code>BpmnModel</code> 再生成 XML 并部署。</p>
+<p>本文会把两种方式都讲清楚，但实际项目里建议优先采用：</p>
+<p><strong>前端画 BPMN -&gt; 导出 XML -&gt; 放入 JSON 请求体 -&gt; 后端自动部署</strong>。</p>
+<hr>
+<h2 id="3-技术选型建议"><a href="#3-技术选型建议" class="headerlink" title="3. 技术选型建议"></a>3. 技术选型建议</h2><p>本文示例选型如下：</p>
+<ul>
+<li><strong>JDK</strong>：17</li>
+<li><strong>Spring Boot</strong>：2.7.x 或你当前公司稳定版本</li>
+<li><strong>Activiti</strong>：与 Spring Boot 兼容的稳定版本</li>
+<li><strong>数据库</strong>：MySQL 8.x</li>
+<li><strong>前端流程设计器</strong>：bpmn-js</li>
+<li><strong>构建工具</strong>：Maven</li>
+</ul>
+<h3 id="版本建议说明"><a href="#版本建议说明" class="headerlink" title="版本建议说明"></a>版本建议说明</h3><p>Activiti 在不同分支、不同 Starter、不同仓库之间版本会比较分散，因此生产环境一定要以“<strong>你当前项目的 Spring Boot 版本、JDK 版本、依赖兼容性</strong>”为准，而不是只看某一个博客里的版本号。比较稳妥的做法是：</p>
+<ol>
+<li>先固定你的 Spring Boot 版本。</li>
+<li>选一个与你项目兼容的 Activiti Starter。</li>
+<li>在 PoC 环境把流程部署、任务流转、历史查询、事务一致性全部跑通后再进入生产。</li>
+</ol>
+<hr>
+<h2 id="4-Activiti-的核心表结构和核心服务"><a href="#4-Activiti-的核心表结构和核心服务" class="headerlink" title="4. Activiti 的核心表结构和核心服务"></a>4. Activiti 的核心表结构和核心服务</h2><p>Spring Boot 启动后，Activiti 会自动建表（前提是配置允许自动建表）。常见表按用途可分为几类：</p>
+<h3 id="4-1-流程定义相关"><a href="#4-1-流程定义相关" class="headerlink" title="4.1 流程定义相关"></a>4.1 流程定义相关</h3><ul>
+<li><code>ACT_RE_DEPLOYMENT</code>：部署信息</li>
+<li><code>ACT_RE_PROCDEF</code>：流程定义</li>
+<li><code>ACT_GE_BYTEARRAY</code>：BPMN XML、PNG 等二进制资源</li>
+</ul>
+<h3 id="4-2-运行时相关"><a href="#4-2-运行时相关" class="headerlink" title="4.2 运行时相关"></a>4.2 运行时相关</h3><ul>
+<li><code>ACT_RU_EXECUTION</code>：执行实例</li>
+<li><code>ACT_RU_TASK</code>：运行中的任务</li>
+<li><code>ACT_RU_VARIABLE</code>：运行中的流程变量</li>
+<li><code>ACT_RU_IDENTITYLINK</code>：任务与用户/组关系</li>
+</ul>
+<h3 id="4-3-历史相关"><a href="#4-3-历史相关" class="headerlink" title="4.3 历史相关"></a>4.3 历史相关</h3><ul>
+<li><code>ACT_HI_PROCINST</code>：历史流程实例</li>
+<li><code>ACT_HI_TASKINST</code>：历史任务实例</li>
+<li><code>ACT_HI_ACTINST</code>：历史活动实例</li>
+<li><code>ACT_HI_VARINST</code>：历史变量</li>
+</ul>
+<h3 id="4-4-身份与权限相关"><a href="#4-4-身份与权限相关" class="headerlink" title="4.4 身份与权限相关"></a>4.4 身份与权限相关</h3><ul>
+<li><code>ACT_ID_USER</code>：用户</li>
+<li><code>ACT_ID_GROUP</code>：组</li>
+<li><code>ACT_ID_MEMBERSHIP</code>：用户-组关系</li>
+</ul>
+<p>在实际项目中，很多团队不会直接使用 Activiti 的内置用户体系，而是使用自己系统的用户、角色、组织架构，只把“处理人、候选组、变量”传给引擎。</p>
+<hr>
+<h2 id="5-Activiti-中最重要的几个服务"><a href="#5-Activiti-中最重要的几个服务" class="headerlink" title="5. Activiti 中最重要的几个服务"></a>5. Activiti 中最重要的几个服务</h2><p>Activiti 的 API 主要围绕一组 Service 展开：</p>
+<ul>
+<li><code>RepositoryService</code>：流程定义管理、部署管理</li>
+<li><code>RuntimeService</code>：启动流程、删除流程实例、设置变量</li>
+<li><code>TaskService</code>：查询待办、签收任务、完成任务</li>
+<li><code>HistoryService</code>：历史流程、历史任务查询</li>
+<li><code>ManagementService</code>：数据库表、作业、引擎管理</li>
+<li><code>IdentityService</code>：用户组管理</li>
+<li><code>FormService</code>：表单管理</li>
+</ul>
+<p>后端绝大多数业务场景，其实都能归纳为下面这五件事：</p>
+<ol>
+<li>发布流程</li>
+<li>启动流程</li>
+<li>查询我的待办</li>
+<li>审批任务</li>
+<li>查询流程历史</li>
+</ol>
+<hr>
+<h2 id="6-创建-Spring-Boot-工程"><a href="#6-创建-Spring-Boot-工程" class="headerlink" title="6. 创建 Spring Boot 工程"></a>6. 创建 Spring Boot 工程</h2><h3 id="6-1-Maven-依赖"><a href="#6-1-Maven-依赖" class="headerlink" title="6.1 Maven 依赖"></a>6.1 Maven 依赖</h3><p>下面给出一个可落地的依赖模板。注意：<strong>版本号请按你的项目兼容性调整</strong>。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-validation<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-jdbc<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-j<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.activiti<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>activiti-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;activiti.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.fasterxml.jackson.core<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jackson-databind<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-test<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-2-application-yml"><a href="#6-2-application-yml" class="headerlink" title="6.2 application.yml"></a>6.2 application.yml</h3><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">8080</span></span><br><span class="line"></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/activiti_demo?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=Asia/Shanghai&amp;nullCatalogMeansCurrent=true</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">jackson:</span></span><br><span class="line">    <span class="attr">date-format:</span> <span class="string">yyyy-MM-dd</span> <span class="string">HH:mm:ss</span></span><br><span class="line">    <span class="attr">time-zone:</span> <span class="string">Asia/Shanghai</span></span><br><span class="line"></span><br><span class="line"><span class="attr">activiti:</span></span><br><span class="line">  <span class="attr">database-schema-update:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">db-history-used:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">history-level:</span> <span class="string">full</span></span><br><span class="line">  <span class="attr">check-process-definitions:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-3-启动类"><a href="#6-3-启动类" class="headerlink" title="6.3 启动类"></a>6.3 启动类</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ActivitiDemoApplication</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(ActivitiDemoApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启动成功后，数据库中应该会自动创建一批 <code>ACT_</code> 开头的表。</p>
+<hr>
+<h2 id="7-先理解-BPMN：你以后会一直用到的节点"><a href="#7-先理解-BPMN：你以后会一直用到的节点" class="headerlink" title="7. 先理解 BPMN：你以后会一直用到的节点"></a>7. 先理解 BPMN：你以后会一直用到的节点</h2><p>在实际审批系统里，最常用的 BPMN 元素如下：</p>
+<h3 id="7-1-StartEvent-开始事件"><a href="#7-1-StartEvent-开始事件" class="headerlink" title="7.1 StartEvent 开始事件"></a>7.1 StartEvent 开始事件</h3><p>流程入口。一个流程一般至少要有一个开始事件。</p>
+<h3 id="7-2-UserTask-用户任务"><a href="#7-2-UserTask-用户任务" class="headerlink" title="7.2 UserTask 用户任务"></a>7.2 UserTask 用户任务</h3><p>表示某个节点需要人工处理，例如：</p>
+<ul>
+<li>部门经理审批</li>
+<li>财务审批</li>
+<li>人事审批</li>
+<li>总经理审批</li>
+</ul>
+<h3 id="7-3-ExclusiveGateway-排他网关"><a href="#7-3-ExclusiveGateway-排他网关" class="headerlink" title="7.3 ExclusiveGateway 排他网关"></a>7.3 ExclusiveGateway 排他网关</h3><p>表示条件分支，只会走其中一条路径。例如：</p>
+<ul>
+<li>请假天数 &lt;= 3 天，走部门经理审批</li>
+<li>请假天数 &gt; 3 天，走总监审批</li>
+</ul>
+<h3 id="7-4-ParallelGateway-并行网关"><a href="#7-4-ParallelGateway-并行网关" class="headerlink" title="7.4 ParallelGateway 并行网关"></a>7.4 ParallelGateway 并行网关</h3><p>表示并行处理。例如同时发给法务和财务审批，两个都完成后再往下走。</p>
+<h3 id="7-5-ServiceTask-服务任务"><a href="#7-5-ServiceTask-服务任务" class="headerlink" title="7.5 ServiceTask 服务任务"></a>7.5 ServiceTask 服务任务</h3><p>表示由系统自动执行的节点，例如：</p>
+<ul>
+<li>自动生成单号</li>
+<li>调用第三方接口</li>
+<li>发送短信/邮件/站内信</li>
+<li>调用 ERP / CRM / OA 系统接口</li>
+</ul>
+<h3 id="7-6-EndEvent-结束事件"><a href="#7-6-EndEvent-结束事件" class="headerlink" title="7.6 EndEvent 结束事件"></a>7.6 EndEvent 结束事件</h3><p>流程结束。</p>
+<hr>
+<h2 id="8-一个最小可运行的请假流程-BPMN-示例"><a href="#8-一个最小可运行的请假流程-BPMN-示例" class="headerlink" title="8. 一个最小可运行的请假流程 BPMN 示例"></a>8. 一个最小可运行的请假流程 BPMN 示例</h2><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">definitions</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">xmlns:activiti</span>=<span class="string">&quot;http://activiti.org/bpmn&quot;</span></span></span><br><span class="line"><span class="tag">             <span class="attr">targetNamespace</span>=<span class="string">&quot;http://www.example.com/processdef&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">process</span> <span class="attr">id</span>=<span class="string">&quot;leaveApproval&quot;</span> <span class="attr">name</span>=<span class="string">&quot;请假审批流程&quot;</span> <span class="attr">isExecutable</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">startEvent</span> <span class="attr">id</span>=<span class="string">&quot;startEvent&quot;</span> <span class="attr">name</span>=<span class="string">&quot;开始&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">userTask</span> <span class="attr">id</span>=<span class="string">&quot;deptLeaderApprove&quot;</span> <span class="attr">name</span>=<span class="string">&quot;部门经理审批&quot;</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">activiti:assignee</span>=<span class="string">&quot;$&#123;deptLeader&#125;&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusiveGateway</span> <span class="attr">id</span>=<span class="string">&quot;daysGateway&quot;</span> <span class="attr">name</span>=<span class="string">&quot;请假天数判断&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">userTask</span> <span class="attr">id</span>=<span class="string">&quot;hrApprove&quot;</span> <span class="attr">name</span>=<span class="string">&quot;HR审批&quot;</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">activiti:assignee</span>=<span class="string">&quot;$&#123;hr&#125;&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">userTask</span> <span class="attr">id</span>=<span class="string">&quot;directorApprove&quot;</span> <span class="attr">name</span>=<span class="string">&quot;总监审批&quot;</span></span></span><br><span class="line"><span class="tag">                  <span class="attr">activiti:assignee</span>=<span class="string">&quot;$&#123;director&#125;&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">endEvent</span> <span class="attr">id</span>=<span class="string">&quot;endEvent&quot;</span> <span class="attr">name</span>=<span class="string">&quot;结束&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">&quot;flow1&quot;</span> <span class="attr">sourceRef</span>=<span class="string">&quot;startEvent&quot;</span> <span class="attr">targetRef</span>=<span class="string">&quot;deptLeaderApprove&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">&quot;flow2&quot;</span> <span class="attr">sourceRef</span>=<span class="string">&quot;deptLeaderApprove&quot;</span> <span class="attr">targetRef</span>=<span class="string">&quot;daysGateway&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">&quot;flow3&quot;</span> <span class="attr">sourceRef</span>=<span class="string">&quot;daysGateway&quot;</span> <span class="attr">targetRef</span>=<span class="string">&quot;hrApprove&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">conditionExpression</span> <span class="attr">xsi:type</span>=<span class="string">&quot;tFormalExpression&quot;</span>&gt;</span>&lt;![CDATA[$&#123;days &lt;= 3&#125;]]&gt;<span class="tag">&lt;/<span class="name">conditionExpression</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sequenceFlow</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">&quot;flow4&quot;</span> <span class="attr">sourceRef</span>=<span class="string">&quot;daysGateway&quot;</span> <span class="attr">targetRef</span>=<span class="string">&quot;directorApprove&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">conditionExpression</span> <span class="attr">xsi:type</span>=<span class="string">&quot;tFormalExpression&quot;</span>&gt;</span>&lt;![CDATA[$&#123;days &gt; 3&#125;]]&gt;<span class="tag">&lt;/<span class="name">conditionExpression</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">sequenceFlow</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">&quot;flow5&quot;</span> <span class="attr">sourceRef</span>=<span class="string">&quot;hrApprove&quot;</span> <span class="attr">targetRef</span>=<span class="string">&quot;endEvent&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">sequenceFlow</span> <span class="attr">id</span>=<span class="string">&quot;flow6&quot;</span> <span class="attr">sourceRef</span>=<span class="string">&quot;directorApprove&quot;</span> <span class="attr">targetRef</span>=<span class="string">&quot;endEvent&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">process</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">definitions</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个流程已经覆盖了审批流里最常见的元素：开始、人工审批、条件判断、结束。</p>
+<hr>
+<h2 id="9-后端实现：流程部署"><a href="#9-后端实现：流程部署" class="headerlink" title="9. 后端实现：流程部署"></a>9. 后端实现：流程部署</h2><h3 id="9-1-定义请求对象"><a href="#9-1-定义请求对象" class="headerlink" title="9.1 定义请求对象"></a>9.1 定义请求对象</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> jakarta.validation.constraints.NotBlank;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProcessDeployRequest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotBlank(message = &quot;流程Key不能为空&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String processKey;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NotBlank(message = &quot;流程名称不能为空&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String processName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String category;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String tenantId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 前端通过 bpmn-js 导出的 BPMN XML</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@NotBlank(message = &quot;bpmnXml不能为空&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> String bpmnXml;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="9-2-部署服务"><a href="#9-2-部署服务" class="headerlink" title="9.2 部署服务"></a>9.2 部署服务</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> org.activiti.engine.RepositoryService;</span><br><span class="line"><span class="keyword">import</span> org.activiti.engine.repository.Deployment;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.ByteArrayInputStream;</span><br><span class="line"><span class="keyword">import</span> java.nio.charset.StandardCharsets;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProcessDeployService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RepositoryService repositoryService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">String</span> <span class="title function_">deploy</span><span class="params">(ProcessDeployRequest request)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">resourceName</span> <span class="operator">=</span> request.getProcessKey() + <span class="string">&quot;.bpmn20.xml&quot;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">Deployment</span> <span class="variable">deployment</span> <span class="operator">=</span> repositoryService.createDeployment()</span><br><span class="line">                .name(request.getProcessName())</span><br><span class="line">                .category(request.getCategory())</span><br><span class="line">                .tenantId(request.getTenantId())</span><br><span class="line">                .addInputStream(</span><br><span class="line">                        resourceName,</span><br><span class="line">                        <span class="keyword">new</span> <span class="title class_">ByteArrayInputStream</span>(request.getBpmnXml().getBytes(StandardCharsets.UTF_8))</span><br><span class="line">                )</span><br><span class="line">                .deploy();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> deployment.getId();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="9-3-控制器"><a href="#9-3-控制器" class="headerlink" title="9.3 控制器"></a>9.3 控制器</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> jakarta.validation.Valid;</span><br><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api/process&quot;)</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProcessController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ProcessDeployService processDeployService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/deploy&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Map</span>&lt;String, Object&gt; <span class="title function_">deploy</span><span class="params">(<span class="meta">@RequestBody</span> <span class="meta">@Valid</span> ProcessDeployRequest request)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">deploymentId</span> <span class="operator">=</span> processDeployService.deploy(request);</span><br><span class="line">        <span class="type">Map</span>&lt;String, Object&gt; <span class="variable">result</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        result.put(<span class="string">&quot;success&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">        result.put(<span class="string">&quot;deploymentId&quot;</span>, deploymentId);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，你已经完成了“<strong>前端传 JSON，后端自动部署流程</strong>”这件事。</p>
+<p>这里的关键点在于：</p>
+<ul>
+<li>请求体是 JSON。</li>
+<li>JSON 中包含 <code>bpmnXml</code> 字段。</li>
+<li>后端将 XML 作为部署资源提交给 Activiti。</li>
+</ul>
+<p>这就是最稳、最易维护、最符合工程实践的实现方式。</p>
+<hr>
+<h2 id="10-后端实现：启动流程实例"><a href="#10-后端实现：启动流程实例" class="headerlink" title="10. 后端实现：启动流程实例"></a>10. 后端实现：启动流程实例</h2><h3 id="10-1-请求对象"><a href="#10-1-请求对象" class="headerlink" title="10.1 请求对象"></a>10.1 请求对象</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProcessStartRequest</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String processDefinitionKey;</span><br><span class="line">    <span class="keyword">private</span> String businessKey;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, Object&gt; variables;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10-2-启动流程服务"><a href="#10-2-启动流程服务" class="headerlink" title="10.2 启动流程服务"></a>10.2 启动流程服务</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> org.activiti.engine.RuntimeService;</span><br><span class="line"><span class="keyword">import</span> org.activiti.engine.runtime.ProcessInstance;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProcessRuntimeAppService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RuntimeService runtimeService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">String</span> <span class="title function_">start</span><span class="params">(ProcessStartRequest request)</span> &#123;</span><br><span class="line">        <span class="type">ProcessInstance</span> <span class="variable">processInstance</span> <span class="operator">=</span> runtimeService.startProcessInstanceByKey(</span><br><span class="line">                request.getProcessDefinitionKey(),</span><br><span class="line">                request.getBusinessKey(),</span><br><span class="line">                request.getVariables()</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> processInstance.getProcessInstanceId();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10-3-控制器"><a href="#10-3-控制器" class="headerlink" title="10.3 控制器"></a>10.3 控制器</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api/runtime&quot;)</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RuntimeController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ProcessRuntimeAppService processRuntimeAppService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/start&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Map</span>&lt;String, Object&gt; <span class="title function_">start</span><span class="params">(<span class="meta">@RequestBody</span> ProcessStartRequest request)</span> &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">processInstanceId</span> <span class="operator">=</span> processRuntimeAppService.start(request);</span><br><span class="line">        <span class="type">Map</span>&lt;String, Object&gt; <span class="variable">result</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        result.put(<span class="string">&quot;success&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">        result.put(<span class="string">&quot;processInstanceId&quot;</span>, processInstanceId);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="10-4-启动流程示例"><a href="#10-4-启动流程示例" class="headerlink" title="10.4 启动流程示例"></a>10.4 启动流程示例</h3><figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;processDefinitionKey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;leaveApproval&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;businessKey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;LEAVE_20260312001&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;variables&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;days&quot;</span><span class="punctuation">:</span> <span class="number">5</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;deptLeader&quot;</span><span class="punctuation">:</span> <span class="string">&quot;zhangsan&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;hr&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lisi&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;director&quot;</span><span class="punctuation">:</span> <span class="string">&quot;wangwu&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;applicant&quot;</span><span class="punctuation">:</span> <span class="string">&quot;hsl&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这里的 <code>variables</code> 就是流程变量，它决定了：</p>
+<ul>
+<li>当前流程走哪条线</li>
+<li>节点由谁审批</li>
+<li>历史记录中保留哪些业务信息</li>
+</ul>
+<hr>
+<h2 id="11-后端实现：待办任务、签收、审批完成"><a href="#11-后端实现：待办任务、签收、审批完成" class="headerlink" title="11. 后端实现：待办任务、签收、审批完成"></a>11. 后端实现：待办任务、签收、审批完成</h2><h3 id="11-1-查询我的待办任务"><a href="#11-1-查询我的待办任务" class="headerlink" title="11.1 查询我的待办任务"></a>11.1 查询我的待办任务</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> org.activiti.engine.TaskService;</span><br><span class="line"><span class="keyword">import</span> org.activiti.task.api.Task;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TaskAppService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TaskService taskService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">List</span>&lt;TaskDto&gt; <span class="title function_">myTodoTasks</span><span class="params">(String assignee)</span> &#123;</span><br><span class="line">        <span class="type">List</span>&lt;Task&gt; <span class="variable">tasks</span> <span class="operator">=</span> taskService.createTaskQuery()</span><br><span class="line">                .taskAssignee(assignee)</span><br><span class="line">                .orderByTaskCreateTime()</span><br><span class="line">                .desc()</span><br><span class="line">                .list();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> tasks.stream().map(task -&gt; &#123;</span><br><span class="line">            <span class="type">TaskDto</span> <span class="variable">dto</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TaskDto</span>();</span><br><span class="line">            dto.setTaskId(task.getId());</span><br><span class="line">            dto.setTaskName(task.getName());</span><br><span class="line">            dto.setProcessInstanceId(task.getProcessInstanceId());</span><br><span class="line">            dto.setExecutionId(task.getExecutionId());</span><br><span class="line">            dto.setCreateTime(task.getCreateTime());</span><br><span class="line">            <span class="keyword">return</span> dto;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TaskDto</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String taskId;</span><br><span class="line">    <span class="keyword">private</span> String taskName;</span><br><span class="line">    <span class="keyword">private</span> String processInstanceId;</span><br><span class="line">    <span class="keyword">private</span> String executionId;</span><br><span class="line">    <span class="keyword">private</span> Date createTime;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="11-2-完成任务"><a href="#11-2-完成任务" class="headerlink" title="11.2 完成任务"></a>11.2 完成任务</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CompleteTaskRequest</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String taskId;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String, Object&gt; variables;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TaskCompleteService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TaskService taskService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">void</span> <span class="title function_">complete</span><span class="params">(CompleteTaskRequest request)</span> &#123;</span><br><span class="line">        taskService.complete(request.getTaskId(), request.getVariables());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="11-3-控制器"><a href="#11-3-控制器" class="headerlink" title="11.3 控制器"></a>11.3 控制器</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/api/task&quot;)</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TaskController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TaskAppService taskAppService;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> TaskCompleteService taskCompleteService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/todo&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">List</span>&lt;TaskDto&gt; <span class="title function_">todo</span><span class="params">(<span class="meta">@RequestParam</span> String assignee)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> taskAppService.myTodoTasks(assignee);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/complete&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">Map</span>&lt;String, Object&gt; <span class="title function_">complete</span><span class="params">(<span class="meta">@RequestBody</span> CompleteTaskRequest request)</span> &#123;</span><br><span class="line">        taskCompleteService.complete(request);</span><br><span class="line">        <span class="type">Map</span>&lt;String, Object&gt; <span class="variable">result</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        result.put(<span class="string">&quot;success&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>审批通过时你可以传：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;taskId&quot;</span><span class="punctuation">:</span> <span class="string">&quot;25005&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;variables&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;approved&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;comment&quot;</span><span class="punctuation">:</span> <span class="string">&quot;同意&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>审批驳回时你也可以传：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;taskId&quot;</span><span class="punctuation">:</span> <span class="string">&quot;25005&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;variables&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;approved&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;comment&quot;</span><span class="punctuation">:</span> <span class="string">&quot;资料不完整，请补充&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>如果你在 BPMN 中已经把驳回逻辑画成条件流转，那么只要变量正确，流程就会自动走对应分支。</p>
+<hr>
+<h2 id="12-后端实现：流程历史查询"><a href="#12-后端实现：流程历史查询" class="headerlink" title="12. 后端实现：流程历史查询"></a>12. 后端实现：流程历史查询</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.RequiredArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> org.activiti.engine.HistoryService;</span><br><span class="line"><span class="keyword">import</span> org.activiti.engine.history.HistoricTaskInstance;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.stream.Collectors;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@RequiredArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProcessHistoryService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> HistoryService historyService;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">List</span>&lt;HistoricTaskDto&gt; <span class="title function_">queryHistoricTasks</span><span class="params">(String processInstanceId)</span> &#123;</span><br><span class="line">        <span class="type">List</span>&lt;HistoricTaskInstance&gt; <span class="variable">list</span> <span class="operator">=</span> historyService.createHistoricTaskInstanceQuery()</span><br><span class="line">                .processInstanceId(processInstanceId)</span><br><span class="line">                .orderByHistoricTaskInstanceStartTime()</span><br><span class="line">                .asc()</span><br><span class="line">                .list();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> list.stream().map(item -&gt; &#123;</span><br><span class="line">            <span class="type">HistoricTaskDto</span> <span class="variable">dto</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">HistoricTaskDto</span>();</span><br><span class="line">            dto.setTaskId(item.getId());</span><br><span class="line">            dto.setTaskName(item.getName());</span><br><span class="line">            dto.setAssignee(item.getAssignee());</span><br><span class="line">            dto.setStartTime(item.getStartTime());</span><br><span class="line">            dto.setEndTime(item.getEndTime());</span><br><span class="line">            dto.setDurationInMillis(item.getDurationInMillis());</span><br><span class="line">            <span class="keyword">return</span> dto;</span><br><span class="line">        &#125;).collect(Collectors.toList());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HistoricTaskDto</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String taskId;</span><br><span class="line">    <span class="keyword">private</span> String taskName;</span><br><span class="line">    <span class="keyword">private</span> String assignee;</span><br><span class="line">    <span class="keyword">private</span> Date startTime;</span><br><span class="line">    <span class="keyword">private</span> Date endTime;</span><br><span class="line">    <span class="keyword">private</span> Long durationInMillis;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="13-前端在线流程设计：为什么推荐-bpmn-js"><a href="#13-前端在线流程设计：为什么推荐-bpmn-js" class="headerlink" title="13. 前端在线流程设计：为什么推荐 bpmn-js"></a>13. 前端在线流程设计：为什么推荐 bpmn-js</h2><p><code>bpmn-js</code> 是一个成熟的 BPMN 2.0 渲染和建模工具库，适合在浏览器中嵌入流程设计器。它可以：</p>
+<ul>
+<li>加载现有 BPMN XML</li>
+<li>在线编辑节点和连线</li>
+<li>导出 BPMN XML</li>
+<li>扩展属性面板</li>
+<li>支持自定义 moddle 扩展</li>
+</ul>
+<p>这正好符合“前端直接画流程图”的要求。</p>
+<hr>
+<h2 id="14-前端接入-bpmn-js-的基本思路"><a href="#14-前端接入-bpmn-js-的基本思路" class="headerlink" title="14. 前端接入 bpmn-js 的基本思路"></a>14. 前端接入 bpmn-js 的基本思路</h2><h3 id="14-1-安装依赖"><a href="#14-1-安装依赖" class="headerlink" title="14.1 安装依赖"></a>14.1 安装依赖</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install bpmn-js</span><br></pre></td></tr></table></figure>
+<p>如果还需要属性面板：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install bpmn-js-properties-panel @bpmn-io/properties-panel</span><br></pre></td></tr></table></figure>
+<h3 id="14-2-一个最小可运行示例"><a href="#14-2-一个最小可运行示例" class="headerlink" title="14.2 一个最小可运行示例"></a>14.2 一个最小可运行示例</h3><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;canvas&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width: 100%; height: 600px; border: 1px solid #ddd;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;saveBtn&quot;</span>&gt;</span>保存并部署<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">import</span> <span class="title class_">BpmnModeler</span> <span class="keyword">from</span> <span class="string">&#x27;bpmn-js/lib/Modeler&#x27;</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> modeler = <span class="keyword">new</span> <span class="title class_">BpmnModeler</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="attr">container</span>: <span class="string">&#x27;#canvas&#x27;</span></span></span><br><span class="line"><span class="language-javascript">  &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> defaultXml = <span class="string">`&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">  &lt;bpmn:definitions xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">                    xmlns:bpmn=&quot;http://www.omg.org/spec/BPMN/20100524/MODEL&quot;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">                    xmlns:bpmndi=&quot;http://www.omg.org/spec/BPMN/20100524/DI&quot;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">                    xmlns:dc=&quot;http://www.omg.org/spec/DD/20100524/DC&quot;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">                    xmlns:di=&quot;http://www.omg.org/spec/DD/20100524/DI&quot;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">                    xmlns:activiti=&quot;http://activiti.org/bpmn&quot;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">                    targetNamespace=&quot;http://bpmn.io/schema/bpmn&quot;&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">    &lt;bpmn:process id=&quot;leaveApproval&quot; isExecutable=&quot;true&quot;&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">      &lt;bpmn:startEvent id=&quot;StartEvent_1&quot; /&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">    &lt;/bpmn:process&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">    &lt;bpmndi:BPMNDiagram id=&quot;BPMNDiagram_1&quot;&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">      &lt;bpmndi:BPMNPlane id=&quot;BPMNPlane_1&quot; bpmnElement=&quot;leaveApproval&quot;&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">        &lt;bpmndi:BPMNShape id=&quot;StartEvent_1_di&quot; bpmnElement=&quot;StartEvent_1&quot;&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">          &lt;dc:Bounds x=&quot;173&quot; y=&quot;102&quot; width=&quot;36&quot; height=&quot;36&quot; /&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">        &lt;/bpmndi:BPMNShape&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">      &lt;/bpmndi:BPMNPlane&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">    &lt;/bpmndi:BPMNDiagram&gt;</span></span></span><br><span class="line"><span class="string"><span class="language-javascript">  &lt;/bpmn:definitions&gt;`</span>;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">await</span> modeler.<span class="title function_">importXML</span>(defaultXml);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;saveBtn&#x27;</span>).<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="title function_">async</span> () =&gt; &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> &#123; xml &#125; = <span class="keyword">await</span> modeler.<span class="title function_">saveXML</span>(&#123; <span class="attr">format</span>: <span class="literal">true</span> &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> body = &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">processKey</span>: <span class="string">&#x27;leaveApproval&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">processName</span>: <span class="string">&#x27;请假审批流程&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">category</span>: <span class="string">&#x27;oa&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">tenantId</span>: <span class="string">&#x27;default&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">bpmnXml</span>: xml</span></span><br><span class="line"><span class="language-javascript">    &#125;;</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;/api/process/deploy&#x27;</span>, &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">headers</span>: &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span></span><br><span class="line"><span class="language-javascript">      &#125;,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">body</span>: <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(body)</span></span><br><span class="line"><span class="language-javascript">    &#125;);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="title function_">alert</span>(<span class="string">&#x27;流程部署成功&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">  &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这个例子已经实现了完整闭环：</p>
+<ul>
+<li>浏览器中画图</li>
+<li>导出 BPMN XML</li>
+<li>封装为 JSON 请求体</li>
+<li>提交给后端</li>
+<li>后端自动部署到 Activiti</li>
+</ul>
+<hr>
+<h2 id="15-如何在前端设置-Activiti-扩展属性"><a href="#15-如何在前端设置-Activiti-扩展属性" class="headerlink" title="15. 如何在前端设置 Activiti 扩展属性"></a>15. 如何在前端设置 Activiti 扩展属性</h2><p>画流程图只是第一步，真正落地项目时你还要给节点配置业务属性，例如：</p>
+<ul>
+<li>审批人表达式：<code>${deptLeader}</code></li>
+<li>候选组：<code>financeGroup</code></li>
+<li>条件表达式：<code>${amount &gt; 10000}</code></li>
+<li>服务任务 Bean：<code>${sendMailDelegate}</code></li>
+<li>节点表单 Key</li>
+<li>超时提醒配置</li>
+</ul>
+<p>这些都可以通过：</p>
+<ol>
+<li>属性面板直接写入 BPMN XML 扩展属性。</li>
+<li>自定义侧边栏，把节点属性单独保存在业务表里。</li>
+<li>两者混合：关键流转属性进 XML，纯业务展示属性进业务表。</li>
+</ol>
+<h3 id="推荐实践"><a href="#推荐实践" class="headerlink" title="推荐实践"></a>推荐实践</h3><ul>
+<li><strong>影响流程流转的属性</strong>：放进 BPMN XML，例如 assignee、candidateGroup、conditionExpression。</li>
+<li><strong>仅用于业务展示的属性</strong>：放业务库，例如按钮权限、表单元数据、前端渲染配置。</li>
+</ul>
+<p>这样不会把 BPMN 搞得过重，也方便维护。</p>
+<hr>
+<h2 id="16-如果前端真的只传“纯-JSON-节点数据”，后端怎么自动部署"><a href="#16-如果前端真的只传“纯-JSON-节点数据”，后端怎么自动部署" class="headerlink" title="16. 如果前端真的只传“纯 JSON 节点数据”，后端怎么自动部署"></a>16. 如果前端真的只传“纯 JSON 节点数据”，后端怎么自动部署</h2><p>有些项目不想让前端关心 XML，只想传这种 JSON：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;processKey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;expenseApproval&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;processName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;报销审批流程&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;nodes&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;start&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;startEvent&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;开始&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;apply&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;userTask&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;提交申请&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;assignee&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;applicant&#125;&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;manager&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;userTask&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;经理审批&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;assignee&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;manager&#125;&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;end&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;endEvent&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;结束&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;flows&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;f1&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;source&quot;</span><span class="punctuation">:</span> <span class="string">&quot;start&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;apply&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;f2&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;source&quot;</span><span class="punctuation">:</span> <span class="string">&quot;apply&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;manager&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="punctuation">&#123;</span><span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;f3&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;source&quot;</span><span class="punctuation">:</span> <span class="string">&quot;manager&quot;</span><span class="punctuation">,</span> <span class="attr">&quot;target&quot;</span><span class="punctuation">:</span> <span class="string">&quot;end&quot;</span><span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>这种情况下，后端需要做两步：</p>
+<ol>
+<li>将业务 JSON 转成 <code>BpmnModel</code>。</li>
+<li>将 <code>BpmnModel</code> 转成 BPMN XML 并部署。</li>
+</ol>
+<h3 id="16-1-JSON-转-BpmnModel-的大致代码骨架"><a href="#16-1-JSON-转-BpmnModel-的大致代码骨架" class="headerlink" title="16.1 JSON 转 BpmnModel 的大致代码骨架"></a>16.1 JSON 转 BpmnModel 的大致代码骨架</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> org.activiti.bpmn.model.*;</span><br><span class="line"><span class="keyword">import</span> org.activiti.bpmn.converter.BpmnXMLConverter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">JsonToBpmnConverter</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">String</span> <span class="title function_">toXml</span><span class="params">(CustomProcessJson json)</span> &#123;</span><br><span class="line">        <span class="type">BpmnModel</span> <span class="variable">model</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BpmnModel</span>();</span><br><span class="line">        <span class="type">Process</span> <span class="variable">process</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Process</span>();</span><br><span class="line">        process.setId(json.getProcessKey());</span><br><span class="line">        process.setName(json.getProcessName());</span><br><span class="line">        model.addProcess(process);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (CustomNode node : json.getNodes()) &#123;</span><br><span class="line">            <span class="type">FlowElement</span> <span class="variable">element</span> <span class="operator">=</span> buildFlowElement(node);</span><br><span class="line">            process.addFlowElement(element);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (CustomFlow flow : json.getFlows()) &#123;</span><br><span class="line">            <span class="type">SequenceFlow</span> <span class="variable">sequenceFlow</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SequenceFlow</span>();</span><br><span class="line">            sequenceFlow.setId(flow.getId());</span><br><span class="line">            sequenceFlow.setSourceRef(flow.getSource());</span><br><span class="line">            sequenceFlow.setTargetRef(flow.getTarget());</span><br><span class="line">            sequenceFlow.setConditionExpression(flow.getConditionExpression());</span><br><span class="line">            process.addFlowElement(sequenceFlow);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="type">byte</span>[] <span class="variable">bytes</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BpmnXMLConverter</span>().convertToXML(model);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">String</span>(bytes, java.nio.charset.StandardCharsets.UTF_8);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">FlowElement</span> <span class="title function_">buildFlowElement</span><span class="params">(CustomNode node)</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> (node.getType()) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;startEvent&quot;</span>:</span><br><span class="line">                <span class="type">StartEvent</span> <span class="variable">startEvent</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StartEvent</span>();</span><br><span class="line">                startEvent.setId(node.getId());</span><br><span class="line">                startEvent.setName(node.getName());</span><br><span class="line">                <span class="keyword">return</span> startEvent;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;userTask&quot;</span>:</span><br><span class="line">                <span class="type">UserTask</span> <span class="variable">userTask</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">UserTask</span>();</span><br><span class="line">                userTask.setId(node.getId());</span><br><span class="line">                userTask.setName(node.getName());</span><br><span class="line">                userTask.setAssignee(node.getAssignee());</span><br><span class="line">                <span class="keyword">return</span> userTask;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;exclusiveGateway&quot;</span>:</span><br><span class="line">                <span class="type">ExclusiveGateway</span> <span class="variable">gateway</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ExclusiveGateway</span>();</span><br><span class="line">                gateway.setId(node.getId());</span><br><span class="line">                gateway.setName(node.getName());</span><br><span class="line">                <span class="keyword">return</span> gateway;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&quot;endEvent&quot;</span>:</span><br><span class="line">                <span class="type">EndEvent</span> <span class="variable">endEvent</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">EndEvent</span>();</span><br><span class="line">                endEvent.setId(node.getId());</span><br><span class="line">                endEvent.setName(node.getName());</span><br><span class="line">                <span class="keyword">return</span> endEvent;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(<span class="string">&quot;暂不支持的节点类型: &quot;</span> + node.getType());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="16-2-再调用部署逻辑"><a href="#16-2-再调用部署逻辑" class="headerlink" title="16.2 再调用部署逻辑"></a>16.2 再调用部署逻辑</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">String</span> <span class="title function_">deployByJson</span><span class="params">(CustomProcessJson json)</span> &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">xml</span> <span class="operator">=</span> jsonToBpmnConverter.toXml(json);</span><br><span class="line"></span><br><span class="line">    <span class="type">ProcessDeployRequest</span> <span class="variable">request</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProcessDeployRequest</span>();</span><br><span class="line">    request.setProcessKey(json.getProcessKey());</span><br><span class="line">    request.setProcessName(json.getProcessName());</span><br><span class="line">    request.setCategory(json.getCategory());</span><br><span class="line">    request.setTenantId(json.getTenantId());</span><br><span class="line">    request.setBpmnXml(xml);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> processDeployService.deploy(request);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="16-3-什么时候需要这种方式"><a href="#16-3-什么时候需要这种方式" class="headerlink" title="16.3 什么时候需要这种方式"></a>16.3 什么时候需要这种方式</h3><p>仅在以下场景推荐纯 JSON 建模：</p>
+<ul>
+<li>你的前端设计器不是 BPMN 标准设计器。</li>
+<li>你希望界面更“业务化”，隐藏 BPMN 概念。</li>
+<li>你只支持有限节点类型，不需要完整 BPMN 能力。</li>
+</ul>
+<p>否则，还是推荐 <strong>bpmn-js 出 XML，JSON 包一层后直接部署</strong>。</p>
+<hr>
+<h2 id="17-任务办理时最常用的功能点"><a href="#17-任务办理时最常用的功能点" class="headerlink" title="17. 任务办理时最常用的功能点"></a>17. 任务办理时最常用的功能点</h2><p>实际项目里，Activiti 常见需求通常不止“完成任务”这么简单，还包括：</p>
+<h3 id="17-1-签收任务"><a href="#17-1-签收任务" class="headerlink" title="17.1 签收任务"></a>17.1 签收任务</h3><p>适用于候选人任务。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">taskService.claim(taskId, userId);</span><br></pre></td></tr></table></figure>
+<h3 id="17-2-任务委派"><a href="#17-2-任务委派" class="headerlink" title="17.2 任务委派"></a>17.2 任务委派</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">taskService.delegateTask(taskId, userId);</span><br></pre></td></tr></table></figure>
+<h3 id="17-3-设置任务变量"><a href="#17-3-设置任务变量" class="headerlink" title="17.3 设置任务变量"></a>17.3 设置任务变量</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">taskService.setVariable(taskId, <span class="string">&quot;approved&quot;</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="17-4-流程变量"><a href="#17-4-流程变量" class="headerlink" title="17.4 流程变量"></a>17.4 流程变量</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">runtimeService.setVariable(processInstanceId, <span class="string">&quot;amount&quot;</span>, <span class="number">12000</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="17-5-删除流程实例"><a href="#17-5-删除流程实例" class="headerlink" title="17.5 删除流程实例"></a>17.5 删除流程实例</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">runtimeService.deleteProcessInstance(processInstanceId, <span class="string">&quot;手动作废&quot;</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="17-6-查询历史流程实例"><a href="#17-6-查询历史流程实例" class="headerlink" title="17.6 查询历史流程实例"></a>17.6 查询历史流程实例</h3><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">historyService.createHistoricProcessInstanceQuery()</span><br><span class="line">        .processInstanceId(processInstanceId)</span><br><span class="line">        .singleResult();</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="18-如何做“审批意见、审批记录、流程轨迹”"><a href="#18-如何做“审批意见、审批记录、流程轨迹”" class="headerlink" title="18. 如何做“审批意见、审批记录、流程轨迹”"></a>18. 如何做“审批意见、审批记录、流程轨迹”</h2><p>这是大多数 OA 项目都会问到的点。</p>
+<h3 id="18-1-审批意见"><a href="#18-1-审批意见" class="headerlink" title="18.1 审批意见"></a>18.1 审批意见</h3><p>最常见做法不是完全依赖引擎表，而是单独建业务表，比如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> biz_approval_record (</span><br><span class="line">    id <span class="type">BIGINT</span> <span class="keyword">PRIMARY KEY</span> AUTO_INCREMENT,</span><br><span class="line">    process_instance_id <span class="type">VARCHAR</span>(<span class="number">64</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">    task_id <span class="type">VARCHAR</span>(<span class="number">64</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">    node_key <span class="type">VARCHAR</span>(<span class="number">64</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">    node_name <span class="type">VARCHAR</span>(<span class="number">128</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">    assignee <span class="type">VARCHAR</span>(<span class="number">64</span>),</span><br><span class="line">    action <span class="type">VARCHAR</span>(<span class="number">32</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">    comment_text <span class="type">VARCHAR</span>(<span class="number">2000</span>),</span><br><span class="line">    created_time DATETIME <span class="keyword">NOT NULL</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>这样你可以很灵活地展示：</p>
+<ul>
+<li>同意</li>
+<li>驳回</li>
+<li>转办</li>
+<li>加签</li>
+<li>撤回</li>
+<li>重新提交</li>
+</ul>
+<h3 id="18-2-流程轨迹"><a href="#18-2-流程轨迹" class="headerlink" title="18.2 流程轨迹"></a>18.2 流程轨迹</h3><p>通常有两种做法：</p>
+<ol>
+<li>根据历史节点查询 <code>HistoricActivityInstance</code>，高亮已走过的节点。</li>
+<li>前端加载 BPMN XML 后，根据后端返回的“已完成节点 ID、当前活动节点 ID”做高亮。</li>
+</ol>
+<h3 id="18-3-审批时间线"><a href="#18-3-审批时间线" class="headerlink" title="18.3 审批时间线"></a>18.3 审批时间线</h3><p>可以把以下数据组合成一个时间线接口：</p>
+<ul>
+<li>流程发起时间</li>
+<li>每个节点的签收时间</li>
+<li>每个节点的完成时间</li>
+<li>审批意见</li>
+<li>当前停留节点</li>
+</ul>
+<hr>
+<h2 id="19-常见高级需求的设计建议"><a href="#19-常见高级需求的设计建议" class="headerlink" title="19. 常见高级需求的设计建议"></a>19. 常见高级需求的设计建议</h2><h3 id="19-1-驳回到任意节点"><a href="#19-1-驳回到任意节点" class="headerlink" title="19.1 驳回到任意节点"></a>19.1 驳回到任意节点</h3><p>标准 BPMN 更多强调“按建模好的路径流转”。如果你要实现“驳回到任意历史节点”，通常需要：</p>
+<ul>
+<li>在流程模型中预留退回线，或</li>
+<li>使用更复杂的运行时跳转策略，或</li>
+<li>通过业务层封装撤回/重提逻辑</li>
+</ul>
+<p>这个需求往往不是简单一行代码能优雅解决，建议在建模阶段就设计清楚。</p>
+<h3 id="19-2-加签-会签"><a href="#19-2-加签-会签" class="headerlink" title="19.2 加签 / 会签"></a>19.2 加签 / 会签</h3><p>可以通过：</p>
+<ul>
+<li>并行网关</li>
+<li>多实例用户任务（会签）</li>
+<li>动态生成子任务</li>
+</ul>
+<p>来实现。</p>
+<h3 id="19-3-抄送"><a href="#19-3-抄送" class="headerlink" title="19.3 抄送"></a>19.3 抄送</h3><p>抄送通常不应该直接建成“阻塞节点”，而更适合作为业务层的附加能力：</p>
+<ul>
+<li>完成任务时写一条抄送记录</li>
+<li>发消息给相关用户</li>
+<li>在“我的抄送”列表中展示</li>
+</ul>
+<h3 id="19-4-流程版本管理"><a href="#19-4-流程版本管理" class="headerlink" title="19.4 流程版本管理"></a>19.4 流程版本管理</h3><p>新流程部署后，Activiti 会生成新的流程定义版本。一般建议：</p>
+<ul>
+<li>老流程实例继续按老版本跑完</li>
+<li>新发起的流程走新版本</li>
+<li>不要轻易去强制迁移正在运行的实例</li>
+</ul>
+<hr>
+<h2 id="20-生产环境落地建议"><a href="#20-生产环境落地建议" class="headerlink" title="20. 生产环境落地建议"></a>20. 生产环境落地建议</h2><h3 id="20-1-流程定义与业务表分离"><a href="#20-1-流程定义与业务表分离" class="headerlink" title="20.1 流程定义与业务表分离"></a>20.1 流程定义与业务表分离</h3><p>推荐把“流程定义管理”和“业务单据”分离：</p>
+<ul>
+<li>流程定义：由流程平台维护</li>
+<li>业务单据：由业务系统维护</li>
+<li>两者通过 <code>businessKey</code> 关联</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>请假单表：<code>oa_leave</code></li>
+<li>流程实例：<code>businessKey = LEAVE_20260312001</code></li>
+</ul>
+<h3 id="20-2-用户身份不要强耦合内置用户表"><a href="#20-2-用户身份不要强耦合内置用户表" class="headerlink" title="20.2 用户身份不要强耦合内置用户表"></a>20.2 用户身份不要强耦合内置用户表</h3><p>企业项目中通常已有：</p>
+<ul>
+<li>用户表</li>
+<li>组织架构表</li>
+<li>角色表</li>
+<li>岗位表</li>
+</ul>
+<p>这时更推荐把审批人以变量、候选组、表达式的方式传给引擎，而不是重复维护一套 Activiti 用户体系。</p>
+<h3 id="20-3-流程变量要分层"><a href="#20-3-流程变量要分层" class="headerlink" title="20.3 流程变量要分层"></a>20.3 流程变量要分层</h3><p>建议将变量分成三类：</p>
+<ol>
+<li><strong>流转变量</strong>：决定走向，例如 <code>days</code>、<code>amount</code>、<code>approved</code></li>
+<li><strong>处理人变量</strong>：例如 <code>deptLeader</code>、<code>hr</code>、<code>director</code></li>
+<li><strong>业务展示变量</strong>：例如申请标题、单据编号、申请人姓名</li>
+</ol>
+<p>不要把整个业务对象无脑全塞进流程变量，否则历史表会越来越重。</p>
+<h3 id="20-4-幂等与重复提交"><a href="#20-4-幂等与重复提交" class="headerlink" title="20.4 幂等与重复提交"></a>20.4 幂等与重复提交</h3><p>发起流程、完成任务接口都要考虑重复点击：</p>
+<ul>
+<li>前端按钮防重复</li>
+<li>后端幂等校验</li>
+<li>用业务主键或版本号控制并发</li>
+</ul>
+<h3 id="20-5-异常处理与事务一致性"><a href="#20-5-异常处理与事务一致性" class="headerlink" title="20.5 异常处理与事务一致性"></a>20.5 异常处理与事务一致性</h3><p>完成审批时，往往不只调用 <code>taskService.complete()</code>，还会：</p>
+<ul>
+<li>记录审批意见</li>
+<li>更新业务单状态</li>
+<li>发消息通知</li>
+<li>写审计日志</li>
+</ul>
+<p>这些操作建议放在同一个事务边界内，避免“任务已完成但业务状态没更新”这种问题。</p>
+<hr>
+<h2 id="21-一个完整的接口设计建议"><a href="#21-一个完整的接口设计建议" class="headerlink" title="21. 一个完整的接口设计建议"></a>21. 一个完整的接口设计建议</h2><h3 id="流程设计相关"><a href="#流程设计相关" class="headerlink" title="流程设计相关"></a>流程设计相关</h3><ul>
+<li><code>POST /api/process/deploy</code>：部署流程（JSON 内含 BPMN XML）</li>
+<li><code>POST /api/process/deploy-json</code>：部署流程（纯业务 JSON 自动转 BPMN）</li>
+<li><code>GET /api/process/definitions</code>：查询流程定义列表</li>
+<li><code>GET /api/process/definition/{id}</code>：查询流程定义详情</li>
+<li><code>GET /api/process/xml/{definitionId}</code>：获取 BPMN XML</li>
+</ul>
+<h3 id="流程运行相关"><a href="#流程运行相关" class="headerlink" title="流程运行相关"></a>流程运行相关</h3><ul>
+<li><code>POST /api/runtime/start</code>：启动流程</li>
+<li><code>POST /api/runtime/cancel</code>：作废流程</li>
+<li><code>GET /api/runtime/detail/{processInstanceId}</code>：流程实例详情</li>
+</ul>
+<h3 id="任务相关"><a href="#任务相关" class="headerlink" title="任务相关"></a>任务相关</h3><ul>
+<li><code>GET /api/task/todo</code>：我的待办</li>
+<li><code>GET /api/task/done</code>：我的已办</li>
+<li><code>POST /api/task/claim</code>：签收任务</li>
+<li><code>POST /api/task/complete</code>：完成任务</li>
+<li><code>POST /api/task/delegate</code>：委派任务</li>
+</ul>
+<h3 id="历史与轨迹相关"><a href="#历史与轨迹相关" class="headerlink" title="历史与轨迹相关"></a>历史与轨迹相关</h3><ul>
+<li><code>GET /api/history/process/{processInstanceId}</code>：流程历史</li>
+<li><code>GET /api/history/activities/{processInstanceId}</code>：节点轨迹</li>
+<li><code>GET /api/history/comments/{processInstanceId}</code>：审批意见</li>
+</ul>
+<hr>
+<h2 id="22-常见问题排查"><a href="#22-常见问题排查" class="headerlink" title="22. 常见问题排查"></a>22. 常见问题排查</h2><h3 id="22-1-启动时报找不到表"><a href="#22-1-启动时报找不到表" class="headerlink" title="22.1 启动时报找不到表"></a>22.1 启动时报找不到表</h3><p>通常是：</p>
+<ul>
+<li>数据源配置错误</li>
+<li>数据库权限不足</li>
+<li><code>database-schema-update</code> 未开启</li>
+</ul>
+<h3 id="22-2-部署时报-XML-解析异常"><a href="#22-2-部署时报-XML-解析异常" class="headerlink" title="22.2 部署时报 XML 解析异常"></a>22.2 部署时报 XML 解析异常</h3><p>通常是：</p>
+<ul>
+<li>XML 格式不合法</li>
+<li>BPMN 命名空间不完整</li>
+<li>节点引用关系错误</li>
+<li>表达式写错</li>
+</ul>
+<p>建议把前端导出的 XML 先保存下来，单独用校验工具或单元测试跑一遍。</p>
+<h3 id="22-3-启动流程时报找不到定义"><a href="#22-3-启动流程时报找不到定义" class="headerlink" title="22.3 启动流程时报找不到定义"></a>22.3 启动流程时报找不到定义</h3><p>通常是：</p>
+<ul>
+<li><code>processDefinitionKey</code> 不匹配</li>
+<li>流程没有成功部署</li>
+<li>部署的是旧版本，查询条件写错</li>
+</ul>
+<h3 id="22-4-任务查不到"><a href="#22-4-任务查不到" class="headerlink" title="22.4 任务查不到"></a>22.4 任务查不到</h3><p>通常是：</p>
+<ul>
+<li>assignee 没传对</li>
+<li>候选人任务未签收</li>
+<li>节点还没走到目标用户</li>
+<li>你查的是历史任务，不是运行时任务</li>
+</ul>
+<h3 id="22-5-条件流转不生效"><a href="#22-5-条件流转不生效" class="headerlink" title="22.5 条件流转不生效"></a>22.5 条件流转不生效</h3><p>通常是：</p>
+<ul>
+<li>流程变量没传</li>
+<li>变量类型不对</li>
+<li>表达式语法错误</li>
+<li>网关配置错误</li>
+</ul>
+<hr>
+<h2 id="23-推荐的项目分层"><a href="#23-推荐的项目分层" class="headerlink" title="23. 推荐的项目分层"></a>23. 推荐的项目分层</h2><p>为了后续维护，建议按下面方式分层：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">com.example.workflow</span><br><span class="line">├── controller</span><br><span class="line">├── service</span><br><span class="line">│   ├── deploy</span><br><span class="line">│   ├── runtime</span><br><span class="line">│   ├── task</span><br><span class="line">│   └── history</span><br><span class="line">├── domain</span><br><span class="line">│   ├── dto</span><br><span class="line">│   ├── entity</span><br><span class="line">│   └── vo</span><br><span class="line">├── converter</span><br><span class="line">├── config</span><br><span class="line">└── infrastructure</span><br></pre></td></tr></table></figure>
+<p>如果你的系统已经很大，建议再加一层 <code>application</code> / <code>domain</code> / <code>infrastructure</code>，把“工作流平台能力”和“业务审批逻辑”分开。</p>
+<hr>
+<h2 id="24-一套更贴近真实项目的落地路径"><a href="#24-一套更贴近真实项目的落地路径" class="headerlink" title="24. 一套更贴近真实项目的落地路径"></a>24. 一套更贴近真实项目的落地路径</h2><p>如果你要把这套方案真正用到 OA、ERP、CRM 里，我建议按这个顺序做：</p>
+<h3 id="第一步：打通最小闭环"><a href="#第一步：打通最小闭环" class="headerlink" title="第一步：打通最小闭环"></a>第一步：打通最小闭环</h3><ul>
+<li>能在线画图</li>
+<li>能部署流程</li>
+<li>能启动流程</li>
+<li>能查询待办</li>
+<li>能完成审批</li>
+</ul>
+<h3 id="第二步：补齐业务关联"><a href="#第二步：补齐业务关联" class="headerlink" title="第二步：补齐业务关联"></a>第二步：补齐业务关联</h3><ul>
+<li>businessKey 绑定业务单</li>
+<li>审批意见表</li>
+<li>消息通知</li>
+<li>流程历史</li>
+</ul>
+<h3 id="第三步：补齐设计器能力"><a href="#第三步：补齐设计器能力" class="headerlink" title="第三步：补齐设计器能力"></a>第三步：补齐设计器能力</h3><ul>
+<li>节点属性面板</li>
+<li>审批人选择器</li>
+<li>条件表达式编辑器</li>
+<li>流程版本管理</li>
+</ul>
+<h3 id="第四步：补齐平台能力"><a href="#第四步：补齐平台能力" class="headerlink" title="第四步：补齐平台能力"></a>第四步：补齐平台能力</h3><ul>
+<li>多租户</li>
+<li>权限控制</li>
+<li>流程发布审核</li>
+<li>流程回滚</li>
+<li>监控与审计</li>
+</ul>
+<hr>
+<h2 id="25-本文最终推荐方案总结"><a href="#25-本文最终推荐方案总结" class="headerlink" title="25. 本文最终推荐方案总结"></a>25. 本文最终推荐方案总结</h2><p>如果你的目标是：</p>
+<blockquote>
+<p>“Spring Boot 整合 Activiti，并且前端可以直接画流程图，传入 JSON 就能自动部署流程。”</p>
+</blockquote>
+<p>那最推荐的落地方案是：</p>
+<h3 id="方案-A：推荐，工程上最稳"><a href="#方案-A：推荐，工程上最稳" class="headerlink" title="方案 A：推荐，工程上最稳"></a>方案 A：推荐，工程上最稳</h3><ul>
+<li>前端：<code>bpmn-js</code> 在线绘制 BPMN</li>
+<li>导出：得到 BPMN XML</li>
+<li>提交：封装到 JSON 请求体中的 <code>bpmnXml</code> 字段</li>
+<li>后端：调用 <code>RepositoryService#createDeployment()</code> 自动部署</li>
+</ul>
+<p>也就是：</p>
+<p><strong>前端画图 -&gt; XML -&gt; JSON 包装 -&gt; 后端部署</strong></p>
+<h3 id="方案-B：适合自定义设计器"><a href="#方案-B：适合自定义设计器" class="headerlink" title="方案 B：适合自定义设计器"></a>方案 B：适合自定义设计器</h3><ul>
+<li>前端：传纯业务 JSON（节点 + 连线 + 条件 + 审批人）</li>
+<li>后端：JSON 转 <code>BpmnModel</code></li>
+<li>转换：<code>BpmnXMLConverter</code> 生成 BPMN XML</li>
+<li>部署：Activiti 自动发布</li>
+</ul>
+<p>也就是：</p>
+<p><strong>前端纯 JSON -&gt; 后端转 BPMN -&gt; 部署</strong></p>
+<h3 id="为什么我更推荐方案-A"><a href="#为什么我更推荐方案-A" class="headerlink" title="为什么我更推荐方案 A"></a>为什么我更推荐方案 A</h3><p>因为它：</p>
+<ul>
+<li>改造成本更低</li>
+<li>与 bpmn-js 原生能力最一致</li>
+<li>与 Activiti 部署接口最贴近</li>
+<li>线上稳定性最好</li>
+<li>后续排查问题最方便</li>
+</ul>
+<hr>
+<h2 id="26-可直接复用的部署请求示例"><a href="#26-可直接复用的部署请求示例" class="headerlink" title="26. 可直接复用的部署请求示例"></a>26. 可直接复用的部署请求示例</h2><figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;processKey&quot;</span><span class="punctuation">:</span> <span class="string">&quot;expenseApproval&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;processName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;报销审批流程&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;category&quot;</span><span class="punctuation">:</span> <span class="string">&quot;finance&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tenantId&quot;</span><span class="punctuation">:</span> <span class="string">&quot;default&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;bpmnXml&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;&lt;definitions ...&gt;...&lt;/definitions&gt;&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>只要你的前端能把流程图导出为 XML，这个接口就能直接工作。</p>
+<hr>
+<h2 id="27-后续可以继续扩展的能力"><a href="#27-后续可以继续扩展的能力" class="headerlink" title="27. 后续可以继续扩展的能力"></a>27. 后续可以继续扩展的能力</h2><p>在本文基础上，你还可以继续做：</p>
+<ul>
+<li>流程设计器属性面板</li>
+<li>节点审批人规则配置</li>
+<li>动态表单</li>
+<li>流程版本比对</li>
+<li>流程图节点高亮</li>
+<li>审批时限和超时提醒</li>
+<li>撤回、退回、转办、加签</li>
+<li>钉钉 / 企业微信 / 邮件通知</li>
+<li>多租户流程平台</li>
+</ul>
+<hr>
+<h2 id="28-参考实现建议"><a href="#28-参考实现建议" class="headerlink" title="28. 参考实现建议"></a>28. 参考实现建议</h2><p>如果你准备正式落地，建议至少补上这些代码与规范：</p>
+<ul>
+<li>全局异常处理</li>
+<li>参数校验</li>
+<li>单元测试与流程测试</li>
+<li>数据权限控制</li>
+<li>流程设计权限控制</li>
+<li>BPMN XML 安全校验</li>
+<li>审批日志与审计日志</li>
+<li>业务表与流程表的一致性设计</li>
+</ul>
+<hr>
+<h2 id="29-参考资料"><a href="#29-参考资料" class="headerlink" title="29. 参考资料"></a>29. 参考资料</h2><p>本文实现思路主要基于以下能力模型：</p>
+<ul>
+<li>Activiti 的流程引擎、部署、运行时、任务与历史服务</li>
+<li>bpmn-js 的浏览器建模、导入导出 XML、可扩展建模能力</li>
+</ul>
+<p>如果你写 Hexo 文章，建议在文末增加你项目实际使用的版本号、你们公司的审批场景截图、接口出参样例、流程图效果图，这样文章会更完整。</p>
+<hr>
+<h2 id="30-小结"><a href="#30-小结" class="headerlink" title="30. 小结"></a>30. 小结</h2><p>到这里，你已经有了一套完整方案：</p>
+<ul>
+<li>用 Spring Boot 整合 Activiti</li>
+<li>支持前端使用 bpmn-js 在线画流程图</li>
+<li>支持 JSON 请求体自动部署流程</li>
+<li>支持启动流程、查询待办、完成审批、查询历史</li>
+<li>也预留了“纯 JSON -&gt; BPMN -&gt; 自动部署”的扩展路线</li>
+</ul>
+<p>真正做项目时，建议你优先把“<strong>部署、启动、待办、审批、历史</strong>”这五个核心能力先打通，然后再逐步补齐：</p>
+<ul>
+<li>节点属性配置</li>
+<li>审批意见</li>
+<li>流程轨迹</li>
+<li>多版本管理</li>
+<li>驳回、加签、转办</li>
+</ul>
+<p>这样你落地起来会非常稳。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>docker命令笔记</title>
+    <url>/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>docker version        # 显示docker的版本信息<br>docker info              # 显示docker的系统信息，包括镜像和容器的数量<br>docker 命令 —help         # 帮助命令<br>docker images    #查看镜像<br>docker search    #搜索镜像<br>docker pull    #下载镜像<br>docker pull  mysql:5.7    #指定版本下载<br>docker rmi     #删除镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id                    # 删除指定的镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id 镜像id 镜像id    # 删除多个镜像（空格分隔）<br>[root@JWei_0124 //]# docker rmi -f $(docker images -aq)    # 删除全部的镜像<br>docker run [可选参数] image</p>
+<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><p>—name=”name”        容器名字：用来区分容器<br>-d                    后台方式运行：相当于nohup<br>-it                    使用交互式运行：进入容器查看内容<br>-p                    指定容器的端口（四种方式）小写字母p<br>    -p ip:主机端口：容器端口<br>    -p 主机端口：容器端口<br>    -p 容器端口<br>    容器端口<br>-P                     随机指定端口（大写字母P）</p>
+<p>docker ps         #列出当前正在运行的容器</p>
+<h1 id="命令参数可选项"><a href="#命令参数可选项" class="headerlink" title="命令参数可选项"></a>命令参数可选项</h1><p>-a        # 列出当前正在运行的容器+历史运行过的容器<br>-n=?    # 显示最近创建的容器（可以指定显示几条，比如-n=1）<br>-q        # 只显示容器的编号</p>
+<p>docker run -it centos /bin/bash #交互式进入<br>docker rm 容器ID    #删除容器（不能删除正在运行的容器）<br>docker rm -f     #强制删除<br>docker ps -a -q|xargs docker rm     #删除所有容器<br>docker start 容器id        # 启动容器<br>docker restart 容器id    # 重启容器<br>docker stop 容器id        # 停止当前正在运行的容器<br>docker kill 容器id        # 强制停止当前容器</p>
+<p>docker logs -tf —tail 容器id</p>
+<p>-tf                        # 显示日志<br>—tail number    # 要显示的日志条数</p>
+<p>查看容器中进程的信息<br>docker top id<br>查看镜像的元数据<br>docker inspect id<br>进入当前正在运行的容器<br>docker exec -it 容器id /bin/bash</p>
+<p>从容器内拷贝文件到主机<br>docker cp 容器id:容器内路径 目的主机的路径</p>
+<h1 id="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"><a href="#如何确定是具名挂载，还是匿名挂载，还是指定路径挂载" class="headerlink" title="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"></a>如何确定是具名挂载，还是匿名挂载，还是指定路径挂载</h1><p>-v 容器内的路径                # 匿名挂载<br>-v 卷名:容器内的路径        # 具名挂载<br>-v /宿主机路径:容器内路径    # 指定路径挂载</p>
+<h1 id="提交容器成为一个新的副本"><a href="#提交容器成为一个新的副本" class="headerlink" title="提交容器成为一个新的副本"></a>提交容器成为一个新的副本</h1><p>docker commit</p>
+<h1 id="命令和git原理类似"><a href="#命令和git原理类似" class="headerlink" title="命令和git原理类似"></a>命令和git原理类似</h1><p>docker commit -m=”提交的描述信息” -a=”作者” 容器id 目标镜像名:[TAG]</p>
+<h1 id="我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"><a href="#我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。" class="headerlink" title="我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"></a>我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。</h1><p>docker run -d -P —name tomcat01 tomcat<br>docker run -d -P —name tomcato1 —het bridge tomcat</p>
+<h1 id="docker0特点：默认，域名不能访问，—1ink可以打通连接！"><a href="#docker0特点：默认，域名不能访问，—1ink可以打通连接！" class="headerlink" title="docker0特点：默认，域名不能访问，—1ink可以打通连接！"></a>docker0特点：默认，域名不能访问，—1ink可以打通连接！</h1><h1 id="我们可以自定义一个网络！"><a href="#我们可以自定义一个网络！" class="headerlink" title="我们可以自定义一个网络！"></a>我们可以自定义一个网络！</h1><p>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network create —driver bridge —subnet 192.168.0.0/16 —gateway 192.168.0.1 mynet<br>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network ls<br>NETWORK ID     NAME      DRIVER    SCOPE<br>7254ffccbdf5   bridge    bridge    local<br>45610891738f   host      host      local<br>266acd66473c   mynet     bridge    local<br>7795cbc2686c   none      null      local</p>
 ]]></content>
   </entry>
   <entry>
@@ -1075,6 +1586,43 @@ Tailscale
 ]]></content>
   </entry>
   <entry>
+    <title>自签证书手册</title>
+    <url>/2026/02/06/%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6/</url>
+    <content><![CDATA[<h1 id="🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记"><a href="#🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记" class="headerlink" title="🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记"></a>🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记</h1><h2 id="📁-目录结构建议"><a href="#📁-目录结构建议" class="headerlink" title="📁 目录结构建议"></a>📁 目录结构建议</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">certs/</span><br><span class="line">├── rootca/</span><br><span class="line">│   ├── rootca-key.pem</span><br><span class="line">│   ├── rootca-cert.pem</span><br><span class="line">│   └── rootca.p12</span><br><span class="line">├── gateway/</span><br><span class="line">│   ├── prodgateway-key.pem</span><br><span class="line">│   ├── prodgateway.csr</span><br><span class="line">│   ├── prodgateway-cert.pem</span><br><span class="line">│   └── prodgateway.p12</span><br><span class="line">└── openssl-san.cnf</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="1️⃣-创建-RootCA-根证书（如已存在可跳过）"><a href="#1️⃣-创建-RootCA-根证书（如已存在可跳过）" class="headerlink" title="1️⃣ 创建 RootCA 根证书（如已存在可跳过）"></a>1️⃣ 创建 RootCA 根证书（如已存在可跳过）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成 RootCA 私钥</span></span><br><span class="line">openssl genrsa -out rootca-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 RootCA 证书</span></span><br><span class="line">openssl req -x509 -new -nodes -key rootca-key.pem -sha256 -days 3650 -out rootca-cert.pem -subj <span class="string">&quot;/C=CN/ST=State/L=City/O=Organization/OU=OrgUnit/CN=rootca&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选：导出为 truststore.p12</span></span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -out rootca.p12 -inkey rootca-key.pem -<span class="keyword">in</span> rootca-cert.pem -name rootca</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2️⃣-创建包含多个-IP-的-OpenSSL-配置文件"><a href="#2️⃣-创建包含多个-IP-的-OpenSSL-配置文件" class="headerlink" title="2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件"></a>2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件</h2><p>新建文件 <code>openssl-san.cnf</code>，内容如下：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[req]</span></span><br><span class="line"><span class="attr">distinguished_name</span> = req_distinguished_name</span><br><span class="line"><span class="attr">req_extensions</span> = v3_req</span><br><span class="line"><span class="attr">prompt</span> = <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="section">[req_distinguished_name]</span></span><br><span class="line"><span class="attr">C</span> = CN</span><br><span class="line"><span class="attr">ST</span> = State</span><br><span class="line"><span class="attr">L</span> = City</span><br><span class="line"><span class="attr">O</span> = Organization</span><br><span class="line"><span class="attr">OU</span> = OrgUnit</span><br><span class="line"><span class="attr">CN</span> = prodgateway.example.com</span><br><span class="line"></span><br><span class="line"><span class="section">[v3_req]</span></span><br><span class="line"><span class="attr">keyUsage</span> = keyEncipherment, dataEncipherment, digitalSignature</span><br><span class="line"><span class="attr">extendedKeyUsage</span> = serverAuth</span><br><span class="line"><span class="attr">subjectAltName</span> = @alt_names</span><br><span class="line"></span><br><span class="line"><span class="section">[alt_names]</span></span><br><span class="line"><span class="attr">IP.1</span> = <span class="number">192.168</span>.<span class="number">3.166</span></span><br><span class="line"><span class="attr">IP.2</span> = <span class="number">192.168</span>.<span class="number">3.197</span></span><br><span class="line"><span class="attr">IP.3</span> = <span class="number">192.168</span>.<span class="number">3.201</span></span><br><span class="line"><span class="attr">IP.4</span> = <span class="number">113.250</span>.<span class="number">177.98</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="3️⃣-生成服务证书和私钥（prodgateway）"><a href="#3️⃣-生成服务证书和私钥（prodgateway）" class="headerlink" title="3️⃣ 生成服务证书和私钥（prodgateway）"></a>3️⃣ 生成服务证书和私钥（prodgateway）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成私钥</span></span><br><span class="line">openssl genrsa -out prodgateway-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 CSR（证书签署请求）</span></span><br><span class="line">openssl req -new -key prodgateway-key.pem -out prodgateway.csr -config openssl-san.cnf</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="4️⃣-使用-rootca-签署-prodgateway-证书"><a href="#4️⃣-使用-rootca-签署-prodgateway-证书" class="headerlink" title="4️⃣ 使用 rootca 签署 prodgateway 证书"></a>4️⃣ 使用 rootca 签署 prodgateway 证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> prodgateway.csr -CA rootca-cert.pem -CAkey rootca-key.pem -CAcreateserial -out prodgateway-cert.pem -days 365 -sha256 -extensions v3_req -extfile openssl-san.cnf</span><br></pre></td></tr></table></figure>
+<p>📌 <code>-CAcreateserial</code> 会自动生成 <code>rootca-cert.srl</code> 文件。</p>
+<hr>
+<h2 id="5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）"><a href="#5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）" class="headerlink" title="5️⃣ 可选：打包为 .p12 格式（供 Java 使用或导入 Truststore）"></a>5️⃣ 可选：打包为 <code>.p12</code> 格式（供 Java 使用或导入 Truststore）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl pkcs12 -<span class="built_in">export</span> -<span class="keyword">in</span> prodgateway-cert.pem -inkey prodgateway-key.pem -out prodgateway.p12 -name prodgateway -CAfile rootca-cert.pem -caname rootca</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6️⃣-导入-prodgateway-p12-到现有-Truststore"><a href="#6️⃣-导入-prodgateway-p12-到现有-Truststore" class="headerlink" title="6️⃣ 导入 prodgateway.p12 到现有 Truststore"></a>6️⃣ 导入 <code>prodgateway.p12</code> 到现有 Truststore</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -importkeystore -deststorepass 123456 -destkeystore truststore.p12 -srckeystore prodgateway.p12 -srcstoretype PKCS12 -srcstorepass 123456</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>truststore.p12</code> 是你已有的信任库  </li>
+<li>可用以下命令查看条目：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -list -keystore truststore.p12 -storepass 123456</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="7️⃣-验证-SAN-是否包含-IP"><a href="#7️⃣-验证-SAN-是否包含-IP" class="headerlink" title="7️⃣ 验证 SAN 是否包含 IP"></a>7️⃣ 验证 SAN 是否包含 IP</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> prodgateway-cert.pem -noout -text | findstr /C:<span class="string">&quot;Subject Alternative Name&quot;</span></span><br></pre></td></tr></table></figure>
+<p>应看到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">X509v3 Subject Alternative Name:</span><br><span class="line">    IP Address:192.168.3.166, IP Address:192.168.3.197, ...</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="✅-最终用途"><a href="#✅-最终用途" class="headerlink" title="✅ 最终用途"></a>✅ 最终用途</h2><ul>
+<li><strong>Nginx / 前端服务</strong> 可配置 <code>prodgateway-cert.pem + prodgateway-key.pem</code></li>
+<li><strong>浏览器不会再报 ERR_CERT_AUTHORITY_INVALID</strong></li>
+<li><strong>HTTPS API 请求能通过 Truststore 验证</strong></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>Docker企业级实战部署 Oracle11g</title>
     <url>/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_Oracle11g_%E5%AE%9E%E6%88%98%E9%83%A8%E7%BD%B2/</url>
     <content><![CDATA[<h1 id="Docker-企业级实战部署-Oracle11g（11-2-0-3）"><a href="#Docker-企业级实战部署-Oracle11g（11-2-0-3）" class="headerlink" title="Docker 企业级实战部署 Oracle11g（11.2.0.3）"></a>Docker 企业级实战部署 Oracle11g（11.2.0.3）</h1><p>适用场景：</p>
@@ -1158,76 +1706,6 @@ Tailscale
 <li>建议加数据卷持久化</li>
 <li>定期备份 /u01 目录</li>
 </ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>自签证书手册</title>
-    <url>/2026/02/06/%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6/</url>
-    <content><![CDATA[<h1 id="🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记"><a href="#🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记" class="headerlink" title="🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记"></a>🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记</h1><h2 id="📁-目录结构建议"><a href="#📁-目录结构建议" class="headerlink" title="📁 目录结构建议"></a>📁 目录结构建议</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">certs/</span><br><span class="line">├── rootca/</span><br><span class="line">│   ├── rootca-key.pem</span><br><span class="line">│   ├── rootca-cert.pem</span><br><span class="line">│   └── rootca.p12</span><br><span class="line">├── gateway/</span><br><span class="line">│   ├── prodgateway-key.pem</span><br><span class="line">│   ├── prodgateway.csr</span><br><span class="line">│   ├── prodgateway-cert.pem</span><br><span class="line">│   └── prodgateway.p12</span><br><span class="line">└── openssl-san.cnf</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="1️⃣-创建-RootCA-根证书（如已存在可跳过）"><a href="#1️⃣-创建-RootCA-根证书（如已存在可跳过）" class="headerlink" title="1️⃣ 创建 RootCA 根证书（如已存在可跳过）"></a>1️⃣ 创建 RootCA 根证书（如已存在可跳过）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成 RootCA 私钥</span></span><br><span class="line">openssl genrsa -out rootca-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 RootCA 证书</span></span><br><span class="line">openssl req -x509 -new -nodes -key rootca-key.pem -sha256 -days 3650 -out rootca-cert.pem -subj <span class="string">&quot;/C=CN/ST=State/L=City/O=Organization/OU=OrgUnit/CN=rootca&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选：导出为 truststore.p12</span></span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -out rootca.p12 -inkey rootca-key.pem -<span class="keyword">in</span> rootca-cert.pem -name rootca</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="2️⃣-创建包含多个-IP-的-OpenSSL-配置文件"><a href="#2️⃣-创建包含多个-IP-的-OpenSSL-配置文件" class="headerlink" title="2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件"></a>2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件</h2><p>新建文件 <code>openssl-san.cnf</code>，内容如下：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[req]</span></span><br><span class="line"><span class="attr">distinguished_name</span> = req_distinguished_name</span><br><span class="line"><span class="attr">req_extensions</span> = v3_req</span><br><span class="line"><span class="attr">prompt</span> = <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="section">[req_distinguished_name]</span></span><br><span class="line"><span class="attr">C</span> = CN</span><br><span class="line"><span class="attr">ST</span> = State</span><br><span class="line"><span class="attr">L</span> = City</span><br><span class="line"><span class="attr">O</span> = Organization</span><br><span class="line"><span class="attr">OU</span> = OrgUnit</span><br><span class="line"><span class="attr">CN</span> = prodgateway.example.com</span><br><span class="line"></span><br><span class="line"><span class="section">[v3_req]</span></span><br><span class="line"><span class="attr">keyUsage</span> = keyEncipherment, dataEncipherment, digitalSignature</span><br><span class="line"><span class="attr">extendedKeyUsage</span> = serverAuth</span><br><span class="line"><span class="attr">subjectAltName</span> = @alt_names</span><br><span class="line"></span><br><span class="line"><span class="section">[alt_names]</span></span><br><span class="line"><span class="attr">IP.1</span> = <span class="number">192.168</span>.<span class="number">3.166</span></span><br><span class="line"><span class="attr">IP.2</span> = <span class="number">192.168</span>.<span class="number">3.197</span></span><br><span class="line"><span class="attr">IP.3</span> = <span class="number">192.168</span>.<span class="number">3.201</span></span><br><span class="line"><span class="attr">IP.4</span> = <span class="number">113.250</span>.<span class="number">177.98</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="3️⃣-生成服务证书和私钥（prodgateway）"><a href="#3️⃣-生成服务证书和私钥（prodgateway）" class="headerlink" title="3️⃣ 生成服务证书和私钥（prodgateway）"></a>3️⃣ 生成服务证书和私钥（prodgateway）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成私钥</span></span><br><span class="line">openssl genrsa -out prodgateway-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 CSR（证书签署请求）</span></span><br><span class="line">openssl req -new -key prodgateway-key.pem -out prodgateway.csr -config openssl-san.cnf</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="4️⃣-使用-rootca-签署-prodgateway-证书"><a href="#4️⃣-使用-rootca-签署-prodgateway-证书" class="headerlink" title="4️⃣ 使用 rootca 签署 prodgateway 证书"></a>4️⃣ 使用 rootca 签署 prodgateway 证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> prodgateway.csr -CA rootca-cert.pem -CAkey rootca-key.pem -CAcreateserial -out prodgateway-cert.pem -days 365 -sha256 -extensions v3_req -extfile openssl-san.cnf</span><br></pre></td></tr></table></figure>
-<p>📌 <code>-CAcreateserial</code> 会自动生成 <code>rootca-cert.srl</code> 文件。</p>
-<hr>
-<h2 id="5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）"><a href="#5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）" class="headerlink" title="5️⃣ 可选：打包为 .p12 格式（供 Java 使用或导入 Truststore）"></a>5️⃣ 可选：打包为 <code>.p12</code> 格式（供 Java 使用或导入 Truststore）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl pkcs12 -<span class="built_in">export</span> -<span class="keyword">in</span> prodgateway-cert.pem -inkey prodgateway-key.pem -out prodgateway.p12 -name prodgateway -CAfile rootca-cert.pem -caname rootca</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="6️⃣-导入-prodgateway-p12-到现有-Truststore"><a href="#6️⃣-导入-prodgateway-p12-到现有-Truststore" class="headerlink" title="6️⃣ 导入 prodgateway.p12 到现有 Truststore"></a>6️⃣ 导入 <code>prodgateway.p12</code> 到现有 Truststore</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -importkeystore -deststorepass 123456 -destkeystore truststore.p12 -srckeystore prodgateway.p12 -srcstoretype PKCS12 -srcstorepass 123456</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>truststore.p12</code> 是你已有的信任库  </li>
-<li>可用以下命令查看条目：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -list -keystore truststore.p12 -storepass 123456</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="7️⃣-验证-SAN-是否包含-IP"><a href="#7️⃣-验证-SAN-是否包含-IP" class="headerlink" title="7️⃣ 验证 SAN 是否包含 IP"></a>7️⃣ 验证 SAN 是否包含 IP</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> prodgateway-cert.pem -noout -text | findstr /C:<span class="string">&quot;Subject Alternative Name&quot;</span></span><br></pre></td></tr></table></figure>
-<p>应看到：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">X509v3 Subject Alternative Name:</span><br><span class="line">    IP Address:192.168.3.166, IP Address:192.168.3.197, ...</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="✅-最终用途"><a href="#✅-最终用途" class="headerlink" title="✅ 最终用途"></a>✅ 最终用途</h2><ul>
-<li><strong>Nginx / 前端服务</strong> 可配置 <code>prodgateway-cert.pem + prodgateway-key.pem</code></li>
-<li><strong>浏览器不会再报 ERR_CERT_AUTHORITY_INVALID</strong></li>
-<li><strong>HTTPS API 请求能通过 Truststore 验证</strong></li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>canal手册</title>
-    <url>/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/</url>
-    <content><![CDATA[<p>docker run —privileged=true \<br>—log-driver json-file \<br>—log-opt max-size=100m \<br>—log-opt max-file=2 \<br>—name kafka -p 9092:9092 \<br>-e KAFKA_BROKER_ID=0 \<br>-e KAFKA_ZOOKEEPER_CONNECT=192.168.71.134:2181/kafka \<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.71.134:9092 \<br>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \<br>-e ALLOW_PLAINTEXT_LISTENER=yes \<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G’ \<br>-v /home/kafka/:/opt/kafka/ \<br>-v /etc/localtime:/etc/localtime \<br>-d wurstmeister/kafka:2.12-2.3.1<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>命令    注释<br>–privileged=true    表示容器内的root拥有真正的root权限<br>–log-driver json-file    表示使用 JSON 文件作为日志驱动<br>–log-opt max-size=100m    表示设置日志的最大大小为100MB<br>–log-opt max-file=2    表示设置日志文件的最大数量<br>–name    表示容器命名<br>-p    表示端口映射<br>-e KAFKA_BROKER_ID=0    表示这个ID是集群的标识，不能重复<br>-e KAFKA_ZOOKEEPER_CONNECT=IP:2181/kafka    表示zookeeper的连接地址<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://IP:9092    表示kafka发布到zookeeper供客户端使用的服务地址<br>-e ALLOW_PLAINTEXT_LISTENER=yes    表示允许使用PLAINTEXT侦听器<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G    表示行内存参数<br>-v /home/kafka/data:/wurstmeister/kafka/data    表示挂载配置数据目录<br>-v /home/kafka/config:/wurstmeister/kafka/config    表示配置文件目录<br>-v /etc/localtime:/etc/localtime    表示将本地时间映射到容器中<br>-d    表示后台运行</p>
-<p>./kafka-topics.sh —create —topic test-kafka —bootstrap-server localhost:9092<br>kafka-topics.sh —describe —topic test-kafka —bootstrap-server localhost:9092</p>
-<p>3.拉取Cannal镜像</p>
-<h2 id="拉取版本为v1-1-5的canal"><a href="#拉取版本为v1-1-5的canal" class="headerlink" title="拉取版本为v1.1.5的canal"></a>拉取版本为v1.1.5的canal</h2><p>docker pull canal/canal-server:v1.1.5<br>1<br>2<br>4.运行Canal<br>4.1、启动命令<br>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>启动命令说明：</p>
-<p>4.2、命令解读<br>① -p ：指定端口<br>② -e ：指定配置文件的配置信息。此处主要有两个配置文件在起作用，分别是 canal.properties 和 instance.properties 这两个配置文件，前缀是 canal. 的修改就是 canal.properties 这个配置文件的，前缀是 canal.instance 修改的就是 instance.properties 这个配置文件的<br>③ canal.destinations：指定了实例的名称，决定了instance实例的配置文件存放目录<br>④ canal.instance.master.address ：指定了mysql的地址，正常需要ip，此处由于会将mysql和canal放在一个网络中，所以可以直接使用mysql替代<br>⑤ canal.instance.filter.regex：此处指定只过滤test这个数据库的binlog数据<br>⑥ network mysql-test：指定网络是步骤1创建的网络<br>⑦ restart=always ：将canal设置为docker启动时自启，可要可不要<br>⑧ -d ：指定步骤2拉取的镜像名称以及版本</p>
-<p>4.3、查看容器状态</p>
-<h1 id="查看启动日志"><a href="#查看启动日志" class="headerlink" title="查看启动日志"></a>查看启动日志</h1><p>docker logs canal</p>
-<h1 id="查看目前运行容器"><a href="#查看目前运行容器" class="headerlink" title="查看目前运行容器"></a>查看目前运行容器</h1><p>docker ps</p>
-<h1 id="启动失败时查看容器状态"><a href="#启动失败时查看容器状态" class="headerlink" title="启动失败时查看容器状态"></a>启动失败时查看容器状态</h1><p>docker ps -a<br>1<br>2<br>3<br>4<br>5<br>6<br>4.4、相关配置调整（可做可不做）<br>①将canal配置文件进行拷贝</p>
-<h1 id="canal-properties-amp-instance-properties"><a href="#canal-properties-amp-instance-properties" class="headerlink" title="canal.properties &amp; instance.properties"></a>canal.properties &amp; instance.properties</h1><h1 id="注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面"><a href="#注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面" class="headerlink" title="注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面"></a>注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</h1><p>docker cp canal:/home/admin/canal-server/conf/canal.properties /mydata/canal/conf<br>docker cp canal:/home/admin/canal-server/conf/test/instance.properties /mydata/canal/conf</p>
-<p>1<br>2<br>3<br>4<br>5<br>6<br>②根据个人需要修改配置之后，将原有的canal容器停止并删除，然后重新启动的时候使用-v进行文件绑定，进行文件绑定时务必确保文件是存在的。</p>
-<h1 id="停止并删除容器"><a href="#停止并删除容器" class="headerlink" title="停止并删除容器"></a>停止并删除容器</h1><p>docker stop canal<br>docker rm canal</p>
-<h1 id="重新运行并指定"><a href="#重新运行并指定" class="headerlink" title="重新运行并指定"></a>重新运行并指定</h1><p>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>-v /mydata/canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties \<br>-v /mydata/canal/conf/instance.properties:/home/admin/canal-server/conf/test/instance.properties \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
-<p>docker run -p 11111:11111 —name canal \<br>-v /mydata/canal/conf:/home/admin/canal-server/conf \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
-<p>找到canal.deployer-1.1.4/conf目录下的canal.properties配置文件：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># tcp, kafka, RocketMQ 这里选择kafka模式</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">kafka</span></span><br><span class="line"><span class="comment"># 解析器的线程数，打开此配置，不打开则会出现阻塞或者不进行解析的情况</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelThreadSize</span> = <span class="string">16</span></span><br><span class="line"><span class="comment"># 配置MQ的服务地址，这里配置的是kafka对应的地址和端口</span></span><br><span class="line"><span class="attr">canal.mq.servers</span> = <span class="string">127.0.0.1:9092</span></span><br><span class="line"><span class="comment"># 配置instance，在conf目录下要有example同名的目录，可以配置多个</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string">example</span></span><br></pre></td></tr></table></figure>
-<p>然后配置instance，找到/conf/example/instance.properties配置文件：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment">## mysql serverId , v1.0.26+ will autoGen(自动生成，不需配置)</span></span><br><span class="line"><span class="comment"># canal.instance.mysql.slaveId=0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># position info</span></span><br><span class="line"><span class="attr">canal.instance.master.address</span>=<span class="string">127.0.0.1:3306</span></span><br><span class="line"><span class="comment"># 在Mysql执行 SHOW MASTER STATUS;查看当前数据库的binlog</span></span><br><span class="line"><span class="attr">canal.instance.master.journal.name</span>=<span class="string">mysql-bin.000006</span></span><br><span class="line"><span class="attr">canal.instance.master.position</span>=<span class="string">4596</span></span><br><span class="line"><span class="comment"># 账号密码</span></span><br><span class="line"><span class="attr">canal.instance.dbUsername</span>=<span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.dbPassword</span>=<span class="string">Canal@****</span></span><br><span class="line"><span class="attr">canal.instance.connectionCharset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="comment">#MQ队列名称</span></span><br><span class="line"><span class="attr">canal.mq.topic</span>=<span class="string">canaltopic</span></span><br><span class="line"><span class="comment">#单队列模式的分区下标</span></span><br><span class="line"><span class="attr">canal.mq.partition</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 使用命令登录：mysql -u root -p</span></span><br><span class="line"><span class="comment">-- 创建用户 用户名：canal 密码：Canal@123456</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授权 *.*表示所有库</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>下一步在MySQL配置文件my.cnf设置如下信息：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># 打开binlog</span></span><br><span class="line"><span class="string">log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"># 选择ROW(行)模式</span></span><br><span class="line"><span class="string">binlog-format=ROW</span></span><br><span class="line"><span class="comment"># 配置MySQL replaction需要定义，不要和canal的slaveId重复</span></span><br><span class="line"><span class="string">server_id=1</span></span><br></pre></td></tr></table></figure>
-<p>改了配置文件之后，重启MySQL，使用命令查看是否打开binlog模式：</p>
-<p>show variables like ‘log_bin’;</p>
-<p>查看binlog日志文件列表：</p>
-<p>show binary logs;</p>
-<p>查看当前正在写入的binlog文件：</p>
-<p>show master status;</p>
-<p>MySQL服务器这边就搞定了，很简单。</p>
 ]]></content>
   </entry>
   <entry>
@@ -1321,6 +1799,62 @@ Tailscale
 <p>D:\App\nexus-3.55.0-01-win64\nexus-3.55.0-01\bin&gt;nexus.exe /run</p>
 <p>用户名：admin（默认）</p>
 <p>密码：第一次启动时生成，(在/sonatype-work/nexus3/admin.password 文件中) </p>
+]]></content>
+  </entry>
+  <entry>
+    <title>证书更换手册</title>
+    <url>/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h2 id="一、-前置条件"><a href="#一、-前置条件" class="headerlink" title="一、 前置条件"></a>一、 前置条件</h2><p>1、需要安装openssl</p>
+<h2 id="二、转换证书格式"><a href="#二、转换证书格式" class="headerlink" title="二、转换证书格式"></a>二、转换证书格式</h2><p>1、转换为PKCS12(推荐)</p>
+<p>openssl pkcs12 -export -in <em>.scaxkc.com_bundle.crt -inkey </em>.scaxkc.com_RSA.key -out scaxkc-gateway.p12 -name scaxkc-gateway</p>
+<p>执行上述命令后会提示输入密码、和确认密码</p>
+<p>参数说明：</p>
+<p>_.scaxkc.com_bundle.crt：证书文件</p>
+<p>_.scaxkc.com_RSA.key：私钥文件</p>
+<p>-name:指定证书别名（可自行定义，但尽量不重复）</p>
+<p>2、springboot配置</p>
+<p>1、将证书放置resources目录下</p>
+<p>2、配置在服务配置文件ssl块下</p>
+<p>示例：</p>
+<p>ssl:</p>
+<p>​    enable: true</p>
+<p>​    key-store: classpath:scaxkc-gateway.p12 # 新服务的 keystore 文件路径</p>
+<p>​    key-store-password: Kunteng@123         # keystore 密码</p>
+<p>​    key-alias: scaxkc-gateway</p>
+<p>​    key-store-type: PKCS12 </p>
+]]></content>
+  </entry>
+  <entry>
+    <title>canal手册</title>
+    <url>/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/</url>
+    <content><![CDATA[<p>docker run —privileged=true \<br>—log-driver json-file \<br>—log-opt max-size=100m \<br>—log-opt max-file=2 \<br>—name kafka -p 9092:9092 \<br>-e KAFKA_BROKER_ID=0 \<br>-e KAFKA_ZOOKEEPER_CONNECT=192.168.71.134:2181/kafka \<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.71.134:9092 \<br>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \<br>-e ALLOW_PLAINTEXT_LISTENER=yes \<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G’ \<br>-v /home/kafka/:/opt/kafka/ \<br>-v /etc/localtime:/etc/localtime \<br>-d wurstmeister/kafka:2.12-2.3.1<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>命令    注释<br>–privileged=true    表示容器内的root拥有真正的root权限<br>–log-driver json-file    表示使用 JSON 文件作为日志驱动<br>–log-opt max-size=100m    表示设置日志的最大大小为100MB<br>–log-opt max-file=2    表示设置日志文件的最大数量<br>–name    表示容器命名<br>-p    表示端口映射<br>-e KAFKA_BROKER_ID=0    表示这个ID是集群的标识，不能重复<br>-e KAFKA_ZOOKEEPER_CONNECT=IP:2181/kafka    表示zookeeper的连接地址<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://IP:9092    表示kafka发布到zookeeper供客户端使用的服务地址<br>-e ALLOW_PLAINTEXT_LISTENER=yes    表示允许使用PLAINTEXT侦听器<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G    表示行内存参数<br>-v /home/kafka/data:/wurstmeister/kafka/data    表示挂载配置数据目录<br>-v /home/kafka/config:/wurstmeister/kafka/config    表示配置文件目录<br>-v /etc/localtime:/etc/localtime    表示将本地时间映射到容器中<br>-d    表示后台运行</p>
+<p>./kafka-topics.sh —create —topic test-kafka —bootstrap-server localhost:9092<br>kafka-topics.sh —describe —topic test-kafka —bootstrap-server localhost:9092</p>
+<p>3.拉取Cannal镜像</p>
+<h2 id="拉取版本为v1-1-5的canal"><a href="#拉取版本为v1-1-5的canal" class="headerlink" title="拉取版本为v1.1.5的canal"></a>拉取版本为v1.1.5的canal</h2><p>docker pull canal/canal-server:v1.1.5<br>1<br>2<br>4.运行Canal<br>4.1、启动命令<br>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>启动命令说明：</p>
+<p>4.2、命令解读<br>① -p ：指定端口<br>② -e ：指定配置文件的配置信息。此处主要有两个配置文件在起作用，分别是 canal.properties 和 instance.properties 这两个配置文件，前缀是 canal. 的修改就是 canal.properties 这个配置文件的，前缀是 canal.instance 修改的就是 instance.properties 这个配置文件的<br>③ canal.destinations：指定了实例的名称，决定了instance实例的配置文件存放目录<br>④ canal.instance.master.address ：指定了mysql的地址，正常需要ip，此处由于会将mysql和canal放在一个网络中，所以可以直接使用mysql替代<br>⑤ canal.instance.filter.regex：此处指定只过滤test这个数据库的binlog数据<br>⑥ network mysql-test：指定网络是步骤1创建的网络<br>⑦ restart=always ：将canal设置为docker启动时自启，可要可不要<br>⑧ -d ：指定步骤2拉取的镜像名称以及版本</p>
+<p>4.3、查看容器状态</p>
+<h1 id="查看启动日志"><a href="#查看启动日志" class="headerlink" title="查看启动日志"></a>查看启动日志</h1><p>docker logs canal</p>
+<h1 id="查看目前运行容器"><a href="#查看目前运行容器" class="headerlink" title="查看目前运行容器"></a>查看目前运行容器</h1><p>docker ps</p>
+<h1 id="启动失败时查看容器状态"><a href="#启动失败时查看容器状态" class="headerlink" title="启动失败时查看容器状态"></a>启动失败时查看容器状态</h1><p>docker ps -a<br>1<br>2<br>3<br>4<br>5<br>6<br>4.4、相关配置调整（可做可不做）<br>①将canal配置文件进行拷贝</p>
+<h1 id="canal-properties-amp-instance-properties"><a href="#canal-properties-amp-instance-properties" class="headerlink" title="canal.properties &amp; instance.properties"></a>canal.properties &amp; instance.properties</h1><h1 id="注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面"><a href="#注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面" class="headerlink" title="注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面"></a>注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</h1><p>docker cp canal:/home/admin/canal-server/conf/canal.properties /mydata/canal/conf<br>docker cp canal:/home/admin/canal-server/conf/test/instance.properties /mydata/canal/conf</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>②根据个人需要修改配置之后，将原有的canal容器停止并删除，然后重新启动的时候使用-v进行文件绑定，进行文件绑定时务必确保文件是存在的。</p>
+<h1 id="停止并删除容器"><a href="#停止并删除容器" class="headerlink" title="停止并删除容器"></a>停止并删除容器</h1><p>docker stop canal<br>docker rm canal</p>
+<h1 id="重新运行并指定"><a href="#重新运行并指定" class="headerlink" title="重新运行并指定"></a>重新运行并指定</h1><p>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>-v /mydata/canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties \<br>-v /mydata/canal/conf/instance.properties:/home/admin/canal-server/conf/test/instance.properties \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>docker run -p 11111:11111 —name canal \<br>-v /mydata/canal/conf:/home/admin/canal-server/conf \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>找到canal.deployer-1.1.4/conf目录下的canal.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># tcp, kafka, RocketMQ 这里选择kafka模式</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">kafka</span></span><br><span class="line"><span class="comment"># 解析器的线程数，打开此配置，不打开则会出现阻塞或者不进行解析的情况</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelThreadSize</span> = <span class="string">16</span></span><br><span class="line"><span class="comment"># 配置MQ的服务地址，这里配置的是kafka对应的地址和端口</span></span><br><span class="line"><span class="attr">canal.mq.servers</span> = <span class="string">127.0.0.1:9092</span></span><br><span class="line"><span class="comment"># 配置instance，在conf目录下要有example同名的目录，可以配置多个</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string">example</span></span><br></pre></td></tr></table></figure>
+<p>然后配置instance，找到/conf/example/instance.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment">## mysql serverId , v1.0.26+ will autoGen(自动生成，不需配置)</span></span><br><span class="line"><span class="comment"># canal.instance.mysql.slaveId=0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># position info</span></span><br><span class="line"><span class="attr">canal.instance.master.address</span>=<span class="string">127.0.0.1:3306</span></span><br><span class="line"><span class="comment"># 在Mysql执行 SHOW MASTER STATUS;查看当前数据库的binlog</span></span><br><span class="line"><span class="attr">canal.instance.master.journal.name</span>=<span class="string">mysql-bin.000006</span></span><br><span class="line"><span class="attr">canal.instance.master.position</span>=<span class="string">4596</span></span><br><span class="line"><span class="comment"># 账号密码</span></span><br><span class="line"><span class="attr">canal.instance.dbUsername</span>=<span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.dbPassword</span>=<span class="string">Canal@****</span></span><br><span class="line"><span class="attr">canal.instance.connectionCharset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="comment">#MQ队列名称</span></span><br><span class="line"><span class="attr">canal.mq.topic</span>=<span class="string">canaltopic</span></span><br><span class="line"><span class="comment">#单队列模式的分区下标</span></span><br><span class="line"><span class="attr">canal.mq.partition</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 使用命令登录：mysql -u root -p</span></span><br><span class="line"><span class="comment">-- 创建用户 用户名：canal 密码：Canal@123456</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授权 *.*表示所有库</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>下一步在MySQL配置文件my.cnf设置如下信息：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># 打开binlog</span></span><br><span class="line"><span class="string">log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"># 选择ROW(行)模式</span></span><br><span class="line"><span class="string">binlog-format=ROW</span></span><br><span class="line"><span class="comment"># 配置MySQL replaction需要定义，不要和canal的slaveId重复</span></span><br><span class="line"><span class="string">server_id=1</span></span><br></pre></td></tr></table></figure>
+<p>改了配置文件之后，重启MySQL，使用命令查看是否打开binlog模式：</p>
+<p>show variables like ‘log_bin’;</p>
+<p>查看binlog日志文件列表：</p>
+<p>show binary logs;</p>
+<p>查看当前正在写入的binlog文件：</p>
+<p>show master status;</p>
+<p>MySQL服务器这边就搞定了，很简单。</p>
 ]]></content>
   </entry>
   <entry>
@@ -1492,29 +2026,6 @@ Tailscale
 <p> 5.限制端口MAC数量(默认=1)：port-security max-mac-num MAC地址上限(可用于<strong>汇聚层**</strong>Switch**)</p>
 <p> 6.端口安全保护动作(默认为restrict)： port-security  protect-action  protect 或restrict 或shutdown</p>
 <p> 7.检查：dis mac-add ， dis mac-add security， dis mac-add sticky</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>证书更换手册</title>
-    <url>/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<h2 id="一、-前置条件"><a href="#一、-前置条件" class="headerlink" title="一、 前置条件"></a>一、 前置条件</h2><p>1、需要安装openssl</p>
-<h2 id="二、转换证书格式"><a href="#二、转换证书格式" class="headerlink" title="二、转换证书格式"></a>二、转换证书格式</h2><p>1、转换为PKCS12(推荐)</p>
-<p>openssl pkcs12 -export -in <em>.scaxkc.com_bundle.crt -inkey </em>.scaxkc.com_RSA.key -out scaxkc-gateway.p12 -name scaxkc-gateway</p>
-<p>执行上述命令后会提示输入密码、和确认密码</p>
-<p>参数说明：</p>
-<p>_.scaxkc.com_bundle.crt：证书文件</p>
-<p>_.scaxkc.com_RSA.key：私钥文件</p>
-<p>-name:指定证书别名（可自行定义，但尽量不重复）</p>
-<p>2、springboot配置</p>
-<p>1、将证书放置resources目录下</p>
-<p>2、配置在服务配置文件ssl块下</p>
-<p>示例：</p>
-<p>ssl:</p>
-<p>​    enable: true</p>
-<p>​    key-store: classpath:scaxkc-gateway.p12 # 新服务的 keystore 文件路径</p>
-<p>​    key-store-password: Kunteng@123         # keystore 密码</p>
-<p>​    key-alias: scaxkc-gateway</p>
-<p>​    key-store-type: PKCS12 </p>
 ]]></content>
   </entry>
 </search>

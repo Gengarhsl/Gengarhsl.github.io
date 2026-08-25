@@ -3,11 +3,11 @@
   <title>Gengar</title>
   
   <subtitle>一个兴趣使然的博客</subtitle>
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="https://gengarhsl.github.io/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
+  <link href="https://gengarhsl.github.io/"/>
   <updated>2026-03-12T02:11:06.215Z</updated>
-  <id>http://example.com/</id>
+  <id>https://gengarhsl.github.io/</id>
   
   <author>
     <name>Gengar</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Tailscale + Nginx Dev Gateway 部署指南</title>
-    <link href="http://example.com/2026/03/12/tailscale-nginx-dev-gateway-hexo/"/>
-    <id>http://example.com/2026/03/12/tailscale-nginx-dev-gateway-hexo/</id>
+    <link href="https://gengarhsl.github.io/2026/03/12/tailscale-nginx-dev-gateway-hexo/"/>
+    <id>https://gengarhsl.github.io/2026/03/12/tailscale-nginx-dev-gateway-hexo/</id>
     <published>2026-03-11T16:00:00.000Z</published>
     <updated>2026-03-12T02:11:06.215Z</updated>
     
@@ -33,25 +33,25 @@
     
     
     
-    <category term="DevOps" scheme="http://example.com/categories/DevOps/"/>
+    <category term="DevOps" scheme="https://gengarhsl.github.io/categories/DevOps/"/>
     
     
-    <category term="Tailscale" scheme="http://example.com/tags/Tailscale/"/>
+    <category term="Tailscale" scheme="https://gengarhsl.github.io/tags/Tailscale/"/>
     
-    <category term="Nginx" scheme="http://example.com/tags/Nginx/"/>
+    <category term="Nginx" scheme="https://gengarhsl.github.io/tags/Nginx/"/>
     
-    <category term="Dev Gateway" scheme="http://example.com/tags/Dev-Gateway/"/>
+    <category term="Dev Gateway" scheme="https://gengarhsl.github.io/tags/Dev-Gateway/"/>
     
-    <category term="微服务" scheme="http://example.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    <category term="微服务" scheme="https://gengarhsl.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
-    <category term="Nacos" scheme="http://example.com/tags/Nacos/"/>
+    <category term="Nacos" scheme="https://gengarhsl.github.io/tags/Nacos/"/>
     
   </entry>
   
   <entry>
     <title>linux重置密码手册</title>
-    <link href="http://example.com/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/"/>
-    <id>http://example.com/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/</id>
+    <link href="https://gengarhsl.github.io/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/"/>
+    <id>https://gengarhsl.github.io/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/</id>
     <published>2026-03-04T16:00:00.000Z</published>
     <updated>2026-03-05T03:25:38.192Z</updated>
     
@@ -69,41 +69,9 @@
   </entry>
   
   <entry>
-    <title>Docker企业级部署Seata分布式事务（Nacos + MySQL + Oracle支持）</title>
-    <link href="http://example.com/2026/02/06/Docker%E4%BC%81%E4%B8%9A%E7%BA%A7%E9%83%A8%E7%BD%B2Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%88Nacos-+-MySQL-+-Oracle%E6%94%AF%E6%8C%81%EF%BC%89/"/>
-    <id>http://example.com/2026/02/06/Docker%E4%BC%81%E4%B8%9A%E7%BA%A7%E9%83%A8%E7%BD%B2Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%88Nacos-+-MySQL-+-Oracle%E6%94%AF%E6%8C%81%EF%BC%89/</id>
-    <published>2026-02-05T16:00:00.000Z</published>
-    <updated>2026-02-06T09:47:40.042Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="一、Seata简介"><a href="#一、Seata简介" class="headerlink" title="一、Seata简介"></a>一、Seata简介</h1><p>Seata 是一款开源的分布式事务解决方案，支持：</p><ul><li>AT 模式（最常用）</li><li>TCC 模式</li><li>SAGA 模式</li><li>XA 模式</li></ul><p>核心组件：</p><div class="table-container"><table><thead><tr><th>组件</th><th>作用</th></tr></thead><tbody><tr><td>TC</td><td>事务协调器（Seata Server）</td></tr><tr><td>TM</td><td>事务管理器（发起事务的服务）</td></tr><tr><td>RM</td><td>资源管理器（数据库操作服务）</td></tr></tbody></table></div><p>核心流程：</p><ol><li>TM 开启全局事务</li><li>TC 生成 XID</li><li>XID 在服务间传播</li><li>RM 注册分支事务</li><li>TM 决议提交或回滚</li><li>TC 通知所有RM执行</li></ol><hr><h1 id="二、环境准备"><a href="#二、环境准备" class="headerlink" title="二、环境准备"></a>二、环境准备</h1><h2 id="1、软件环境"><a href="#1、软件环境" class="headerlink" title="1、软件环境"></a>1、软件环境</h2><p>Docker &gt;= 23<br>Nacos &gt;= 2.2<br>MySQL 或 Oracle<br>JDK 8+</p><hr><h2 id="2、目录规划（企业标准）"><a href="#2、目录规划（企业标准）" class="headerlink" title="2、目录规划（企业标准）"></a>2、目录规划（企业标准）</h2><p>/data/docker/seata<br>/data/docker/seata/resources<br>/data/docker/seata/logs</p><p>创建目录：</p><p>mkdir -p /data/docker/seata/resources<br>mkdir -p /data/docker/seata/logs</p><hr><h1 id="三、拉取Seata镜像"><a href="#三、拉取Seata镜像" class="headerlink" title="三、拉取Seata镜像"></a>三、拉取Seata镜像</h1><h2 id="1、查看镜像"><a href="#1、查看镜像" class="headerlink" title="1、查看镜像"></a>1、查看镜像</h2><p>docker search seata</p><p>推荐官方镜像：</p><p>seataio/seata-server</p><hr><h2 id="2、拉取指定稳定版本（推荐）"><a href="#2、拉取指定稳定版本（推荐）" class="headerlink" title="2、拉取指定稳定版本（推荐）"></a>2、拉取指定稳定版本（推荐）</h2><p>docker pull seataio/seata-server:1.6.1</p><p>查看：</p><p>docker images</p><hr><h1 id="四、创建Seata数据库"><a href="#四、创建Seata数据库" class="headerlink" title="四、创建Seata数据库"></a>四、创建Seata数据库</h1><p>下载官方脚本：</p><p><a href="https://github.com/apache/incubator-seata/tree/master/script/server/db">https://github.com/apache/incubator-seata/tree/master/script/server/db</a></p><p>创建数据库：</p><p>CREATE DATABASE seata;</p><p>执行：</p><p>mysql.sql</p><hr><h1 id="五、初始化配置文件"><a href="#五、初始化配置文件" class="headerlink" title="五、初始化配置文件"></a>五、初始化配置文件</h1><h2 id="1、先启动一次容器"><a href="#1、先启动一次容器" class="headerlink" title="1、先启动一次容器"></a>1、先启动一次容器</h2><p>docker run -d —name seata-temp<br>-p 7091:7091<br>seataio/seata-server:1.6.1</p><hr><h2 id="2、复制配置"><a href="#2、复制配置" class="headerlink" title="2、复制配置"></a>2、复制配置</h2><p>docker cp seata-temp:/seata-server/resources /data/docker/seata/</p><hr><h2 id="3、删除临时容器"><a href="#3、删除临时容器" class="headerlink" title="3、删除临时容器"></a>3、删除临时容器</h2><p>docker rm -f seata-temp</p><hr><h1 id="六、修改-application-yml（企业版）"><a href="#六、修改-application-yml（企业版）" class="headerlink" title="六、修改 application.yml（企业版）"></a>六、修改 application.yml（企业版）</h1><p>server:<br>port: 7091</p><p>spring:<br>application:<br>name: seata-server</p><p>console:<br>user:<br>username: seata<br>password: seata</p><p>seata:<br>config:<br>type: nacos<br>nacos:<br>server-addr: 192.168.1.10:8848<br>group: SEATA_GROUP<br>username: nacos<br>password: nacos<br>data-id: seata.properties</p><p>registry:<br>type: nacos<br>nacos:<br>application: seata-server<br>server-addr: 192.168.1.10:8848<br>group: SEATA_GROUP<br>cluster: default<br>username: nacos<br>password: nacos</p><p>store:<br>mode: db<br>db:<br>datasource: druid<br>db-type: mysql<br>driver-class-name: com.mysql.jdbc.Driver<br>url: jdbc:mysql://192.168.1.20:3306/seata<br>user: root<br>password: 123456</p><p>security:<br>secretKey: SeataSecretKey<br>tokenValidityInMilliseconds: 1800000</p><hr><h1 id="七、Nacos配置中心配置"><a href="#七、Nacos配置中心配置" class="headerlink" title="七、Nacos配置中心配置"></a>七、Nacos配置中心配置</h1><p>创建：</p><p>DataId: seata.properties<br>Group: SEATA_GROUP</p><p>内容：</p><p>store.mode=db<br>store.db.dbType=mysql<br>store.db.url=jdbc:mysql://192.168.1.20:3306/seata<br>store.db.user=root<br>store.db.password=123456</p><hr><h1 id="八、正式启动Seata（生产版）"><a href="#八、正式启动Seata（生产版）" class="headerlink" title="八、正式启动Seata（生产版）"></a>八、正式启动Seata（生产版）</h1><p>docker run -d<br>—name seata<br>—restart=always<br>-p 8091:8091<br>-p 7091:7091<br>-e SEATA_IP=192.168.1.30<br>-v /data/docker/seata/resources:/seata-server/resources<br>-v /data/docker/seata/logs:/root/logs<br>seataio/seata-server:1.6.1</p><hr><h1 id="九、验证部署"><a href="#九、验证部署" class="headerlink" title="九、验证部署"></a>九、验证部署</h1><h2 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h2><p>docker ps</p><h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p>docker logs -f seata</p><h2 id="查看Nacos"><a href="#查看Nacos" class="headerlink" title="查看Nacos"></a>查看Nacos</h2><p>服务列表出现 seata-server</p><hr><h1 id="十、微服务接入Seata"><a href="#十、微服务接入Seata" class="headerlink" title="十、微服务接入Seata"></a>十、微服务接入Seata</h1><p>入口方法：</p><p>@GlobalTransactional</p><p>普通方法：</p><p>@Transactional</p><hr><h1 id="十一、Oracle数据库-undo-log"><a href="#十一、Oracle数据库-undo-log" class="headerlink" title="十一、Oracle数据库 undo_log"></a>十一、Oracle数据库 undo_log</h1><p>CREATE TABLE undo_log (<br>id NUMBER(19) NOT NULL,<br>branch_id NUMBER(19) NOT NULL,<br>xid VARCHAR2(100) NOT NULL,<br>context VARCHAR2(128) NOT NULL,<br>rollback_info BLOB NOT NULL,<br>log_status NUMBER(10) NOT NULL,<br>log_created DATE NOT NULL,<br>log_modified DATE NOT NULL,<br>ext VARCHAR2(100),<br>CONSTRAINT pk_undo_log PRIMARY KEY (id)<br>);</p><hr><h1 id="十二、企业级避坑指南"><a href="#十二、企业级避坑指南" class="headerlink" title="十二、企业级避坑指南"></a>十二、企业级避坑指南</h1><ol><li>不支持复杂SQL</li><li>不支持MP批量操作</li><li>Feign必须检查返回值</li><li>每个业务库必须有 undo_log</li><li>AT模式入口必须使用 GlobalTransactional</li><li>Oracle建议驱动19+</li><li>Druid建议1.2.20+</li><li>异常不能吞</li><li>不支持事务嵌套</li><li>低版本Seata序列化问题严重</li></ol><hr><h1 id="十三、企业部署架构建议"><a href="#十三、企业部署架构建议" class="headerlink" title="十三、企业部署架构建议"></a>十三、企业部署架构建议</h1><p>Nacos集群<br>MySQL主从<br>Seata集群<br>Docker部署<br>日志集中收集</p><hr><h1 id="十四、生产环境建议"><a href="#十四、生产环境建议" class="headerlink" title="十四、生产环境建议"></a>十四、生产环境建议</h1><p>开启restart=always<br>开启日志挂载<br>禁止使用latest版本<br>配置独立数据库<br>使用内网IP注册</p><hr>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;一、Seata简介&quot;&gt;&lt;a href=&quot;#一、Seata简介&quot; class=&quot;headerlink&quot; title=&quot;一、Seata简介&quot;&gt;&lt;/a&gt;一、Seata简介&lt;/h1&gt;&lt;p&gt;Seata 是一款开源的分布式事务解决方案，支持：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;AT </summary>
-      
-    
-    
-    
-    <category term="中间件实战" scheme="http://example.com/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9E%E6%88%98/"/>
-    
-    
-    <category term="Docker" scheme="http://example.com/tags/Docker/"/>
-    
-    <category term="Seata" scheme="http://example.com/tags/Seata/"/>
-    
-    <category term="分布式事务" scheme="http://example.com/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
-    
-    <category term="微服务中间件" scheme="http://example.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
     <title>docker命令笔记</title>
-    <link href="http://example.com/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"/>
-    <id>http://example.com/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://gengarhsl.github.io/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</id>
     <published>2026-02-05T16:00:00.000Z</published>
     <updated>2026-02-06T09:53:11.217Z</updated>
     
@@ -121,9 +89,41 @@
   </entry>
   
   <entry>
+    <title>Docker企业级部署Seata分布式事务（Nacos + MySQL + Oracle支持）</title>
+    <link href="https://gengarhsl.github.io/2026/02/06/Docker%E4%BC%81%E4%B8%9A%E7%BA%A7%E9%83%A8%E7%BD%B2Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%88Nacos-+-MySQL-+-Oracle%E6%94%AF%E6%8C%81%EF%BC%89/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/Docker%E4%BC%81%E4%B8%9A%E7%BA%A7%E9%83%A8%E7%BD%B2Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%88Nacos-+-MySQL-+-Oracle%E6%94%AF%E6%8C%81%EF%BC%89/</id>
+    <published>2026-02-05T16:00:00.000Z</published>
+    <updated>2026-02-06T09:47:40.042Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="一、Seata简介"><a href="#一、Seata简介" class="headerlink" title="一、Seata简介"></a>一、Seata简介</h1><p>Seata 是一款开源的分布式事务解决方案，支持：</p><ul><li>AT 模式（最常用）</li><li>TCC 模式</li><li>SAGA 模式</li><li>XA 模式</li></ul><p>核心组件：</p><div class="table-container"><table><thead><tr><th>组件</th><th>作用</th></tr></thead><tbody><tr><td>TC</td><td>事务协调器（Seata Server）</td></tr><tr><td>TM</td><td>事务管理器（发起事务的服务）</td></tr><tr><td>RM</td><td>资源管理器（数据库操作服务）</td></tr></tbody></table></div><p>核心流程：</p><ol><li>TM 开启全局事务</li><li>TC 生成 XID</li><li>XID 在服务间传播</li><li>RM 注册分支事务</li><li>TM 决议提交或回滚</li><li>TC 通知所有RM执行</li></ol><hr><h1 id="二、环境准备"><a href="#二、环境准备" class="headerlink" title="二、环境准备"></a>二、环境准备</h1><h2 id="1、软件环境"><a href="#1、软件环境" class="headerlink" title="1、软件环境"></a>1、软件环境</h2><p>Docker &gt;= 23<br>Nacos &gt;= 2.2<br>MySQL 或 Oracle<br>JDK 8+</p><hr><h2 id="2、目录规划（企业标准）"><a href="#2、目录规划（企业标准）" class="headerlink" title="2、目录规划（企业标准）"></a>2、目录规划（企业标准）</h2><p>/data/docker/seata<br>/data/docker/seata/resources<br>/data/docker/seata/logs</p><p>创建目录：</p><p>mkdir -p /data/docker/seata/resources<br>mkdir -p /data/docker/seata/logs</p><hr><h1 id="三、拉取Seata镜像"><a href="#三、拉取Seata镜像" class="headerlink" title="三、拉取Seata镜像"></a>三、拉取Seata镜像</h1><h2 id="1、查看镜像"><a href="#1、查看镜像" class="headerlink" title="1、查看镜像"></a>1、查看镜像</h2><p>docker search seata</p><p>推荐官方镜像：</p><p>seataio/seata-server</p><hr><h2 id="2、拉取指定稳定版本（推荐）"><a href="#2、拉取指定稳定版本（推荐）" class="headerlink" title="2、拉取指定稳定版本（推荐）"></a>2、拉取指定稳定版本（推荐）</h2><p>docker pull seataio/seata-server:1.6.1</p><p>查看：</p><p>docker images</p><hr><h1 id="四、创建Seata数据库"><a href="#四、创建Seata数据库" class="headerlink" title="四、创建Seata数据库"></a>四、创建Seata数据库</h1><p>下载官方脚本：</p><p><a href="https://github.com/apache/incubator-seata/tree/master/script/server/db">https://github.com/apache/incubator-seata/tree/master/script/server/db</a></p><p>创建数据库：</p><p>CREATE DATABASE seata;</p><p>执行：</p><p>mysql.sql</p><hr><h1 id="五、初始化配置文件"><a href="#五、初始化配置文件" class="headerlink" title="五、初始化配置文件"></a>五、初始化配置文件</h1><h2 id="1、先启动一次容器"><a href="#1、先启动一次容器" class="headerlink" title="1、先启动一次容器"></a>1、先启动一次容器</h2><p>docker run -d —name seata-temp<br>-p 7091:7091<br>seataio/seata-server:1.6.1</p><hr><h2 id="2、复制配置"><a href="#2、复制配置" class="headerlink" title="2、复制配置"></a>2、复制配置</h2><p>docker cp seata-temp:/seata-server/resources /data/docker/seata/</p><hr><h2 id="3、删除临时容器"><a href="#3、删除临时容器" class="headerlink" title="3、删除临时容器"></a>3、删除临时容器</h2><p>docker rm -f seata-temp</p><hr><h1 id="六、修改-application-yml（企业版）"><a href="#六、修改-application-yml（企业版）" class="headerlink" title="六、修改 application.yml（企业版）"></a>六、修改 application.yml（企业版）</h1><p>server:<br>port: 7091</p><p>spring:<br>application:<br>name: seata-server</p><p>console:<br>user:<br>username: seata<br>password: seata</p><p>seata:<br>config:<br>type: nacos<br>nacos:<br>server-addr: 192.168.1.10:8848<br>group: SEATA_GROUP<br>username: nacos<br>password: nacos<br>data-id: seata.properties</p><p>registry:<br>type: nacos<br>nacos:<br>application: seata-server<br>server-addr: 192.168.1.10:8848<br>group: SEATA_GROUP<br>cluster: default<br>username: nacos<br>password: nacos</p><p>store:<br>mode: db<br>db:<br>datasource: druid<br>db-type: mysql<br>driver-class-name: com.mysql.jdbc.Driver<br>url: jdbc:mysql://192.168.1.20:3306/seata<br>user: root<br>password: 123456</p><p>security:<br>secretKey: SeataSecretKey<br>tokenValidityInMilliseconds: 1800000</p><hr><h1 id="七、Nacos配置中心配置"><a href="#七、Nacos配置中心配置" class="headerlink" title="七、Nacos配置中心配置"></a>七、Nacos配置中心配置</h1><p>创建：</p><p>DataId: seata.properties<br>Group: SEATA_GROUP</p><p>内容：</p><p>store.mode=db<br>store.db.dbType=mysql<br>store.db.url=jdbc:mysql://192.168.1.20:3306/seata<br>store.db.user=root<br>store.db.password=123456</p><hr><h1 id="八、正式启动Seata（生产版）"><a href="#八、正式启动Seata（生产版）" class="headerlink" title="八、正式启动Seata（生产版）"></a>八、正式启动Seata（生产版）</h1><p>docker run -d<br>—name seata<br>—restart=always<br>-p 8091:8091<br>-p 7091:7091<br>-e SEATA_IP=192.168.1.30<br>-v /data/docker/seata/resources:/seata-server/resources<br>-v /data/docker/seata/logs:/root/logs<br>seataio/seata-server:1.6.1</p><hr><h1 id="九、验证部署"><a href="#九、验证部署" class="headerlink" title="九、验证部署"></a>九、验证部署</h1><h2 id="查看容器"><a href="#查看容器" class="headerlink" title="查看容器"></a>查看容器</h2><p>docker ps</p><h2 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h2><p>docker logs -f seata</p><h2 id="查看Nacos"><a href="#查看Nacos" class="headerlink" title="查看Nacos"></a>查看Nacos</h2><p>服务列表出现 seata-server</p><hr><h1 id="十、微服务接入Seata"><a href="#十、微服务接入Seata" class="headerlink" title="十、微服务接入Seata"></a>十、微服务接入Seata</h1><p>入口方法：</p><p>@GlobalTransactional</p><p>普通方法：</p><p>@Transactional</p><hr><h1 id="十一、Oracle数据库-undo-log"><a href="#十一、Oracle数据库-undo-log" class="headerlink" title="十一、Oracle数据库 undo_log"></a>十一、Oracle数据库 undo_log</h1><p>CREATE TABLE undo_log (<br>id NUMBER(19) NOT NULL,<br>branch_id NUMBER(19) NOT NULL,<br>xid VARCHAR2(100) NOT NULL,<br>context VARCHAR2(128) NOT NULL,<br>rollback_info BLOB NOT NULL,<br>log_status NUMBER(10) NOT NULL,<br>log_created DATE NOT NULL,<br>log_modified DATE NOT NULL,<br>ext VARCHAR2(100),<br>CONSTRAINT pk_undo_log PRIMARY KEY (id)<br>);</p><hr><h1 id="十二、企业级避坑指南"><a href="#十二、企业级避坑指南" class="headerlink" title="十二、企业级避坑指南"></a>十二、企业级避坑指南</h1><ol><li>不支持复杂SQL</li><li>不支持MP批量操作</li><li>Feign必须检查返回值</li><li>每个业务库必须有 undo_log</li><li>AT模式入口必须使用 GlobalTransactional</li><li>Oracle建议驱动19+</li><li>Druid建议1.2.20+</li><li>异常不能吞</li><li>不支持事务嵌套</li><li>低版本Seata序列化问题严重</li></ol><hr><h1 id="十三、企业部署架构建议"><a href="#十三、企业部署架构建议" class="headerlink" title="十三、企业部署架构建议"></a>十三、企业部署架构建议</h1><p>Nacos集群<br>MySQL主从<br>Seata集群<br>Docker部署<br>日志集中收集</p><hr><h1 id="十四、生产环境建议"><a href="#十四、生产环境建议" class="headerlink" title="十四、生产环境建议"></a>十四、生产环境建议</h1><p>开启restart=always<br>开启日志挂载<br>禁止使用latest版本<br>配置独立数据库<br>使用内网IP注册</p><hr>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;一、Seata简介&quot;&gt;&lt;a href=&quot;#一、Seata简介&quot; class=&quot;headerlink&quot; title=&quot;一、Seata简介&quot;&gt;&lt;/a&gt;一、Seata简介&lt;/h1&gt;&lt;p&gt;Seata 是一款开源的分布式事务解决方案，支持：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AT </summary>
+      
+    
+    
+    
+    <category term="中间件实战" scheme="https://gengarhsl.github.io/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6%E5%AE%9E%E6%88%98/"/>
+    
+    
+    <category term="Docker" scheme="https://gengarhsl.github.io/tags/Docker/"/>
+    
+    <category term="Seata" scheme="https://gengarhsl.github.io/tags/Seata/"/>
+    
+    <category term="分布式事务" scheme="https://gengarhsl.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
+    
+    <category term="微服务中间件" scheme="https://gengarhsl.github.io/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>git-jenkins-harbor-k8s部署笔记</title>
-    <link href="http://example.com/2026/02/06/git-jenkins-harbor-k8s%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/"/>
-    <id>http://example.com/2026/02/06/git-jenkins-harbor-k8s%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://gengarhsl.github.io/2026/02/06/git-jenkins-harbor-k8s%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/git-jenkins-harbor-k8s%E9%83%A8%E7%BD%B2%E7%AC%94%E8%AE%B0/</id>
     <published>2026-02-05T16:00:00.000Z</published>
     <updated>2026-02-06T09:51:44.810Z</updated>
     
@@ -143,8 +143,8 @@
   
   <entry>
     <title>docker部署mqtt</title>
-    <link href="http://example.com/2026/02/06/mqtt/"/>
-    <id>http://example.com/2026/02/06/mqtt/</id>
+    <link href="https://gengarhsl.github.io/2026/02/06/mqtt/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/mqtt/</id>
     <published>2026-02-05T16:00:00.000Z</published>
     <updated>2026-02-06T09:54:21.220Z</updated>
     
@@ -167,8 +167,8 @@
   
   <entry>
     <title>springcloud项目部署为https</title>
-    <link href="http://example.com/2026/02/06/springcloud%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%BAhttps%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/"/>
-    <id>http://example.com/2026/02/06/springcloud%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%BAhttps%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</id>
+    <link href="https://gengarhsl.github.io/2026/02/06/springcloud%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%BAhttps%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/springcloud%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B8%BAhttps%E9%85%8D%E7%BD%AE%E6%96%87%E6%A1%A3/</id>
     <published>2026-02-05T16:00:00.000Z</published>
     <updated>2026-02-06T09:54:54.008Z</updated>
     
@@ -187,8 +187,8 @@
   
   <entry>
     <title>Docker企业级部署Elasticsearch与Kibana实践</title>
-    <link href="http://example.com/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_ES_Kibana_%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C/"/>
-    <id>http://example.com/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_ES_Kibana_%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C/</id>
+    <link href="https://gengarhsl.github.io/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_ES_Kibana_%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_ES_Kibana_%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C/</id>
     <published>2026-02-05T16:00:00.000Z</published>
     <updated>2026-02-06T09:31:54.922Z</updated>
     
@@ -206,9 +206,49 @@
   </entry>
   
   <entry>
+    <title>Docker企业级实战部署 Oracle11g</title>
+    <link href="https://gengarhsl.github.io/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_Oracle11g_%E5%AE%9E%E6%88%98%E9%83%A8%E7%BD%B2/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_Oracle11g_%E5%AE%9E%E6%88%98%E9%83%A8%E7%BD%B2/</id>
+    <published>2026-02-05T16:00:00.000Z</published>
+    <updated>2026-02-06T09:44:00.481Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker-企业级实战部署-Oracle11g（11-2-0-3）"><a href="#Docker-企业级实战部署-Oracle11g（11-2-0-3）" class="headerlink" title="Docker 企业级实战部署 Oracle11g（11.2.0.3）"></a>Docker 企业级实战部署 Oracle11g（11.2.0.3）</h1><p>适用场景：</p><ul><li>本地开发环境</li><li>微服务数据库测试</li><li>Oracle 老系统迁移</li><li>内网测试数据库</li></ul><p>特点：</p><ul><li>一键部署</li><li>持久化建议</li><li>企业实战流程</li><li>启动监听与数据库</li><li>常见问题解决</li></ul><hr><h1 id="一、环境要求（生产建议）"><a href="#一、环境要求（生产建议）" class="headerlink" title="一、环境要求（生产建议）"></a>一、环境要求（生产建议）</h1><p>  项目     建议配置</p><hr><p>  CPU      ≥2核<br>  内存     ≥4G<br>  磁盘     ≥20G<br>  Docker   ≥20.x</p><p>检查 Docker：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -v</span><br></pre></td></tr></table></figure><hr><h1 id="二、拉取-Oracle11g-镜像"><a href="#二、拉取-Oracle11g-镜像" class="headerlink" title="二、拉取 Oracle11g 镜像"></a>二、拉取 Oracle11g 镜像</h1><h2 id="方式1：DockerHub（慢）"><a href="#方式1：DockerHub（慢）" class="headerlink" title="方式1：DockerHub（慢）"></a>方式1：DockerHub（慢）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure><h2 id="方式2：阿里云镜像（推荐）"><a href="#方式2：阿里云镜像（推荐）" class="headerlink" title="方式2：阿里云镜像（推荐）"></a>方式2：阿里云镜像（推荐）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure><p>重新打tag：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure><p>查看镜像：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images | grep oracle</span><br></pre></td></tr></table></figure><hr><h1 id="三、创建-Oracle-容器（实战标准）"><a href="#三、创建-Oracle-容器（实战标准）" class="headerlink" title="三、创建 Oracle 容器（实战标准）"></a>三、创建 Oracle 容器（实战标准）</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --name oracle11g -h oracle11g --privileged=<span class="literal">true</span> -p 1521:1521 -p 1158:1158 -p 222:22 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 init</span><br></pre></td></tr></table></figure><p>端口说明：</p><p>  端口   作用</p><hr><p>  1521   数据库端口<br>  1158   EM管理<br>  222    SSH</p><hr><h1 id="四、启动数据库（核心步骤）"><a href="#四、启动数据库（核心步骤）" class="headerlink" title="四、启动数据库（核心步骤）"></a>四、启动数据库（核心步骤）</h1><p>进入容器：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it oracle11g bash</span><br></pre></td></tr></table></figure><p>切换用户：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br></pre></td></tr></table></figure><p>启动监听：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl start</span><br></pre></td></tr></table></figure><p>进入数据库：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus / as sysdba</span><br></pre></td></tr></table></figure><p>启动实例：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup;</span><br></pre></td></tr></table></figure><hr><h1 id="五、连接数据库"><a href="#五、连接数据库" class="headerlink" title="五、连接数据库"></a>五、连接数据库</h1><p>连接信息：</p><p>  项目   内容</p><hr><p>  IP     服务器IP<br>  端口   1521<br>  SID    LHR11G<br>  用户   system/sys</p><p>连接示例：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus system/oracle@服务器IP:1521/LHR11G</span><br></pre></td></tr></table></figure><hr><h1 id="六、企业级持久化（强烈建议）"><a href="#六、企业级持久化（强烈建议）" class="headerlink" title="六、企业级持久化（强烈建议）"></a>六、企业级持久化（强烈建议）</h1><p>创建目录：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /data/oracle11g</span><br><span class="line"><span class="built_in">chmod</span> -R 777 /data/oracle11g</span><br></pre></td></tr></table></figure><p>推荐运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --name oracle11g --privileged=<span class="literal">true</span> -p 1521:1521 -v /data/oracle11g:/u01 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 init</span><br></pre></td></tr></table></figure><hr><h1 id="七、SpringBoot连接配置"><a href="#七、SpringBoot连接配置" class="headerlink" title="七、SpringBoot连接配置"></a>七、SpringBoot连接配置</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">oracle.jdbc.OracleDriver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:oracle:thin:@服务器IP:1521:LHR11G</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">system</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">oracle</span></span><br></pre></td></tr></table></figure><hr><h1 id="八、常用管理命令"><a href="#八、常用管理命令" class="headerlink" title="八、常用管理命令"></a>八、常用管理命令</h1><p>查看监听：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl status</span><br></pre></td></tr></table></figure><p>查看实例：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> status <span class="keyword">from</span> v$instance;</span><br></pre></td></tr></table></figure><p>查看用户：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username <span class="keyword">from</span> dba_users;</span><br></pre></td></tr></table></figure><hr><h1 id="九、日志查看"><a href="#九、日志查看" class="headerlink" title="九、日志查看"></a>九、日志查看</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f oracle11g</span><br></pre></td></tr></table></figure><hr><h1 id="十、常见问题（实战踩坑）"><a href="#十、常见问题（实战踩坑）" class="headerlink" title="十、常见问题（实战踩坑）"></a>十、常见问题（实战踩坑）</h1><h2 id="1-无法连接"><a href="#1-无法连接" class="headerlink" title="1. 无法连接"></a>1. 无法连接</h2><p>检查：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ntlp | grep 1521</span><br></pre></td></tr></table></figure><h2 id="2-数据库未启动"><a href="#2-数据库未启动" class="headerlink" title="2. 数据库未启动"></a>2. 数据库未启动</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup;</span><br></pre></td></tr></table></figure><h2 id="3-内存不足"><a href="#3-内存不足" class="headerlink" title="3. 内存不足"></a>3. 内存不足</h2><p>修改 Docker 启动内存限制。</p><hr><h1 id="十一、企业最佳实践"><a href="#十一、企业最佳实践" class="headerlink" title="十一、企业最佳实践"></a>十一、企业最佳实践</h1><ul><li>不要用于生产正式业务</li><li>建议用于开发测试</li><li>建议使用 Oracle19c 替代</li><li>建议加数据卷持久化</li><li>定期备份 /u01 目录</li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;Docker-企业级实战部署-Oracle11g（11-2-0-3）&quot;&gt;&lt;a href=&quot;#Docker-企业级实战部署-Oracle11g（11-2-0-3）&quot; class=&quot;headerlink&quot; title=&quot;Docker 企业级实战部署 Oracle11g</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>自签证书手册</title>
+    <link href="https://gengarhsl.github.io/2026/02/06/%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6/</id>
+    <published>2026-02-05T16:00:00.000Z</published>
+    <updated>2026-02-06T09:55:32.470Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记"><a href="#🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记" class="headerlink" title="🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记"></a>🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记</h1><h2 id="📁-目录结构建议"><a href="#📁-目录结构建议" class="headerlink" title="📁 目录结构建议"></a>📁 目录结构建议</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">certs/</span><br><span class="line">├── rootca/</span><br><span class="line">│   ├── rootca-key.pem</span><br><span class="line">│   ├── rootca-cert.pem</span><br><span class="line">│   └── rootca.p12</span><br><span class="line">├── gateway/</span><br><span class="line">│   ├── prodgateway-key.pem</span><br><span class="line">│   ├── prodgateway.csr</span><br><span class="line">│   ├── prodgateway-cert.pem</span><br><span class="line">│   └── prodgateway.p12</span><br><span class="line">└── openssl-san.cnf</span><br></pre></td></tr></table></figure><hr><h2 id="1️⃣-创建-RootCA-根证书（如已存在可跳过）"><a href="#1️⃣-创建-RootCA-根证书（如已存在可跳过）" class="headerlink" title="1️⃣ 创建 RootCA 根证书（如已存在可跳过）"></a>1️⃣ 创建 RootCA 根证书（如已存在可跳过）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成 RootCA 私钥</span></span><br><span class="line">openssl genrsa -out rootca-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 RootCA 证书</span></span><br><span class="line">openssl req -x509 -new -nodes -key rootca-key.pem -sha256 -days 3650 -out rootca-cert.pem -subj <span class="string">&quot;/C=CN/ST=State/L=City/O=Organization/OU=OrgUnit/CN=rootca&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选：导出为 truststore.p12</span></span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -out rootca.p12 -inkey rootca-key.pem -<span class="keyword">in</span> rootca-cert.pem -name rootca</span><br></pre></td></tr></table></figure><hr><h2 id="2️⃣-创建包含多个-IP-的-OpenSSL-配置文件"><a href="#2️⃣-创建包含多个-IP-的-OpenSSL-配置文件" class="headerlink" title="2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件"></a>2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件</h2><p>新建文件 <code>openssl-san.cnf</code>，内容如下：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[req]</span></span><br><span class="line"><span class="attr">distinguished_name</span> = req_distinguished_name</span><br><span class="line"><span class="attr">req_extensions</span> = v3_req</span><br><span class="line"><span class="attr">prompt</span> = <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="section">[req_distinguished_name]</span></span><br><span class="line"><span class="attr">C</span> = CN</span><br><span class="line"><span class="attr">ST</span> = State</span><br><span class="line"><span class="attr">L</span> = City</span><br><span class="line"><span class="attr">O</span> = Organization</span><br><span class="line"><span class="attr">OU</span> = OrgUnit</span><br><span class="line"><span class="attr">CN</span> = prodgateway.example.com</span><br><span class="line"></span><br><span class="line"><span class="section">[v3_req]</span></span><br><span class="line"><span class="attr">keyUsage</span> = keyEncipherment, dataEncipherment, digitalSignature</span><br><span class="line"><span class="attr">extendedKeyUsage</span> = serverAuth</span><br><span class="line"><span class="attr">subjectAltName</span> = @alt_names</span><br><span class="line"></span><br><span class="line"><span class="section">[alt_names]</span></span><br><span class="line"><span class="attr">IP.1</span> = <span class="number">192.168</span>.<span class="number">3.166</span></span><br><span class="line"><span class="attr">IP.2</span> = <span class="number">192.168</span>.<span class="number">3.197</span></span><br><span class="line"><span class="attr">IP.3</span> = <span class="number">192.168</span>.<span class="number">3.201</span></span><br><span class="line"><span class="attr">IP.4</span> = <span class="number">113.250</span>.<span class="number">177.98</span></span><br></pre></td></tr></table></figure><hr><h2 id="3️⃣-生成服务证书和私钥（prodgateway）"><a href="#3️⃣-生成服务证书和私钥（prodgateway）" class="headerlink" title="3️⃣ 生成服务证书和私钥（prodgateway）"></a>3️⃣ 生成服务证书和私钥（prodgateway）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成私钥</span></span><br><span class="line">openssl genrsa -out prodgateway-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 CSR（证书签署请求）</span></span><br><span class="line">openssl req -new -key prodgateway-key.pem -out prodgateway.csr -config openssl-san.cnf</span><br></pre></td></tr></table></figure><hr><h2 id="4️⃣-使用-rootca-签署-prodgateway-证书"><a href="#4️⃣-使用-rootca-签署-prodgateway-证书" class="headerlink" title="4️⃣ 使用 rootca 签署 prodgateway 证书"></a>4️⃣ 使用 rootca 签署 prodgateway 证书</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> prodgateway.csr -CA rootca-cert.pem -CAkey rootca-key.pem -CAcreateserial -out prodgateway-cert.pem -days 365 -sha256 -extensions v3_req -extfile openssl-san.cnf</span><br></pre></td></tr></table></figure><p>📌 <code>-CAcreateserial</code> 会自动生成 <code>rootca-cert.srl</code> 文件。</p><hr><h2 id="5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）"><a href="#5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）" class="headerlink" title="5️⃣ 可选：打包为 .p12 格式（供 Java 使用或导入 Truststore）"></a>5️⃣ 可选：打包为 <code>.p12</code> 格式（供 Java 使用或导入 Truststore）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -<span class="built_in">export</span> -<span class="keyword">in</span> prodgateway-cert.pem -inkey prodgateway-key.pem -out prodgateway.p12 -name prodgateway -CAfile rootca-cert.pem -caname rootca</span><br></pre></td></tr></table></figure><hr><h2 id="6️⃣-导入-prodgateway-p12-到现有-Truststore"><a href="#6️⃣-导入-prodgateway-p12-到现有-Truststore" class="headerlink" title="6️⃣ 导入 prodgateway.p12 到现有 Truststore"></a>6️⃣ 导入 <code>prodgateway.p12</code> 到现有 Truststore</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -importkeystore -deststorepass 123456 -destkeystore truststore.p12 -srckeystore prodgateway.p12 -srcstoretype PKCS12 -srcstorepass 123456</span><br></pre></td></tr></table></figure><blockquote><ul><li><code>truststore.p12</code> 是你已有的信任库  </li><li>可用以下命令查看条目：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -keystore truststore.p12 -storepass 123456</span><br></pre></td></tr></table></figure></li></ul></blockquote><hr><h2 id="7️⃣-验证-SAN-是否包含-IP"><a href="#7️⃣-验证-SAN-是否包含-IP" class="headerlink" title="7️⃣ 验证 SAN 是否包含 IP"></a>7️⃣ 验证 SAN 是否包含 IP</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> prodgateway-cert.pem -noout -text | findstr /C:<span class="string">&quot;Subject Alternative Name&quot;</span></span><br></pre></td></tr></table></figure><p>应看到：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X509v3 Subject Alternative Name:</span><br><span class="line">    IP Address:192.168.3.166, IP Address:192.168.3.197, ...</span><br></pre></td></tr></table></figure><hr><h2 id="✅-最终用途"><a href="#✅-最终用途" class="headerlink" title="✅ 最终用途"></a>✅ 最终用途</h2><ul><li><strong>Nginx / 前端服务</strong> 可配置 <code>prodgateway-cert.pem + prodgateway-key.pem</code></li><li><strong>浏览器不会再报 ERR_CERT_AUTHORITY_INVALID</strong></li><li><strong>HTTPS API 请求能通过 Truststore 验证</strong></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记&quot;&gt;&lt;a href=&quot;#🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记&quot; class=&quot;headerlink&quot; title=&quot;🧾 自签 RootCA +</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>canal手册</title>
-    <link href="http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/"/>
-    <id>http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/</id>
+    <link href="https://gengarhsl.github.io/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/</id>
     <published>2026-02-05T16:00:00.000Z</published>
     <updated>2026-02-06T09:56:34.308Z</updated>
     
@@ -227,8 +267,8 @@
   
   <entry>
     <title>搭建maven私服手册</title>
-    <link href="http://example.com/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/"/>
-    <id>http://example.com/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</id>
+    <link href="https://gengarhsl.github.io/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</id>
     <published>2026-02-05T16:00:00.000Z</published>
     <updated>2026-02-06T09:56:00.183Z</updated>
     
@@ -246,29 +286,9 @@
   </entry>
   
   <entry>
-    <title>Docker企业级实战部署 Oracle11g</title>
-    <link href="http://example.com/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_Oracle11g_%E5%AE%9E%E6%88%98%E9%83%A8%E7%BD%B2/"/>
-    <id>http://example.com/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_Oracle11g_%E5%AE%9E%E6%88%98%E9%83%A8%E7%BD%B2/</id>
-    <published>2026-02-05T16:00:00.000Z</published>
-    <updated>2026-02-06T09:44:00.481Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Docker-企业级实战部署-Oracle11g（11-2-0-3）"><a href="#Docker-企业级实战部署-Oracle11g（11-2-0-3）" class="headerlink" title="Docker 企业级实战部署 Oracle11g（11.2.0.3）"></a>Docker 企业级实战部署 Oracle11g（11.2.0.3）</h1><p>适用场景：</p><ul><li>本地开发环境</li><li>微服务数据库测试</li><li>Oracle 老系统迁移</li><li>内网测试数据库</li></ul><p>特点：</p><ul><li>一键部署</li><li>持久化建议</li><li>企业实战流程</li><li>启动监听与数据库</li><li>常见问题解决</li></ul><hr><h1 id="一、环境要求（生产建议）"><a href="#一、环境要求（生产建议）" class="headerlink" title="一、环境要求（生产建议）"></a>一、环境要求（生产建议）</h1><p>  项目     建议配置</p><hr><p>  CPU      ≥2核<br>  内存     ≥4G<br>  磁盘     ≥20G<br>  Docker   ≥20.x</p><p>检查 Docker：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -v</span><br></pre></td></tr></table></figure><hr><h1 id="二、拉取-Oracle11g-镜像"><a href="#二、拉取-Oracle11g-镜像" class="headerlink" title="二、拉取 Oracle11g 镜像"></a>二、拉取 Oracle11g 镜像</h1><h2 id="方式1：DockerHub（慢）"><a href="#方式1：DockerHub（慢）" class="headerlink" title="方式1：DockerHub（慢）"></a>方式1：DockerHub（慢）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure><h2 id="方式2：阿里云镜像（推荐）"><a href="#方式2：阿里云镜像（推荐）" class="headerlink" title="方式2：阿里云镜像（推荐）"></a>方式2：阿里云镜像（推荐）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure><p>重新打tag：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure><p>查看镜像：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images | grep oracle</span><br></pre></td></tr></table></figure><hr><h1 id="三、创建-Oracle-容器（实战标准）"><a href="#三、创建-Oracle-容器（实战标准）" class="headerlink" title="三、创建 Oracle 容器（实战标准）"></a>三、创建 Oracle 容器（实战标准）</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --name oracle11g -h oracle11g --privileged=<span class="literal">true</span> -p 1521:1521 -p 1158:1158 -p 222:22 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 init</span><br></pre></td></tr></table></figure><p>端口说明：</p><p>  端口   作用</p><hr><p>  1521   数据库端口<br>  1158   EM管理<br>  222    SSH</p><hr><h1 id="四、启动数据库（核心步骤）"><a href="#四、启动数据库（核心步骤）" class="headerlink" title="四、启动数据库（核心步骤）"></a>四、启动数据库（核心步骤）</h1><p>进入容器：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it oracle11g bash</span><br></pre></td></tr></table></figure><p>切换用户：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br></pre></td></tr></table></figure><p>启动监听：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl start</span><br></pre></td></tr></table></figure><p>进入数据库：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus / as sysdba</span><br></pre></td></tr></table></figure><p>启动实例：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup;</span><br></pre></td></tr></table></figure><hr><h1 id="五、连接数据库"><a href="#五、连接数据库" class="headerlink" title="五、连接数据库"></a>五、连接数据库</h1><p>连接信息：</p><p>  项目   内容</p><hr><p>  IP     服务器IP<br>  端口   1521<br>  SID    LHR11G<br>  用户   system/sys</p><p>连接示例：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus system/oracle@服务器IP:1521/LHR11G</span><br></pre></td></tr></table></figure><hr><h1 id="六、企业级持久化（强烈建议）"><a href="#六、企业级持久化（强烈建议）" class="headerlink" title="六、企业级持久化（强烈建议）"></a>六、企业级持久化（强烈建议）</h1><p>创建目录：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /data/oracle11g</span><br><span class="line"><span class="built_in">chmod</span> -R 777 /data/oracle11g</span><br></pre></td></tr></table></figure><p>推荐运行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --name oracle11g --privileged=<span class="literal">true</span> -p 1521:1521 -v /data/oracle11g:/u01 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 init</span><br></pre></td></tr></table></figure><hr><h1 id="七、SpringBoot连接配置"><a href="#七、SpringBoot连接配置" class="headerlink" title="七、SpringBoot连接配置"></a>七、SpringBoot连接配置</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">oracle.jdbc.OracleDriver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:oracle:thin:@服务器IP:1521:LHR11G</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">system</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">oracle</span></span><br></pre></td></tr></table></figure><hr><h1 id="八、常用管理命令"><a href="#八、常用管理命令" class="headerlink" title="八、常用管理命令"></a>八、常用管理命令</h1><p>查看监听：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl status</span><br></pre></td></tr></table></figure><p>查看实例：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> status <span class="keyword">from</span> v$instance;</span><br></pre></td></tr></table></figure><p>查看用户：</p><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username <span class="keyword">from</span> dba_users;</span><br></pre></td></tr></table></figure><hr><h1 id="九、日志查看"><a href="#九、日志查看" class="headerlink" title="九、日志查看"></a>九、日志查看</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f oracle11g</span><br></pre></td></tr></table></figure><hr><h1 id="十、常见问题（实战踩坑）"><a href="#十、常见问题（实战踩坑）" class="headerlink" title="十、常见问题（实战踩坑）"></a>十、常见问题（实战踩坑）</h1><h2 id="1-无法连接"><a href="#1-无法连接" class="headerlink" title="1. 无法连接"></a>1. 无法连接</h2><p>检查：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ntlp | grep 1521</span><br></pre></td></tr></table></figure><h2 id="2-数据库未启动"><a href="#2-数据库未启动" class="headerlink" title="2. 数据库未启动"></a>2. 数据库未启动</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup;</span><br></pre></td></tr></table></figure><h2 id="3-内存不足"><a href="#3-内存不足" class="headerlink" title="3. 内存不足"></a>3. 内存不足</h2><p>修改 Docker 启动内存限制。</p><hr><h1 id="十一、企业最佳实践"><a href="#十一、企业最佳实践" class="headerlink" title="十一、企业最佳实践"></a>十一、企业最佳实践</h1><ul><li>不要用于生产正式业务</li><li>建议用于开发测试</li><li>建议使用 Oracle19c 替代</li><li>建议加数据卷持久化</li><li>定期备份 /u01 目录</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;Docker-企业级实战部署-Oracle11g（11-2-0-3）&quot;&gt;&lt;a href=&quot;#Docker-企业级实战部署-Oracle11g（11-2-0-3）&quot; class=&quot;headerlink&quot; title=&quot;Docker 企业级实战部署 Oracle11g</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>证书更换手册</title>
-    <link href="http://example.com/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/"/>
-    <id>http://example.com/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/</id>
+    <link href="https://gengarhsl.github.io/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/"/>
+    <id>https://gengarhsl.github.io/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/</id>
     <published>2026-02-05T16:00:00.000Z</published>
     <updated>2026-02-06T09:56:56.850Z</updated>
     
@@ -287,29 +307,9 @@
   </entry>
   
   <entry>
-    <title>自签证书手册</title>
-    <link href="http://example.com/2026/02/06/%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6/"/>
-    <id>http://example.com/2026/02/06/%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6/</id>
-    <published>2026-02-05T16:00:00.000Z</published>
-    <updated>2026-02-06T09:55:32.470Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记"><a href="#🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记" class="headerlink" title="🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记"></a>🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记</h1><h2 id="📁-目录结构建议"><a href="#📁-目录结构建议" class="headerlink" title="📁 目录结构建议"></a>📁 目录结构建议</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">certs/</span><br><span class="line">├── rootca/</span><br><span class="line">│   ├── rootca-key.pem</span><br><span class="line">│   ├── rootca-cert.pem</span><br><span class="line">│   └── rootca.p12</span><br><span class="line">├── gateway/</span><br><span class="line">│   ├── prodgateway-key.pem</span><br><span class="line">│   ├── prodgateway.csr</span><br><span class="line">│   ├── prodgateway-cert.pem</span><br><span class="line">│   └── prodgateway.p12</span><br><span class="line">└── openssl-san.cnf</span><br></pre></td></tr></table></figure><hr><h2 id="1️⃣-创建-RootCA-根证书（如已存在可跳过）"><a href="#1️⃣-创建-RootCA-根证书（如已存在可跳过）" class="headerlink" title="1️⃣ 创建 RootCA 根证书（如已存在可跳过）"></a>1️⃣ 创建 RootCA 根证书（如已存在可跳过）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成 RootCA 私钥</span></span><br><span class="line">openssl genrsa -out rootca-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 RootCA 证书</span></span><br><span class="line">openssl req -x509 -new -nodes -key rootca-key.pem -sha256 -days 3650 -out rootca-cert.pem -subj <span class="string">&quot;/C=CN/ST=State/L=City/O=Organization/OU=OrgUnit/CN=rootca&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选：导出为 truststore.p12</span></span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -out rootca.p12 -inkey rootca-key.pem -<span class="keyword">in</span> rootca-cert.pem -name rootca</span><br></pre></td></tr></table></figure><hr><h2 id="2️⃣-创建包含多个-IP-的-OpenSSL-配置文件"><a href="#2️⃣-创建包含多个-IP-的-OpenSSL-配置文件" class="headerlink" title="2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件"></a>2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件</h2><p>新建文件 <code>openssl-san.cnf</code>，内容如下：</p><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[req]</span></span><br><span class="line"><span class="attr">distinguished_name</span> = req_distinguished_name</span><br><span class="line"><span class="attr">req_extensions</span> = v3_req</span><br><span class="line"><span class="attr">prompt</span> = <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="section">[req_distinguished_name]</span></span><br><span class="line"><span class="attr">C</span> = CN</span><br><span class="line"><span class="attr">ST</span> = State</span><br><span class="line"><span class="attr">L</span> = City</span><br><span class="line"><span class="attr">O</span> = Organization</span><br><span class="line"><span class="attr">OU</span> = OrgUnit</span><br><span class="line"><span class="attr">CN</span> = prodgateway.example.com</span><br><span class="line"></span><br><span class="line"><span class="section">[v3_req]</span></span><br><span class="line"><span class="attr">keyUsage</span> = keyEncipherment, dataEncipherment, digitalSignature</span><br><span class="line"><span class="attr">extendedKeyUsage</span> = serverAuth</span><br><span class="line"><span class="attr">subjectAltName</span> = @alt_names</span><br><span class="line"></span><br><span class="line"><span class="section">[alt_names]</span></span><br><span class="line"><span class="attr">IP.1</span> = <span class="number">192.168</span>.<span class="number">3.166</span></span><br><span class="line"><span class="attr">IP.2</span> = <span class="number">192.168</span>.<span class="number">3.197</span></span><br><span class="line"><span class="attr">IP.3</span> = <span class="number">192.168</span>.<span class="number">3.201</span></span><br><span class="line"><span class="attr">IP.4</span> = <span class="number">113.250</span>.<span class="number">177.98</span></span><br></pre></td></tr></table></figure><hr><h2 id="3️⃣-生成服务证书和私钥（prodgateway）"><a href="#3️⃣-生成服务证书和私钥（prodgateway）" class="headerlink" title="3️⃣ 生成服务证书和私钥（prodgateway）"></a>3️⃣ 生成服务证书和私钥（prodgateway）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成私钥</span></span><br><span class="line">openssl genrsa -out prodgateway-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 CSR（证书签署请求）</span></span><br><span class="line">openssl req -new -key prodgateway-key.pem -out prodgateway.csr -config openssl-san.cnf</span><br></pre></td></tr></table></figure><hr><h2 id="4️⃣-使用-rootca-签署-prodgateway-证书"><a href="#4️⃣-使用-rootca-签署-prodgateway-证书" class="headerlink" title="4️⃣ 使用 rootca 签署 prodgateway 证书"></a>4️⃣ 使用 rootca 签署 prodgateway 证书</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> prodgateway.csr -CA rootca-cert.pem -CAkey rootca-key.pem -CAcreateserial -out prodgateway-cert.pem -days 365 -sha256 -extensions v3_req -extfile openssl-san.cnf</span><br></pre></td></tr></table></figure><p>📌 <code>-CAcreateserial</code> 会自动生成 <code>rootca-cert.srl</code> 文件。</p><hr><h2 id="5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）"><a href="#5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）" class="headerlink" title="5️⃣ 可选：打包为 .p12 格式（供 Java 使用或导入 Truststore）"></a>5️⃣ 可选：打包为 <code>.p12</code> 格式（供 Java 使用或导入 Truststore）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -<span class="built_in">export</span> -<span class="keyword">in</span> prodgateway-cert.pem -inkey prodgateway-key.pem -out prodgateway.p12 -name prodgateway -CAfile rootca-cert.pem -caname rootca</span><br></pre></td></tr></table></figure><hr><h2 id="6️⃣-导入-prodgateway-p12-到现有-Truststore"><a href="#6️⃣-导入-prodgateway-p12-到现有-Truststore" class="headerlink" title="6️⃣ 导入 prodgateway.p12 到现有 Truststore"></a>6️⃣ 导入 <code>prodgateway.p12</code> 到现有 Truststore</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -importkeystore -deststorepass 123456 -destkeystore truststore.p12 -srckeystore prodgateway.p12 -srcstoretype PKCS12 -srcstorepass 123456</span><br></pre></td></tr></table></figure><blockquote><ul><li><code>truststore.p12</code> 是你已有的信任库  </li><li>可用以下命令查看条目：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -list -keystore truststore.p12 -storepass 123456</span><br></pre></td></tr></table></figure></li></ul></blockquote><hr><h2 id="7️⃣-验证-SAN-是否包含-IP"><a href="#7️⃣-验证-SAN-是否包含-IP" class="headerlink" title="7️⃣ 验证 SAN 是否包含 IP"></a>7️⃣ 验证 SAN 是否包含 IP</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> prodgateway-cert.pem -noout -text | findstr /C:<span class="string">&quot;Subject Alternative Name&quot;</span></span><br></pre></td></tr></table></figure><p>应看到：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">X509v3 Subject Alternative Name:</span><br><span class="line">    IP Address:192.168.3.166, IP Address:192.168.3.197, ...</span><br></pre></td></tr></table></figure><hr><h2 id="✅-最终用途"><a href="#✅-最终用途" class="headerlink" title="✅ 最终用途"></a>✅ 最终用途</h2><ul><li><strong>Nginx / 前端服务</strong> 可配置 <code>prodgateway-cert.pem + prodgateway-key.pem</code></li><li><strong>浏览器不会再报 ERR_CERT_AUTHORITY_INVALID</strong></li><li><strong>HTTPS API 请求能通过 Truststore 验证</strong></li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h1 id=&quot;🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记&quot;&gt;&lt;a href=&quot;#🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记&quot; class=&quot;headerlink&quot; title=&quot;🧾 自签 RootCA +</summary>
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>数通笔记</title>
-    <link href="http://example.com/2023/07/25/%E7%AC%94%E8%AE%B0/"/>
-    <id>http://example.com/2023/07/25/%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://gengarhsl.github.io/2023/07/25/%E7%AC%94%E8%AE%B0/"/>
+    <id>https://gengarhsl.github.io/2023/07/25/%E7%AC%94%E8%AE%B0/</id>
     <published>2023-07-25T14:55:28.869Z</published>
     <updated>2022-05-06T14:33:29.446Z</updated>
     
@@ -328,8 +328,8 @@
   
   <entry>
     <title>Linux笔记</title>
-    <link href="http://example.com/2023/07/25/Linux/"/>
-    <id>http://example.com/2023/07/25/Linux/</id>
+    <link href="https://gengarhsl.github.io/2023/07/25/Linux/"/>
+    <id>https://gengarhsl.github.io/2023/07/25/Linux/</id>
     <published>2023-07-25T14:55:28.865Z</published>
     <updated>2022-07-12T09:31:25.942Z</updated>
     

@@ -1,6 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Linux笔记</title>
+    <url>/2023/07/25/Linux/</url>
+    <content><![CDATA[<h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><h3 id="安装图形化界面虚拟机管理工具"><a href="#安装图形化界面虚拟机管理工具" class="headerlink" title="安装图形化界面虚拟机管理工具"></a>安装图形化界面虚拟机管理工具</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum groupinstall <span class="string">&#x27;Virtualization Host&#x27;</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动虚拟化服务"><a href="#启动虚拟化服务" class="headerlink" title="启动虚拟化服务"></a>启动虚拟化服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install virt-manager</span><br></pre></td></tr></table></figure>
+<h3 id="Web管理界面"><a href="#Web管理界面" class="headerlink" title="Web管理界面"></a>Web管理界面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ systemctl start libvirtd.service</span><br><span class="line">$ systemclt start cockpit.service</span><br></pre></td></tr></table></figure>
+<h1 id="配置网卡"><a href="#配置网卡" class="headerlink" title="配置网卡"></a>配置网卡</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nmtui 图形化工具</span><br><span class="line">$ /etc/sysconfig/network-scripts/ifcfg-enp1s0 网卡配置文件</span><br><span class="line">$ nmcli con modify enp1s0 ipv4.method me</span><br><span class="line">$ nmcli con up enp1s0启用网卡配置</span><br></pre></td></tr></table></figure>
+<p>w查看登录信息<br>Ss -ant查看链接信息<br>Ss -at<br>Ss -atu<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/resolv.conf  dns记录文件 网卡会覆盖</span><br><span class="line">$ /etc/hostname修改主机名</span><br><span class="line">$ /etc/hosts dns解析文件</span><br></pre></td></tr></table></figure><br>route -n查询网关<br>主机名 计算机名<br>Fqdn  web-server.abc.com<br>Netbiosname.  Web-server<br>nmcli con show 查看<br>nmcli device status 查看网卡状态</p>
+<h1 id="安装软件包-chrony"><a href="#安装软件包-chrony" class="headerlink" title="安装软件包 chrony"></a>安装软件包 chrony</h1><h3 id="查看时钟同步状态"><a href="#查看时钟同步状态" class="headerlink" title="查看时钟同步状态"></a>查看时钟同步状态</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ chronyc sources -v</span><br></pre></td></tr></table></figure>
+<h3 id="搭建内网Ntp服务器"><a href="#搭建内网Ntp服务器" class="headerlink" title="搭建内网Ntp服务器"></a>搭建内网Ntp服务器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/chrony.conf 修改配置文件</span><br><span class="line">$ firewall-cmd. --add-service=ntp 防火墙放行ntp服务</span><br></pre></td></tr></table></figure>
+<p>修改时区<br>timedatectl. Set-timezone. Asia/Shanghai<br>           List-timezone  查询<br>Timedatectl. Set-ntp. true/false 开启互联网校准<br>Date -s. 修改时间</p>
+<p>Yum list 查询仓库里所有软件包及其状态</p>
+<p>rpm -i 安装 v查看安装信息 h显示进度<br>rpm -q查询<br>rpm -e删除<br>过滤<br>| grep 名字<br>查询某个文件属于某个rpm包<br>rpm -qa<br>Net-tools<br>Bash-c<em><br>Vim-e</em></p>
+<h1 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h1><p>\1. /boot. 1g<br>\2. Swap.  2 Ram<br>\3. /.  All</p>
+<h1 id="ssh配置"><a href="#ssh配置" class="headerlink" title="ssh配置"></a>ssh配置</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/ssh/sshd_config</span><br><span class="line">$ Port 22</span><br><span class="line">$ Permitrootlogin <span class="built_in">yes</span> 允许 root远程登录 no禁止</span><br></pre></td></tr></table></figure>
+<h3 id="关闭selinux安全插件"><a href="#关闭selinux安全插件" class="headerlink" title="关闭selinux安全插件"></a>关闭selinux安全插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
+<h3 id="使用秘钥登陆"><a href="#使用秘钥登陆" class="headerlink" title="使用秘钥登陆"></a>使用秘钥登陆</h3><p>客户端生成秘钥文件  公钥加密（非对称加密）公钥，私钥</p>
+<p>客户端<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen 生成公钥</span><br><span class="line">上传公钥到目标服务器的root账号</span><br><span class="line">$ ssh-copy-id 主机</span><br></pre></td></tr></table></figure></p>
+<p>scp 文件 主机:位置<br>SCP -R 文件夹</p>
+<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="搭建DHCP服务器"><a href="#搭建DHCP服务器" class="headerlink" title="搭建DHCP服务器"></a>搭建DHCP服务器</h1><h3 id="安装dhcp软件包"><a href="#安装dhcp软件包" class="headerlink" title="安装dhcp软件包"></a>安装dhcp软件包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install dhcp-server</span><br><span class="line">修改配置文件 </span><br><span class="line">$ vim /etc/DHCP/dhcpd.conf</span><br></pre></td></tr></table></figure>
+<p>10yy复制<br>P粘贴</p>
+<p>查看磁盘<br>fdisk -l<br>lsblk<br>分区工具<br>fdisk交互式分区<br>n p w<br>parted 可交互</p>
+<p>Parted 磁盘<br>Print打印查看<br>Mkpart<br>Name 名字<br>类型<br>起始 上一个磁盘的终止<br>终止 起始加分区大小<br>quit 退出<br>非交互式<br>parted 磁盘 mkpart 名字 起始 终止</p>
+<p>RMB<br>Parted 磁盘 mklabel msdos<br>Parted 磁盘 rm 分区 删除分区<br>Parted 磁盘 mkpart 主/扩 格式 起始 终止<br>对分区进行格式化</p>
+<p>ext4<br>Xfs<br>mkfs -t 格式 磁盘<br>mkfs.格式 磁盘<br>如果硬盘是Ada 插入U盘 设备名为 sdb<br>mount | tail -n 数字 查看文件的最后几行<br>lsblk -f 查看挂载<br>开机自动挂载<br>/etc/fstab<br>设备名建议使用UUID<br>blkid 磁盘 查看UUID<br>lsblk _f 查看UUID<br>udevadm settle 更新文件 rhel8<br>Parts -a 磁盘 更新文件. rhel7之前</p>
+<p>扩充交换分区<br>mkswap 磁盘 格式化为swap类型<br>挂载为了swap空间<br>swapon 磁盘<br>swapon -s 查看<br>swapoff 卸载挂载点</p>
+<p>dd if=/dev/zero of=/ten/swap1 bs=1M count=2048 复制磁盘块为文件<br>格式化<br>挂载</p>
+<p>Man 命令 查看命令手册 </p>
+<h1 id="搭建ftp服务器"><a href="#搭建ftp服务器" class="headerlink" title="搭建ftp服务器"></a>搭建ftp服务器</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install vsftpd -y</span><br><span class="line"> 修改FTP配置文件</span><br><span class="line">$ /etc/vsftpd/vsftpd.conf</span><br><span class="line"><span class="variable">$anonymous_enable</span>=<span class="built_in">yes</span></span><br><span class="line"> 启动FTP服务 开机自启</span><br><span class="line"><span class="variable">$systemctl</span> <span class="built_in">enable</span> vsftpd.service --now</span><br><span class="line"> Ftp 默认家目录 匿名访问</span><br><span class="line">$ /var/ftp</span><br><span class="line">默认命令行下是主动FTP 21 20建立传输</span><br><span class="line">被动高端端口</span><br><span class="line">限制FTP被动端口范围</span><br><span class="line">Pasv_min_port=10000</span><br><span class="line">Pasv_max_port=11000</span><br><span class="line">Ss -ant查看 </span><br></pre></td></tr></table></figure>
+<h1 id="LVM-逻辑卷管理"><a href="#LVM-逻辑卷管理" class="headerlink" title="LVM  逻辑卷管理"></a>LVM  逻辑卷管理</h1><p>传统的磁盘分区  分区固定后不能更改</p>
+<h3 id="将磁盘，分区转换为PV逻辑卷"><a href="#将磁盘，分区转换为PV逻辑卷" class="headerlink" title="将磁盘，分区转换为PV逻辑卷"></a>将磁盘，分区转换为PV逻辑卷</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ PVcreate 磁盘</span><br><span class="line">$ Pvs. Pvdisplay 磁盘 查看信息</span><br></pre></td></tr></table></figure>
+<h3 id="将物理卷组合成卷组-VG"><a href="#将物理卷组合成卷组-VG" class="headerlink" title="将物理卷组合成卷组 VG"></a>将物理卷组合成卷组 VG</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vgcreate 名字 磁盘</span><br><span class="line">$ vgs. Vgdispaly 磁盘 查看</span><br><span class="line">$ VGremove 名称 删除卷组</span><br><span class="line">$ -s定义块大小</span><br><span class="line"></span><br><span class="line">Pe的尺寸可以更改</span><br></pre></td></tr></table></figure>
+<h3 id="创建lv-逻辑卷"><a href="#创建lv-逻辑卷" class="headerlink" title="创建lv 逻辑卷"></a>创建lv 逻辑卷</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ lvcreate -n 名字 -L 大小/-l 多少个块 卷组</span><br><span class="line">$ lvextend -L +尺寸 逻辑卷 扩展逻辑卷</span><br><span class="line">将扩展的lv与挂载点 同步尺寸</span><br><span class="line">xfs_growfs 挂载点</span><br><span class="line">Resize2fs 逻辑卷 ext4同步</span><br><span class="line">Vgextend vg pv扩展卷组</span><br></pre></td></tr></table></figure>
+<h1 id="dns服务器"><a href="#dns服务器" class="headerlink" title="dns服务器"></a>dns服务器</h1><h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install <span class="built_in">bind</span>. bind-utils </span><br><span class="line">$ /etc/named.conf</span><br><span class="line">UDP53客户机找服务</span><br><span class="line">Tcp53服务器找服务器</span><br><span class="line"></span><br><span class="line">添加区域</span><br><span class="line">zone “ABC.com”IN&#123;</span><br><span class="line">      <span class="built_in">type</span> master;</span><br><span class="line">      File <span class="string">&quot;abc.com.zone&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$ /var/named/</span><br></pre></td></tr></table></figure>
+<p>mount -o loop 文件 挂载本地文件<br>＞覆盖 ＞＞重定向<br>开机自动挂载 defaults.loop<br>给web启用 ssl 使用数字证书<br>Yum install mod_ssl</p>
+<h1 id="搭建多个web站点-虚拟主机"><a href="#搭建多个web站点-虚拟主机" class="headerlink" title="搭建多个web站点 虚拟主机"></a>搭建多个web站点 虚拟主机</h1><p>Apache 配置文件 /etc/httpd<br>conf 主配置文件 conf.d辅配置文件<br>/usr/share/doc/httpd配置文件模板<br>httpd-vhosts.conf 虚拟主机模板</p>
+<p>动态网站<br>asp asp.net php jsp Python 等开发<br>小型机 IBM Aix<br>      Sun solris Oracle 甲骨文<br>      Hp hp-unix</p>
+<p>挂接数据库 mysql mariadb<br>mariadb-server<br>如果需要，可以做安全初始化配置<br>MySQL_secure_installation<br>清除历史命令 history -c<br>unzip 文件 -d 目录</p>
+<p>Chmod o+w config/ -R<br>data/ -R<br>uc_client<br>Uc_server<br>软件包 php-mysqlnd<br>Php-xml</p>
+<p>firewall-cmd.  —list-all  查看防火墙规则<br>firewall-cmd —list-all<br>firewalld.richlanguage富规则<br>firewall-cmd —add-service=服务  —permanent. 写入配置文件</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>docker命令笔记</title>
+    <url>/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>docker version        # 显示docker的版本信息<br>docker info              # 显示docker的系统信息，包括镜像和容器的数量<br>docker 命令 —help         # 帮助命令<br>docker images    #查看镜像<br>docker search    #搜索镜像<br>docker pull    #下载镜像<br>docker pull  mysql:5.7    #指定版本下载<br>docker rmi     #删除镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id                    # 删除指定的镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id 镜像id 镜像id    # 删除多个镜像（空格分隔）<br>[root@JWei_0124 //]# docker rmi -f $(docker images -aq)    # 删除全部的镜像<br>docker run [可选参数] image</p>
+<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><p>—name=”name”        容器名字：用来区分容器<br>-d                    后台方式运行：相当于nohup<br>-it                    使用交互式运行：进入容器查看内容<br>-p                    指定容器的端口（四种方式）小写字母p<br>    -p ip:主机端口：容器端口<br>    -p 主机端口：容器端口<br>    -p 容器端口<br>    容器端口<br>-P                     随机指定端口（大写字母P）</p>
+<p>docker ps         #列出当前正在运行的容器</p>
+<h1 id="命令参数可选项"><a href="#命令参数可选项" class="headerlink" title="命令参数可选项"></a>命令参数可选项</h1><p>-a        # 列出当前正在运行的容器+历史运行过的容器<br>-n=?    # 显示最近创建的容器（可以指定显示几条，比如-n=1）<br>-q        # 只显示容器的编号</p>
+<p>docker run -it centos /bin/bash #交互式进入<br>docker rm 容器ID    #删除容器（不能删除正在运行的容器）<br>docker rm -f     #强制删除<br>docker ps -a -q|xargs docker rm     #删除所有容器<br>docker start 容器id        # 启动容器<br>docker restart 容器id    # 重启容器<br>docker stop 容器id        # 停止当前正在运行的容器<br>docker kill 容器id        # 强制停止当前容器</p>
+<p>docker logs -tf —tail 容器id</p>
+<p>-tf                        # 显示日志<br>—tail number    # 要显示的日志条数</p>
+<p>查看容器中进程的信息<br>docker top id<br>查看镜像的元数据<br>docker inspect id<br>进入当前正在运行的容器<br>docker exec -it 容器id /bin/bash</p>
+<p>从容器内拷贝文件到主机<br>docker cp 容器id:容器内路径 目的主机的路径</p>
+<h1 id="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"><a href="#如何确定是具名挂载，还是匿名挂载，还是指定路径挂载" class="headerlink" title="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"></a>如何确定是具名挂载，还是匿名挂载，还是指定路径挂载</h1><p>-v 容器内的路径                # 匿名挂载<br>-v 卷名:容器内的路径        # 具名挂载<br>-v /宿主机路径:容器内路径    # 指定路径挂载</p>
+<h1 id="提交容器成为一个新的副本"><a href="#提交容器成为一个新的副本" class="headerlink" title="提交容器成为一个新的副本"></a>提交容器成为一个新的副本</h1><p>docker commit</p>
+<h1 id="命令和git原理类似"><a href="#命令和git原理类似" class="headerlink" title="命令和git原理类似"></a>命令和git原理类似</h1><p>docker commit -m=”提交的描述信息” -a=”作者” 容器id 目标镜像名:[TAG]</p>
+<h1 id="我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"><a href="#我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。" class="headerlink" title="我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"></a>我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。</h1><p>docker run -d -P —name tomcat01 tomcat<br>docker run -d -P —name tomcato1 —het bridge tomcat</p>
+<h1 id="docker0特点：默认，域名不能访问，—1ink可以打通连接！"><a href="#docker0特点：默认，域名不能访问，—1ink可以打通连接！" class="headerlink" title="docker0特点：默认，域名不能访问，—1ink可以打通连接！"></a>docker0特点：默认，域名不能访问，—1ink可以打通连接！</h1><h1 id="我们可以自定义一个网络！"><a href="#我们可以自定义一个网络！" class="headerlink" title="我们可以自定义一个网络！"></a>我们可以自定义一个网络！</h1><p>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network create —driver bridge —subnet 192.168.0.0/16 —gateway 192.168.0.1 mynet<br>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network ls<br>NETWORK ID     NAME      DRIVER    SCOPE<br>7254ffccbdf5   bridge    bridge    local<br>45610891738f   host      host      local<br>266acd66473c   mynet     bridge    local<br>7795cbc2686c   none      null      local</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>linux重置密码手册</title>
+    <url>/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Linux 忘记 Root 密码解决方案与安全防护指南（运维手册版）</span><br><span class="line"></span><br><span class="line">本文系统整理 **Linux 忘记 root 密码的解决方案**、**GRUB 启动原理**、**不同发行版重置方式**以及**生产环境安全防护措施**。  </span><br><span class="line">适用于 Linux 运维工程师、开发人员和系统管理员。</span><br><span class="line"></span><br><span class="line">适用系统包括：</span><br><span class="line"></span><br><span class="line">- **:contentReference[oaicite:0]&#123;index=0&#125;**</span><br><span class="line">- **:contentReference[oaicite:1]&#123;index=1&#125;**</span><br><span class="line">- **:contentReference[oaicite:2]&#123;index=2&#125;**</span><br><span class="line">- **:contentReference[oaicite:3]&#123;index=3&#125;**</span><br><span class="line">- **:contentReference[oaicite:4]&#123;index=4&#125;**</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># 一、Linux 启动流程简述</span><br><span class="line"></span><br><span class="line">理解 Linux 启动流程有助于理解为什么可以通过 GRUB 重置 root 密码。</span><br><span class="line"></span><br><span class="line">Linux 启动过程大致如下：</span><br></pre></td></tr></table></figure>
+<p>BIOS / UEFI<br> ↓<br> BootLoader（GRUB）<br> ↓<br> Linux Kernel<br> ↓<br> init / systemd<br> ↓<br> 用户空间</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">关键点：</span><br></pre></td></tr></table></figure>
+<p>GRUB 可以修改 Linux 内核启动参数</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">如果我们修改启动参数，就可以：</span><br><span class="line"></span><br><span class="line">- 进入单用户模式</span><br><span class="line">- 进入 emergency shell</span><br><span class="line">- 修改系统文件</span><br><span class="line">- 重置 root 密码</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># 二、通过 GRUB 重置 root 密码（推荐方法）</span><br><span class="line"></span><br><span class="line">适用于：</span><br><span class="line"></span><br><span class="line">- CentOS 7+</span><br><span class="line">- Rocky Linux</span><br><span class="line">- AlmaLinux</span><br><span class="line"></span><br><span class="line">## 1 重启服务器</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-进入-GRUB-菜单"><a href="#2-进入-GRUB-菜单" class="headerlink" title="2 进入 GRUB 菜单"></a>2 进入 GRUB 菜单</h2><p>系统启动时按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ESC</span><br><span class="line">或</span><br><span class="line">Shift</span><br></pre></td></tr></table></figure>
+<p>进入 GRUB 界面。</p>
+<hr>
+<h2 id="3-编辑启动项"><a href="#3-编辑启动项" class="headerlink" title="3 编辑启动项"></a>3 编辑启动项</h2><p>选中当前系统启动项，按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
+<p>进入编辑模式。</p>
+<p>找到这一行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/... ro</span><br></pre></td></tr></table></figure>
+<p>将：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ro</span><br></pre></td></tr></table></figure>
+<p>改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rw init=/sysroot/bin/sh</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/centos-root rw init=/sysroot/bin/sh</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-启动系统"><a href="#4-启动系统" class="headerlink" title="4 启动系统"></a>4 启动系统</h2><p>按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
+<p>进入紧急 shell。</p>
+<hr>
+<h2 id="5-切换到系统环境"><a href="#5-切换到系统环境" class="headerlink" title="5 切换到系统环境"></a>5 切换到系统环境</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chroot /sysroot</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6-修改-root-密码"><a href="#6-修改-root-密码" class="headerlink" title="6 修改 root 密码"></a>6 修改 root 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<p>输入新密码即可。</p>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Changing password for user root.</span><br><span class="line">New password:</span><br><span class="line">Retype new password:</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="7-修复-SELinux-标签（重要）"><a href="#7-修复-SELinux-标签（重要）" class="headerlink" title="7 修复 SELinux 标签（重要）"></a>7 修复 SELinux 标签（重要）</h2><p>如果系统开启了 SELinux，需要执行：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch /.autorelabel</span><br></pre></td></tr></table></figure>
+<p>否则系统可能无法正常登录。</p>
+<hr>
+<h2 id="8-重启系统"><a href="#8-重启系统" class="headerlink" title="8 重启系统"></a>8 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">exit</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<p>系统启动后即可使用新密码登录。</p>
+<hr>
+<h1 id="三、使用-rd-break-重置密码（CentOS-官方方式）"><a href="#三、使用-rd-break-重置密码（CentOS-官方方式）" class="headerlink" title="三、使用 rd.break 重置密码（CentOS 官方方式）"></a>三、使用 rd.break 重置密码（CentOS 官方方式）</h1><p>该方法是 **Red Hat 推荐的方式。</p>
+<h2 id="1-进入-GRUB-编辑界面"><a href="#1-进入-GRUB-编辑界面" class="headerlink" title="1 进入 GRUB 编辑界面"></a>1 进入 GRUB 编辑界面</h2><p>按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
+<p>找到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16</span><br></pre></td></tr></table></figure>
+<p>在行尾添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rd.break</span><br></pre></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/centos-root ro rd.break</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-启动系统"><a href="#2-启动系统" class="headerlink" title="2 启动系统"></a>2 启动系统</h2><p>按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
+<p>进入 emergency mode。</p>
+<hr>
+<h2 id="3-重新挂载系统分区"><a href="#3-重新挂载系统分区" class="headerlink" title="3 重新挂载系统分区"></a>3 重新挂载系统分区</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount -o remount,rw /sysroot</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-切换到系统环境"><a href="#4-切换到系统环境" class="headerlink" title="4 切换到系统环境"></a>4 切换到系统环境</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chroot /sysroot</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="5-修改-root-密码"><a href="#5-修改-root-密码" class="headerlink" title="5 修改 root 密码"></a>5 修改 root 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6-SELinux-修复"><a href="#6-SELinux-修复" class="headerlink" title="6 SELinux 修复"></a>6 SELinux 修复</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch /.autorelabel</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="7-重启系统"><a href="#7-重启系统" class="headerlink" title="7 重启系统"></a>7 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">exit</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="四、Ubuntu-Debian-重置-root-密码"><a href="#四、Ubuntu-Debian-重置-root-密码" class="headerlink" title="四、Ubuntu / Debian 重置 root 密码"></a>四、Ubuntu / Debian 重置 root 密码</h1><p>适用于：</p>
+<ul>
+<li><strong>Ubuntu</strong></li>
+<li><strong>Debian</strong></li>
+</ul>
+<h2 id="1-进入-GRUB"><a href="#1-进入-GRUB" class="headerlink" title="1 进入 GRUB"></a>1 进入 GRUB</h2><p>开机按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ESC</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2-编辑启动项"><a href="#2-编辑启动项" class="headerlink" title="2 编辑启动项"></a>2 编辑启动项</h2><p>找到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux /boot/vmlinuz</span><br></pre></td></tr></table></figure>
+<p>在行尾添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">init=/bin/bash</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="3-启动系统"><a href="#3-启动系统" class="headerlink" title="3 启动系统"></a>3 启动系统</h2><p>按：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
+<p>进入 root shell。</p>
+<hr>
+<h2 id="4-挂载为读写"><a href="#4-挂载为读写" class="headerlink" title="4 挂载为读写"></a>4 挂载为读写</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount -o remount,rw /</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="5-修改密码"><a href="#5-修改密码" class="headerlink" title="5 修改密码"></a>5 修改密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6-重启系统"><a href="#6-重启系统" class="headerlink" title="6 重启系统"></a>6 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exec /sbin/init</span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">reboot -f</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="五、为什么可以重置-root-密码？"><a href="#五、为什么可以重置-root-密码？" class="headerlink" title="五、为什么可以重置 root 密码？"></a>五、为什么可以重置 root 密码？</h1><p>核心原因：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GRUB 可以修改 Linux 启动参数</span><br></pre></td></tr></table></figure>
+<p>只要满足以下条件：</p>
+<ul>
+<li>能访问服务器控制台</li>
+<li>能修改 GRUB 启动项</li>
+<li>没有设置 GRUB 密码</li>
+</ul>
+<p>就可以重置 root 密码。</p>
+<hr>
+<h1 id="六、生产环境安全防护"><a href="#六、生产环境安全防护" class="headerlink" title="六、生产环境安全防护"></a>六、生产环境安全防护</h1><p>为了防止非法修改 root 密码，需要采取安全措施。</p>
+<hr>
+<h2 id="1-设置-GRUB-密码"><a href="#1-设置-GRUB-密码" class="headerlink" title="1 设置 GRUB 密码"></a>1 设置 GRUB 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grub2-setpassword</span><br></pre></td></tr></table></figure>
+<p>这样进入 GRUB 编辑界面需要密码。</p>
+<hr>
+<h2 id="2-禁止外部设备启动"><a href="#2-禁止外部设备启动" class="headerlink" title="2 禁止外部设备启动"></a>2 禁止外部设备启动</h2><p>在 BIOS 中：</p>
+<ul>
+<li>禁止 U 盘启动</li>
+<li>禁止光驱启动</li>
+</ul>
+<hr>
+<h2 id="3-设置-BIOS-密码"><a href="#3-设置-BIOS-密码" class="headerlink" title="3 设置 BIOS 密码"></a>3 设置 BIOS 密码</h2><p>防止攻击者修改启动顺序。</p>
+<hr>
+<h2 id="4-使用磁盘加密"><a href="#4-使用磁盘加密" class="headerlink" title="4 使用磁盘加密"></a>4 使用磁盘加密</h2><p>Linux 推荐使用：</p>
+<p><strong>LUKS</strong></p>
+<p>磁盘加密后：</p>
+<ul>
+<li>没有密码无法挂载磁盘</li>
+<li>无法修改系统文件</li>
+<li>无法重置 root 密码</li>
+</ul>
+<hr>
+<h2 id="5-机房物理安全"><a href="#5-机房物理安全" class="headerlink" title="5 机房物理安全"></a>5 机房物理安全</h2><p>服务器安全原则：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">物理安全 &gt; 系统安全</span><br></pre></td></tr></table></figure>
+<p>如果攻击者拥有：</p>
+<ul>
+<li>服务器物理访问权限</li>
+<li>控制台权限</li>
+</ul>
+<p>任何系统都可能被破解。</p>
+<hr>
+<h1 id="七、云服务器为什么不能这样操作"><a href="#七、云服务器为什么不能这样操作" class="headerlink" title="七、云服务器为什么不能这样操作"></a>七、云服务器为什么不能这样操作</h1><p>在云环境中，例如：</p>
+<ul>
+<li><strong>Amazon Web Services</strong></li>
+<li><strong>Alibaba Cloud</strong></li>
+<li><strong>Tencent Cloud</strong></li>
+</ul>
+<p>用户通常无法：</p>
+<ul>
+<li>修改 GRUB</li>
+<li>控制启动过程</li>
+<li>直接访问磁盘</li>
+</ul>
+<p>因此只能通过云平台提供的 <strong>重置密码功能</strong>。</p>
+<hr>
+<h1 id="八、运维最佳实践"><a href="#八、运维最佳实践" class="headerlink" title="八、运维最佳实践"></a>八、运维最佳实践</h1><p>建议：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 定期备份服务器</span><br><span class="line">2 禁止 root 远程登录</span><br><span class="line">3 使用 SSH Key 登录</span><br><span class="line">4 开启日志审计</span><br><span class="line">5 设置 GRUB 密码</span><br><span class="line">6 保护服务器物理安全</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="九、总结"><a href="#九、总结" class="headerlink" title="九、总结"></a>九、总结</h1><p>Linux 忘记 root 密码时，可以通过 <strong>GRUB 修改启动参数</strong>进入系统重置密码。</p>
+<p>常见方法：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>推荐程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GRUB init=/bin/sh</td>
+<td>常用</td>
+</tr>
+<tr>
+<td>rd.break</td>
+<td>官方推荐</td>
+</tr>
+<tr>
+<td>单用户模式</td>
+<td>较旧</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>但前提是：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">必须拥有服务器控制权限</span><br></pre></td></tr></table></figure>
+<p>生产环境必须做好：</p>
+<ul>
+<li>GRUB 安全</li>
+<li>BIOS 安全</li>
+<li>磁盘加密</li>
+<li>物理安全</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>Docker企业级部署Seata分布式事务（Nacos + MySQL + Oracle支持）</title>
     <url>/2026/02/06/Docker%E4%BC%81%E4%B8%9A%E7%BA%A7%E9%83%A8%E7%BD%B2Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%88Nacos-+-MySQL-+-Oracle%E6%94%AF%E6%8C%81%EF%BC%89/</url>
     <content><![CDATA[<h1 id="一、Seata简介"><a href="#一、Seata简介" class="headerlink" title="一、Seata简介"></a>一、Seata简介</h1><p>Seata 是一款开源的分布式事务解决方案，支持：</p>
@@ -125,67 +373,6 @@
         <tag>分布式事务</tag>
         <tag>微服务中间件</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>docker命令笔记</title>
-    <url>/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>docker version        # 显示docker的版本信息<br>docker info              # 显示docker的系统信息，包括镜像和容器的数量<br>docker 命令 —help         # 帮助命令<br>docker images    #查看镜像<br>docker search    #搜索镜像<br>docker pull    #下载镜像<br>docker pull  mysql:5.7    #指定版本下载<br>docker rmi     #删除镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id                    # 删除指定的镜像<br>[root@JWei_0124 //]# docker rmi -f 镜像id 镜像id 镜像id    # 删除多个镜像（空格分隔）<br>[root@JWei_0124 //]# docker rmi -f $(docker images -aq)    # 删除全部的镜像<br>docker run [可选参数] image</p>
-<h1 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h1><p>—name=”name”        容器名字：用来区分容器<br>-d                    后台方式运行：相当于nohup<br>-it                    使用交互式运行：进入容器查看内容<br>-p                    指定容器的端口（四种方式）小写字母p<br>    -p ip:主机端口：容器端口<br>    -p 主机端口：容器端口<br>    -p 容器端口<br>    容器端口<br>-P                     随机指定端口（大写字母P）</p>
-<p>docker ps         #列出当前正在运行的容器</p>
-<h1 id="命令参数可选项"><a href="#命令参数可选项" class="headerlink" title="命令参数可选项"></a>命令参数可选项</h1><p>-a        # 列出当前正在运行的容器+历史运行过的容器<br>-n=?    # 显示最近创建的容器（可以指定显示几条，比如-n=1）<br>-q        # 只显示容器的编号</p>
-<p>docker run -it centos /bin/bash #交互式进入<br>docker rm 容器ID    #删除容器（不能删除正在运行的容器）<br>docker rm -f     #强制删除<br>docker ps -a -q|xargs docker rm     #删除所有容器<br>docker start 容器id        # 启动容器<br>docker restart 容器id    # 重启容器<br>docker stop 容器id        # 停止当前正在运行的容器<br>docker kill 容器id        # 强制停止当前容器</p>
-<p>docker logs -tf —tail 容器id</p>
-<p>-tf                        # 显示日志<br>—tail number    # 要显示的日志条数</p>
-<p>查看容器中进程的信息<br>docker top id<br>查看镜像的元数据<br>docker inspect id<br>进入当前正在运行的容器<br>docker exec -it 容器id /bin/bash</p>
-<p>从容器内拷贝文件到主机<br>docker cp 容器id:容器内路径 目的主机的路径</p>
-<h1 id="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"><a href="#如何确定是具名挂载，还是匿名挂载，还是指定路径挂载" class="headerlink" title="如何确定是具名挂载，还是匿名挂载，还是指定路径挂载"></a>如何确定是具名挂载，还是匿名挂载，还是指定路径挂载</h1><p>-v 容器内的路径                # 匿名挂载<br>-v 卷名:容器内的路径        # 具名挂载<br>-v /宿主机路径:容器内路径    # 指定路径挂载</p>
-<h1 id="提交容器成为一个新的副本"><a href="#提交容器成为一个新的副本" class="headerlink" title="提交容器成为一个新的副本"></a>提交容器成为一个新的副本</h1><p>docker commit</p>
-<h1 id="命令和git原理类似"><a href="#命令和git原理类似" class="headerlink" title="命令和git原理类似"></a>命令和git原理类似</h1><p>docker commit -m=”提交的描述信息” -a=”作者” 容器id 目标镜像名:[TAG]</p>
-<h1 id="我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"><a href="#我们直接启动的命令—net-bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。" class="headerlink" title="我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。"></a>我们直接启动的命令—net bridge（这个就是我们的docker0）；默认带上这个参数的，以下两种启动方式效果一致。</h1><p>docker run -d -P —name tomcat01 tomcat<br>docker run -d -P —name tomcato1 —het bridge tomcat</p>
-<h1 id="docker0特点：默认，域名不能访问，—1ink可以打通连接！"><a href="#docker0特点：默认，域名不能访问，—1ink可以打通连接！" class="headerlink" title="docker0特点：默认，域名不能访问，—1ink可以打通连接！"></a>docker0特点：默认，域名不能访问，—1ink可以打通连接！</h1><h1 id="我们可以自定义一个网络！"><a href="#我们可以自定义一个网络！" class="headerlink" title="我们可以自定义一个网络！"></a>我们可以自定义一个网络！</h1><p>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network create —driver bridge —subnet 192.168.0.0/16 —gateway 192.168.0.1 mynet<br>[root@iZbp13qr3mm4ucsjumrlgqZ ~]# docker network ls<br>NETWORK ID     NAME      DRIVER    SCOPE<br>7254ffccbdf5   bridge    bridge    local<br>45610891738f   host      host      local<br>266acd66473c   mynet     bridge    local<br>7795cbc2686c   none      null      local</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Linux笔记</title>
-    <url>/2023/07/25/Linux/</url>
-    <content><![CDATA[<h1 id="安装虚拟化组"><a href="#安装虚拟化组" class="headerlink" title="安装虚拟化组"></a>安装虚拟化组</h1><h3 id="安装图形化界面虚拟机管理工具"><a href="#安装图形化界面虚拟机管理工具" class="headerlink" title="安装图形化界面虚拟机管理工具"></a>安装图形化界面虚拟机管理工具</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum groupinstall <span class="string">&#x27;Virtualization Host&#x27;</span></span><br></pre></td></tr></table></figure>
-<h3 id="启动虚拟化服务"><a href="#启动虚拟化服务" class="headerlink" title="启动虚拟化服务"></a>启动虚拟化服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install virt-manager</span><br></pre></td></tr></table></figure>
-<h3 id="Web管理界面"><a href="#Web管理界面" class="headerlink" title="Web管理界面"></a>Web管理界面</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ systemctl start libvirtd.service</span><br><span class="line">$ systemclt start cockpit.service</span><br></pre></td></tr></table></figure>
-<h1 id="配置网卡"><a href="#配置网卡" class="headerlink" title="配置网卡"></a>配置网卡</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nmtui 图形化工具</span><br><span class="line">$ /etc/sysconfig/network-scripts/ifcfg-enp1s0 网卡配置文件</span><br><span class="line">$ nmcli con modify enp1s0 ipv4.method me</span><br><span class="line">$ nmcli con up enp1s0启用网卡配置</span><br></pre></td></tr></table></figure>
-<p>w查看登录信息<br>Ss -ant查看链接信息<br>Ss -at<br>Ss -atu<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/resolv.conf  dns记录文件 网卡会覆盖</span><br><span class="line">$ /etc/hostname修改主机名</span><br><span class="line">$ /etc/hosts dns解析文件</span><br></pre></td></tr></table></figure><br>route -n查询网关<br>主机名 计算机名<br>Fqdn  web-server.abc.com<br>Netbiosname.  Web-server<br>nmcli con show 查看<br>nmcli device status 查看网卡状态</p>
-<h1 id="安装软件包-chrony"><a href="#安装软件包-chrony" class="headerlink" title="安装软件包 chrony"></a>安装软件包 chrony</h1><h3 id="查看时钟同步状态"><a href="#查看时钟同步状态" class="headerlink" title="查看时钟同步状态"></a>查看时钟同步状态</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ chronyc sources -v</span><br></pre></td></tr></table></figure>
-<h3 id="搭建内网Ntp服务器"><a href="#搭建内网Ntp服务器" class="headerlink" title="搭建内网Ntp服务器"></a>搭建内网Ntp服务器</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vim /etc/chrony.conf 修改配置文件</span><br><span class="line">$ firewall-cmd. --add-service=ntp 防火墙放行ntp服务</span><br></pre></td></tr></table></figure>
-<p>修改时区<br>timedatectl. Set-timezone. Asia/Shanghai<br>           List-timezone  查询<br>Timedatectl. Set-ntp. true/false 开启互联网校准<br>Date -s. 修改时间</p>
-<p>Yum list 查询仓库里所有软件包及其状态</p>
-<p>rpm -i 安装 v查看安装信息 h显示进度<br>rpm -q查询<br>rpm -e删除<br>过滤<br>| grep 名字<br>查询某个文件属于某个rpm包<br>rpm -qa<br>Net-tools<br>Bash-c<em><br>Vim-e</em></p>
-<h1 id="磁盘分区"><a href="#磁盘分区" class="headerlink" title="磁盘分区"></a>磁盘分区</h1><p>\1. /boot. 1g<br>\2. Swap.  2 Ram<br>\3. /.  All</p>
-<h1 id="ssh配置"><a href="#ssh配置" class="headerlink" title="ssh配置"></a>ssh配置</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ /etc/ssh/sshd_config</span><br><span class="line">$ Port 22</span><br><span class="line">$ Permitrootlogin <span class="built_in">yes</span> 允许 root远程登录 no禁止</span><br></pre></td></tr></table></figure>
-<h3 id="关闭selinux安全插件"><a href="#关闭selinux安全插件" class="headerlink" title="关闭selinux安全插件"></a>关闭selinux安全插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
-<h3 id="使用秘钥登陆"><a href="#使用秘钥登陆" class="headerlink" title="使用秘钥登陆"></a>使用秘钥登陆</h3><p>客户端生成秘钥文件  公钥加密（非对称加密）公钥，私钥</p>
-<p>客户端<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen 生成公钥</span><br><span class="line">上传公钥到目标服务器的root账号</span><br><span class="line">$ ssh-copy-id 主机</span><br></pre></td></tr></table></figure></p>
-<p>scp 文件 主机:位置<br>SCP -R 文件夹</p>
-<h1 id=""><a href="#" class="headerlink" title=" "></a> </h1><h1 id="搭建DHCP服务器"><a href="#搭建DHCP服务器" class="headerlink" title="搭建DHCP服务器"></a>搭建DHCP服务器</h1><h3 id="安装dhcp软件包"><a href="#安装dhcp软件包" class="headerlink" title="安装dhcp软件包"></a>安装dhcp软件包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install dhcp-server</span><br><span class="line">修改配置文件 </span><br><span class="line">$ vim /etc/DHCP/dhcpd.conf</span><br></pre></td></tr></table></figure>
-<p>10yy复制<br>P粘贴</p>
-<p>查看磁盘<br>fdisk -l<br>lsblk<br>分区工具<br>fdisk交互式分区<br>n p w<br>parted 可交互</p>
-<p>Parted 磁盘<br>Print打印查看<br>Mkpart<br>Name 名字<br>类型<br>起始 上一个磁盘的终止<br>终止 起始加分区大小<br>quit 退出<br>非交互式<br>parted 磁盘 mkpart 名字 起始 终止</p>
-<p>RMB<br>Parted 磁盘 mklabel msdos<br>Parted 磁盘 rm 分区 删除分区<br>Parted 磁盘 mkpart 主/扩 格式 起始 终止<br>对分区进行格式化</p>
-<p>ext4<br>Xfs<br>mkfs -t 格式 磁盘<br>mkfs.格式 磁盘<br>如果硬盘是Ada 插入U盘 设备名为 sdb<br>mount | tail -n 数字 查看文件的最后几行<br>lsblk -f 查看挂载<br>开机自动挂载<br>/etc/fstab<br>设备名建议使用UUID<br>blkid 磁盘 查看UUID<br>lsblk _f 查看UUID<br>udevadm settle 更新文件 rhel8<br>Parts -a 磁盘 更新文件. rhel7之前</p>
-<p>扩充交换分区<br>mkswap 磁盘 格式化为swap类型<br>挂载为了swap空间<br>swapon 磁盘<br>swapon -s 查看<br>swapoff 卸载挂载点</p>
-<p>dd if=/dev/zero of=/ten/swap1 bs=1M count=2048 复制磁盘块为文件<br>格式化<br>挂载</p>
-<p>Man 命令 查看命令手册 </p>
-<h1 id="搭建ftp服务器"><a href="#搭建ftp服务器" class="headerlink" title="搭建ftp服务器"></a>搭建ftp服务器</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install vsftpd -y</span><br><span class="line"> 修改FTP配置文件</span><br><span class="line">$ /etc/vsftpd/vsftpd.conf</span><br><span class="line"><span class="variable">$anonymous_enable</span>=<span class="built_in">yes</span></span><br><span class="line"> 启动FTP服务 开机自启</span><br><span class="line"><span class="variable">$systemctl</span> <span class="built_in">enable</span> vsftpd.service --now</span><br><span class="line"> Ftp 默认家目录 匿名访问</span><br><span class="line">$ /var/ftp</span><br><span class="line">默认命令行下是主动FTP 21 20建立传输</span><br><span class="line">被动高端端口</span><br><span class="line">限制FTP被动端口范围</span><br><span class="line">Pasv_min_port=10000</span><br><span class="line">Pasv_max_port=11000</span><br><span class="line">Ss -ant查看 </span><br></pre></td></tr></table></figure>
-<h1 id="LVM-逻辑卷管理"><a href="#LVM-逻辑卷管理" class="headerlink" title="LVM  逻辑卷管理"></a>LVM  逻辑卷管理</h1><p>传统的磁盘分区  分区固定后不能更改</p>
-<h3 id="将磁盘，分区转换为PV逻辑卷"><a href="#将磁盘，分区转换为PV逻辑卷" class="headerlink" title="将磁盘，分区转换为PV逻辑卷"></a>将磁盘，分区转换为PV逻辑卷</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ PVcreate 磁盘</span><br><span class="line">$ Pvs. Pvdisplay 磁盘 查看信息</span><br></pre></td></tr></table></figure>
-<h3 id="将物理卷组合成卷组-VG"><a href="#将物理卷组合成卷组-VG" class="headerlink" title="将物理卷组合成卷组 VG"></a>将物理卷组合成卷组 VG</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ vgcreate 名字 磁盘</span><br><span class="line">$ vgs. Vgdispaly 磁盘 查看</span><br><span class="line">$ VGremove 名称 删除卷组</span><br><span class="line">$ -s定义块大小</span><br><span class="line"></span><br><span class="line">Pe的尺寸可以更改</span><br></pre></td></tr></table></figure>
-<h3 id="创建lv-逻辑卷"><a href="#创建lv-逻辑卷" class="headerlink" title="创建lv 逻辑卷"></a>创建lv 逻辑卷</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ lvcreate -n 名字 -L 大小/-l 多少个块 卷组</span><br><span class="line">$ lvextend -L +尺寸 逻辑卷 扩展逻辑卷</span><br><span class="line">将扩展的lv与挂载点 同步尺寸</span><br><span class="line">xfs_growfs 挂载点</span><br><span class="line">Resize2fs 逻辑卷 ext4同步</span><br><span class="line">Vgextend vg pv扩展卷组</span><br></pre></td></tr></table></figure>
-<h1 id="dns服务器"><a href="#dns服务器" class="headerlink" title="dns服务器"></a>dns服务器</h1><h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ yum install <span class="built_in">bind</span>. bind-utils </span><br><span class="line">$ /etc/named.conf</span><br><span class="line">UDP53客户机找服务</span><br><span class="line">Tcp53服务器找服务器</span><br><span class="line"></span><br><span class="line">添加区域</span><br><span class="line">zone “ABC.com”IN&#123;</span><br><span class="line">      <span class="built_in">type</span> master;</span><br><span class="line">      File <span class="string">&quot;abc.com.zone&quot;</span>;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$ /var/named/</span><br></pre></td></tr></table></figure>
-<p>mount -o loop 文件 挂载本地文件<br>＞覆盖 ＞＞重定向<br>开机自动挂载 defaults.loop<br>给web启用 ssl 使用数字证书<br>Yum install mod_ssl</p>
-<h1 id="搭建多个web站点-虚拟主机"><a href="#搭建多个web站点-虚拟主机" class="headerlink" title="搭建多个web站点 虚拟主机"></a>搭建多个web站点 虚拟主机</h1><p>Apache 配置文件 /etc/httpd<br>conf 主配置文件 conf.d辅配置文件<br>/usr/share/doc/httpd配置文件模板<br>httpd-vhosts.conf 虚拟主机模板</p>
-<p>动态网站<br>asp asp.net php jsp Python 等开发<br>小型机 IBM Aix<br>      Sun solris Oracle 甲骨文<br>      Hp hp-unix</p>
-<p>挂接数据库 mysql mariadb<br>mariadb-server<br>如果需要，可以做安全初始化配置<br>MySQL_secure_installation<br>清除历史命令 history -c<br>unzip 文件 -d 目录</p>
-<p>Chmod o+w config/ -R<br>data/ -R<br>uc_client<br>Uc_server<br>软件包 php-mysqlnd<br>Php-xml</p>
-<p>firewall-cmd.  —list-all  查看防火墙规则<br>firewall-cmd —list-all<br>firewalld.richlanguage富规则<br>firewall-cmd —add-service=服务  —permanent. 写入配置文件</p>
-]]></content>
   </entry>
   <entry>
     <title>git-jenkins-harbor-k8s部署笔记</title>
@@ -566,193 +753,6 @@
 </code></pre>]]></content>
   </entry>
   <entry>
-    <title>linux重置密码手册</title>
-    <url>/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Linux 忘记 Root 密码解决方案与安全防护指南（运维手册版）</span><br><span class="line"></span><br><span class="line">本文系统整理 **Linux 忘记 root 密码的解决方案**、**GRUB 启动原理**、**不同发行版重置方式**以及**生产环境安全防护措施**。  </span><br><span class="line">适用于 Linux 运维工程师、开发人员和系统管理员。</span><br><span class="line"></span><br><span class="line">适用系统包括：</span><br><span class="line"></span><br><span class="line">- **:contentReference[oaicite:0]&#123;index=0&#125;**</span><br><span class="line">- **:contentReference[oaicite:1]&#123;index=1&#125;**</span><br><span class="line">- **:contentReference[oaicite:2]&#123;index=2&#125;**</span><br><span class="line">- **:contentReference[oaicite:3]&#123;index=3&#125;**</span><br><span class="line">- **:contentReference[oaicite:4]&#123;index=4&#125;**</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># 一、Linux 启动流程简述</span><br><span class="line"></span><br><span class="line">理解 Linux 启动流程有助于理解为什么可以通过 GRUB 重置 root 密码。</span><br><span class="line"></span><br><span class="line">Linux 启动过程大致如下：</span><br></pre></td></tr></table></figure>
-<p>BIOS / UEFI<br> ↓<br> BootLoader（GRUB）<br> ↓<br> Linux Kernel<br> ↓<br> init / systemd<br> ↓<br> 用户空间</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">关键点：</span><br></pre></td></tr></table></figure>
-<p>GRUB 可以修改 Linux 内核启动参数</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">如果我们修改启动参数，就可以：</span><br><span class="line"></span><br><span class="line">- 进入单用户模式</span><br><span class="line">- 进入 emergency shell</span><br><span class="line">- 修改系统文件</span><br><span class="line">- 重置 root 密码</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># 二、通过 GRUB 重置 root 密码（推荐方法）</span><br><span class="line"></span><br><span class="line">适用于：</span><br><span class="line"></span><br><span class="line">- CentOS 7+</span><br><span class="line">- Rocky Linux</span><br><span class="line">- AlmaLinux</span><br><span class="line"></span><br><span class="line">## 1 重启服务器</span><br><span class="line"></span><br><span class="line">```bash</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="2-进入-GRUB-菜单"><a href="#2-进入-GRUB-菜单" class="headerlink" title="2 进入 GRUB 菜单"></a>2 进入 GRUB 菜单</h2><p>系统启动时按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ESC</span><br><span class="line">或</span><br><span class="line">Shift</span><br></pre></td></tr></table></figure>
-<p>进入 GRUB 界面。</p>
-<hr>
-<h2 id="3-编辑启动项"><a href="#3-编辑启动项" class="headerlink" title="3 编辑启动项"></a>3 编辑启动项</h2><p>选中当前系统启动项，按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
-<p>进入编辑模式。</p>
-<p>找到这一行：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/... ro</span><br></pre></td></tr></table></figure>
-<p>将：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ro</span><br></pre></td></tr></table></figure>
-<p>改为：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rw init=/sysroot/bin/sh</span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/centos-root rw init=/sysroot/bin/sh</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="4-启动系统"><a href="#4-启动系统" class="headerlink" title="4 启动系统"></a>4 启动系统</h2><p>按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
-<p>进入紧急 shell。</p>
-<hr>
-<h2 id="5-切换到系统环境"><a href="#5-切换到系统环境" class="headerlink" title="5 切换到系统环境"></a>5 切换到系统环境</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chroot /sysroot</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="6-修改-root-密码"><a href="#6-修改-root-密码" class="headerlink" title="6 修改 root 密码"></a>6 修改 root 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-<p>输入新密码即可。</p>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Changing password for user root.</span><br><span class="line">New password:</span><br><span class="line">Retype new password:</span><br><span class="line">passwd: all authentication tokens updated successfully.</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="7-修复-SELinux-标签（重要）"><a href="#7-修复-SELinux-标签（重要）" class="headerlink" title="7 修复 SELinux 标签（重要）"></a>7 修复 SELinux 标签（重要）</h2><p>如果系统开启了 SELinux，需要执行：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch /.autorelabel</span><br></pre></td></tr></table></figure>
-<p>否则系统可能无法正常登录。</p>
-<hr>
-<h2 id="8-重启系统"><a href="#8-重启系统" class="headerlink" title="8 重启系统"></a>8 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">exit</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<p>系统启动后即可使用新密码登录。</p>
-<hr>
-<h1 id="三、使用-rd-break-重置密码（CentOS-官方方式）"><a href="#三、使用-rd-break-重置密码（CentOS-官方方式）" class="headerlink" title="三、使用 rd.break 重置密码（CentOS 官方方式）"></a>三、使用 rd.break 重置密码（CentOS 官方方式）</h1><p>该方法是 **Red Hat 推荐的方式。</p>
-<h2 id="1-进入-GRUB-编辑界面"><a href="#1-进入-GRUB-编辑界面" class="headerlink" title="1 进入 GRUB 编辑界面"></a>1 进入 GRUB 编辑界面</h2><p>按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">e</span><br></pre></td></tr></table></figure>
-<p>找到：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16</span><br></pre></td></tr></table></figure>
-<p>在行尾添加：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rd.break</span><br></pre></td></tr></table></figure>
-<p>示例：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux16 /vmlinuz-xxx root=/dev/mapper/centos-root ro rd.break</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="2-启动系统"><a href="#2-启动系统" class="headerlink" title="2 启动系统"></a>2 启动系统</h2><p>按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
-<p>进入 emergency mode。</p>
-<hr>
-<h2 id="3-重新挂载系统分区"><a href="#3-重新挂载系统分区" class="headerlink" title="3 重新挂载系统分区"></a>3 重新挂载系统分区</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount -o remount,rw /sysroot</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="4-切换到系统环境"><a href="#4-切换到系统环境" class="headerlink" title="4 切换到系统环境"></a>4 切换到系统环境</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">chroot /sysroot</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="5-修改-root-密码"><a href="#5-修改-root-密码" class="headerlink" title="5 修改 root 密码"></a>5 修改 root 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="6-SELinux-修复"><a href="#6-SELinux-修复" class="headerlink" title="6 SELinux 修复"></a>6 SELinux 修复</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch /.autorelabel</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="7-重启系统"><a href="#7-重启系统" class="headerlink" title="7 重启系统"></a>7 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exit</span><br><span class="line">exit</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="四、Ubuntu-Debian-重置-root-密码"><a href="#四、Ubuntu-Debian-重置-root-密码" class="headerlink" title="四、Ubuntu / Debian 重置 root 密码"></a>四、Ubuntu / Debian 重置 root 密码</h1><p>适用于：</p>
-<ul>
-<li><strong>Ubuntu</strong></li>
-<li><strong>Debian</strong></li>
-</ul>
-<h2 id="1-进入-GRUB"><a href="#1-进入-GRUB" class="headerlink" title="1 进入 GRUB"></a>1 进入 GRUB</h2><p>开机按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ESC</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="2-编辑启动项"><a href="#2-编辑启动项" class="headerlink" title="2 编辑启动项"></a>2 编辑启动项</h2><p>找到：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">linux /boot/vmlinuz</span><br></pre></td></tr></table></figure>
-<p>在行尾添加：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">init=/bin/bash</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="3-启动系统"><a href="#3-启动系统" class="headerlink" title="3 启动系统"></a>3 启动系统</h2><p>按：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Ctrl + X</span><br></pre></td></tr></table></figure>
-<p>进入 root shell。</p>
-<hr>
-<h2 id="4-挂载为读写"><a href="#4-挂载为读写" class="headerlink" title="4 挂载为读写"></a>4 挂载为读写</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">mount -o remount,rw /</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="5-修改密码"><a href="#5-修改密码" class="headerlink" title="5 修改密码"></a>5 修改密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">passwd root</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="6-重启系统"><a href="#6-重启系统" class="headerlink" title="6 重启系统"></a>6 重启系统</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">exec /sbin/init</span><br></pre></td></tr></table></figure>
-<p>或</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">reboot -f</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="五、为什么可以重置-root-密码？"><a href="#五、为什么可以重置-root-密码？" class="headerlink" title="五、为什么可以重置 root 密码？"></a>五、为什么可以重置 root 密码？</h1><p>核心原因：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GRUB 可以修改 Linux 启动参数</span><br></pre></td></tr></table></figure>
-<p>只要满足以下条件：</p>
-<ul>
-<li>能访问服务器控制台</li>
-<li>能修改 GRUB 启动项</li>
-<li>没有设置 GRUB 密码</li>
-</ul>
-<p>就可以重置 root 密码。</p>
-<hr>
-<h1 id="六、生产环境安全防护"><a href="#六、生产环境安全防护" class="headerlink" title="六、生产环境安全防护"></a>六、生产环境安全防护</h1><p>为了防止非法修改 root 密码，需要采取安全措施。</p>
-<hr>
-<h2 id="1-设置-GRUB-密码"><a href="#1-设置-GRUB-密码" class="headerlink" title="1 设置 GRUB 密码"></a>1 设置 GRUB 密码</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">grub2-setpassword</span><br></pre></td></tr></table></figure>
-<p>这样进入 GRUB 编辑界面需要密码。</p>
-<hr>
-<h2 id="2-禁止外部设备启动"><a href="#2-禁止外部设备启动" class="headerlink" title="2 禁止外部设备启动"></a>2 禁止外部设备启动</h2><p>在 BIOS 中：</p>
-<ul>
-<li>禁止 U 盘启动</li>
-<li>禁止光驱启动</li>
-</ul>
-<hr>
-<h2 id="3-设置-BIOS-密码"><a href="#3-设置-BIOS-密码" class="headerlink" title="3 设置 BIOS 密码"></a>3 设置 BIOS 密码</h2><p>防止攻击者修改启动顺序。</p>
-<hr>
-<h2 id="4-使用磁盘加密"><a href="#4-使用磁盘加密" class="headerlink" title="4 使用磁盘加密"></a>4 使用磁盘加密</h2><p>Linux 推荐使用：</p>
-<p><strong>LUKS</strong></p>
-<p>磁盘加密后：</p>
-<ul>
-<li>没有密码无法挂载磁盘</li>
-<li>无法修改系统文件</li>
-<li>无法重置 root 密码</li>
-</ul>
-<hr>
-<h2 id="5-机房物理安全"><a href="#5-机房物理安全" class="headerlink" title="5 机房物理安全"></a>5 机房物理安全</h2><p>服务器安全原则：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">物理安全 &gt; 系统安全</span><br></pre></td></tr></table></figure>
-<p>如果攻击者拥有：</p>
-<ul>
-<li>服务器物理访问权限</li>
-<li>控制台权限</li>
-</ul>
-<p>任何系统都可能被破解。</p>
-<hr>
-<h1 id="七、云服务器为什么不能这样操作"><a href="#七、云服务器为什么不能这样操作" class="headerlink" title="七、云服务器为什么不能这样操作"></a>七、云服务器为什么不能这样操作</h1><p>在云环境中，例如：</p>
-<ul>
-<li><strong>Amazon Web Services</strong></li>
-<li><strong>Alibaba Cloud</strong></li>
-<li><strong>Tencent Cloud</strong></li>
-</ul>
-<p>用户通常无法：</p>
-<ul>
-<li>修改 GRUB</li>
-<li>控制启动过程</li>
-<li>直接访问磁盘</li>
-</ul>
-<p>因此只能通过云平台提供的 <strong>重置密码功能</strong>。</p>
-<hr>
-<h1 id="八、运维最佳实践"><a href="#八、运维最佳实践" class="headerlink" title="八、运维最佳实践"></a>八、运维最佳实践</h1><p>建议：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1 定期备份服务器</span><br><span class="line">2 禁止 root 远程登录</span><br><span class="line">3 使用 SSH Key 登录</span><br><span class="line">4 开启日志审计</span><br><span class="line">5 设置 GRUB 密码</span><br><span class="line">6 保护服务器物理安全</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="九、总结"><a href="#九、总结" class="headerlink" title="九、总结"></a>九、总结</h1><p>Linux 忘记 root 密码时，可以通过 <strong>GRUB 修改启动参数</strong>进入系统重置密码。</p>
-<p>常见方法：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>推荐程度</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>GRUB init=/bin/sh</td>
-<td>常用</td>
-</tr>
-<tr>
-<td>rd.break</td>
-<td>官方推荐</td>
-</tr>
-<tr>
-<td>单用户模式</td>
-<td>较旧</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>但前提是：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">必须拥有服务器控制权限</span><br></pre></td></tr></table></figure>
-<p>生产环境必须做好：</p>
-<ul>
-<li>GRUB 安全</li>
-<li>BIOS 安全</li>
-<li>磁盘加密</li>
-<li>物理安全</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
     <title>docker部署mqtt</title>
     <url>/2026/02/06/mqtt/</url>
     <content><![CDATA[<p>Docker 部署 MQTT服务器(EMQX)</p>
@@ -860,72 +860,6 @@ location /api/ &#123;
     proxy_set_header X-Forwarded-Proto $scheme;
 &#125;
 </code></pre><p>}</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Docker企业级部署Elasticsearch与Kibana实践</title>
-    <url>/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_ES_Kibana_%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C/</url>
-    <content><![CDATA[<h1 id="Docker-企业级部署-Elasticsearch-Kibana-IK-分词器"><a href="#Docker-企业级部署-Elasticsearch-Kibana-IK-分词器" class="headerlink" title="Docker 企业级部署 Elasticsearch + Kibana + IK 分词器"></a>Docker 企业级部署 Elasticsearch + Kibana + IK 分词器</h1><blockquote>
-<p>适用于：生产环境 / SpringCloud 微服务 / 日志平台 / 搜索服务</p>
-</blockquote>
-<p>特点： - docker-compose 一键部署 - 启用安全认证 - 持久化数据 -<br>插件标准化安装 - 容器网络隔离 - 可直接扩展为集群</p>
-<hr>
-<h1 id="一、目录规划（生产推荐）"><a href="#一、目录规划（生产推荐）" class="headerlink" title="一、目录规划（生产推荐）"></a>一、目录规划（生产推荐）</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /data/es/&#123;data,plugins,config,certs&#125;</span><br><span class="line"><span class="built_in">mkdir</span> -p /data/kibana/&#123;config,data&#125;</span><br></pre></td></tr></table></figure>
-<p>权限：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chmod</span> -R 777 /data/es</span><br><span class="line"><span class="built_in">chmod</span> -R 777 /data/kibana</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="二、docker-compose-企业级部署"><a href="#二、docker-compose-企业级部署" class="headerlink" title="二、docker-compose 企业级部署"></a>二、docker-compose 企业级部署</h1><p>创建：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /opt/es-stack</span><br><span class="line"><span class="built_in">cd</span> /opt/es-stack</span><br><span class="line">vim docker-compose.yml</span><br></pre></td></tr></table></figure>
-<h2 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">elasticsearch:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">elasticsearch:8.6.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">es</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">discovery.type=single-node</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ES_JAVA_OPTS=-Xms1g</span> <span class="string">-Xmx1g</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">xpack.security.enabled=true</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ELASTIC_PASSWORD=Elastic@123</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/data/es/data:/usr/share/elasticsearch/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/data/es/plugins:/usr/share/elasticsearch/plugins</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9200:9200&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9300:9300&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es-net</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">kibana:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">kibana:8.6.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kibana</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ELASTICSEARCH_HOSTS=http://es:9200</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ELASTICSEARCH_USERNAME=elastic</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ELASTICSEARCH_PASSWORD=Elastic@123</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5601:5601&quot;</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elasticsearch</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es-net</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">es-net:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="三、启动服务"><a href="#三、启动服务" class="headerlink" title="三、启动服务"></a>三、启动服务</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
-<p>查看状态：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="四、访问测试"><a href="#四、访问测试" class="headerlink" title="四、访问测试"></a>四、访问测试</h1><p>Elasticsearch：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">http://服务器IP:9200</span><br></pre></td></tr></table></figure>
-<p>账号：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">elastic</span><br><span class="line">Elastic@123</span><br></pre></td></tr></table></figure>
-<p>Kibana：</p>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">http://服务器IP:5601</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="五、企业级-IK-分词器安装"><a href="#五、企业级-IK-分词器安装" class="headerlink" title="五、企业级 IK 分词器安装"></a>五、企业级 IK 分词器安装</h1><p>进入容器：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it es bash</span><br></pre></td></tr></table></figure>
-<p>安装插件：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/elasticsearch-plugin install https://get.infini.cloud/elasticsearch/analysis-ik/8.6.0</span><br></pre></td></tr></table></figure>
-<p>退出并重启：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker restart es</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="六、SpringBoot-企业连接配置"><a href="#六、SpringBoot-企业连接配置" class="headerlink" title="六、SpringBoot 企业连接配置"></a>六、SpringBoot 企业连接配置</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">elasticsearch:</span></span><br><span class="line">    <span class="attr">uris:</span> <span class="string">http://服务器IP:9200</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">Elastic@123</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="七、生产环境优化建议"><a href="#七、生产环境优化建议" class="headerlink" title="七、生产环境优化建议"></a>七、生产环境优化建议</h1><h2 id="JVM优化"><a href="#JVM优化" class="headerlink" title="JVM优化"></a>JVM优化</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">ES_JAVA_OPTS=-Xms2g</span> <span class="string">-Xmx2g</span></span><br></pre></td></tr></table></figure>
-<p>原则： - 不超过物理内存 50% - Xms = Xmx</p>
-<h2 id="内核参数（必须）"><a href="#内核参数（必须）" class="headerlink" title="内核参数（必须）"></a>内核参数（必须）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
-<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">vm.max_map_count=262144</span><br></pre></td></tr></table></figure>
-<p>生效：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="八、日志查看"><a href="#八、日志查看" class="headerlink" title="八、日志查看"></a>八、日志查看</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker logs -f es</span><br><span class="line">docker logs -f kibana</span><br></pre></td></tr></table></figure>
-<hr>
-<h1 id="九、集群扩展（企业进阶）"><a href="#九、集群扩展（企业进阶）" class="headerlink" title="九、集群扩展（企业进阶）"></a>九、集群扩展（企业进阶）</h1><p>后续可扩展：</p>
-<ul>
-<li>ES 三节点集群</li>
-<li>专用 master 节点</li>
-<li>专用 data 节点</li>
-<li>接入 Filebeat / Logstash</li>
-<li>对接 SpringCloud 微服务日志中心</li>
-<li>对接 MQTT / IoT 数据检索</li>
-</ul>
-<hr>
-<h1 id="十、企业部署最佳实践总结"><a href="#十、企业部署最佳实践总结" class="headerlink" title="十、企业部署最佳实践总结"></a>十、企业部署最佳实践总结</h1><ul>
-<li>使用 docker-compose 管理服务</li>
-<li>必须开启安全认证</li>
-<li>数据必须挂载宿主机</li>
-<li>禁止 root 运行容器</li>
-<li>JVM 内存按机器资源合理配置</li>
-<li>插件版本必须与 ES 一致</li>
-<li>生产环境建议至少三节点</li>
-</ul>
 ]]></content>
   </entry>
   <entry>
@@ -1075,129 +1009,69 @@ Tailscale
       </tags>
   </entry>
   <entry>
-    <title>canal手册</title>
-    <url>/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/</url>
-    <content><![CDATA[<p>docker run —privileged=true \<br>—log-driver json-file \<br>—log-opt max-size=100m \<br>—log-opt max-file=2 \<br>—name kafka -p 9092:9092 \<br>-e KAFKA_BROKER_ID=0 \<br>-e KAFKA_ZOOKEEPER_CONNECT=192.168.71.134:2181/kafka \<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.71.134:9092 \<br>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \<br>-e ALLOW_PLAINTEXT_LISTENER=yes \<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G’ \<br>-v /home/kafka/:/opt/kafka/ \<br>-v /etc/localtime:/etc/localtime \<br>-d wurstmeister/kafka:2.12-2.3.1<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>命令    注释<br>–privileged=true    表示容器内的root拥有真正的root权限<br>–log-driver json-file    表示使用 JSON 文件作为日志驱动<br>–log-opt max-size=100m    表示设置日志的最大大小为100MB<br>–log-opt max-file=2    表示设置日志文件的最大数量<br>–name    表示容器命名<br>-p    表示端口映射<br>-e KAFKA_BROKER_ID=0    表示这个ID是集群的标识，不能重复<br>-e KAFKA_ZOOKEEPER_CONNECT=IP:2181/kafka    表示zookeeper的连接地址<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://IP:9092    表示kafka发布到zookeeper供客户端使用的服务地址<br>-e ALLOW_PLAINTEXT_LISTENER=yes    表示允许使用PLAINTEXT侦听器<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G    表示行内存参数<br>-v /home/kafka/data:/wurstmeister/kafka/data    表示挂载配置数据目录<br>-v /home/kafka/config:/wurstmeister/kafka/config    表示配置文件目录<br>-v /etc/localtime:/etc/localtime    表示将本地时间映射到容器中<br>-d    表示后台运行</p>
-<p>./kafka-topics.sh —create —topic test-kafka —bootstrap-server localhost:9092<br>kafka-topics.sh —describe —topic test-kafka —bootstrap-server localhost:9092</p>
-<p>3.拉取Cannal镜像</p>
-<h2 id="拉取版本为v1-1-5的canal"><a href="#拉取版本为v1-1-5的canal" class="headerlink" title="拉取版本为v1.1.5的canal"></a>拉取版本为v1.1.5的canal</h2><p>docker pull canal/canal-server:v1.1.5<br>1<br>2<br>4.运行Canal<br>4.1、启动命令<br>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>启动命令说明：</p>
-<p>4.2、命令解读<br>① -p ：指定端口<br>② -e ：指定配置文件的配置信息。此处主要有两个配置文件在起作用，分别是 canal.properties 和 instance.properties 这两个配置文件，前缀是 canal. 的修改就是 canal.properties 这个配置文件的，前缀是 canal.instance 修改的就是 instance.properties 这个配置文件的<br>③ canal.destinations：指定了实例的名称，决定了instance实例的配置文件存放目录<br>④ canal.instance.master.address ：指定了mysql的地址，正常需要ip，此处由于会将mysql和canal放在一个网络中，所以可以直接使用mysql替代<br>⑤ canal.instance.filter.regex：此处指定只过滤test这个数据库的binlog数据<br>⑥ network mysql-test：指定网络是步骤1创建的网络<br>⑦ restart=always ：将canal设置为docker启动时自启，可要可不要<br>⑧ -d ：指定步骤2拉取的镜像名称以及版本</p>
-<p>4.3、查看容器状态</p>
-<h1 id="查看启动日志"><a href="#查看启动日志" class="headerlink" title="查看启动日志"></a>查看启动日志</h1><p>docker logs canal</p>
-<h1 id="查看目前运行容器"><a href="#查看目前运行容器" class="headerlink" title="查看目前运行容器"></a>查看目前运行容器</h1><p>docker ps</p>
-<h1 id="启动失败时查看容器状态"><a href="#启动失败时查看容器状态" class="headerlink" title="启动失败时查看容器状态"></a>启动失败时查看容器状态</h1><p>docker ps -a<br>1<br>2<br>3<br>4<br>5<br>6<br>4.4、相关配置调整（可做可不做）<br>①将canal配置文件进行拷贝</p>
-<h1 id="canal-properties-amp-instance-properties"><a href="#canal-properties-amp-instance-properties" class="headerlink" title="canal.properties &amp; instance.properties"></a>canal.properties &amp; instance.properties</h1><h1 id="注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面"><a href="#注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面" class="headerlink" title="注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面"></a>注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</h1><p>docker cp canal:/home/admin/canal-server/conf/canal.properties /mydata/canal/conf<br>docker cp canal:/home/admin/canal-server/conf/test/instance.properties /mydata/canal/conf</p>
-<p>1<br>2<br>3<br>4<br>5<br>6<br>②根据个人需要修改配置之后，将原有的canal容器停止并删除，然后重新启动的时候使用-v进行文件绑定，进行文件绑定时务必确保文件是存在的。</p>
-<h1 id="停止并删除容器"><a href="#停止并删除容器" class="headerlink" title="停止并删除容器"></a>停止并删除容器</h1><p>docker stop canal<br>docker rm canal</p>
-<h1 id="重新运行并指定"><a href="#重新运行并指定" class="headerlink" title="重新运行并指定"></a>重新运行并指定</h1><p>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>-v /mydata/canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties \<br>-v /mydata/canal/conf/instance.properties:/home/admin/canal-server/conf/test/instance.properties \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
-<p>docker run -p 11111:11111 —name canal \<br>-v /mydata/canal/conf:/home/admin/canal-server/conf \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
-<p>找到canal.deployer-1.1.4/conf目录下的canal.properties配置文件：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># tcp, kafka, RocketMQ 这里选择kafka模式</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">kafka</span></span><br><span class="line"><span class="comment"># 解析器的线程数，打开此配置，不打开则会出现阻塞或者不进行解析的情况</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelThreadSize</span> = <span class="string">16</span></span><br><span class="line"><span class="comment"># 配置MQ的服务地址，这里配置的是kafka对应的地址和端口</span></span><br><span class="line"><span class="attr">canal.mq.servers</span> = <span class="string">127.0.0.1:9092</span></span><br><span class="line"><span class="comment"># 配置instance，在conf目录下要有example同名的目录，可以配置多个</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string">example</span></span><br></pre></td></tr></table></figure>
-<p>然后配置instance，找到/conf/example/instance.properties配置文件：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment">## mysql serverId , v1.0.26+ will autoGen(自动生成，不需配置)</span></span><br><span class="line"><span class="comment"># canal.instance.mysql.slaveId=0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># position info</span></span><br><span class="line"><span class="attr">canal.instance.master.address</span>=<span class="string">127.0.0.1:3306</span></span><br><span class="line"><span class="comment"># 在Mysql执行 SHOW MASTER STATUS;查看当前数据库的binlog</span></span><br><span class="line"><span class="attr">canal.instance.master.journal.name</span>=<span class="string">mysql-bin.000006</span></span><br><span class="line"><span class="attr">canal.instance.master.position</span>=<span class="string">4596</span></span><br><span class="line"><span class="comment"># 账号密码</span></span><br><span class="line"><span class="attr">canal.instance.dbUsername</span>=<span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.dbPassword</span>=<span class="string">Canal@****</span></span><br><span class="line"><span class="attr">canal.instance.connectionCharset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="comment">#MQ队列名称</span></span><br><span class="line"><span class="attr">canal.mq.topic</span>=<span class="string">canaltopic</span></span><br><span class="line"><span class="comment">#单队列模式的分区下标</span></span><br><span class="line"><span class="attr">canal.mq.partition</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 使用命令登录：mysql -u root -p</span></span><br><span class="line"><span class="comment">-- 创建用户 用户名：canal 密码：Canal@123456</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授权 *.*表示所有库</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>下一步在MySQL配置文件my.cnf设置如下信息：</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># 打开binlog</span></span><br><span class="line"><span class="string">log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"># 选择ROW(行)模式</span></span><br><span class="line"><span class="string">binlog-format=ROW</span></span><br><span class="line"><span class="comment"># 配置MySQL replaction需要定义，不要和canal的slaveId重复</span></span><br><span class="line"><span class="string">server_id=1</span></span><br></pre></td></tr></table></figure>
-<p>改了配置文件之后，重启MySQL，使用命令查看是否打开binlog模式：</p>
-<p>show variables like ‘log_bin’;</p>
-<p>查看binlog日志文件列表：</p>
-<p>show binary logs;</p>
-<p>查看当前正在写入的binlog文件：</p>
-<p>show master status;</p>
-<p>MySQL服务器这边就搞定了，很简单。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>搭建maven私服手册</title>
-    <url>/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</url>
-    <content><![CDATA[<h1 id="搭建maven私服"><a href="#搭建maven私服" class="headerlink" title="搭建maven私服"></a>搭建maven私服</h1><h2 id="一、docker版本"><a href="#一、docker版本" class="headerlink" title="一、docker版本"></a>一、docker版本</h2><p>docker pull sonatype/nexus3</p>
-<p>mkdir -p /home/nexus/data<br>chmod 777 -R /home/nexus/data</p>
-<p>docker run -d —name nexus3 -p 8081:8081 —restart always -v /home/nexus/data:/nexus-data sonatype/nexus3</p>
-<p>docker logs -f nexus3</p>
-<p>访问地址：http:ip:8081</p>
-<p>默认密码存放位置：</p>
-<p>cat /home/nexus/data/admin.password</p>
-<p>1、默认仓库说明：</p>
-<p>maven-central：maven中央库，默认从<a href="https://repo1.maven.org/maven2/拉取jar">https://repo1.maven.org/maven2/拉取jar</a><br>maven-releases：私库发行版jar，初次安装请将Deployment policy设置为Allow redeploy<br>maven-snapshots：私库快照（调试版本）jar<br>maven-public：仓库分组，把上面三个仓库组合在一起对外提供服务，在本地maven基础配置settings.xml或项目pom.xml中使用</p>
-<p>2、nexus仓库类型说明</p>
-<p>hosted：本地仓库，通常我们会部署自己的构件到这一类型的仓库。比如公司的第二方库。<br>proxy：代理仓库，它们被用来代理远程的公共仓库，如maven中央仓库。<br>group：仓库组，用来合并多个hosted/proxy仓库，当你的项目希望在多个repository使用资源时就不需要多次引用了，只需要引用一个group即可。</p>
-<p>3、创建Blob stores</p>
-<p>在创建repository之前，还需要先指定文件存储目录，便于统一管理。就需要创建Blob Stores，不创建则使用的是default</p>
-<p>4、</p>
-<p>jboss的maven中央仓库地址：<a href="http://repository.jboss.com/maven2/">http://repository.jboss.com/maven2/</a><br>阿里云的maven中央仓库地址：<a href="http://maven.aliyun.com/nexus/content/groups/public/">http://maven.aliyun.com/nexus/content/groups/public/</a><br>apache的maven中央仓库地址：<a href="http://repo.maven.apache.org/maven2/">http://repo.maven.apache.org/maven2/</a></p>
-<p>Hosted有三种方式：Releases、Snapshot、Mixed</p>
-<p>Releases: 一般是已经发布的Jar包<br>Snapshot: 未发布的版本<br>Mixed：混合的</p>
-<p>Allow redeploy：允许同一个版本号下重复提交代码, nexus以时间区分<br>Disable redeploy：不允许同一个版本号下重复提交代码<br>Read-Only：不允许提交任何版本<br>原生的maven-releases库是Disable redeploy设置， maven-snapshots是Allow redeploy。</p>
-<p>5、settings.xml 配置</p>
-<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
-<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
-
-    <localRepository>D:\123</localRepository>
-
-    <pluginGroups>
-    </pluginGroups>
-
-
-    <proxies>
-    </proxies>
-
-    <servers>
-
-        <server>
-            <id>maven-public</id>
-            <username>admin</username>
-            <password>123456</password>
-        </server>
-
-    </servers>
-
-
-    <mirrors>
-
-        <mirror>
-            <id>maven-public</id>
-            <mirrorOf>*</mirrorOf>
-            <name>maven-public</name>
-            <url>http://192.168.3.108:8081/repository/maven-public/</url>
-        </mirror>
-
-    </mirrors>
-
-    <profiles>
-
-        <!-- 配置私服 -->
-
-        <profile>
-            <id>maven-public</id>
-            <repositories>
-                <repository>
-                    <id>maven-public</id>
-                    <name>Repository for nexus</name>
-                    <url>http://192.168.3.108:8081/repository/maven-public/</url>
-                </repository>
-            </repositories>
-        </profile>
-
-
-    </profiles>
-
-    <!-- 配置私服 -->
-
-    <activeProfiles>
-        <activeProfile>maven-public</activeProfile>
-    </activeProfiles>
-</settings>
-
-
-
-<h2 id="二、windows版"><a href="#二、windows版" class="headerlink" title="二、windows版"></a>二、windows版</h2><p>1、下载地址</p>
-<p><a href="https://help.sonatype.com/en/download.html">Download</a></p>
-<p>2、运行</p>
-<p>D:\App\nexus-3.55.0-01-win64\nexus-3.55.0-01\bin&gt;nexus.exe /run</p>
-<p>用户名：admin（默认）</p>
-<p>密码：第一次启动时生成，(在/sonatype-work/nexus3/admin.password 文件中) </p>
+    <title>Docker企业级部署Elasticsearch与Kibana实践</title>
+    <url>/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_ES_Kibana_%E9%83%A8%E7%BD%B2%E6%89%8B%E5%86%8C/</url>
+    <content><![CDATA[<h1 id="Docker-企业级部署-Elasticsearch-Kibana-IK-分词器"><a href="#Docker-企业级部署-Elasticsearch-Kibana-IK-分词器" class="headerlink" title="Docker 企业级部署 Elasticsearch + Kibana + IK 分词器"></a>Docker 企业级部署 Elasticsearch + Kibana + IK 分词器</h1><blockquote>
+<p>适用于：生产环境 / SpringCloud 微服务 / 日志平台 / 搜索服务</p>
+</blockquote>
+<p>特点： - docker-compose 一键部署 - 启用安全认证 - 持久化数据 -<br>插件标准化安装 - 容器网络隔离 - 可直接扩展为集群</p>
+<hr>
+<h1 id="一、目录规划（生产推荐）"><a href="#一、目录规划（生产推荐）" class="headerlink" title="一、目录规划（生产推荐）"></a>一、目录规划（生产推荐）</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /data/es/&#123;data,plugins,config,certs&#125;</span><br><span class="line"><span class="built_in">mkdir</span> -p /data/kibana/&#123;config,data&#125;</span><br></pre></td></tr></table></figure>
+<p>权限：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">chmod</span> -R 777 /data/es</span><br><span class="line"><span class="built_in">chmod</span> -R 777 /data/kibana</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="二、docker-compose-企业级部署"><a href="#二、docker-compose-企业级部署" class="headerlink" title="二、docker-compose 企业级部署"></a>二、docker-compose 企业级部署</h1><p>创建：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /opt/es-stack</span><br><span class="line"><span class="built_in">cd</span> /opt/es-stack</span><br><span class="line">vim docker-compose.yml</span><br></pre></td></tr></table></figure>
+<h2 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml"></a>docker-compose.yml</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">elasticsearch:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">elasticsearch:8.6.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">es</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">discovery.type=single-node</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ES_JAVA_OPTS=-Xms1g</span> <span class="string">-Xmx1g</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">xpack.security.enabled=true</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ELASTIC_PASSWORD=Elastic@123</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/data/es/data:/usr/share/elasticsearch/data</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/data/es/plugins:/usr/share/elasticsearch/plugins</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9200:9200&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;9300:9300&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es-net</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">kibana:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">kibana:8.6.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">kibana</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ELASTICSEARCH_HOSTS=http://es:9200</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ELASTICSEARCH_USERNAME=elastic</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">ELASTICSEARCH_PASSWORD=Elastic@123</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5601:5601&quot;</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">elasticsearch</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">es-net</span></span><br><span class="line"></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="attr">es-net:</span></span><br><span class="line">    <span class="attr">driver:</span> <span class="string">bridge</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="三、启动服务"><a href="#三、启动服务" class="headerlink" title="三、启动服务"></a>三、启动服务</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker compose up -d</span><br></pre></td></tr></table></figure>
+<p>查看状态：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="四、访问测试"><a href="#四、访问测试" class="headerlink" title="四、访问测试"></a>四、访问测试</h1><p>Elasticsearch：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">http://服务器IP:9200</span><br></pre></td></tr></table></figure>
+<p>账号：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">elastic</span><br><span class="line">Elastic@123</span><br></pre></td></tr></table></figure>
+<p>Kibana：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">http://服务器IP:5601</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="五、企业级-IK-分词器安装"><a href="#五、企业级-IK-分词器安装" class="headerlink" title="五、企业级 IK 分词器安装"></a>五、企业级 IK 分词器安装</h1><p>进入容器：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it es bash</span><br></pre></td></tr></table></figure>
+<p>安装插件：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">./bin/elasticsearch-plugin install https://get.infini.cloud/elasticsearch/analysis-ik/8.6.0</span><br></pre></td></tr></table></figure>
+<p>退出并重启：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker restart es</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="六、SpringBoot-企业连接配置"><a href="#六、SpringBoot-企业连接配置" class="headerlink" title="六、SpringBoot 企业连接配置"></a>六、SpringBoot 企业连接配置</h1><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">elasticsearch:</span></span><br><span class="line">    <span class="attr">uris:</span> <span class="string">http://服务器IP:9200</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">Elastic@123</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="七、生产环境优化建议"><a href="#七、生产环境优化建议" class="headerlink" title="七、生产环境优化建议"></a>七、生产环境优化建议</h1><h2 id="JVM优化"><a href="#JVM优化" class="headerlink" title="JVM优化"></a>JVM优化</h2><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="string">ES_JAVA_OPTS=-Xms2g</span> <span class="string">-Xmx2g</span></span><br></pre></td></tr></table></figure>
+<p>原则： - 不超过物理内存 50% - Xms = Xmx</p>
+<h2 id="内核参数（必须）"><a href="#内核参数（必须）" class="headerlink" title="内核参数（必须）"></a>内核参数（必须）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/sysctl.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">vm.max_map_count=262144</span><br></pre></td></tr></table></figure>
+<p>生效：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sysctl -p</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="八、日志查看"><a href="#八、日志查看" class="headerlink" title="八、日志查看"></a>八、日志查看</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">docker logs -f es</span><br><span class="line">docker logs -f kibana</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="九、集群扩展（企业进阶）"><a href="#九、集群扩展（企业进阶）" class="headerlink" title="九、集群扩展（企业进阶）"></a>九、集群扩展（企业进阶）</h1><p>后续可扩展：</p>
+<ul>
+<li>ES 三节点集群</li>
+<li>专用 master 节点</li>
+<li>专用 data 节点</li>
+<li>接入 Filebeat / Logstash</li>
+<li>对接 SpringCloud 微服务日志中心</li>
+<li>对接 MQTT / IoT 数据检索</li>
+</ul>
+<hr>
+<h1 id="十、企业部署最佳实践总结"><a href="#十、企业部署最佳实践总结" class="headerlink" title="十、企业部署最佳实践总结"></a>十、企业部署最佳实践总结</h1><ul>
+<li>使用 docker-compose 管理服务</li>
+<li>必须开启安全认证</li>
+<li>数据必须挂载宿主机</li>
+<li>禁止 root 运行容器</li>
+<li>JVM 内存按机器资源合理配置</li>
+<li>插件版本必须与 ES 一致</li>
+<li>生产环境建议至少三节点</li>
+</ul>
 ]]></content>
   </entry>
   <entry>
@@ -1284,6 +1158,76 @@ Tailscale
 <li>建议加数据卷持久化</li>
 <li>定期备份 /u01 目录</li>
 </ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>自签证书手册</title>
+    <url>/2026/02/06/%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6/</url>
+    <content><![CDATA[<h1 id="🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记"><a href="#🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记" class="headerlink" title="🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记"></a>🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记</h1><h2 id="📁-目录结构建议"><a href="#📁-目录结构建议" class="headerlink" title="📁 目录结构建议"></a>📁 目录结构建议</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">certs/</span><br><span class="line">├── rootca/</span><br><span class="line">│   ├── rootca-key.pem</span><br><span class="line">│   ├── rootca-cert.pem</span><br><span class="line">│   └── rootca.p12</span><br><span class="line">├── gateway/</span><br><span class="line">│   ├── prodgateway-key.pem</span><br><span class="line">│   ├── prodgateway.csr</span><br><span class="line">│   ├── prodgateway-cert.pem</span><br><span class="line">│   └── prodgateway.p12</span><br><span class="line">└── openssl-san.cnf</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="1️⃣-创建-RootCA-根证书（如已存在可跳过）"><a href="#1️⃣-创建-RootCA-根证书（如已存在可跳过）" class="headerlink" title="1️⃣ 创建 RootCA 根证书（如已存在可跳过）"></a>1️⃣ 创建 RootCA 根证书（如已存在可跳过）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成 RootCA 私钥</span></span><br><span class="line">openssl genrsa -out rootca-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 RootCA 证书</span></span><br><span class="line">openssl req -x509 -new -nodes -key rootca-key.pem -sha256 -days 3650 -out rootca-cert.pem -subj <span class="string">&quot;/C=CN/ST=State/L=City/O=Organization/OU=OrgUnit/CN=rootca&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选：导出为 truststore.p12</span></span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -out rootca.p12 -inkey rootca-key.pem -<span class="keyword">in</span> rootca-cert.pem -name rootca</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="2️⃣-创建包含多个-IP-的-OpenSSL-配置文件"><a href="#2️⃣-创建包含多个-IP-的-OpenSSL-配置文件" class="headerlink" title="2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件"></a>2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件</h2><p>新建文件 <code>openssl-san.cnf</code>，内容如下：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[req]</span></span><br><span class="line"><span class="attr">distinguished_name</span> = req_distinguished_name</span><br><span class="line"><span class="attr">req_extensions</span> = v3_req</span><br><span class="line"><span class="attr">prompt</span> = <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="section">[req_distinguished_name]</span></span><br><span class="line"><span class="attr">C</span> = CN</span><br><span class="line"><span class="attr">ST</span> = State</span><br><span class="line"><span class="attr">L</span> = City</span><br><span class="line"><span class="attr">O</span> = Organization</span><br><span class="line"><span class="attr">OU</span> = OrgUnit</span><br><span class="line"><span class="attr">CN</span> = prodgateway.example.com</span><br><span class="line"></span><br><span class="line"><span class="section">[v3_req]</span></span><br><span class="line"><span class="attr">keyUsage</span> = keyEncipherment, dataEncipherment, digitalSignature</span><br><span class="line"><span class="attr">extendedKeyUsage</span> = serverAuth</span><br><span class="line"><span class="attr">subjectAltName</span> = @alt_names</span><br><span class="line"></span><br><span class="line"><span class="section">[alt_names]</span></span><br><span class="line"><span class="attr">IP.1</span> = <span class="number">192.168</span>.<span class="number">3.166</span></span><br><span class="line"><span class="attr">IP.2</span> = <span class="number">192.168</span>.<span class="number">3.197</span></span><br><span class="line"><span class="attr">IP.3</span> = <span class="number">192.168</span>.<span class="number">3.201</span></span><br><span class="line"><span class="attr">IP.4</span> = <span class="number">113.250</span>.<span class="number">177.98</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="3️⃣-生成服务证书和私钥（prodgateway）"><a href="#3️⃣-生成服务证书和私钥（prodgateway）" class="headerlink" title="3️⃣ 生成服务证书和私钥（prodgateway）"></a>3️⃣ 生成服务证书和私钥（prodgateway）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成私钥</span></span><br><span class="line">openssl genrsa -out prodgateway-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 CSR（证书签署请求）</span></span><br><span class="line">openssl req -new -key prodgateway-key.pem -out prodgateway.csr -config openssl-san.cnf</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="4️⃣-使用-rootca-签署-prodgateway-证书"><a href="#4️⃣-使用-rootca-签署-prodgateway-证书" class="headerlink" title="4️⃣ 使用 rootca 签署 prodgateway 证书"></a>4️⃣ 使用 rootca 签署 prodgateway 证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> prodgateway.csr -CA rootca-cert.pem -CAkey rootca-key.pem -CAcreateserial -out prodgateway-cert.pem -days 365 -sha256 -extensions v3_req -extfile openssl-san.cnf</span><br></pre></td></tr></table></figure>
+<p>📌 <code>-CAcreateserial</code> 会自动生成 <code>rootca-cert.srl</code> 文件。</p>
+<hr>
+<h2 id="5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）"><a href="#5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）" class="headerlink" title="5️⃣ 可选：打包为 .p12 格式（供 Java 使用或导入 Truststore）"></a>5️⃣ 可选：打包为 <code>.p12</code> 格式（供 Java 使用或导入 Truststore）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl pkcs12 -<span class="built_in">export</span> -<span class="keyword">in</span> prodgateway-cert.pem -inkey prodgateway-key.pem -out prodgateway.p12 -name prodgateway -CAfile rootca-cert.pem -caname rootca</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="6️⃣-导入-prodgateway-p12-到现有-Truststore"><a href="#6️⃣-导入-prodgateway-p12-到现有-Truststore" class="headerlink" title="6️⃣ 导入 prodgateway.p12 到现有 Truststore"></a>6️⃣ 导入 <code>prodgateway.p12</code> 到现有 Truststore</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -importkeystore -deststorepass 123456 -destkeystore truststore.p12 -srckeystore prodgateway.p12 -srcstoretype PKCS12 -srcstorepass 123456</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li><code>truststore.p12</code> 是你已有的信任库  </li>
+<li>可用以下命令查看条目：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -list -keystore truststore.p12 -storepass 123456</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="7️⃣-验证-SAN-是否包含-IP"><a href="#7️⃣-验证-SAN-是否包含-IP" class="headerlink" title="7️⃣ 验证 SAN 是否包含 IP"></a>7️⃣ 验证 SAN 是否包含 IP</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> prodgateway-cert.pem -noout -text | findstr /C:<span class="string">&quot;Subject Alternative Name&quot;</span></span><br></pre></td></tr></table></figure>
+<p>应看到：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">X509v3 Subject Alternative Name:</span><br><span class="line">    IP Address:192.168.3.166, IP Address:192.168.3.197, ...</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="✅-最终用途"><a href="#✅-最终用途" class="headerlink" title="✅ 最终用途"></a>✅ 最终用途</h2><ul>
+<li><strong>Nginx / 前端服务</strong> 可配置 <code>prodgateway-cert.pem + prodgateway-key.pem</code></li>
+<li><strong>浏览器不会再报 ERR_CERT_AUTHORITY_INVALID</strong></li>
+<li><strong>HTTPS API 请求能通过 Truststore 验证</strong></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>canal手册</title>
+    <url>/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/</url>
+    <content><![CDATA[<p>docker run —privileged=true \<br>—log-driver json-file \<br>—log-opt max-size=100m \<br>—log-opt max-file=2 \<br>—name kafka -p 9092:9092 \<br>-e KAFKA_BROKER_ID=0 \<br>-e KAFKA_ZOOKEEPER_CONNECT=192.168.71.134:2181/kafka \<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.71.134:9092 \<br>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \<br>-e ALLOW_PLAINTEXT_LISTENER=yes \<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G’ \<br>-v /home/kafka/:/opt/kafka/ \<br>-v /etc/localtime:/etc/localtime \<br>-d wurstmeister/kafka:2.12-2.3.1<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>命令    注释<br>–privileged=true    表示容器内的root拥有真正的root权限<br>–log-driver json-file    表示使用 JSON 文件作为日志驱动<br>–log-opt max-size=100m    表示设置日志的最大大小为100MB<br>–log-opt max-file=2    表示设置日志文件的最大数量<br>–name    表示容器命名<br>-p    表示端口映射<br>-e KAFKA_BROKER_ID=0    表示这个ID是集群的标识，不能重复<br>-e KAFKA_ZOOKEEPER_CONNECT=IP:2181/kafka    表示zookeeper的连接地址<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://IP:9092    表示kafka发布到zookeeper供客户端使用的服务地址<br>-e ALLOW_PLAINTEXT_LISTENER=yes    表示允许使用PLAINTEXT侦听器<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G    表示行内存参数<br>-v /home/kafka/data:/wurstmeister/kafka/data    表示挂载配置数据目录<br>-v /home/kafka/config:/wurstmeister/kafka/config    表示配置文件目录<br>-v /etc/localtime:/etc/localtime    表示将本地时间映射到容器中<br>-d    表示后台运行</p>
+<p>./kafka-topics.sh —create —topic test-kafka —bootstrap-server localhost:9092<br>kafka-topics.sh —describe —topic test-kafka —bootstrap-server localhost:9092</p>
+<p>3.拉取Cannal镜像</p>
+<h2 id="拉取版本为v1-1-5的canal"><a href="#拉取版本为v1-1-5的canal" class="headerlink" title="拉取版本为v1.1.5的canal"></a>拉取版本为v1.1.5的canal</h2><p>docker pull canal/canal-server:v1.1.5<br>1<br>2<br>4.运行Canal<br>4.1、启动命令<br>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>启动命令说明：</p>
+<p>4.2、命令解读<br>① -p ：指定端口<br>② -e ：指定配置文件的配置信息。此处主要有两个配置文件在起作用，分别是 canal.properties 和 instance.properties 这两个配置文件，前缀是 canal. 的修改就是 canal.properties 这个配置文件的，前缀是 canal.instance 修改的就是 instance.properties 这个配置文件的<br>③ canal.destinations：指定了实例的名称，决定了instance实例的配置文件存放目录<br>④ canal.instance.master.address ：指定了mysql的地址，正常需要ip，此处由于会将mysql和canal放在一个网络中，所以可以直接使用mysql替代<br>⑤ canal.instance.filter.regex：此处指定只过滤test这个数据库的binlog数据<br>⑥ network mysql-test：指定网络是步骤1创建的网络<br>⑦ restart=always ：将canal设置为docker启动时自启，可要可不要<br>⑧ -d ：指定步骤2拉取的镜像名称以及版本</p>
+<p>4.3、查看容器状态</p>
+<h1 id="查看启动日志"><a href="#查看启动日志" class="headerlink" title="查看启动日志"></a>查看启动日志</h1><p>docker logs canal</p>
+<h1 id="查看目前运行容器"><a href="#查看目前运行容器" class="headerlink" title="查看目前运行容器"></a>查看目前运行容器</h1><p>docker ps</p>
+<h1 id="启动失败时查看容器状态"><a href="#启动失败时查看容器状态" class="headerlink" title="启动失败时查看容器状态"></a>启动失败时查看容器状态</h1><p>docker ps -a<br>1<br>2<br>3<br>4<br>5<br>6<br>4.4、相关配置调整（可做可不做）<br>①将canal配置文件进行拷贝</p>
+<h1 id="canal-properties-amp-instance-properties"><a href="#canal-properties-amp-instance-properties" class="headerlink" title="canal.properties &amp; instance.properties"></a>canal.properties &amp; instance.properties</h1><h1 id="注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面"><a href="#注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面" class="headerlink" title="注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面"></a>注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</h1><p>docker cp canal:/home/admin/canal-server/conf/canal.properties /mydata/canal/conf<br>docker cp canal:/home/admin/canal-server/conf/test/instance.properties /mydata/canal/conf</p>
+<p>1<br>2<br>3<br>4<br>5<br>6<br>②根据个人需要修改配置之后，将原有的canal容器停止并删除，然后重新启动的时候使用-v进行文件绑定，进行文件绑定时务必确保文件是存在的。</p>
+<h1 id="停止并删除容器"><a href="#停止并删除容器" class="headerlink" title="停止并删除容器"></a>停止并删除容器</h1><p>docker stop canal<br>docker rm canal</p>
+<h1 id="重新运行并指定"><a href="#重新运行并指定" class="headerlink" title="重新运行并指定"></a>重新运行并指定</h1><p>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>-v /mydata/canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties \<br>-v /mydata/canal/conf/instance.properties:/home/admin/canal-server/conf/test/instance.properties \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>docker run -p 11111:11111 —name canal \<br>-v /mydata/canal/conf:/home/admin/canal-server/conf \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
+<p>找到canal.deployer-1.1.4/conf目录下的canal.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment"># tcp, kafka, RocketMQ 这里选择kafka模式</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">kafka</span></span><br><span class="line"><span class="comment"># 解析器的线程数，打开此配置，不打开则会出现阻塞或者不进行解析的情况</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelThreadSize</span> = <span class="string">16</span></span><br><span class="line"><span class="comment"># 配置MQ的服务地址，这里配置的是kafka对应的地址和端口</span></span><br><span class="line"><span class="attr">canal.mq.servers</span> = <span class="string">127.0.0.1:9092</span></span><br><span class="line"><span class="comment"># 配置instance，在conf目录下要有example同名的目录，可以配置多个</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string">example</span></span><br></pre></td></tr></table></figure>
+<p>然后配置instance，找到/conf/example/instance.properties配置文件：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="comment">## mysql serverId , v1.0.26+ will autoGen(自动生成，不需配置)</span></span><br><span class="line"><span class="comment"># canal.instance.mysql.slaveId=0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># position info</span></span><br><span class="line"><span class="attr">canal.instance.master.address</span>=<span class="string">127.0.0.1:3306</span></span><br><span class="line"><span class="comment"># 在Mysql执行 SHOW MASTER STATUS;查看当前数据库的binlog</span></span><br><span class="line"><span class="attr">canal.instance.master.journal.name</span>=<span class="string">mysql-bin.000006</span></span><br><span class="line"><span class="attr">canal.instance.master.position</span>=<span class="string">4596</span></span><br><span class="line"><span class="comment"># 账号密码</span></span><br><span class="line"><span class="attr">canal.instance.dbUsername</span>=<span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.dbPassword</span>=<span class="string">Canal@****</span></span><br><span class="line"><span class="attr">canal.instance.connectionCharset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="comment">#MQ队列名称</span></span><br><span class="line"><span class="attr">canal.mq.topic</span>=<span class="string">canaltopic</span></span><br><span class="line"><span class="comment">#单队列模式的分区下标</span></span><br><span class="line"><span class="attr">canal.mq.partition</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- 使用命令登录：mysql -u root -p</span></span><br><span class="line"><span class="comment">-- 创建用户 用户名：canal 密码：Canal@123456</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授权 *.*表示所有库</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>下一步在MySQL配置文件my.cnf设置如下信息：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># 打开binlog</span></span><br><span class="line"><span class="string">log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"># 选择ROW(行)模式</span></span><br><span class="line"><span class="string">binlog-format=ROW</span></span><br><span class="line"><span class="comment"># 配置MySQL replaction需要定义，不要和canal的slaveId重复</span></span><br><span class="line"><span class="string">server_id=1</span></span><br></pre></td></tr></table></figure>
+<p>改了配置文件之后，重启MySQL，使用命令查看是否打开binlog模式：</p>
+<p>show variables like ‘log_bin’;</p>
+<p>查看binlog日志文件列表：</p>
+<p>show binary logs;</p>
+<p>查看当前正在写入的binlog文件：</p>
+<p>show master status;</p>
+<p>MySQL服务器这边就搞定了，很简单。</p>
 ]]></content>
   </entry>
   <entry>
@@ -1458,6 +1402,99 @@ Tailscale
 ]]></content>
   </entry>
   <entry>
+    <title>搭建maven私服手册</title>
+    <url>/2026/02/06/%E6%90%AD%E5%BB%BAmaven%E7%A7%81%E6%9C%8D/</url>
+    <content><![CDATA[<h1 id="搭建maven私服"><a href="#搭建maven私服" class="headerlink" title="搭建maven私服"></a>搭建maven私服</h1><h2 id="一、docker版本"><a href="#一、docker版本" class="headerlink" title="一、docker版本"></a>一、docker版本</h2><p>docker pull sonatype/nexus3</p>
+<p>mkdir -p /home/nexus/data<br>chmod 777 -R /home/nexus/data</p>
+<p>docker run -d —name nexus3 -p 8081:8081 —restart always -v /home/nexus/data:/nexus-data sonatype/nexus3</p>
+<p>docker logs -f nexus3</p>
+<p>访问地址：http:ip:8081</p>
+<p>默认密码存放位置：</p>
+<p>cat /home/nexus/data/admin.password</p>
+<p>1、默认仓库说明：</p>
+<p>maven-central：maven中央库，默认从<a href="https://repo1.maven.org/maven2/拉取jar">https://repo1.maven.org/maven2/拉取jar</a><br>maven-releases：私库发行版jar，初次安装请将Deployment policy设置为Allow redeploy<br>maven-snapshots：私库快照（调试版本）jar<br>maven-public：仓库分组，把上面三个仓库组合在一起对外提供服务，在本地maven基础配置settings.xml或项目pom.xml中使用</p>
+<p>2、nexus仓库类型说明</p>
+<p>hosted：本地仓库，通常我们会部署自己的构件到这一类型的仓库。比如公司的第二方库。<br>proxy：代理仓库，它们被用来代理远程的公共仓库，如maven中央仓库。<br>group：仓库组，用来合并多个hosted/proxy仓库，当你的项目希望在多个repository使用资源时就不需要多次引用了，只需要引用一个group即可。</p>
+<p>3、创建Blob stores</p>
+<p>在创建repository之前，还需要先指定文件存储目录，便于统一管理。就需要创建Blob Stores，不创建则使用的是default</p>
+<p>4、</p>
+<p>jboss的maven中央仓库地址：<a href="http://repository.jboss.com/maven2/">http://repository.jboss.com/maven2/</a><br>阿里云的maven中央仓库地址：<a href="http://maven.aliyun.com/nexus/content/groups/public/">http://maven.aliyun.com/nexus/content/groups/public/</a><br>apache的maven中央仓库地址：<a href="http://repo.maven.apache.org/maven2/">http://repo.maven.apache.org/maven2/</a></p>
+<p>Hosted有三种方式：Releases、Snapshot、Mixed</p>
+<p>Releases: 一般是已经发布的Jar包<br>Snapshot: 未发布的版本<br>Mixed：混合的</p>
+<p>Allow redeploy：允许同一个版本号下重复提交代码, nexus以时间区分<br>Disable redeploy：不允许同一个版本号下重复提交代码<br>Read-Only：不允许提交任何版本<br>原生的maven-releases库是Disable redeploy设置， maven-snapshots是Allow redeploy。</p>
+<p>5、settings.xml 配置</p>
+<p>&lt;?xml version=”1.0” encoding=”UTF-8”?&gt;</p>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+
+    <localRepository>D:\123</localRepository>
+
+    <pluginGroups>
+    </pluginGroups>
+
+
+    <proxies>
+    </proxies>
+
+    <servers>
+
+        <server>
+            <id>maven-public</id>
+            <username>admin</username>
+            <password>123456</password>
+        </server>
+
+    </servers>
+
+
+    <mirrors>
+
+        <mirror>
+            <id>maven-public</id>
+            <mirrorOf>*</mirrorOf>
+            <name>maven-public</name>
+            <url>http://192.168.3.108:8081/repository/maven-public/</url>
+        </mirror>
+
+    </mirrors>
+
+    <profiles>
+
+        <!-- 配置私服 -->
+
+        <profile>
+            <id>maven-public</id>
+            <repositories>
+                <repository>
+                    <id>maven-public</id>
+                    <name>Repository for nexus</name>
+                    <url>http://192.168.3.108:8081/repository/maven-public/</url>
+                </repository>
+            </repositories>
+        </profile>
+
+
+    </profiles>
+
+    <!-- 配置私服 -->
+
+    <activeProfiles>
+        <activeProfile>maven-public</activeProfile>
+    </activeProfiles>
+</settings>
+
+
+
+<h2 id="二、windows版"><a href="#二、windows版" class="headerlink" title="二、windows版"></a>二、windows版</h2><p>1、下载地址</p>
+<p><a href="https://help.sonatype.com/en/download.html">Download</a></p>
+<p>2、运行</p>
+<p>D:\App\nexus-3.55.0-01-win64\nexus-3.55.0-01\bin&gt;nexus.exe /run</p>
+<p>用户名：admin（默认）</p>
+<p>密码：第一次启动时生成，(在/sonatype-work/nexus3/admin.password 文件中) </p>
+]]></content>
+  </entry>
+  <entry>
     <title>证书更换手册</title>
     <url>/2026/02/06/%E8%AF%81%E4%B9%A6%E6%9B%B4%E6%8D%A2%E6%89%8B%E5%86%8C/</url>
     <content><![CDATA[<h2 id="一、-前置条件"><a href="#一、-前置条件" class="headerlink" title="一、 前置条件"></a>一、 前置条件</h2><p>1、需要安装openssl</p>
@@ -1478,43 +1515,6 @@ Tailscale
 <p>​    key-store-password: Kunteng@123         # keystore 密码</p>
 <p>​    key-alias: scaxkc-gateway</p>
 <p>​    key-store-type: PKCS12 </p>
-]]></content>
-  </entry>
-  <entry>
-    <title>自签证书手册</title>
-    <url>/2026/02/06/%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6/</url>
-    <content><![CDATA[<h1 id="🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记"><a href="#🧾-自签-RootCA-签发带多个-IP-的服务证书-导入信任库-全流程笔记" class="headerlink" title="🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记"></a>🧾 自签 RootCA + 签发带多个 IP 的服务证书 + 导入信任库 全流程笔记</h1><h2 id="📁-目录结构建议"><a href="#📁-目录结构建议" class="headerlink" title="📁 目录结构建议"></a>📁 目录结构建议</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">certs/</span><br><span class="line">├── rootca/</span><br><span class="line">│   ├── rootca-key.pem</span><br><span class="line">│   ├── rootca-cert.pem</span><br><span class="line">│   └── rootca.p12</span><br><span class="line">├── gateway/</span><br><span class="line">│   ├── prodgateway-key.pem</span><br><span class="line">│   ├── prodgateway.csr</span><br><span class="line">│   ├── prodgateway-cert.pem</span><br><span class="line">│   └── prodgateway.p12</span><br><span class="line">└── openssl-san.cnf</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="1️⃣-创建-RootCA-根证书（如已存在可跳过）"><a href="#1️⃣-创建-RootCA-根证书（如已存在可跳过）" class="headerlink" title="1️⃣ 创建 RootCA 根证书（如已存在可跳过）"></a>1️⃣ 创建 RootCA 根证书（如已存在可跳过）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成 RootCA 私钥</span></span><br><span class="line">openssl genrsa -out rootca-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 RootCA 证书</span></span><br><span class="line">openssl req -x509 -new -nodes -key rootca-key.pem -sha256 -days 3650 -out rootca-cert.pem -subj <span class="string">&quot;/C=CN/ST=State/L=City/O=Organization/OU=OrgUnit/CN=rootca&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选：导出为 truststore.p12</span></span><br><span class="line">openssl pkcs12 -<span class="built_in">export</span> -out rootca.p12 -inkey rootca-key.pem -<span class="keyword">in</span> rootca-cert.pem -name rootca</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="2️⃣-创建包含多个-IP-的-OpenSSL-配置文件"><a href="#2️⃣-创建包含多个-IP-的-OpenSSL-配置文件" class="headerlink" title="2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件"></a>2️⃣ 创建包含多个 IP 的 OpenSSL 配置文件</h2><p>新建文件 <code>openssl-san.cnf</code>，内容如下：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="section">[req]</span></span><br><span class="line"><span class="attr">distinguished_name</span> = req_distinguished_name</span><br><span class="line"><span class="attr">req_extensions</span> = v3_req</span><br><span class="line"><span class="attr">prompt</span> = <span class="literal">no</span></span><br><span class="line"></span><br><span class="line"><span class="section">[req_distinguished_name]</span></span><br><span class="line"><span class="attr">C</span> = CN</span><br><span class="line"><span class="attr">ST</span> = State</span><br><span class="line"><span class="attr">L</span> = City</span><br><span class="line"><span class="attr">O</span> = Organization</span><br><span class="line"><span class="attr">OU</span> = OrgUnit</span><br><span class="line"><span class="attr">CN</span> = prodgateway.example.com</span><br><span class="line"></span><br><span class="line"><span class="section">[v3_req]</span></span><br><span class="line"><span class="attr">keyUsage</span> = keyEncipherment, dataEncipherment, digitalSignature</span><br><span class="line"><span class="attr">extendedKeyUsage</span> = serverAuth</span><br><span class="line"><span class="attr">subjectAltName</span> = @alt_names</span><br><span class="line"></span><br><span class="line"><span class="section">[alt_names]</span></span><br><span class="line"><span class="attr">IP.1</span> = <span class="number">192.168</span>.<span class="number">3.166</span></span><br><span class="line"><span class="attr">IP.2</span> = <span class="number">192.168</span>.<span class="number">3.197</span></span><br><span class="line"><span class="attr">IP.3</span> = <span class="number">192.168</span>.<span class="number">3.201</span></span><br><span class="line"><span class="attr">IP.4</span> = <span class="number">113.250</span>.<span class="number">177.98</span></span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="3️⃣-生成服务证书和私钥（prodgateway）"><a href="#3️⃣-生成服务证书和私钥（prodgateway）" class="headerlink" title="3️⃣ 生成服务证书和私钥（prodgateway）"></a>3️⃣ 生成服务证书和私钥（prodgateway）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 生成私钥</span></span><br><span class="line">openssl genrsa -out prodgateway-key.pem 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成 CSR（证书签署请求）</span></span><br><span class="line">openssl req -new -key prodgateway-key.pem -out prodgateway.csr -config openssl-san.cnf</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="4️⃣-使用-rootca-签署-prodgateway-证书"><a href="#4️⃣-使用-rootca-签署-prodgateway-证书" class="headerlink" title="4️⃣ 使用 rootca 签署 prodgateway 证书"></a>4️⃣ 使用 rootca 签署 prodgateway 证书</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> prodgateway.csr -CA rootca-cert.pem -CAkey rootca-key.pem -CAcreateserial -out prodgateway-cert.pem -days 365 -sha256 -extensions v3_req -extfile openssl-san.cnf</span><br></pre></td></tr></table></figure>
-<p>📌 <code>-CAcreateserial</code> 会自动生成 <code>rootca-cert.srl</code> 文件。</p>
-<hr>
-<h2 id="5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）"><a href="#5️⃣-可选：打包为-p12-格式（供-Java-使用或导入-Truststore）" class="headerlink" title="5️⃣ 可选：打包为 .p12 格式（供 Java 使用或导入 Truststore）"></a>5️⃣ 可选：打包为 <code>.p12</code> 格式（供 Java 使用或导入 Truststore）</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl pkcs12 -<span class="built_in">export</span> -<span class="keyword">in</span> prodgateway-cert.pem -inkey prodgateway-key.pem -out prodgateway.p12 -name prodgateway -CAfile rootca-cert.pem -caname rootca</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="6️⃣-导入-prodgateway-p12-到现有-Truststore"><a href="#6️⃣-导入-prodgateway-p12-到现有-Truststore" class="headerlink" title="6️⃣ 导入 prodgateway.p12 到现有 Truststore"></a>6️⃣ 导入 <code>prodgateway.p12</code> 到现有 Truststore</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -importkeystore -deststorepass 123456 -destkeystore truststore.p12 -srckeystore prodgateway.p12 -srcstoretype PKCS12 -srcstorepass 123456</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ul>
-<li><code>truststore.p12</code> 是你已有的信任库  </li>
-<li>可用以下命令查看条目：<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">keytool -list -keystore truststore.p12 -storepass 123456</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</blockquote>
-<hr>
-<h2 id="7️⃣-验证-SAN-是否包含-IP"><a href="#7️⃣-验证-SAN-是否包含-IP" class="headerlink" title="7️⃣ 验证 SAN 是否包含 IP"></a>7️⃣ 验证 SAN 是否包含 IP</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> prodgateway-cert.pem -noout -text | findstr /C:<span class="string">&quot;Subject Alternative Name&quot;</span></span><br></pre></td></tr></table></figure>
-<p>应看到：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">X509v3 Subject Alternative Name:</span><br><span class="line">    IP Address:192.168.3.166, IP Address:192.168.3.197, ...</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="✅-最终用途"><a href="#✅-最终用途" class="headerlink" title="✅ 最终用途"></a>✅ 最终用途</h2><ul>
-<li><strong>Nginx / 前端服务</strong> 可配置 <code>prodgateway-cert.pem + prodgateway-key.pem</code></li>
-<li><strong>浏览器不会再报 ERR_CERT_AUTHORITY_INVALID</strong></li>
-<li><strong>HTTPS API 请求能通过 Truststore 验证</strong></li>
-</ul>
 ]]></content>
   </entry>
 </search>

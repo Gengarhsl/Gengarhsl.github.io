@@ -18,13 +18,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"disqus","storage":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"gengarhsl.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":true,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":"disqus","storage":false,"nav":null,"activeClass":"disqus"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="1234567891011121314151617181920# Linux 忘记 Root 密码解决方案与安全防护指南（运维手册版）本文系统整理 **Linux 忘记 root 密码的解决方案**、**GRUB 启动原理**、**不同发行版重置方式**以及**生产环境安全防护措施**。  适用于 Linux 运维工程师、开发人员和系统管理员。适用系统包括：- **:contentReferenc">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux重置密码手册">
-<meta property="og:url" content="http://example.com/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:url" content="https://gengarhsl.github.io/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/index.html">
 <meta property="og:site_name" content="Gengar">
 <meta property="og:description" content="1234567891011121314151617181920# Linux 忘记 Root 密码解决方案与安全防护指南（运维手册版）本文系统整理 **Linux 忘记 root 密码的解决方案**、**GRUB 启动原理**、**不同发行版重置方式**以及**生产环境安全防护措施**。  适用于 Linux 运维工程师、开发人员和系统管理员。适用系统包括：- **:contentReferenc">
 <meta property="og:locale" content="zh_CN">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="python, linux, mysql, 数通">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/">
+<link rel="canonical" href="https://gengarhsl.github.io/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/">
 
 
 <script id="page-configurations">
@@ -205,7 +205,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/">
+    <link itemprop="mainEntityOfPage" href="https://gengarhsl.github.io/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/3.jpg">
@@ -454,7 +454,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/" title="linux重置密码手册">http://example.com/2026/03/05/linux密码重置手册/</a>
+    <a href="https://gengarhsl.github.io/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/" title="linux重置密码手册">https://gengarhsl.github.io/2026/03/05/linux密码重置手册/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -471,8 +471,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2026/02/06/Docker%E4%BC%81%E4%B8%9A%E7%BA%A7%E9%83%A8%E7%BD%B2Seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%EF%BC%88Nacos-+-MySQL-+-Oracle%E6%94%AF%E6%8C%81%EF%BC%89/" rel="prev" title="Docker企业级部署Seata分布式事务（Nacos + MySQL + Oracle支持）">
-      <i class="fa fa-chevron-left"></i> Docker企业级部署Seata分布式事务（Nacos + MySQL + Oracle支持）
+    <a href="/2026/02/06/docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/" rel="prev" title="docker命令笔记">
+      <i class="fa fa-chevron-left"></i> docker命令笔记
     </a></div>
       <div class="post-nav-item">
     <a href="/2026/03/12/tailscale-nginx-dev-gateway-hexo/" rel="next" title="Tailscale + Nginx Dev Gateway 部署指南">
@@ -763,7 +763,7 @@ window.addEventListener('pjax:success', () => {
 </script>
 <script>
   var disqus_config = function() {
-    this.page.url = "http://example.com/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/";
+    this.page.url = "https://gengarhsl.github.io/2026/03/05/linux%E5%AF%86%E7%A0%81%E9%87%8D%E7%BD%AE%E6%89%8B%E5%86%8C/";
     this.page.identifier = "2026/03/05/linux密码重置手册/";
     this.page.title = "linux重置密码手册";
     };

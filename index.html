@@ -1657,7 +1657,7 @@ location /api/ &#123;
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_Oracle11g_%E5%AE%9E%E6%88%98%E9%83%A8%E7%BD%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/3.jpg">
@@ -1671,7 +1671,7 @@ location /api/ &#123;
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2026/02/06/%E6%8B%89%E5%8F%96%E7%89%88%E6%9C%AC%E4%B8%BAv1.1.5%E7%9A%84canal/" class="post-title-link" itemprop="url">canal手册</a>
+            <a href="/2026/02/06/%E4%BC%81%E4%B8%9A%E7%BA%A7_Docker_Oracle11g_%E5%AE%9E%E6%88%98%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">Docker企业级实战部署 Oracle11g</a>
         </h2>
 
         <div class="post-meta">
@@ -1682,7 +1682,7 @@ location /api/ &#123;
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2026-02-06 00:00:00 / 修改时间：17:56:34" itemprop="dateCreated datePublished" datetime="2026-02-06T00:00:00+08:00">2026-02-06</time>
+              <time title="创建时间：2026-02-06 00:00:00 / 修改时间：17:44:00" itemprop="dateCreated datePublished" datetime="2026-02-06T00:00:00+08:00">2026-02-06</time>
             </span>
 
           
@@ -1696,34 +1696,87 @@ location /api/ &#123;
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>docker run —privileged=true \<br>—log-driver json-file \<br>—log-opt max-size=100m \<br>—log-opt max-file=2 \<br>—name kafka -p 9092:9092 \<br>-e KAFKA_BROKER_ID=0 \<br>-e KAFKA_ZOOKEEPER_CONNECT=192.168.71.134:2181/kafka \<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.71.134:9092 \<br>-e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 \<br>-e ALLOW_PLAINTEXT_LISTENER=yes \<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G’ \<br>-v /home/kafka/:/opt/kafka/ \<br>-v /etc/localtime:/etc/localtime \<br>-d wurstmeister/kafka:2.12-2.3.1<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>命令    注释<br>–privileged=true    表示容器内的root拥有真正的root权限<br>–log-driver json-file    表示使用 JSON 文件作为日志驱动<br>–log-opt max-size=100m    表示设置日志的最大大小为100MB<br>–log-opt max-file=2    表示设置日志文件的最大数量<br>–name    表示容器命名<br>-p    表示端口映射<br>-e KAFKA_BROKER_ID=0    表示这个ID是集群的标识，不能重复<br>-e KAFKA_ZOOKEEPER_CONNECT=IP:2181/kafka    表示zookeeper的连接地址<br>-e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://IP:9092    表示kafka发布到zookeeper供客户端使用的服务地址<br>-e ALLOW_PLAINTEXT_LISTENER=yes    表示允许使用PLAINTEXT侦听器<br>-e KAFKA_HEAP_OPTS=’-Xms512M -Xmx4G    表示行内存参数<br>-v /home/kafka/data:/wurstmeister/kafka/data    表示挂载配置数据目录<br>-v /home/kafka/config:/wurstmeister/kafka/config    表示配置文件目录<br>-v /etc/localtime:/etc/localtime    表示将本地时间映射到容器中<br>-d    表示后台运行</p>
-<p>./kafka-topics.sh —create —topic test-kafka —bootstrap-server localhost:9092<br>kafka-topics.sh —describe —topic test-kafka —bootstrap-server localhost:9092</p>
-<p>3.拉取Cannal镜像</p>
-<h2 id="拉取版本为v1-1-5的canal"><a href="#拉取版本为v1-1-5的canal" class="headerlink" title="拉取版本为v1.1.5的canal"></a>拉取版本为v1.1.5的canal</h2><p>docker pull canal/canal-server:v1.1.5<br>1<br>2<br>4.运行Canal<br>4.1、启动命令<br>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>启动命令说明：</p>
-<p>4.2、命令解读<br>① -p ：指定端口<br>② -e ：指定配置文件的配置信息。此处主要有两个配置文件在起作用，分别是 canal.properties 和 instance.properties 这两个配置文件，前缀是 canal. 的修改就是 canal.properties 这个配置文件的，前缀是 canal.instance 修改的就是 instance.properties 这个配置文件的<br>③ canal.destinations：指定了实例的名称，决定了instance实例的配置文件存放目录<br>④ canal.instance.master.address ：指定了mysql的地址，正常需要ip，此处由于会将mysql和canal放在一个网络中，所以可以直接使用mysql替代<br>⑤ canal.instance.filter.regex：此处指定只过滤test这个数据库的binlog数据<br>⑥ network mysql-test：指定网络是步骤1创建的网络<br>⑦ restart=always ：将canal设置为docker启动时自启，可要可不要<br>⑧ -d ：指定步骤2拉取的镜像名称以及版本</p>
-<p>4.3、查看容器状态</p>
-<h1 id="查看启动日志"><a href="#查看启动日志" class="headerlink" title="查看启动日志"></a>查看启动日志</h1><p>docker logs canal</p>
-<h1 id="查看目前运行容器"><a href="#查看目前运行容器" class="headerlink" title="查看目前运行容器"></a>查看目前运行容器</h1><p>docker ps</p>
-<h1 id="启动失败时查看容器状态"><a href="#启动失败时查看容器状态" class="headerlink" title="启动失败时查看容器状态"></a>启动失败时查看容器状态</h1><p>docker ps -a<br>1<br>2<br>3<br>4<br>5<br>6<br>4.4、相关配置调整（可做可不做）<br>①将canal配置文件进行拷贝</p>
-<h1 id="canal-properties-amp-instance-properties"><a href="#canal-properties-amp-instance-properties" class="headerlink" title="canal.properties &amp; instance.properties"></a>canal.properties &amp; instance.properties</h1><h1 id="注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面"><a href="#注意，instance-properties文件是在canal-destinations这个配置指定的目录作为前缀下面" class="headerlink" title="注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面"></a>注意，instance.properties文件是在canal.destinations这个配置指定的目录作为前缀下面</h1><p>docker cp canal:/home/admin/canal-server/conf/canal.properties /mydata/canal/conf<br>docker cp canal:/home/admin/canal-server/conf/test/instance.properties /mydata/canal/conf</p>
-<p>1<br>2<br>3<br>4<br>5<br>6<br>②根据个人需要修改配置之后，将原有的canal容器停止并删除，然后重新启动的时候使用-v进行文件绑定，进行文件绑定时务必确保文件是存在的。</p>
-<h1 id="停止并删除容器"><a href="#停止并删除容器" class="headerlink" title="停止并删除容器"></a>停止并删除容器</h1><p>docker stop canal<br>docker rm canal</p>
-<h1 id="重新运行并指定"><a href="#重新运行并指定" class="headerlink" title="重新运行并指定"></a>重新运行并指定</h1><p>docker run -p 11111:11111 —name canal \<br>-e canal.destinations=test \<br>-e canal.instance.master.address=mysql:3306  \<br>-e canal.instance.dbUsername=canal  \<br>-e canal.instance.dbPassword=canal  \<br>-e canal.instance.connectionCharset=UTF-8 \<br>-e canal.instance.tsdb.enable=true \<br>-e canal.instance.gtidon=false  \<br>-e canal.instance.filter.regex=test\..* \<br>-v /mydata/canal/conf/canal.properties:/home/admin/canal-server/conf/canal.properties \<br>-v /mydata/canal/conf/instance.properties:/home/admin/canal-server/conf/test/instance.properties \<br>—network mysql-test \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
-<p>docker run -p 11111:11111 —name canal \<br>-v /mydata/canal/conf:/home/admin/canal-server/conf \<br>—restart=always \<br>-d canal/canal-server:v1.1.5</p>
-<p>找到canal.deployer-1.1.4/conf目录下的canal.properties配置文件：</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tcp, kafka, RocketMQ 这里选择kafka模式</span></span><br><span class="line"><span class="attr">canal.serverMode</span> = <span class="string">kafka</span></span><br><span class="line"><span class="comment"># 解析器的线程数，打开此配置，不打开则会出现阻塞或者不进行解析的情况</span></span><br><span class="line"><span class="attr">canal.instance.parser.parallelThreadSize</span> = <span class="string">16</span></span><br><span class="line"><span class="comment"># 配置MQ的服务地址，这里配置的是kafka对应的地址和端口</span></span><br><span class="line"><span class="attr">canal.mq.servers</span> = <span class="string">127.0.0.1:9092</span></span><br><span class="line"><span class="comment"># 配置instance，在conf目录下要有example同名的目录，可以配置多个</span></span><br><span class="line"><span class="attr">canal.destinations</span> = <span class="string">example</span></span><br></pre></td></tr></table></figure>
-<p>然后配置instance，找到/conf/example/instance.properties配置文件：</p>
-<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## mysql serverId , v1.0.26+ will autoGen(自动生成，不需配置)</span></span><br><span class="line"><span class="comment"># canal.instance.mysql.slaveId=0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"># position info</span></span><br><span class="line"><span class="attr">canal.instance.master.address</span>=<span class="string">127.0.0.1:3306</span></span><br><span class="line"><span class="comment"># 在Mysql执行 SHOW MASTER STATUS;查看当前数据库的binlog</span></span><br><span class="line"><span class="attr">canal.instance.master.journal.name</span>=<span class="string">mysql-bin.000006</span></span><br><span class="line"><span class="attr">canal.instance.master.position</span>=<span class="string">4596</span></span><br><span class="line"><span class="comment"># 账号密码</span></span><br><span class="line"><span class="attr">canal.instance.dbUsername</span>=<span class="string">canal</span></span><br><span class="line"><span class="attr">canal.instance.dbPassword</span>=<span class="string">Canal@****</span></span><br><span class="line"><span class="attr">canal.instance.connectionCharset</span> = <span class="string">UTF-8</span></span><br><span class="line"><span class="comment">#MQ队列名称</span></span><br><span class="line"><span class="attr">canal.mq.topic</span>=<span class="string">canaltopic</span></span><br><span class="line"><span class="comment">#单队列模式的分区下标</span></span><br><span class="line"><span class="attr">canal.mq.partition</span>=<span class="string">0</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 使用命令登录：mysql -u root -p</span></span><br><span class="line"><span class="comment">-- 创建用户 用户名：canal 密码：Canal@123456</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br><span class="line"><span class="comment">-- 授权 *.*表示所有库</span></span><br><span class="line"><span class="keyword">grant</span> <span class="keyword">SELECT</span>, REPLICATION SLAVE, REPLICATION CLIENT <span class="keyword">on</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">to</span> <span class="string">&#x27;canal&#x27;</span>@<span class="string">&#x27;%&#x27;</span> identified <span class="keyword">by</span> <span class="string">&#x27;Canal@123456&#x27;</span>;</span><br></pre></td></tr></table></figure>
-<p>下一步在MySQL配置文件my.cnf设置如下信息：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">mysqld</span>]</span><br><span class="line"><span class="comment"># 打开binlog</span></span><br><span class="line"><span class="string">log-bin=mysql-bin</span></span><br><span class="line"><span class="comment"># 选择ROW(行)模式</span></span><br><span class="line"><span class="string">binlog-format=ROW</span></span><br><span class="line"><span class="comment"># 配置MySQL replaction需要定义，不要和canal的slaveId重复</span></span><br><span class="line"><span class="string">server_id=1</span></span><br></pre></td></tr></table></figure>
-<p>改了配置文件之后，重启MySQL，使用命令查看是否打开binlog模式：</p>
-<p>show variables like ‘log_bin’;</p>
-<p>查看binlog日志文件列表：</p>
-<p>show binary logs;</p>
-<p>查看当前正在写入的binlog文件：</p>
-<p>show master status;</p>
-<p>MySQL服务器这边就搞定了，很简单。</p>
+          <h1 id="Docker-企业级实战部署-Oracle11g（11-2-0-3）"><a href="#Docker-企业级实战部署-Oracle11g（11-2-0-3）" class="headerlink" title="Docker 企业级实战部署 Oracle11g（11.2.0.3）"></a>Docker 企业级实战部署 Oracle11g（11.2.0.3）</h1><p>适用场景：</p>
+<ul>
+<li>本地开发环境</li>
+<li>微服务数据库测试</li>
+<li>Oracle 老系统迁移</li>
+<li>内网测试数据库</li>
+</ul>
+<p>特点：</p>
+<ul>
+<li>一键部署</li>
+<li>持久化建议</li>
+<li>企业实战流程</li>
+<li>启动监听与数据库</li>
+<li>常见问题解决</li>
+</ul>
+<hr>
+<h1 id="一、环境要求（生产建议）"><a href="#一、环境要求（生产建议）" class="headerlink" title="一、环境要求（生产建议）"></a>一、环境要求（生产建议）</h1><p>  项目     建议配置</p>
+<hr>
+<p>  CPU      ≥2核<br>  内存     ≥4G<br>  磁盘     ≥20G<br>  Docker   ≥20.x</p>
+<p>检查 Docker：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -v</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="二、拉取-Oracle11g-镜像"><a href="#二、拉取-Oracle11g-镜像" class="headerlink" title="二、拉取 Oracle11g 镜像"></a>二、拉取 Oracle11g 镜像</h1><h2 id="方式1：DockerHub（慢）"><a href="#方式1：DockerHub（慢）" class="headerlink" title="方式1：DockerHub（慢）"></a>方式1：DockerHub（慢）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure>
+<h2 id="方式2：阿里云镜像（推荐）"><a href="#方式2：阿里云镜像（推荐）" class="headerlink" title="方式2：阿里云镜像（推荐）"></a>方式2：阿里云镜像（推荐）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure>
+<p>重新打tag：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker tag registry.cn-hangzhou.aliyuncs.com/lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0</span><br></pre></td></tr></table></figure>
+<p>查看镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images | grep oracle</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="三、创建-Oracle-容器（实战标准）"><a href="#三、创建-Oracle-容器（实战标准）" class="headerlink" title="三、创建 Oracle 容器（实战标准）"></a>三、创建 Oracle 容器（实战标准）</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --name oracle11g -h oracle11g --privileged=<span class="literal">true</span> -p 1521:1521 -p 1158:1158 -p 222:22 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 init</span><br></pre></td></tr></table></figure>
+<p>端口说明：</p>
+<p>  端口   作用</p>
+<hr>
+<p>  1521   数据库端口<br>  1158   EM管理<br>  222    SSH</p>
+<hr>
+<h1 id="四、启动数据库（核心步骤）"><a href="#四、启动数据库（核心步骤）" class="headerlink" title="四、启动数据库（核心步骤）"></a>四、启动数据库（核心步骤）</h1><p>进入容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it oracle11g bash</span><br></pre></td></tr></table></figure>
+<p>切换用户：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su - oracle</span><br></pre></td></tr></table></figure>
+<p>启动监听：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl start</span><br></pre></td></tr></table></figure>
+<p>进入数据库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus / as sysdba</span><br></pre></td></tr></table></figure>
+<p>启动实例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="五、连接数据库"><a href="#五、连接数据库" class="headerlink" title="五、连接数据库"></a>五、连接数据库</h1><p>连接信息：</p>
+<p>  项目   内容</p>
+<hr>
+<p>  IP     服务器IP<br>  端口   1521<br>  SID    LHR11G<br>  用户   system/sys</p>
+<p>连接示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlplus system/oracle@服务器IP:1521/LHR11G</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="六、企业级持久化（强烈建议）"><a href="#六、企业级持久化（强烈建议）" class="headerlink" title="六、企业级持久化（强烈建议）"></a>六、企业级持久化（强烈建议）</h1><p>创建目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> -p /data/oracle11g</span><br><span class="line"><span class="built_in">chmod</span> -R 777 /data/oracle11g</span><br></pre></td></tr></table></figure>
+<p>推荐运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -itd --name oracle11g --privileged=<span class="literal">true</span> -p 1521:1521 -v /data/oracle11g:/u01 lhrbest/oracle_11g_ee_lhr_11.2.0.3:1.0 init</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="七、SpringBoot连接配置"><a href="#七、SpringBoot连接配置" class="headerlink" title="七、SpringBoot连接配置"></a>七、SpringBoot连接配置</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">driver-class-name:</span> <span class="string">oracle.jdbc.OracleDriver</span></span><br><span class="line">    <span class="attr">url:</span> <span class="string">jdbc:oracle:thin:@服务器IP:1521:LHR11G</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">system</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">oracle</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="八、常用管理命令"><a href="#八、常用管理命令" class="headerlink" title="八、常用管理命令"></a>八、常用管理命令</h1><p>查看监听：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsnrctl status</span><br></pre></td></tr></table></figure>
+<p>查看实例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> status <span class="keyword">from</span> v$instance;</span><br></pre></td></tr></table></figure>
+<p>查看用户：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> username <span class="keyword">from</span> dba_users;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="九、日志查看"><a href="#九、日志查看" class="headerlink" title="九、日志查看"></a>九、日志查看</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f oracle11g</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="十、常见问题（实战踩坑）"><a href="#十、常见问题（实战踩坑）" class="headerlink" title="十、常见问题（实战踩坑）"></a>十、常见问题（实战踩坑）</h1><h2 id="1-无法连接"><a href="#1-无法连接" class="headerlink" title="1. 无法连接"></a>1. 无法连接</h2><p>检查：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ntlp | grep 1521</span><br></pre></td></tr></table></figure>
+<h2 id="2-数据库未启动"><a href="#2-数据库未启动" class="headerlink" title="2. 数据库未启动"></a>2. 数据库未启动</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup;</span><br></pre></td></tr></table></figure>
+<h2 id="3-内存不足"><a href="#3-内存不足" class="headerlink" title="3. 内存不足"></a>3. 内存不足</h2><p>修改 Docker 启动内存限制。</p>
+<hr>
+<h1 id="十一、企业最佳实践"><a href="#十一、企业最佳实践" class="headerlink" title="十一、企业最佳实践"></a>十一、企业最佳实践</h1><ul>
+<li>不要用于生产正式业务</li>
+<li>建议用于开发测试</li>
+<li>建议使用 Oracle19c 替代</li>
+<li>建议加数据卷持久化</li>
+<li>定期备份 /u01 目录</li>
+</ul>
 
       
     </div>

@@ -1,0 +1,109 @@
+# NexT 8 theme overrides.
+# Site-wide settings (title, URL, deployment, etc.) belong in _config.yml.
+
+scheme: Pisces
+
+# `Follow me on GitHub` banner in the top-right corner.
+github_banner:
+  enable: true
+  permalink: https://github.com/Gengarhsl/gengarhsl.github.io
+
+menu:
+  home: / || fa fa-home
+  archives: /archives/ || fa fa-archive
+  tags: /tags/ || fa fa-tags
+  categories: /categories/ || fa fa-th
+  about: /about/ || fa fa-user
+  sitemap: /atom.xml || fa fa-sitemap
+
+menu_settings:
+  icons: true
+  badges: false
+
+site_state: true
+
+sidebar:
+  position: left
+  display: post
+  offset: 12
+  onmobile: false
+
+avatar:
+  url: /images/3.jpg
+  rounded: true
+  rotated: true
+
+social:
+  GitHub: https://github.com/Gengarhsl || fab fa-github
+  E-Mail: mailto:hsl851178515@gmail.com || fa fa-envelope
+
+social_icons:
+  enable: true
+  icons_only: false
+  transition: false
+
+toc:
+  enable: true
+  number: true
+  wrap: false
+  expand_all: false
+  max_depth: 6
+
+scroll_to_more: true
+excerpt_description: true
+auto_excerpt:
+  enable: true
+  length: 150
+read_more_btn: true
+
+post_meta:
+  item_text: true
+  created_at: true
+  updated_at:
+    enable: true
+    another_day: true
+  categories: true
+
+creative_commons:
+  license: by-nc-sa
+  sidebar: false
+  post: true
+
+# NexT 8 uses Animate.css class names. These are the supported equivalents of
+# the old Velocity transition settings.
+motion:
+  enable: true
+  async: false
+  duration: 200
+  transition:
+    menu_item: fadeInDown
+    post_block: fadeIn
+    post_header: fadeInDown
+    post_body: fadeInDown
+    coll_header: fadeInLeft
+    sidebar: fadeInUp
+
+local_search:
+  enable: true
+  top_n_per_article: 1
+  unescape: false
+  preload: false
+
+# Comments: retain the old preferred service, Disqus.
+comments:
+  style: tabs
+  active: disqus
+  storage: false
+  lazyload: false
+
+disqus:
+  enable: true
+  shortname: gengar-2
+  count: true
+
+# Gitalk was enabled in the old configuration, but is intentionally disabled:
+# Disqus is the active service and Gitalk OAuth secrets must not be kept in a
+# public static-site configuration file.
+gitalk:
+  enable: false
+
